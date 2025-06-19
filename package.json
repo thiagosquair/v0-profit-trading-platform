@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@ai-sdk/openai": "latest",
+    "@chakra-ui/react": "latest",
+    "@emotion/react": "latest",
     "@hookform/resolvers": "^3.9.1",
     "@radix-ui/react-accordion": "latest",
     "@radix-ui/react-alert-dialog": "latest",
@@ -57,6 +59,7 @@
     "react-day-picker": "latest",
     "react-dom": "^19",
     "react-hook-form": "latest",
+    "react-icons": "latest",
     "react-resizable-panels": "latest",
     "recharts": "latest",
     "sonner": "latest",

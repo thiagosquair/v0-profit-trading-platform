@@ -9,7 +9,6 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Loader2, Mail, Lock, Chrome } from "lucide-react"
-import { useAuth } from "@/hooks/use-auth"
 import { isSupabaseConfigured } from "@/lib/supabase"
 import Link from "next/link"
 
@@ -19,20 +18,21 @@ export function SignInForm() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
 
-  const { signIn, signInWithGoogle } = useAuth()
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!isSupabaseConfigured()) {
-      setError("Demo mode: Authentication requires Supabase configuration")
-      return
-    }
-
     setIsLoading(true)
     setError("")
 
     try {
-      await signIn(email, password)
+      // Check for demo credentials first
+      if (email === "demo@profitz.com" && password === "demo123") {
+        // Simulate successful demo login
+        window.location.href = "/dashboard"
+        return
+      }
+
+      // For other credentials, show demo message
+      setError("Demo mode: Use demo@profitz.com / demo123 to access the dashboard")
     } catch (err: any) {
       setError(err.message || "Failed to sign in")
     } finally {
@@ -41,16 +41,7 @@ export function SignInForm() {
   }
 
   const handleGoogleSignIn = async () => {
-    if (!isSupabaseConfigured()) {
-      setError("Demo mode: Authentication requires Supabase configuration")
-      return
-    }
-
-    try {
-      await signInWithGoogle()
-    } catch (err: any) {
-      setError(err.message || "Failed to sign in with Google")
-    }
+    setError("Demo mode: Google sign-in requires Supabase configuration. Use demo@profitz.com / demo123 instead.")
   }
 
   return (
