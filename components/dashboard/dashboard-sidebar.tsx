@@ -30,122 +30,67 @@ const navigationItems = [
     name: "Overview",
     href: "/dashboard",
     icon: Home,
-    translations: {
-      en: "Overview",
-      pt: "Visão Geral",
-      es: "Resumen",
-      fr: "Aperçu",
-    },
+    key: "nav.overview",
   },
   {
     name: "AI Coach",
     href: "/dashboard/coach",
     icon: Brain,
-    translations: {
-      en: "AI Coach",
-      pt: "Coach IA",
-      es: "Coach IA",
-      fr: "Coach IA",
-    },
+    key: "nav.aiCoach",
   },
   {
     name: "Screenshot Analysis",
     href: "/dashboard/analysis",
     icon: Camera,
-    translations: {
-      en: "Screenshot Analysis",
-      pt: "Análise de Screenshot",
-      es: "Análisis de Captura",
-      fr: "Analyse de Capture",
-    },
+    key: "nav.analysis",
   },
   {
     name: "Progress Tracking",
     href: "/dashboard/progress",
     icon: BarChart3,
-    translations: {
-      en: "Progress Tracking",
-      pt: "Acompanhamento de Progresso",
-      es: "Seguimiento de Progreso",
-      fr: "Suivi des Progrès",
-    },
+    key: "nav.progress",
   },
   {
     name: "Interactive Exercises",
     href: "/dashboard/exercises",
     icon: Target,
-    translations: {
-      en: "Interactive Exercises",
-      pt: "Exercícios Interativos",
-      es: "Ejercicios Interactivos",
-      fr: "Exercices Interactifs",
-    },
+    key: "nav.exercises",
   },
   {
     name: "Behavioral Patterns",
     href: "/dashboard/patterns",
     icon: TrendingUp,
-    translations: {
-      en: "Behavioral Patterns",
-      pt: "Padrões Comportamentais",
-      es: "Patrones Conductuales",
-      fr: "Modèles Comportementaux",
-    },
+    key: "nav.patterns",
   },
   {
     name: "Psychology Courses",
     href: "/dashboard/courses",
     icon: BookOpen,
-    translations: {
-      en: "Psychology Courses",
-      pt: "Cursos de Psicologia",
-      es: "Cursos de Psicología",
-      fr: "Cours de Psychologie",
-    },
+    key: "nav.courses",
   },
   {
     name: "Reflection Journal",
     href: "/dashboard/journal",
     icon: PenTool,
-    translations: {
-      en: "Reflection Journal",
-      pt: "Diário de Reflexão",
-      es: "Diario de Reflexión",
-      fr: "Journal de Réflexion",
-    },
+    key: "nav.journal",
   },
   {
     name: "Coaching Insights",
     href: "/dashboard/insights",
     icon: Lightbulb,
-    translations: {
-      en: "Coaching Insights",
-      pt: "Insights de Coaching",
-      es: "Insights de Coaching",
-      fr: "Insights de Coaching",
-    },
+    key: "nav.insights",
   },
   {
     name: "Trade Builder",
     href: "/dashboard/trade-builder",
     icon: LineChart,
-    translations: {
-      en: "Trade Builder",
-      pt: "Construtor de Trade",
-      es: "Constructor de Trade",
-      fr: "Constructeur de Trade",
-    },
+    key: "nav.tradeBuilder",
   },
   {
     name: "Market Insights",
     href: "/dashboard/market-insights",
     icon: Zap,
-    translations: {
-      en: "Market Insights",
-      pt: "Insights de Mercado",
-      es: "Insights de Mercado",
-      fr: "Insights de Marché",
-    },
+    key: "nav.marketInsights",
   },
 ]
 
@@ -156,7 +101,7 @@ interface DashboardSidebarProps {
 export function DashboardSidebar({ className }: DashboardSidebarProps) {
   const pathname = usePathname()
   const [collapsed, setCollapsed] = useState(false)
-  const { language } = useLanguage()
+  const { t } = useLanguage()
 
   return (
     <div className={cn("flex flex-col border-r bg-white/50 backdrop-blur-sm", collapsed ? "w-16" : "w-64", className)}>
@@ -189,10 +134,10 @@ export function DashboardSidebar({ className }: DashboardSidebarProps) {
                     collapsed && "px-2",
                     isActive && "bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg",
                   )}
-                  title={collapsed ? item.translations[language] : undefined}
+                  title={collapsed ? t(item.key) : undefined}
                 >
                   <item.icon className={cn("h-5 w-5", !collapsed && "mr-3")} />
-                  {!collapsed && <span className="font-medium">{item.translations[language]}</span>}
+                  {!collapsed && <span className="font-medium">{t(item.key)}</span>}
                 </Button>
               </Link>
             )
@@ -209,27 +154,10 @@ export function DashboardSidebar({ className }: DashboardSidebarProps) {
           <Button
             variant="ghost"
             className={cn("w-full justify-start h-10", collapsed && "px-2")}
-            title={
-              collapsed
-                ? language === "en"
-                  ? "Settings"
-                  : language === "pt"
-                    ? "Configurações"
-                    : language === "es"
-                      ? "Configuración"
-                      : "Paramètres"
-                : undefined
-            }
+            title={collapsed ? t("nav.settings") : undefined}
           >
             <Settings className={cn("h-5 w-5", !collapsed && "mr-3")} />
-            {!collapsed &&
-              (language === "en"
-                ? "Settings"
-                : language === "pt"
-                  ? "Configurações"
-                  : language === "es"
-                    ? "Configuración"
-                    : "Paramètres")}
+            {!collapsed && <span className="font-medium">{t("nav.settings")}</span>}
           </Button>
         </Link>
       </div>
