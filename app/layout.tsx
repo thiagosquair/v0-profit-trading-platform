@@ -1,12 +1,9 @@
 import type React from "react"
-import "./globals.css"
-import { Inter } from "next/font/google"
+import type { Metadata } from "next"
 
-const inter = Inter({ subsets: ["latin"] })
-
-export const metadata = {
-  title: "ProFitz - Trading Psychology Platform",
-  description: "Master your trading psychology with AI-powered coaching and insights",
+export const metadata: Metadata = {
+  title: "Profitz Trading Psychology Lab",
+  description: "Advanced trading psychology platform with AI coaching",
     generator: 'v0.dev'
 }
 
@@ -15,9 +12,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  return (
-    <html suppressHydrationWarning>
-      <body className={inter.className}>{children}</body>
-    </html>
-  )
+  return children
 }
+
+
+import './globals.css'

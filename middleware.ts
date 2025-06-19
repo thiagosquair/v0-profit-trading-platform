@@ -7,14 +7,18 @@ export default createMiddleware({
   // Used when no locale matches
   defaultLocale: "en",
 
-  // Don't use locale prefix for default locale
-  localePrefix: "as-needed",
+  // Always show locale in URL to avoid redirect loops
+  localePrefix: "always",
 })
 
 export const config = {
-  // Match all pathnames except for
-  // - API routes
-  // - files with extensions (e.g. favicon.ico)
-  // - files in public folder
-  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
+  // Match only internationalized pathnames, exclude API routes and static files
+  matcher: [
+    // Match all pathnames except for
+    // - API routes
+    // - files with extensions (e.g. favicon.ico)
+    // - files in public folder
+    // - Next.js internals
+    "/((?!api|_next|_vercel|.*\\..*).*)",
+  ],
 }

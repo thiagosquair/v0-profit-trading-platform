@@ -7,8 +7,8 @@ export const routing = defineRouting({
   // Used when no locale matches
   defaultLocale: "en",
 
-  // Use locale prefix only when needed
-  localePrefix: "as-needed",
+  // Always show locale prefix to prevent redirect loops
+  localePrefix: "always",
 })
 
 export type Pathnames = keyof typeof routing.pathnames
