@@ -575,20 +575,23 @@ const translations = {
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>("en")
+  const [language, setLanguage] = useState<Language>("en")
 
-  // Load language from localStorage on mount
   useEffect(() => {
-    const savedLanguage = localStorage.getItem("profitz-language") as Language
-    if (savedLanguage && translations[savedLanguage]) {
-      setLanguageState(savedLanguage)
+    // Load saved language from localStorage
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("language") as Language
+      if (saved && ["en", "pt", "es", "fr"].includes(saved)) {
+        setLanguage(saved)
+      }
     }
   }, [])
 
-  const setLanguage = (lang: Language) => {
-    setLanguageState(lang)
-    localStorage.setItem("profitz-language", lang)
-    console.log("Language changed to:", lang) // Debug log
+  const handleSetLanguage = (lang: Language) => {
+    setLanguage(lang)
+    if (typeof window !== "undefined") {
+      localStorage.setItem("language", lang)
+    }
   }
 
   const t = (key: string, params?: Record<string, string>): string => {
@@ -629,19 +632,23 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     return value
   }
 
-  return <LanguageContext.Provider value={{ language, setLanguage, t }}>{children}</LanguageContext.Provider>
+  return (
+    <LanguageContext.Provider value={{ language, setLanguage: handleSetLanguage, t }}>
+      {children}
+    </LanguageContext.Provider>
+  )
 }
 
-export function useLanguage() {
+export function useLanguage(): LanguageContextType {
   const context = useContext(LanguageContext)
 
-  // During static-generation there is no provider – return a safe fallback.
-  if (context === undefined) {
+  // Safe fallback for when hook is used outside provider
+  if (!context) {
     return {
       language: "en",
-      setLanguage: () => {}, // no-op
-      t: (key: string) => key, // show raw key during build
-    } as const
+      setLanguage: () => {},
+      t: (key: string) => key,
+    }
   }
 
   return context

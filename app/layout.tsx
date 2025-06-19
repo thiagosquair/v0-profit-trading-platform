@@ -1,15 +1,15 @@
 import type React from "react"
 import type { Metadata } from "next"
-import "./globals.css"
 import { Inter } from "next/font/google"
+import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { AuthProvider } from "@/providers/authprovider"
+import { Toaster } from "@/components/ui/toaster"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "ProFitz - Trading Psychology Platform",
-  description: "Master your trading psychology with AI-powered coaching and insights",
+  title: "ProFitz - Trading Psychology Lab",
+  description: "Advanced trading psychology platform with AI coaching",
     generator: 'v0.dev'
 }
 
@@ -21,8 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <AuthProvider>{children}</AuthProvider>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
+          {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
