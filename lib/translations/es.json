@@ -1,0 +1,173 @@
+{
+  "nav": {
+    "overview": "Resumen",
+    "analysis": "Análisis de Captura",
+    "progress": "Progreso",
+    "exercises": "Ejercicios",
+    "patterns": "Patrones",
+    "courses": "Cursos",
+    "journal": "Diario",
+    "coach": "Coach IA",
+    "insights": "Insights",
+    "tradeBuilder": "Constructor de Trade",
+    "marketInsights": "Insights del Mercado"
+  },
+  "overview": {
+    "title": "Panel de Psicología de Trading",
+    "subtitle": "Monitorea tu desarrollo psicológico y rendimiento de trading",
+    "psychologyScore": "Puntuación Psicológica",
+    "weeklyProgress": "Progreso Semanal",
+    "activeExercises": "Ejercicios Activos",
+    "coachingSessions": "Sesiones de Coaching",
+    "quickActions": "Acciones Rápidas",
+    "startExercise": "Iniciar Ejercicio",
+    "viewProgress": "Ver Progreso",
+    "chatWithCoach": "Chatear con Coach IA",
+    "analyzeScreenshot": "Analizar Captura",
+    "recentActivity": "Actividad Reciente",
+    "completedExercise": "Ejercicio de control emocional completado",
+    "aiCoachSession": "Sesión de coaching IA sobre gestión de FOMO",
+    "progressMilestone": "Alcanzó hito del 70% en puntuación psicológica",
+    "journalEntry": "Agregó entrada al diario de reflexión",
+    "upcomingGoals": "Próximas Metas",
+    "improveEmotionalControl": "Mejorar control emocional al 85%",
+    "completeRiskCourse": "Completar curso avanzado de gestión de riesgo",
+    "reduceImpulsiveDecisions": "Reducir decisiones impulsivas de trading en 50%",
+    "maintainConsistency": "Mantener consistencia de trading por 30 días"
+  },
+  "aiCoach": {
+    "title": "Coach de Psicología IA",
+    "subtitle": "Obtén coaching personalizado y orientación para tu psicología de trading",
+    "aiPowered": "Powered by IA",
+    "quickTopics": "Temas Rápidos",
+    "quickTopicsDesc": "Inicia una conversación sobre áreas específicas",
+    "yourProfile": "Tu Perfil",
+    "experience": "Nivel de Experiencia",
+    "currentChallenges": "Desafíos Actuales",
+    "goals": "Objetivos",
+    "welcomeMessage": "¡Hola! Soy tu Coach de Psicología IA. Estoy aquí para ayudarte a desarrollar mejor psicología de trading y control emocional. ¿Cómo te sientes sobre tu trading hoy?",
+    "quickTopicMessage": "Me gustaría discutir {{topic}}. ¿Puedes ayudarme con esto?",
+    "thinking": "Coach IA está pensando...",
+    "inputPlaceholder": "Comparte tus pensamientos, preocupaciones o pide orientación...",
+    "coachName": "Coach de Psicología IA",
+    "coachDesc": "Tu asistente personal de psicología de trading",
+    "topics": {
+      "emotionalControl": "Control Emocional",
+      "riskManagement": "Gestión de Riesgo",
+      "fomoHelp": "Ayuda con FOMO",
+      "confidenceBuilding": "Construcción de Confianza",
+      "discipline": "Disciplina",
+      "stressManagement": "Gestión de Estrés"
+    },
+    "profile": {
+      "experience": "Trader Intermedio",
+      "challenges": {
+        "fomo": "Trading por FOMO",
+        "emotional": "Toma de Decisiones Emocional",
+        "overconfidence": "Sesgo de Exceso de Confianza"
+      },
+      "goals": {
+        "emotionalControl": "Mejorar control emocional",
+        "discipline": "Desarrollar mejor disciplina",
+        "consistency": "Aumentar consistencia de trading"
+      }
+    },
+    "tabs": {
+      "chat": "Chat de Coaching IA",
+      "insights": "Insights de Sesión",
+      "progress": "Progreso"
+    },
+    "insights": {
+      "title": "Insights de Sesión",
+      "description": "Principales insights de tus sesiones de coaching",
+      "sessions": "Total de Sesiones",
+      "improvement": "Tasa de Mejora",
+      "breakthroughs": "Avances"
+    },
+    "progress": {
+      "title": "Progreso del Coaching",
+      "description": "Rastrea tu desarrollo en áreas clave",
+      "emotionalControl": "Control Emocional",
+      "discipline": "Disciplina",
+      "riskManagement": "Gestión de Riesgo"
+    }
+  },
+  "screenshotAnalysis": {
+    "title": "Análisis de Captura",
+    "subtitle": "Sube capturas de trading para análisis psicológico con IA",
+    "aiAnalysis": "Análisis IA",
+    "sampleAnalysis": "Este trade muestra buena identificación de setup técnico pero revela algunos patrones de toma de decisiones emocionales...",
+    "upload": {
+      "title": "Subir Captura de Trading",
+      "description": "Sube una captura de tu plataforma de trading, gráfico o ejecución de trade para análisis",
+      "dropHere": "Suelta la captura aquí...",
+      "dragDrop": "Arrastra y suelta una captura aquí, o haz clic para seleccionar",
+      "supportedFormats": "Soporta PNG, JPG, JPEG, GIF, BMP, WebP",
+      "previewAlt": "Vista previa de captura de trading",
+      "file": "Archivo",
+      "contextLabel": "Contexto de Trading (Opcional)",
+      "contextPlaceholder": "Describe las condiciones del mercado, tu proceso de pensamiento o preocupaciones específicas sobre este trade...",
+      "analyzing": "Analizando Captura...",
+      "analyzeButton": "Analizar Captura"
+    },
+    "results": {
+      "title": "Análisis Completo",
+      "description": "Análisis con IA de tu captura de trading"
+    },
+    "tabs": {
+      "overview": "Resumen",
+      "technical": "Técnico",
+      "psychology": "Psicología",
+      "recommendations": "Consejos"
+    },
+    "scores": {
+      "technical": "Puntuación Técnica",
+      "psychology": "Puntuación Psicológica",
+      "riskAssessment": "Evaluación de Riesgo"
+    },
+    "risk": {
+      "low": "RIESGO BAJO",
+      "medium": "RIESGO MEDIO",
+      "high": "RIESGO ALTO"
+    },
+    "insights": {
+      "supportLevel": "Fuerte reconocimiento de nivel de soporte",
+      "entryTiming": "Timing de entrada adecuado",
+      "riskReward": "Relación riesgo-recompensa necesita mejorar",
+      "technicalQuality": "Evaluación de calidad del análisis técnico",
+      "entryExit": "Evaluación de puntos de entrada/salida",
+      "riskManagement": "Revisión de gestión de riesgo"
+    },
+    "recommendations": {
+      "stopLoss": "Considera stop losses más amplios",
+      "patience": "Practica paciencia con entradas",
+      "positionSize": "Revisa el tamaño de posición",
+      "positionAdjust": "Considera ajustes en el tamaño de posición",
+      "stopReview": "Revisa la colocación del stop loss",
+      "emotionalReg": "Practica técnicas de regulación emocional",
+      "title": "Recomendaciones"
+    },
+    "emotions": {
+      "fomoDetected": "Leve FOMO detectado",
+      "goodDiscipline": "Buena disciplina general",
+      "confidenceModerate": "Nivel de confianza: Moderado",
+      "stressLow": "Indicadores de estrés: Bajo"
+    },
+    "technical": {
+      "keyInsights": "Principales Insights Técnicos"
+    },
+    "psychology": {
+      "emotionalIndicators": "Indicadores Emocionales"
+    },
+    "recent": {
+      "title": "Análisis Recientes",
+      "description": "Tus últimos análisis de captura"
+    },
+    "tips": {
+      "title": "Consejos de Análisis",
+      "includeInterface": "Incluye la interfaz de tu plataforma de trading para mejor contexto",
+      "chartsWithIndicators": "Gráficos con indicadores proporcionan análisis técnico más detallado",
+      "addContext": "Agrega contexto sobre tu estado emocional para insights psicológicos"
+    }
+  }
+}

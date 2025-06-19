@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+    "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+    --chart-1: 221.2 83.2% 53.3%;
+    --chart-2: 212 95% 68%;
+    --chart-3: 216 92% 60%;
+    --chart-4: 210 98% 78%;
+    --chart-5: 212 97% 87%;
+
+    /* Custom Navy and Royal Blue Colors */
+    --navy-50: #f0f4f8;
+    --navy-100: #d9e2ec;
+    --navy-200: #bcccdc;
+    --navy-300: #9fb3c8;
+    --navy-400: #829ab1;
+    --navy-500: #627d98;
+    --navy-600: #486581;
+    --navy-700: #334e68;
+    --navy-800: #243b53;
+    --navy-900: #102a43;
+    --navy-950: 240 43% 15%;
+
+    --royal-blue-50: #eff6ff;
+    --royal-blue-100: #dbeafe;
+    --royal-blue-200: #bfdbfe;
+    --royal-blue-300: #93c5fd;
+    --royal-blue-400: #60a5fa;
+    --royal-blue-500: #3b82f6;
+    --royal-blue-600: #2563eb;
+    --royal-blue-700: #1d4ed8;
+    --royal-blue-800: #1e40af;
+    --royal-blue-900: #1e3a8a;
+  }
+
+  .dark {
+    --background: 240 47% 23%;
+    --foreground: 210 40% 98%;
+    --card: 240 50% 32%;
+    --card-foreground: 210 40% 98%;
+    --popover: 240 50% 32%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 225 67% 62%;
+    --primary-foreground: 240 47% 23%;
+    --secondary: 240 43% 15%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 240 43% 15%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 240 43% 15%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 240 43% 15%;
+    --input: 240 43% 15%;
+    --ring: 225 67% 62%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom gradient backgrounds */
+.gradient-navy-royal {
+  background: linear-gradient(135deg, hsl(var(--navy-600)) 0%, hsl(var(--royal-blue-500)) 100%);
+}
+
+.gradient-navy-royal-light {
+  background: linear-gradient(135deg, hsl(var(--navy-50)) 0%, hsl(var(--royal-blue-50)) 100%);
+}
+
+.gradient-text-navy-royal {
+  background: linear-gradient(135deg, hsl(var(--navy-700)) 0%, hsl(var(--royal-blue-600)) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
