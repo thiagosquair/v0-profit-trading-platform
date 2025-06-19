@@ -54,6 +54,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
 export function useAuth() {
   const ctx = React.useContext(AuthContext)
-  if (!ctx) throw new Error("useAuth must be used within <AuthProvider>")
+  if (ctx === undefined) {
+    // Return a safe fallback during static generation / when no provider mounted
+    return {
+      session: null,
+      user: null,
+      // expose the same shape so callers don't break
+    } as ReturnType<typeof useAuthInternal>
+  }
   return ctx
 }
