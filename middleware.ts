@@ -1,6 +1,9 @@
-import {routing} from './routing';
+import createMiddleware from "next-intl/middleware"
+import { routing } from "./routing"
 
-// Use the default: `always`
-export const localePrefix = routing.localePrefix;
+export default createMiddleware(routing)
 
-export default routing;
+export const config = {
+  // Match only internationalized pathnames
+  matcher: ["/", "/(pt|es|fr)/:path*"],
+}
