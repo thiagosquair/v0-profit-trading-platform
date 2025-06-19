@@ -1,227 +1,216 @@
 "use client"
 
-import { useLanguage } from "@/hooks/use-language"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Brain, TrendingUp, Target, Award, MessageSquare, Camera, BarChart3, BookOpen, Clock } from "lucide-react"
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  RadarChart,
-  PolarGrid,
-  PolarAngleAxis,
-  PolarRadiusAxis,
-  Radar,
-} from "recharts"
-
-// Mock data for preview
-const psychologyScoreData = [
-  { date: "Mon", score: 65 },
-  { date: "Tue", score: 72 },
-  { date: "Wed", score: 68 },
-  { date: "Thu", score: 75 },
-  { date: "Fri", score: 82 },
-  { date: "Sat", score: 78 },
-  { date: "Sun", score: 85 },
-]
-
-const skillsData = [
-  { skill: "Emotional Control", score: 85 },
-  { skill: "Risk Management", score: 72 },
-  { skill: "Patience", score: 68 },
-  { skill: "Discipline", score: 90 },
-  { skill: "Focus", score: 75 },
-  { skill: "Confidence", score: 80 },
-]
+import { Progress } from "@/components/ui/progress"
+import { useLanguage } from "@/hooks/use-language"
+import { Brain, Target, Award, BarChart3, Camera, PenTool, ArrowRight, Clock } from "lucide-react"
 
 export function DashboardOverview() {
   const { t } = useLanguage()
 
+  // Mock data for demo
+  const stats = {
+    psychologyScore: 78,
+    exercisesCompleted: 12,
+    coachingSessions: 5,
+    achievements: 8,
+  }
+
+  const quickActions = [
+    {
+      title: t("nav.aiCoach"),
+      description: t("aiCoach.subtitle"),
+      icon: Brain,
+      href: "/dashboard/coach",
+      color: "bg-blue-500",
+    },
+    {
+      title: t("nav.analysis"),
+      description: "Upload and analyze your trading screenshots",
+      icon: Camera,
+      href: "/dashboard/analysis",
+      color: "bg-purple-500",
+    },
+    {
+      title: t("nav.exercises"),
+      description: "Complete psychology exercises and assessments",
+      icon: Target,
+      href: "/dashboard/exercises",
+      color: "bg-green-500",
+    },
+    {
+      title: t("nav.journal"),
+      description: "Reflect on your trading experiences",
+      icon: PenTool,
+      href: "/dashboard/journal",
+      color: "bg-orange-500",
+    },
+  ]
+
   const recentActivities = [
-    { type: t("nav.aiCoach"), time: "2 hours ago", icon: MessageSquare },
-    { type: t("nav.analysis"), time: "5 hours ago", icon: Camera },
-    { type: t("nav.exercises"), time: "1 day ago", icon: Target },
-    { type: t("nav.courses"), time: "2 days ago", icon: BookOpen },
+    {
+      type: "exercise",
+      title: "Completed Emotional Control Assessment",
+      time: "2 hours ago",
+      score: 85,
+    },
+    {
+      type: "coaching",
+      title: "AI Coaching Session on Risk Management",
+      time: "1 day ago",
+      duration: "15 min",
+    },
+    {
+      type: "analysis",
+      title: "Screenshot Analysis - EUR/USD Trade",
+      time: "2 days ago",
+      result: "Positive",
+    },
+  ]
+
+  const currentGoals = [
+    {
+      title: "Improve Emotional Control",
+      progress: 75,
+      target: "Score 85+",
+    },
+    {
+      title: "Complete 20 Exercises",
+      progress: 60,
+      target: "12/20 completed",
+    },
+    {
+      title: "Weekly Coaching Sessions",
+      progress: 80,
+      target: "4/5 sessions",
+    },
   ]
 
   return (
     <div className="space-y-6">
-      {/* Welcome Header */}
-      <div className="bg-gradient-to-r from-navy-900 via-navy-800 to-royal-blue-800 rounded-lg p-6 text-white">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold mb-2">{t("welcome")}, John!</h1>
-            <p className="text-navy-200">{t("subtitle")}</p>
-          </div>
-          <Brain className="h-16 w-16 text-royal-blue-300" />
-        </div>
+      {/* Header */}
+      <div>
+        <h1 className="text-3xl font-bold text-gray-900">{t("welcome")}</h1>
+        <p className="text-gray-600 mt-2">{t("subtitle")}</p>
       </div>
 
-      {/* Key Metrics */}
+      {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card className="border-l-4 border-l-royal-blue-500">
+        <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">{t("psychologyScore")}</CardTitle>
-            <TrendingUp className="h-4 w-4 text-royal-blue-500" />
+            <Brain className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-navy-800">85/100</div>
-            <p className="text-xs text-muted-foreground">+12% from last week</p>
-            <Progress value={85} className="mt-2" />
+            <div className="text-2xl font-bold">{stats.psychologyScore}</div>
+            <p className="text-xs text-muted-foreground">+5 from last week</p>
           </CardContent>
         </Card>
 
-        <Card className="border-l-4 border-l-green-500">
+        <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">{t("exercisesCompleted")}</CardTitle>
-            <Target className="h-4 w-4 text-green-500" />
+            <Target className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-navy-800">24</div>
+            <div className="text-2xl font-bold">{stats.exercisesCompleted}</div>
             <p className="text-xs text-muted-foreground">{t("thisWeek")}</p>
-            <Progress value={80} className="mt-2" />
           </CardContent>
         </Card>
 
-        <Card className="border-l-4 border-l-orange-500">
+        <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">{t("coachingSessions")}</CardTitle>
-            <MessageSquare className="h-4 w-4 text-orange-500" />
+            <BarChart3 className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-navy-800">8</div>
+            <div className="text-2xl font-bold">{stats.coachingSessions}</div>
             <p className="text-xs text-muted-foreground">{t("thisMonth")}</p>
-            <Progress value={65} className="mt-2" />
           </CardContent>
         </Card>
 
-        <Card className="border-l-4 border-l-purple-500">
+        <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">{t("achievements")}</CardTitle>
-            <Award className="h-4 w-4 text-purple-500" />
+            <Award className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-navy-800">12</div>
+            <div className="text-2xl font-bold">{stats.achievements}</div>
             <p className="text-xs text-muted-foreground">{t("badgesEarned")}</p>
-            <Progress value={75} className="mt-2" />
           </CardContent>
         </Card>
       </div>
 
-      {/* Charts Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Psychology Score Trend */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-navy-800">{t("psychologyTrend")}</CardTitle>
-            <CardDescription>{t("weeklyPerformance")}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={psychologyScoreData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="date" />
-                <YAxis />
-                <Tooltip />
-                <Line
-                  type="monotone"
-                  dataKey="score"
-                  stroke="#2563eb"
-                  strokeWidth={3}
-                  dot={{ fill: "#2563eb", strokeWidth: 2, r: 4 }}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-
-        {/* Skills Radar */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-navy-800">{t("tradingSkills")}</CardTitle>
-            <CardDescription>{t("skillLevels")}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <RadarChart data={skillsData}>
-                <PolarGrid />
-                <PolarAngleAxis dataKey="skill" />
-                <PolarRadiusAxis angle={90} domain={[0, 100]} />
-                <Radar
-                  name="Skills"
-                  dataKey="score"
-                  stroke="#2563eb"
-                  fill="#2563eb"
-                  fillOpacity={0.3}
-                  strokeWidth={2}
-                />
-              </RadarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Quick Actions & Recent Activity */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Quick Actions */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-navy-800">{t("quickActions")}</CardTitle>
+            <CardTitle>{t("quickActions")}</CardTitle>
             <CardDescription>{t("jumpInto")}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <Button className="w-full justify-start bg-gradient-to-r from-royal-blue-600 to-royal-blue-700 hover:from-royal-blue-700 hover:to-royal-blue-800">
-              <MessageSquare className="mr-2 h-4 w-4" />
-              {t("nav.aiCoach")}
-            </Button>
-            <Button variant="outline" className="w-full justify-start border-royal-blue-200 hover:bg-royal-blue-50">
-              <Camera className="mr-2 h-4 w-4" />
-              {t("nav.analysis")}
-            </Button>
-            <Button variant="outline" className="w-full justify-start border-royal-blue-200 hover:bg-royal-blue-50">
-              <Target className="mr-2 h-4 w-4" />
-              {t("nav.exercises")}
-            </Button>
-            <Button variant="outline" className="w-full justify-start border-royal-blue-200 hover:bg-royal-blue-50">
-              <BarChart3 className="mr-2 h-4 w-4" />
-              {t("nav.patterns")}
-            </Button>
+            {quickActions.map((action, index) => (
+              <div
+                key={index}
+                className="flex items-center space-x-4 p-3 rounded-lg border hover:bg-gray-50 transition-colors"
+              >
+                <div className={`p-2 rounded-lg ${action.color}`}>
+                  <action.icon className="h-5 w-5 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-medium">{action.title}</h3>
+                  <p className="text-sm text-gray-600">{action.description}</p>
+                </div>
+                <Button variant="ghost" size="sm" asChild>
+                  <a href={action.href}>
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                </Button>
+              </div>
+            ))}
           </CardContent>
         </Card>
 
         {/* Recent Activity */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-navy-800">{t("recentActivity")}</CardTitle>
+            <CardTitle>{t("recentActivity")}</CardTitle>
             <CardDescription>{t("latestActivities")}</CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {recentActivities.map((activity, index) => (
-                <div
-                  key={index}
-                  className="flex items-center space-x-3 p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
-                >
-                  <div className="p-2 rounded-full bg-royal-blue-100">
-                    <activity.icon className="h-4 w-4 text-royal-blue-600" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-navy-800">{activity.type}</p>
-                    <p className="text-xs text-gray-500 flex items-center">
-                      <Clock className="h-3 w-3 mr-1" />
-                      {activity.time}
-                    </p>
+          <CardContent className="space-y-4">
+            {recentActivities.map((activity, index) => (
+              <div key={index} className="flex items-start space-x-3">
+                <div className="flex-shrink-0">
+                  {activity.type === "exercise" && <Target className="h-5 w-5 text-green-500" />}
+                  {activity.type === "coaching" && <Brain className="h-5 w-5 text-blue-500" />}
+                  {activity.type === "analysis" && <Camera className="h-5 w-5 text-purple-500" />}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-gray-900">{activity.title}</p>
+                  <div className="flex items-center space-x-2 mt-1">
+                    <Clock className="h-3 w-3 text-gray-400" />
+                    <p className="text-xs text-gray-500">{activity.time}</p>
+                    {activity.score && (
+                      <Badge variant="secondary" className="text-xs">
+                        Score: {activity.score}
+                      </Badge>
+                    )}
+                    {activity.duration && (
+                      <Badge variant="outline" className="text-xs">
+                        {activity.duration}
+                      </Badge>
+                    )}
+                    {activity.result && (
+                      <Badge variant="default" className="text-xs">
+                        {activity.result}
+                      </Badge>
+                    )}
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </CardContent>
         </Card>
       </div>
@@ -229,43 +218,21 @@ export function DashboardOverview() {
       {/* Current Goals */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-navy-800">{t("currentGoals")}</CardTitle>
+          <CardTitle>{t("currentGoals")}</CardTitle>
           <CardDescription>{t("developmentObjectives")}</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
-            <div className="flex items-center justify-between p-4 border rounded-lg">
-              <div className="flex-1">
-                <h4 className="font-medium text-navy-800">Improve Emotional Control</h4>
-                <p className="text-sm text-gray-600">Complete 5 mindfulness exercises this week</p>
-                <Progress value={80} className="mt-2 w-full" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {currentGoals.map((goal, index) => (
+              <div key={index} className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <h3 className="font-medium">{goal.title}</h3>
+                  <span className="text-sm text-gray-500">{goal.progress}%</span>
+                </div>
+                <Progress value={goal.progress} className="h-2" />
+                <p className="text-xs text-gray-600">{goal.target}</p>
               </div>
-              <Badge variant="secondary" className="ml-4">
-                4/5
-              </Badge>
-            </div>
-
-            <div className="flex items-center justify-between p-4 border rounded-lg">
-              <div className="flex-1">
-                <h4 className="font-medium text-navy-800">Reduce Impulsive Trading</h4>
-                <p className="text-sm text-gray-600">Practice pre-trade analysis routine</p>
-                <Progress value={60} className="mt-2 w-full" />
-              </div>
-              <Badge variant="secondary" className="ml-4">
-                3/5
-              </Badge>
-            </div>
-
-            <div className="flex items-center justify-between p-4 border rounded-lg">
-              <div className="flex-1">
-                <h4 className="font-medium text-navy-800">Build Trading Confidence</h4>
-                <p className="text-sm text-gray-600">Complete confidence-building course</p>
-                <Progress value={40} className="mt-2 w-full" />
-              </div>
-              <Badge variant="secondary" className="ml-4">
-                2/5
-              </Badge>
-            </div>
+            ))}
           </div>
         </CardContent>
       </Card>
