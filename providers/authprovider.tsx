@@ -1,7 +1,9 @@
 "use client"
 
+import type React from "react"
+
 import { createContext, useContext, useEffect, useState } from "react"
-import { User } from "@supabase/supabase-js"
+import type { User } from "@supabase/supabase-js"
 import { supabase } from "@/lib/supabase"
 
 interface AuthContextType {
@@ -27,12 +29,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     })
 
     // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        setUser(session?.user ?? null)
-        setLoading(false)
-      }
-    )
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
+      setUser(session?.user ?? null)
+      setLoading(false)
+    })
 
     return () => subscription.unsubscribe()
   }, [])
@@ -54,32 +56,48 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signInWithGoogle = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
+      provider: "google",
       options: {
-        redirectTo: `${window.location.origin}/auth/callback`
-      }
+        redirectTo: `${window.location.origin}/auth/callback`,
+      },
     })
     if (error) throw error
   }
 
   return (
-    <AuthContext.Provider value={{
-      user,
-      loading,
-      signIn,
-      signUp,
-      signOut,
-      signInWithGoogle
-    }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        loading,
+        signIn,
+        signUp,
+        signOut,
+        signInWithGoogle,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   )
 }
 
-export function useAuth() {
+/** Safe hook that never crashes during static prerender.
+ *  When called outside `<AuthProvider>` (e.g. on the build server)
+ *  it returns a dummy object so pages can still compile.
+ *  In the browser it returns the real context as usual.
+ */
+export function useAuth(): AuthContextType & { loading: boolean } {
   const context = useContext(AuthContext)
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider')
+    // Fallback used only while no provider is mounted (SSG).
+    return {
+      user: null,
+      loading: true,
+      // no-op auth functions
+      signIn: async () => {},
+      signUp: async () => {},
+      signOut: async () => {},
+      signInWithGoogle: async () => {},
+    }
   }
   return context
 }
