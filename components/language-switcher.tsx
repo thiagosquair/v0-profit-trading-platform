@@ -20,6 +20,11 @@ export function LanguageSwitcher({ variant = "header" }: LanguageSwitcherProps) 
   const { language, setLanguage } = useLanguage()
   const currentLang = languages.find((lang) => lang.code === language) || languages[0]
 
+  const handleLanguageChange = (langCode: "en" | "pt" | "es" | "fr") => {
+    console.log("Changing language to:", langCode) // Debug log
+    setLanguage(langCode)
+  }
+
   if (variant === "compact") {
     return (
       <DropdownMenu>
@@ -32,8 +37,8 @@ export function LanguageSwitcher({ variant = "header" }: LanguageSwitcherProps) 
           {languages.map((lang) => (
             <DropdownMenuItem
               key={lang.code}
-              onClick={() => setLanguage(lang.code)}
-              className="flex items-center justify-between"
+              onClick={() => handleLanguageChange(lang.code)}
+              className="flex items-center justify-between cursor-pointer"
             >
               <span className="flex items-center gap-2">
                 <span>{lang.flag}</span>
@@ -67,8 +72,8 @@ export function LanguageSwitcher({ variant = "header" }: LanguageSwitcherProps) 
             {languages.map((lang) => (
               <DropdownMenuItem
                 key={lang.code}
-                onClick={() => setLanguage(lang.code)}
-                className="flex items-center justify-between"
+                onClick={() => handleLanguageChange(lang.code)}
+                className="flex items-center justify-between cursor-pointer"
               >
                 <span className="flex items-center gap-2">
                   <span>{lang.flag}</span>
@@ -99,8 +104,8 @@ export function LanguageSwitcher({ variant = "header" }: LanguageSwitcherProps) 
         {languages.map((lang) => (
           <DropdownMenuItem
             key={lang.code}
-            onClick={() => setLanguage(lang.code)}
-            className="flex items-center justify-between"
+            onClick={() => handleLanguageChange(lang.code)}
+            className="flex items-center justify-between cursor-pointer"
           >
             <span className="flex items-center gap-2">
               <span>{lang.flag}</span>

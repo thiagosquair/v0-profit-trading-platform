@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { DashboardSidebar } from "@/components/dashboard/dashboard-sidebar"
@@ -50,7 +49,10 @@ export default function DashboardLayout({
 
   return (
     <div className="flex h-screen bg-gray-50">
+      {/* Single sidebar */}
       <DashboardSidebar />
+
+      {/* Main content area */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Simple header */}
         <header className="bg-white border-b border-gray-200 px-6 py-4">
@@ -68,10 +70,8 @@ export default function DashboardLayout({
           </div>
         </header>
 
-        {/* Main content */}
-        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50">
-          <div className="container mx-auto px-6 py-8">{children}</div>
-        </main>
+        {/* Main content - no additional sidebar here */}
+        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-6">{children}</main>
       </div>
     </div>
   )
