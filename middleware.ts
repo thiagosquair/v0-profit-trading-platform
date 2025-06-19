@@ -1,24 +1,23 @@
-import createMiddleware from "next-intl/middleware"
+// Temporarily disabled to fix redirect loop
+// import createMiddleware from "next-intl/middleware"
 
-export default createMiddleware({
-  // A list of all locales that are supported
-  locales: ["en", "pt", "es", "fr"],
+// export default createMiddleware({
+//   locales: ["en", "pt", "es", "fr"],
+//   defaultLocale: "en",
+//   localePrefix: "always",
+// })
 
-  // Used when no locale matches
-  defaultLocale: "en",
+// export const config = {
+//   matcher: [
+//     "/((?!api|_next|_vercel|.*\\..*).*)",
+//   ],
+// }
 
-  // Always show locale in URL to avoid redirect loops
-  localePrefix: "always",
-})
+// Temporary: No middleware to avoid redirect loops
+export function middleware() {
+  // Do nothing for now
+}
 
 export const config = {
-  // Match only internationalized pathnames, exclude API routes and static files
-  matcher: [
-    // Match all pathnames except for
-    // - API routes
-    // - files with extensions (e.g. favicon.ico)
-    // - files in public folder
-    // - Next.js internals
-    "/((?!api|_next|_vercel|.*\\..*).*)",
-  ],
+  matcher: [],
 }

@@ -1,9 +1,15 @@
 import type React from "react"
 import type { Metadata } from "next"
+import "./globals.css"
+import { Inter } from "next/font/google"
+import { ThemeProvider } from "@/components/theme-provider"
+import { AuthProvider } from "@/providers/authprovider"
+
+const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Profitz Trading Psychology Lab",
-  description: "Advanced trading psychology platform with AI coaching",
+  title: "ProFitz - Trading Psychology Platform",
+  description: "Master your trading psychology with AI-powered coaching and insights",
     generator: 'v0.dev'
 }
 
@@ -12,8 +18,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  return children
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+          <AuthProvider>{children}</AuthProvider>
+        </ThemeProvider>
+      </body>
+    </html>
+  )
 }
-
-
-import './globals.css'

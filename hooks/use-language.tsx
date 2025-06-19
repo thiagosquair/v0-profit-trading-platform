@@ -28,6 +28,9 @@ const translations = {
     "nav.tradeBuilder": "Trade Builder",
     "nav.marketInsights": "Market Insights",
     "nav.settings": "Settings",
+    "nav.dashboard": "Dashboard",
+    "nav.coach": "AI Coach",
+    "nav.builder": "Trade Builder",
 
     // Common
     "common.signOut": "Sign Out",
@@ -143,6 +146,10 @@ const translations = {
       "I have trouble sticking to my trading plan and rules. Can you help me develop better discipline?",
     "aiCoach.riskPrompt":
       "I struggle with proper risk management and position sizing. Can you help me understand the psychology behind risk?",
+    "dashboard.overview": "Dashboard Overview",
+    "dashboard.coach": "AI Coach",
+    "dashboard.analysis": "Screenshot Analysis",
+    "dashboard.progress": "Progress Tracking",
   },
   pt: {
     // Navigation
@@ -158,6 +165,9 @@ const translations = {
     "nav.tradeBuilder": "Construtor de Trade",
     "nav.marketInsights": "Insights de Mercado",
     "nav.settings": "Configurações",
+    "nav.dashboard": "Dashboard",
+    "nav.coach": "Coach IA",
+    "nav.builder": "Construtor de Trade",
 
     // Common
     "common.signOut": "Sair",
@@ -277,6 +287,10 @@ const translations = {
       "Tenho problemas para seguir meu plano e regras de trading. Você pode me ajudar a desenvolver melhor disciplina?",
     "aiCoach.riskPrompt":
       "Luto com a gestão adequada de risco e dimensionamento de posição. Você pode me ajudar a entender a psicologia por trás do risco?",
+    "dashboard.overview": "Visão Geral do Dashboard",
+    "dashboard.coach": "Coach IA",
+    "dashboard.analysis": "Análise de Screenshot",
+    "dashboard.progress": "Acompanhamento de Progresso",
   },
   es: {
     // Navigation
@@ -292,6 +306,9 @@ const translations = {
     "nav.tradeBuilder": "Constructor de Trade",
     "nav.marketInsights": "Insights de Mercado",
     "nav.settings": "Configuración",
+    "nav.dashboard": "Dashboard",
+    "nav.coach": "Coach IA",
+    "nav.builder": "Constructor de Trade",
 
     // Common
     "common.signOut": "Cerrar Sesión",
@@ -409,6 +426,10 @@ const translations = {
       "Tengo problemas para seguir mi plan y reglas de trading. ¿Puedes ayudarme a desarrollar mejor disciplina?",
     "aiCoach.riskPrompt":
       "Lucho con la gestión adecuada de riesgo y dimensionamiento de posición. ¿Puedes ayudarme a entender la psicología detrás del riesgo?",
+    "dashboard.overview": "Resumen del Dashboard",
+    "dashboard.coach": "Coach IA",
+    "dashboard.analysis": "Análisis de Captura",
+    "dashboard.progress": "Seguimiento de Progreso",
   },
   fr: {
     // Navigation
@@ -424,6 +445,9 @@ const translations = {
     "nav.tradeBuilder": "Constructeur de Trade",
     "nav.marketInsights": "Insights de Marché",
     "nav.settings": "Paramètres",
+    "nav.dashboard": "Dashboard",
+    "nav.coach": "Coach IA",
+    "nav.builder": "Constructeur de Trade",
 
     // Common
     "common.signOut": "Se Déconnecter",
@@ -543,6 +567,10 @@ const translations = {
       "J'ai du mal à suivre mon plan et mes règles de trading. Pouvez-vous m'aider à développer une meilleure discipline ?",
     "aiCoach.riskPrompt":
       "Je lutte avec une gestion appropriée du risque et le dimensionnement des positions. Pouvez-vous m'aider à comprendre la psychologie derrière le risque ?",
+    "dashboard.overview": "Aperçu du Dashboard",
+    "dashboard.coach": "Coach IA",
+    "dashboard.analysis": "Analyse de Capture",
+    "dashboard.progress": "Suivi des Progrès",
   },
 }
 
