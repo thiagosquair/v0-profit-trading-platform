@@ -6,7 +6,7 @@ import '../globals.css';
 
 const inter = Inter({subsets: ['latin']});
 
-const locales = ['en', 'pt', 'es', 'fr'];
+const locales = ['en', 'pt-BR', 'es', 'fr'];
 
 export function generateStaticParams() {
   return locales.map((locale) => ({locale}));
