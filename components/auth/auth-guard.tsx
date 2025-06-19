@@ -1,45 +1,43 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import type React from "react"
+
+import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/hooks/use-auth"
 
-interface AuthGuardProps {
+/**
+ * Guard pages or sections that should (or should NOT) be accessed
+ * when the user is authenticated.
+ *
+ * @param requireAuth  true  → only logged-in users may proceed
+ *                     false → only guests may proceed
+ */
+export function AuthGuard({
+  children,
+  requireAuth = true,
+}: {
   children: React.ReactNode
   requireAuth?: boolean
-  redirectTo?: string
-}
-
-export function AuthGuard({ 
-  children, 
-  requireAuth = true, 
-  redirectTo = "/auth/signin" 
-}: AuthGuardProps) {
-  const { user, loading } = useAuth()
+}) {
   const router = useRouter()
-  const [isChecking, setIsChecking] = useState(true)
+  const { user, loading } = useAuth()
 
+  // Redirect according to auth state
   useEffect(() => {
-    if (!loading) {
-      if (requireAuth && !user) {
-        router.push(redirectTo)
-        return
-      }
-      if (!requireAuth && user) {
-        router.push("/dashboard")
-        return
-      }
-      setIsChecking(false)
-    }
-  }, [user, loading, requireAuth, redirectTo, router])
+    if (loading) return
 
-  if (loading || isChecking) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-      </div>
-    )
-  }
+    if (requireAuth && !user) {
+      router.replace("/auth/signin")
+    } else if (!requireAuth && user) {
+      router.replace("/dashboard")
+    }
+  }, [loading, user, requireAuth, router])
+
+  // While we don’t know the auth state (or we are redirecting) render nothing
+  if (loading) return null
+  if (requireAuth && !user) return null
+  if (!requireAuth && user) return null
 
   return <>{children}</>
 }
