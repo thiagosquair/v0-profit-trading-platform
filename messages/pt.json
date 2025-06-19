@@ -1,0 +1,53 @@
+{
+  "common": {
+    "appName": "ProFitz",
+    "tagline": "Laboratório de Psicologia do Trading",
+    "welcome": "Bem-vindo, {name}!"
+  },
+  "navigation": {
+    "dashboard": "Visão Geral",
+    "aiCoach": "Coach IA",
+    "learningPath": "Caminho de Aprendizado",
+    "exercises": "Exercícios Interativos",
+    "reflections": "Diário de Reflexão",
+    "tradeJournal": "Diário de Negociação",
+    "progress": "Acompanhamento de Progresso",
+    "achievements": "Conquistas",
+    "subscriptionPlans": "Planos de Assinatura",
+    "settings": "Configurações",
+    "help": "Ajuda",
+    "signOut": "Sair"
+  },
+  "dashboard": {
+    "title": "Painel",
+    "overview": "Visão Geral",
+    "recentActivity": "Atividade Recente",
+    "quickActions": "Ações Rápidas"
+  },
+  "coach": {
+    "title": "Coach de Psicologia IA Avançado",
+    "subtitle": "Coaching de IA sofisticado com análise emocional em tempo real",
+    "sessionType": "Tipo de Sessão",
+    "chooseCoachingFocus": "Escolha o foco do seu coaching",
+    "generalCoaching": "Coaching Geral",
+    "openConversation": "Conversa aberta e orientação",
+    "currentState": "Estado Atual",
+    "helpAiUnderstand": "Ajude a IA a entender seu estado atual",
+    "moodLevel": "Nível de Humor",
+    "low": "Baixo",
+    "high": "Alto",
+    "stressLevel": "Nível de Estresse",
+    "calm": "Calmo",
+    "stressed": "Estressado",
+    "aiCoachingChat": "Chat de Coaching IA",
+    "coachingPlan": "Plano de Coaching",
+    "sessionInsights": "Insights da Sessão",
+    "advancedAiCoach": "Coach IA Avançado",
+    "generalCoachingSession": "Sessão de Coaching Geral",
+    "greeting": "Olá! Sou seu Coach de Psicologia IA avançado. Posso fornecer sessões de coaching especializadas, análise emocional em tempo real e planos de coaching personalizados. Como você está se sentindo sobre suas negociações hoje?",
+    "shareThoughts": "Compartilhe seus pensamentos, preocupações ou peça orientação...",
+    "aiAnalysisActive": "Análise IA Ativa",
+    "generatePlan": "Gerar Plano"
+  }
+}
+
