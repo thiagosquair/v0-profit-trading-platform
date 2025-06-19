@@ -1,5 +1,5 @@
-import { SignInForm } from "@/components/auth/signin-form"
-import { AuthGuard } from "@/components/auth/auth-guard"
+import SignInForm from "@/components/auth/signin-form"
+import AuthGuard from "@/components/auth/auth-guard"
 
 export default function SignInPage() {
   return (
