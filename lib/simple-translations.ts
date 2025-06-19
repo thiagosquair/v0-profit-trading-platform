@@ -23,6 +23,16 @@ export const translations = {
     exercisesCompleted: "Exercises Completed",
     coachingSessions: "Coaching Sessions",
     achievements: "Achievements",
+
+    thisWeek: "This week",
+    thisMonth: "This month",
+    badgesEarned: "Badges earned",
+    quickActions: "Quick Actions",
+    jumpInto: "Jump into your training",
+    recentActivity: "Recent Activity",
+    latestActivities: "Your latest activities",
+    currentGoals: "Current Goals",
+    developmentObjectives: "Your development objectives",
   },
   pt: {
     // Sidebar
@@ -46,6 +56,16 @@ export const translations = {
     exercisesCompleted: "Exercícios Completados",
     coachingSessions: "Sessões de Coaching",
     achievements: "Conquistas",
+
+    thisWeek: "Esta semana",
+    thisMonth: "Este mês",
+    badgesEarned: "Distintivos conquistados",
+    quickActions: "Ações Rápidas",
+    jumpInto: "Entre no seu treinamento",
+    recentActivity: "Atividade Recente",
+    latestActivities: "Suas atividades mais recentes",
+    currentGoals: "Objetivos Atuais",
+    developmentObjectives: "Seus objetivos de desenvolvimento",
   },
   es: {
     // Sidebar
@@ -69,6 +89,16 @@ export const translations = {
     exercisesCompleted: "Ejercicios Completados",
     coachingSessions: "Sesiones de Coaching",
     achievements: "Logros",
+
+    thisWeek: "Esta semana",
+    thisMonth: "Este mes",
+    badgesEarned: "Insignias ganadas",
+    quickActions: "Acciones Rápidas",
+    jumpInto: "Sumérgete en tu entrenamiento",
+    recentActivity: "Actividad Reciente",
+    latestActivities: "Tus actividades más recientes",
+    currentGoals: "Objetivos Actuales",
+    developmentObjectives: "Tus objetivos de desarrollo",
   },
   fr: {
     // Sidebar
@@ -92,6 +122,16 @@ export const translations = {
     exercisesCompleted: "Exercices Complétés",
     coachingSessions: "Sessions de Coaching",
     achievements: "Réalisations",
+
+    thisWeek: "Cette semaine",
+    thisMonth: "Ce mois",
+    badgesEarned: "Badges gagnés",
+    quickActions: "Actions Rapides",
+    jumpInto: "Plongez dans votre formation",
+    recentActivity: "Activité Récente",
+    latestActivities: "Vos dernières activités",
+    currentGoals: "Objectifs Actuels",
+    developmentObjectives: "Vos objectifs de développement",
   },
 }
 

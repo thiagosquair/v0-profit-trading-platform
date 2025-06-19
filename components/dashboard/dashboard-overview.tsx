@@ -4,12 +4,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
-import { useLanguage } from "@/hooks/use-language"
+import { t } from "@/lib/simple-translations"
 import { Brain, Target, Award, BarChart3, Camera, PenTool, ArrowRight, Clock } from "lucide-react"
 
 export function DashboardOverview() {
-  const { t } = useLanguage()
-
   // Mock data for demo
   const stats = {
     psychologyScore: 78,
@@ -20,28 +18,28 @@ export function DashboardOverview() {
 
   const quickActions = [
     {
-      title: t("nav.aiCoach"),
-      description: t("aiCoach.subtitle"),
+      title: t("aiCoach"),
+      description: "Get personalized coaching insights",
       icon: Brain,
       href: "/dashboard/coach",
       color: "bg-blue-500",
     },
     {
-      title: t("nav.analysis"),
+      title: t("screenshotAnalysis"),
       description: "Upload and analyze your trading screenshots",
       icon: Camera,
       href: "/dashboard/analysis",
       color: "bg-purple-500",
     },
     {
-      title: t("nav.exercises"),
+      title: t("interactiveExercises"),
       description: "Complete psychology exercises and assessments",
       icon: Target,
       href: "/dashboard/exercises",
       color: "bg-green-500",
     },
     {
-      title: t("nav.journal"),
+      title: t("reflectionJournal"),
       description: "Reflect on your trading experiences",
       icon: PenTool,
       href: "/dashboard/journal",
@@ -116,7 +114,7 @@ export function DashboardOverview() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.exercisesCompleted}</div>
-            <p className="text-xs text-muted-foreground">{t("thisWeek")}</p>
+            <p className="text-xs text-muted-foreground">This week</p>
           </CardContent>
         </Card>
 
@@ -127,7 +125,7 @@ export function DashboardOverview() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.coachingSessions}</div>
-            <p className="text-xs text-muted-foreground">{t("thisMonth")}</p>
+            <p className="text-xs text-muted-foreground">This month</p>
           </CardContent>
         </Card>
 
@@ -138,7 +136,7 @@ export function DashboardOverview() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.achievements}</div>
-            <p className="text-xs text-muted-foreground">{t("badgesEarned")}</p>
+            <p className="text-xs text-muted-foreground">Badges earned</p>
           </CardContent>
         </Card>
       </div>
@@ -147,8 +145,8 @@ export function DashboardOverview() {
         {/* Quick Actions */}
         <Card>
           <CardHeader>
-            <CardTitle>{t("quickActions")}</CardTitle>
-            <CardDescription>{t("jumpInto")}</CardDescription>
+            <CardTitle>Quick Actions</CardTitle>
+            <CardDescription>Jump into your training</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             {quickActions.map((action, index) => (
@@ -176,8 +174,8 @@ export function DashboardOverview() {
         {/* Recent Activity */}
         <Card>
           <CardHeader>
-            <CardTitle>{t("recentActivity")}</CardTitle>
-            <CardDescription>{t("latestActivities")}</CardDescription>
+            <CardTitle>Recent Activity</CardTitle>
+            <CardDescription>Your latest activities</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             {recentActivities.map((activity, index) => (
@@ -218,8 +216,8 @@ export function DashboardOverview() {
       {/* Current Goals */}
       <Card>
         <CardHeader>
-          <CardTitle>{t("currentGoals")}</CardTitle>
-          <CardDescription>{t("developmentObjectives")}</CardDescription>
+          <CardTitle>Current Goals</CardTitle>
+          <CardDescription>Your development objectives</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
