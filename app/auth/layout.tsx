@@ -1,6 +1,6 @@
-// /app/auth/layout.tsx
-import { AuthProvider } from "@/components/auth/auth-provider";
+import type React from "react"
+import { AuthProvider } from "@/providers/authprovider"
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
-  return <AuthProvider>{children}</AuthProvider>;
+  return <AuthProvider>{children}</AuthProvider>
 }
