@@ -3,6 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -10,6 +11,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Loader2, Mail, Lock, Chrome } from "lucide-react"
 import { isSupabaseConfigured } from "@/lib/supabase"
+import { demoAuth } from "@/lib/demo-auth"
 import Link from "next/link"
 
 export function SignInForm() {
@@ -17,27 +19,52 @@ export function SignInForm() {
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
     setError("")
 
-    try {
-      // Check for demo credentials first
-      if (email === "demo@profitz.com" && password === "demo123") {
-        // Simulate successful demo login
-        window.location.href = "/dashboard"
-        return
-      }
+    console.log("Attempting sign in with:", email, password) // Debug log
 
-      // For other credentials, show demo message
-      setError("Demo mode: Use demo@profitz.com / demo123 to access the dashboard")
+    try {
+      // Check for demo credentials
+      if (email === "demo@profitz.com" && password === "demo123") {
+        console.log("Demo credentials matched, signing in...") // Debug log
+
+        // Use demo auth to sign in
+        const success = demoAuth.signIn(email, password)
+
+        if (success) {
+          console.log("Demo sign in successful, redirecting...") // Debug log
+          // Use Next.js router for navigation
+          router.push("/dashboard")
+        } else {
+          setError("Failed to sign in with demo credentials")
+        }
+      } else {
+        // For any other credentials, show helpful message
+        setError("Demo mode: Please use demo@profitz.com with password demo123")
+      }
     } catch (err: any) {
+      console.error("Sign in error:", err) // Debug log
       setError(err.message || "Failed to sign in")
     } finally {
       setIsLoading(false)
     }
+  }
+
+  const handleQuickDemo = () => {
+    setEmail("demo@profitz.com")
+    setPassword("demo123")
+    // Auto-submit after setting values
+    setTimeout(() => {
+      const success = demoAuth.signIn("demo@profitz.com", "demo123")
+      if (success) {
+        router.push("/dashboard")
+      }
+    }, 100)
   }
 
   const handleGoogleSignIn = async () => {
@@ -55,8 +82,7 @@ export function SignInForm() {
           {!isSupabaseConfigured() && (
             <Alert>
               <AlertDescription>
-                🚀 Demo Mode: To enable authentication, configure your Supabase credentials in the environment
-                variables.
+                🚀 Demo Mode: Use <strong>demo@profitz.com</strong> with password <strong>demo123</strong>
               </AlertDescription>
             </Alert>
           )}
@@ -67,6 +93,16 @@ export function SignInForm() {
             </Alert>
           )}
 
+          {/* Quick Demo Button */}
+          <Button
+            type="button"
+            variant="outline"
+            className="w-full bg-green-50 border-green-200 text-green-700 hover:bg-green-100"
+            onClick={handleQuickDemo}
+          >
+            🚀 Quick Demo Login
+          </Button>
+
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
@@ -75,7 +111,7 @@ export function SignInForm() {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder="demo@profitz.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="pl-10"
@@ -91,7 +127,7 @@ export function SignInForm() {
                 <Input
                   id="password"
                   type="password"
-                  placeholder="Enter your password"
+                  placeholder="demo123"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="pl-10"
