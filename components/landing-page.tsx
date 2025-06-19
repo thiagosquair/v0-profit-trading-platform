@@ -61,7 +61,7 @@ export function LandingPage() {
       footerHelp: "Help Center",
       footerContact: "Contact",
       footerCommunity: "Community",
-      footerCopyright: "© 2025 ProFitz. All rights reserved.",
+      footerCopyright: "© 2024 ProFitz. All rights reserved.",
       features: [
         {
           title: "AI Psychology Coach",
