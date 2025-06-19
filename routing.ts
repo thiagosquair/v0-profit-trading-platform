@@ -7,15 +7,8 @@ export const routing = defineRouting({
   // Used when no locale matches
   defaultLocale: "en",
 
-  // The `pathnames` object holds pairs of internal and
-  // external paths. Based on the locale, the external
-  // paths are rewritten to the shared, internal ones.
-  pathnames: {
-    // If all locales use the same pathname, a single
-    // external path can be provided for all locales
-    "/": "/",
-    "/dashboard": "/dashboard",
-  },
+  // Use locale prefix only when needed
+  localePrefix: "as-needed",
 })
 
 export type Pathnames = keyof typeof routing.pathnames
