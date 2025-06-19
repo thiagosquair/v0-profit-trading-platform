@@ -40,12 +40,6 @@ export const auth = {
         data: userData,
       },
     })
-
-    // Mark this as a new signup for assessment triggering
-    if (data.user && !error) {
-      localStorage.setItem(`new_signup_${data.user.id}`, "true")
-    }
-
     return { data, error }
   },
 
@@ -108,29 +102,5 @@ export const auth = {
   // Listen to auth changes
   onAuthStateChange(callback: (event: string, session: any) => void) {
     return supabase.auth.onAuthStateChange(callback)
-  },
-
-  // Test signup function for demo purposes
-  async testSignUp(email: string, password: string, userData?: any) {
-    // Simulate a successful signup for testing
-    const testUser = {
-      id: `test-user-${Date.now()}`,
-      email,
-      user_metadata: {
-        full_name: userData?.full_name || "Test User",
-        ...userData,
-      },
-    }
-
-    // Mark as new signup
-    localStorage.setItem(`new_signup_${testUser.id}`, "true")
-
-    return {
-      data: {
-        user: testUser,
-        session: { user: testUser },
-      },
-      error: null,
-    }
   },
 }

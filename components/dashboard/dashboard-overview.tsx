@@ -20,8 +20,6 @@ import {
   PolarRadiusAxis,
   Radar,
 } from "recharts"
-import { TradingPsychologyAssessment } from "./trading-psychology-assessment"
-import { AssessmentDataViewer } from "../debug/assessment-data-viewer"
 
 // Mock data for preview
 const psychologyScoreData = [
@@ -65,12 +63,6 @@ export function DashboardOverview() {
           <Brain className="h-16 w-16 text-royal-blue-300" />
         </div>
       </div>
-
-      {/* Trading Psychology Assessment */}
-      <TradingPsychologyAssessment />
-
-      {/* Debug Component - Remove in production */}
-      <AssessmentDataViewer />
 
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -271,7 +263,7 @@ export function DashboardOverview() {
                 <Progress value={40} className="mt-2 w-full" />
               </div>
               <Badge variant="secondary" className="ml-4">
-                3/5
+                2/5
               </Badge>
             </div>
           </div>

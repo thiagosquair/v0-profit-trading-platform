@@ -1,0 +1,52 @@
+{
+  "common": {
+    "appName": "ProFitz",
+    "tagline": "Laboratoire de Psychologie du Trading",
+    "welcome": "Bienvenue, {name} !"
+  },
+  "navigation": {
+    "dashboard": "Aperçu",
+    "aiCoach": "Coach IA",
+    "learningPath": "Parcours d'Apprentissage",
+    "exercises": "Exercices Interactifs",
+    "reflections": "Journal de Réflexion",
+    "tradeJournal": "Journal de Trading",
+    "progress": "Suivi des Progrès",
+    "achievements": "Réalisations",
+    "subscriptionPlans": "Plans d'Abonnement",
+    "settings": "Paramètres",
+    "help": "Aide",
+    "signOut": "Se Déconnecter"
+  },
+  "dashboard": {
+    "title": "Tableau de Bord",
+    "overview": "Aperçu",
+    "recentActivity": "Activité Récente",
+    "quickActions": "Actions Rapides"
+  },
+  "coach": {
+    "title": "Coach de Psychologie IA Avancé",
+    "subtitle": "Coaching IA sophistiqué avec analyse émotionnelle en temps réel",
+    "sessionType": "Type de Session",
+    "chooseCoachingFocus": "Choisissez votre focus de coaching",
+    "generalCoaching": "Coaching Général",
+    "openConversation": "Conversation ouverte et guidance",
+    "currentState": "État Actuel",
+    "helpAiUnderstand": "Aidez l'IA à comprendre votre état actuel",
+    "moodLevel": "Niveau d'Humeur",
+    "low": "Bas",
+    "high": "Élevé",
+    "stressLevel": "Niveau de Stress",
+    "calm": "Calme",
+    "stressed": "Stressé",
+    "aiCoachingChat": "Chat de Coaching IA",
+    "coachingPlan": "Plan de Coaching",
+    "sessionInsights": "Aperçus de Session",
+    "advancedAiCoach": "Coach IA Avancé",
+    "generalCoachingSession": "Session de Coaching Général",
+    "greeting": "Bonjour ! Je suis votre Coach de Psychologie IA avancé. Je peux fournir des sessions de coaching spécialisées, une analyse émotionnelle en temps réel et des plans de coaching personnalisés. Comment vous sentez-vous à propos de votre trading aujourd'hui ?",
+    "shareThoughts": "Partagez vos pensées, préoccupations ou demandez des conseils...",
+    "aiAnalysisActive": "Analyse IA Active",
+    "generatePlan": "Générer un Plan"
+  }
+}

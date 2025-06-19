@@ -1,0 +1,52 @@
+{
+  "common": {
+    "appName": "ProFitz",
+    "tagline": "Laboratorio de Psicología del Trading",
+    "welcome": "¡Bienvenido, {name}!"
+  },
+  "navigation": {
+    "dashboard": "Resumen",
+    "aiCoach": "Entrenador IA",
+    "learningPath": "Ruta de Aprendizaje",
+    "exercises": "Ejercicios Interactivos",
+    "reflections": "Diario de Reflexión",
+    "tradeJournal": "Diario de Operaciones",
+    "progress": "Seguimiento de Progreso",
+    "achievements": "Logros",
+    "subscriptionPlans": "Planes de Suscripción",
+    "settings": "Configuración",
+    "help": "Ayuda",
+    "signOut": "Cerrar Sesión"
+  },
+  "dashboard": {
+    "title": "Tablero",
+    "overview": "Resumen",
+    "recentActivity": "Actividad Reciente",
+    "quickActions": "Acciones Rápidas"
+  },
+  "coach": {
+    "title": "Entrenador de Psicología IA Avanzado",
+    "subtitle": "Entrenamiento de IA sofisticado con análisis emocional en tiempo real",
+    "sessionType": "Tipo de Sesión",
+    "chooseCoachingFocus": "Elige el enfoque de tu entrenamiento",
+    "generalCoaching": "Entrenamiento General",
+    "openConversation": "Conversación abierta y orientación",
+    "currentState": "Estado Actual",
+    "helpAiUnderstand": "Ayuda a la IA a entender tu estado actual",
+    "moodLevel": "Nivel de Ánimo",
+    "low": "Bajo",
+    "high": "Alto",
+    "stressLevel": "Nivel de Estrés",
+    "calm": "Tranquilo",
+    "stressed": "Estresado",
+    "aiCoachingChat": "Chat de Entrenamiento IA",
+    "coachingPlan": "Plan de Entrenamiento",
+    "sessionInsights": "Perspectivas de la Sesión",
+    "advancedAiCoach": "Entrenador IA Avanzado",
+    "generalCoachingSession": "Sesión de Entrenamiento General",
+    "greeting": "¡Hola! Soy tu Entrenador de Psicología IA avanzado. Puedo proporcionar sesiones de entrenamiento especializadas, análisis emocional en tiempo real y planes de entrenamiento personalizados. ¿Cómo te sientes sobre tus operaciones hoy?",
+    "shareThoughts": "Comparte tus pensamientos, preocupaciones o pide orientación...",
+    "aiAnalysisActive": "Análisis IA Activo",
+    "generatePlan": "Generar Plan"
+  }
+}
