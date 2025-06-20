@@ -1,34 +1,34 @@
 "use client"
 
 import type React from "react"
-
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
+import { demoAuth } from "@/lib/demo-auth"
+import { Loader2 } from "lucide-react"
 
 interface AuthGuardProps {
   children: React.ReactNode
 }
 
 export function AuthGuard({ children }: AuthGuardProps) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
     const checkAuth = () => {
       try {
-        if (typeof window !== "undefined") {
-          const authData = localStorage.getItem("demo-auth")
-          if (authData) {
-            const parsed = JSON.parse(authData)
-            if (parsed.isAuthenticated) {
-              setIsAuthenticated(true)
-            } else {
-              router.push("/auth/signin")
-            }
-          } else {
-            router.push("/auth/signin")
-          }
+        console.log("Checking authentication...")
+        const signedIn = demoAuth.isSignedIn()
+        console.log("Authentication status:", signedIn)
+
+        setIsAuthenticated(signedIn)
+
+        if (!signedIn) {
+          console.log("Not authenticated, redirecting to signin...")
+          router.push("/auth/signin")
+        } else {
+          console.log("Authenticated, showing dashboard...")
         }
       } catch (error) {
         console.error("Auth check error:", error)
@@ -38,19 +38,29 @@ export function AuthGuard({ children }: AuthGuardProps) {
       }
     }
 
-    checkAuth()
+    // Small delay to ensure localStorage is available
+    setTimeout(checkAuth, 50)
   }, [router])
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="flex items-center space-x-2">
+          <Loader2 className="h-6 w-6 animate-spin" />
+          <span>Loading...</span>
+        </div>
       </div>
     )
   }
 
   if (!isAuthenticated) {
-    return null
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <p>Redirecting to sign in...</p>
+        </div>
+      </div>
+    )
   }
 
   return <>{children}</>

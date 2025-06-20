@@ -9,7 +9,6 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Loader2, Mail, Lock, Chrome } from "lucide-react"
-import { isSupabaseConfigured } from "@/lib/supabase"
 import { demoAuth } from "@/lib/demo-auth"
 import Link from "next/link"
 
@@ -26,20 +25,24 @@ export function SignInForm() {
     setError("")
 
     try {
+      console.log("Attempting to sign in with:", email)
+
       // Check for demo credentials
       if (email === "demo@profitz.com" && password === "demo123") {
-        // Use demo auth to sign in
         const success = demoAuth.signIn(email, password)
+        console.log("Demo sign in result:", success)
 
         if (success) {
-          // Use window.location for more reliable navigation
-          window.location.href = "/dashboard"
+          console.log("Sign in successful, navigating to dashboard...")
+          // Small delay to ensure localStorage is set
+          setTimeout(() => {
+            window.location.href = "/dashboard"
+          }, 100)
           return
         } else {
           setError("Failed to sign in with demo credentials")
         }
       } else {
-        // For any other credentials, show helpful message
         setError("Demo mode: Please use demo@profitz.com with password demo123")
       }
     } catch (err: any) {
@@ -55,15 +58,16 @@ export function SignInForm() {
     setError("")
 
     try {
-      setEmail("demo@profitz.com")
-      setPassword("demo123")
-
-      // Use demo auth to sign in
+      console.log("Quick demo login...")
       const success = demoAuth.signIn("demo@profitz.com", "demo123")
+      console.log("Quick demo result:", success)
 
       if (success) {
-        // Use window.location for more reliable navigation
-        window.location.href = "/dashboard"
+        console.log("Quick demo successful, navigating...")
+        // Small delay to ensure localStorage is set
+        setTimeout(() => {
+          window.location.href = "/dashboard"
+        }, 100)
         return
       } else {
         setError("Failed to sign in with demo credentials")
@@ -88,13 +92,11 @@ export function SignInForm() {
           <CardDescription className="text-center">Sign in to your ProFitz account</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          {!isSupabaseConfigured() && (
-            <Alert>
-              <AlertDescription>
-                🚀 Demo Mode: Use <strong>demo@profitz.com</strong> with password <strong>demo123</strong>
-              </AlertDescription>
-            </Alert>
-          )}
+          <Alert>
+            <AlertDescription>
+              🚀 Demo Mode: Use <strong>demo@profitz.com</strong> with password <strong>demo123</strong>
+            </AlertDescription>
+          </Alert>
 
           {error && (
             <Alert variant="destructive">

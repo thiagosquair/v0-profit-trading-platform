@@ -18,8 +18,12 @@ export const demoAuth = {
   isSignedIn(): boolean {
     if (typeof window === "undefined") return false
     try {
-      const signedIn = localStorage.getItem("demo_signed_in")
-      return signedIn === "true"
+      const authData = localStorage.getItem("demo-auth")
+      if (authData) {
+        const parsed = JSON.parse(authData)
+        return parsed.isAuthenticated === true
+      }
+      return false
     } catch (error) {
       console.error("Error checking sign in status:", error)
       return false
@@ -31,9 +35,10 @@ export const demoAuth = {
     if (!this.isSignedIn()) return null
 
     try {
-      const userData = localStorage.getItem("demo_user")
-      if (userData) {
-        return JSON.parse(userData)
+      const authData = localStorage.getItem("demo-auth")
+      if (authData) {
+        const parsed = JSON.parse(authData)
+        return parsed.user || this.demoUser
       }
       return this.demoUser
     } catch (error) {
@@ -47,8 +52,13 @@ export const demoAuth = {
     try {
       if (email === "demo@profitz.com" && password === "demo123") {
         if (typeof window !== "undefined") {
-          localStorage.setItem("demo_signed_in", "true")
-          localStorage.setItem("demo_user", JSON.stringify(this.demoUser))
+          const authData = {
+            isAuthenticated: true,
+            user: this.demoUser,
+            timestamp: Date.now(),
+          }
+          localStorage.setItem("demo-auth", JSON.stringify(authData))
+          console.log("Demo auth set:", authData)
           return true
         }
       }
@@ -63,8 +73,8 @@ export const demoAuth = {
   signOut() {
     try {
       if (typeof window !== "undefined") {
-        localStorage.removeItem("demo_signed_in")
-        localStorage.removeItem("demo_user")
+        localStorage.removeItem("demo-auth")
+        console.log("Demo auth cleared")
       }
     } catch (error) {
       console.error("Error during sign out:", error)
