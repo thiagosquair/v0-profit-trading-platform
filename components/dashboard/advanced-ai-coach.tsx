@@ -49,7 +49,7 @@ export function AdvancedAICoach() {
 
   const coachingInsights = [
     {
-      title: "Emotional Control",
+      title: t("emotionalControl"),
       score: 78,
       trend: "up",
       description: "Your emotional regulation has improved by 12% this week",
@@ -57,7 +57,7 @@ export function AdvancedAICoach() {
       color: "text-red-500",
     },
     {
-      title: "Risk Management",
+      title: t("riskManagement"),
       score: 85,
       trend: "up",
       description: "Excellent progress in position sizing discipline",
@@ -108,14 +108,14 @@ export function AdvancedAICoach() {
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold text-gray-900">{t("aiCoach")}</h1>
-        <p className="text-gray-600 mt-2">Your personal AI trading psychology coach</p>
+        <p className="text-gray-600 mt-2">{t("personalAICoach")}</p>
       </div>
 
       <Tabs defaultValue="chat" className="space-y-6">
         <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="chat">AI Chat</TabsTrigger>
-          <TabsTrigger value="insights">Insights</TabsTrigger>
-          <TabsTrigger value="exercises">Quick Exercises</TabsTrigger>
+          <TabsTrigger value="chat">{t("aiChat")}</TabsTrigger>
+          <TabsTrigger value="insights">{t("insights")}</TabsTrigger>
+          <TabsTrigger value="exercises">{t("quickExercises")}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="chat" className="space-y-6">
@@ -126,9 +126,9 @@ export function AdvancedAICoach() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Brain className="h-5 w-5 text-blue-500" />
-                    AI Coach Chat
+                    {t("aiChat")}
                   </CardTitle>
-                  <CardDescription>Get personalized coaching advice and support</CardDescription>
+                  <CardDescription>{t("getPersonalizedCoachingAdvice")}</CardDescription>
                 </CardHeader>
                 <CardContent className="flex-1 flex flex-col">
                   {/* Chat Messages */}
@@ -150,7 +150,7 @@ export function AdvancedAICoach() {
                         <div className="bg-gray-100 p-3 rounded-lg">
                           <div className="flex items-center space-x-2">
                             <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-500"></div>
-                            <span className="text-sm text-gray-600">AI is thinking...</span>
+                            <span className="text-sm text-gray-600">{t("aiIsThinking")}</span>
                           </div>
                         </div>
                       </div>
@@ -162,7 +162,7 @@ export function AdvancedAICoach() {
                     <Input
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      placeholder="Ask your AI coach anything..."
+                      placeholder={t("askYourAICoach")}
                       onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
                       disabled={isLoading}
                     />
@@ -178,7 +178,7 @@ export function AdvancedAICoach() {
             <div className="space-y-4">
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg">Today's Focus</CardTitle>
+                  <CardTitle className="text-lg">{t("todaysFocus")}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-center space-x-3">
@@ -186,8 +186,8 @@ export function AdvancedAICoach() {
                       <Target className="h-5 w-5 text-blue-600" />
                     </div>
                     <div>
-                      <p className="font-medium">Emotional Control</p>
-                      <p className="text-sm text-gray-600">Practice mindful trading</p>
+                      <p className="font-medium">{t("emotionalControl")}</p>
+                      <p className="text-sm text-gray-600">{t("practiceMindfulTrading")}</p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
@@ -195,8 +195,8 @@ export function AdvancedAICoach() {
                       <CheckCircle className="h-5 w-5 text-green-600" />
                     </div>
                     <div>
-                      <p className="font-medium">Risk Management</p>
-                      <p className="text-sm text-gray-600">Stick to position sizes</p>
+                      <p className="font-medium">{t("riskManagement")}</p>
+                      <p className="text-sm text-gray-600">{t("stickToPositionSizes")}</p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
@@ -204,8 +204,8 @@ export function AdvancedAICoach() {
                       <AlertCircle className="h-5 w-5 text-orange-600" />
                     </div>
                     <div>
-                      <p className="font-medium">Patience</p>
-                      <p className="text-sm text-gray-600">Wait for quality setups</p>
+                      <p className="font-medium">{t("patience")}</p>
+                      <p className="text-sm text-gray-600">{t("waitForQualitySetups")}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -213,19 +213,19 @@ export function AdvancedAICoach() {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-lg">Session Stats</CardTitle>
+                  <CardTitle className="text-lg">{t("sessionStats")}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex justify-between items-center">
-                    <span className="text-sm">Messages Today</span>
+                    <span className="text-sm">{t("messagesToday")}</span>
                     <Badge variant="secondary">12</Badge>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm">Insights Received</span>
+                    <span className="text-sm">{t("insightsReceived")}</span>
                     <Badge variant="secondary">8</Badge>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm">Exercises Suggested</span>
+                    <span className="text-sm">{t("exercisesSuggested")}</span>
                     <Badge variant="secondary">3</Badge>
                   </div>
                 </CardContent>
@@ -273,7 +273,7 @@ export function AdvancedAICoach() {
                     </div>
                     <Badge variant="outline">{exercise.type}</Badge>
                   </div>
-                  <Button className="w-full">Start Exercise</Button>
+                  <Button className="w-full">{t("start")} Exercise</Button>
                 </CardContent>
               </Card>
             ))}
