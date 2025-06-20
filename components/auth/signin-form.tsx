@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -26,20 +25,16 @@ export function SignInForm() {
     setIsLoading(true)
     setError("")
 
-    console.log("Attempting sign in with:", email, password) // Debug log
-
     try {
       // Check for demo credentials
       if (email === "demo@profitz.com" && password === "demo123") {
-        console.log("Demo credentials matched, signing in...") // Debug log
-
         // Use demo auth to sign in
         const success = demoAuth.signIn(email, password)
 
         if (success) {
-          console.log("Demo sign in successful, redirecting...") // Debug log
-          // Use Next.js router for navigation
-          router.push("/dashboard")
+          // Use window.location for more reliable navigation
+          window.location.href = "/dashboard"
+          return
         } else {
           setError("Failed to sign in with demo credentials")
         }
@@ -48,23 +43,37 @@ export function SignInForm() {
         setError("Demo mode: Please use demo@profitz.com with password demo123")
       }
     } catch (err: any) {
-      console.error("Sign in error:", err) // Debug log
+      console.error("Sign in error:", err)
       setError(err.message || "Failed to sign in")
     } finally {
       setIsLoading(false)
     }
   }
 
-  const handleQuickDemo = () => {
-    setEmail("demo@profitz.com")
-    setPassword("demo123")
-    // Auto-submit after setting values
-    setTimeout(() => {
+  const handleQuickDemo = async () => {
+    setIsLoading(true)
+    setError("")
+
+    try {
+      setEmail("demo@profitz.com")
+      setPassword("demo123")
+
+      // Use demo auth to sign in
       const success = demoAuth.signIn("demo@profitz.com", "demo123")
+
       if (success) {
-        router.push("/dashboard")
+        // Use window.location for more reliable navigation
+        window.location.href = "/dashboard"
+        return
+      } else {
+        setError("Failed to sign in with demo credentials")
       }
-    }, 100)
+    } catch (err: any) {
+      console.error("Quick demo error:", err)
+      setError("Failed to sign in")
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const handleGoogleSignIn = async () => {
@@ -99,8 +108,16 @@ export function SignInForm() {
             variant="outline"
             className="w-full bg-green-50 border-green-200 text-green-700 hover:bg-green-100"
             onClick={handleQuickDemo}
+            disabled={isLoading}
           >
-            🚀 Quick Demo Login
+            {isLoading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Signing in...
+              </>
+            ) : (
+              "🚀 Quick Demo Login"
+            )}
           </Button>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -116,6 +133,7 @@ export function SignInForm() {
                   onChange={(e) => setEmail(e.target.value)}
                   className="pl-10"
                   required
+                  disabled={isLoading}
                 />
               </div>
             </div>
@@ -132,6 +150,7 @@ export function SignInForm() {
                   onChange={(e) => setPassword(e.target.value)}
                   className="pl-10"
                   required
+                  disabled={isLoading}
                 />
               </div>
             </div>
@@ -157,7 +176,7 @@ export function SignInForm() {
             </div>
           </div>
 
-          <Button type="button" variant="outline" className="w-full" onClick={handleGoogleSignIn}>
+          <Button type="button" variant="outline" className="w-full" onClick={handleGoogleSignIn} disabled={isLoading}>
             <Chrome className="mr-2 h-4 w-4" />
             Google
           </Button>

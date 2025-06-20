@@ -2,42 +2,60 @@
 
 import type React from "react"
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { useAuth } from "@/hooks/use-auth"
+import { demoAuth } from "@/lib/demo-auth"
+import { Loader2 } from "lucide-react"
 
-/**
- * Guard pages or sections that should (or should NOT) be accessed
- * when the user is authenticated.
- *
- * @param requireAuth  true  → only logged-in users may proceed
- *                     false → only guests may proceed
- */
-export function AuthGuard({
-  children,
-  requireAuth = true,
-}: {
+interface AuthGuardProps {
   children: React.ReactNode
-  requireAuth?: boolean
-}) {
+}
+
+export function AuthGuard({ children }: AuthGuardProps) {
+  const [isLoading, setIsLoading] = useState(true)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
   const router = useRouter()
-  const { user, loading } = useAuth()
 
-  // Redirect according to auth state
   useEffect(() => {
-    if (loading) return
+    const checkAuth = () => {
+      try {
+        const signedIn = demoAuth.isSignedIn()
+        setIsAuthenticated(signedIn)
 
-    if (requireAuth && !user) {
-      router.replace("/auth/signin")
-    } else if (!requireAuth && user) {
-      router.replace("/dashboard")
+        if (!signedIn) {
+          router.push("/auth/signin")
+        }
+      } catch (error) {
+        console.error("Auth check error:", error)
+        router.push("/auth/signin")
+      } finally {
+        setIsLoading(false)
+      }
     }
-  }, [loading, user, requireAuth, router])
 
-  // While we don’t know the auth state (or we are redirecting) render nothing
-  if (loading) return null
-  if (requireAuth && !user) return null
-  if (!requireAuth && user) return null
+    checkAuth()
+  }, [router])
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="flex items-center space-x-2">
+          <Loader2 className="h-6 w-6 animate-spin" />
+          <span>Loading...</span>
+        </div>
+      </div>
+    )
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <p>Redirecting to sign in...</p>
+        </div>
+      </div>
+    )
+  }
 
   return <>{children}</>
 }

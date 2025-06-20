@@ -17,52 +17,57 @@ export const demoAuth = {
   // Check if user is signed in (demo mode)
   isSignedIn(): boolean {
     if (typeof window === "undefined") return false
-    const signedIn = localStorage.getItem("demo_signed_in")
-    console.log("Checking if signed in:", signedIn) // Debug log
-    return signedIn === "true"
+    try {
+      const signedIn = localStorage.getItem("demo_signed_in")
+      return signedIn === "true"
+    } catch (error) {
+      console.error("Error checking sign in status:", error)
+      return false
+    }
   },
 
   // Get current user (demo mode)
   getCurrentUser() {
-    if (this.isSignedIn()) {
+    if (!this.isSignedIn()) return null
+
+    try {
       const userData = localStorage.getItem("demo_user")
       if (userData) {
-        try {
-          return JSON.parse(userData)
-        } catch (e) {
-          console.error("Error parsing user data:", e)
-          return this.demoUser
-        }
+        return JSON.parse(userData)
       }
       return this.demoUser
+    } catch (error) {
+      console.error("Error getting current user:", error)
+      return this.demoUser
     }
-    return null
   },
 
   // Sign in (demo mode)
   signIn(email: string, password: string): boolean {
-    console.log("Demo auth signIn called with:", email, password) // Debug log
-
-    if (email === "demo@profitz.com" && password === "demo123") {
-      if (typeof window !== "undefined") {
-        console.log("Setting localStorage items...") // Debug log
-        localStorage.setItem("demo_signed_in", "true")
-        localStorage.setItem("demo_user", JSON.stringify(this.demoUser))
-        console.log("localStorage set successfully") // Debug log
+    try {
+      if (email === "demo@profitz.com" && password === "demo123") {
+        if (typeof window !== "undefined") {
+          localStorage.setItem("demo_signed_in", "true")
+          localStorage.setItem("demo_user", JSON.stringify(this.demoUser))
+          return true
+        }
       }
-      return true
+      return false
+    } catch (error) {
+      console.error("Error during sign in:", error)
+      return false
     }
-    console.log("Demo credentials don't match") // Debug log
-    return false
   },
 
   // Sign out (demo mode)
   signOut() {
-    console.log("Demo auth signOut called") // Debug log
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("demo_signed_in")
-      localStorage.removeItem("demo_user")
-      console.log("localStorage cleared") // Debug log
+    try {
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("demo_signed_in")
+        localStorage.removeItem("demo_user")
+      }
+    } catch (error) {
+      console.error("Error during sign out:", error)
     }
   },
 }
