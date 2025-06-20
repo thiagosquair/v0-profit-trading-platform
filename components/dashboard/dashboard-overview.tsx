@@ -1,31 +1,109 @@
 "use client"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { t } from "@/lib/simple-translations"
-import { Brain, Camera, Target, PenTool, Award } from "lucide-react"
+import { Brain, Target, Award, BarChart3, Camera, PenTool, ArrowRight, Clock } from "lucide-react"
 
 export function DashboardOverview() {
+  // Mock data for demo
+  const stats = {
+    psychologyScore: 78,
+    exercisesCompleted: 12,
+    coachingSessions: 5,
+    achievements: 8,
+  }
+
+  const quickActions = [
+    {
+      title: t("aiCoach"),
+      description: t("getPersonalizedCoaching"),
+      icon: Brain,
+      href: "/dashboard/coach",
+      color: "bg-blue-500",
+    },
+    {
+      title: t("screenshotAnalysis"),
+      description: t("uploadAndAnalyze"),
+      icon: Camera,
+      href: "/dashboard/analysis",
+      color: "bg-purple-500",
+    },
+    {
+      title: t("interactiveExercises"),
+      description: t("completePsychology"),
+      icon: Target,
+      href: "/dashboard/exercises",
+      color: "bg-green-500",
+    },
+    {
+      title: t("reflectionJournal"),
+      description: t("reflectOnTrading"),
+      icon: PenTool,
+      href: "/dashboard/journal",
+      color: "bg-orange-500",
+    },
+  ]
+
+  const recentActivities = [
+    {
+      type: "exercise",
+      title: t("completedEmotionalControl"),
+      time: t("hoursAgo"),
+      score: 85,
+    },
+    {
+      type: "coaching",
+      title: t("aiCoachingSession"),
+      time: t("dayAgo"),
+      duration: t("minutes"),
+    },
+    {
+      type: "analysis",
+      title: t("screenshotAnalysisEUR"),
+      time: t("daysAgo"),
+      result: t("positive"),
+    },
+  ]
+
+  const currentGoals = [
+    {
+      title: t("improveEmotionalControl"),
+      progress: 75,
+      target: t("scoreTarget"),
+    },
+    {
+      title: t("complete20Exercises"),
+      progress: 60,
+      target: t("exercisesProgress"),
+    },
+    {
+      title: t("weeklyCoachingSessions"),
+      progress: 80,
+      target: t("sessionsProgress"),
+    },
+  ]
+
   return (
-    <div className="p-6 space-y-6">
-      {/* Welcome Section */}
-      <div className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">{t("welcome")}</h1>
-        <p className="text-muted-foreground">{t("subtitle")}</p>
+    <div className="space-y-6 p-6">
+      {/* Header */}
+      <div>
+        <h1 className="text-3xl font-bold text-gray-900">{t("welcome")}</h1>
+        <p className="text-gray-600 mt-2">{t("subtitle")}</p>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">{t("psychologyScore")}</CardTitle>
             <Brain className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">82</div>
-            <p className="text-xs text-muted-foreground">+5 {t("fromLastWeek")}</p>
+            <div className="text-2xl font-bold">{stats.psychologyScore}</div>
+            <p className="text-xs text-muted-foreground">{t("fromLastWeek")}</p>
           </CardContent>
         </Card>
 
@@ -35,7 +113,7 @@ export function DashboardOverview() {
             <Target className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">12</div>
+            <div className="text-2xl font-bold">{stats.exercisesCompleted}</div>
             <p className="text-xs text-muted-foreground">{t("thisWeek")}</p>
           </CardContent>
         </Card>
@@ -43,10 +121,10 @@ export function DashboardOverview() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">{t("coachingSessions")}</CardTitle>
-            <Brain className="h-4 w-4 text-muted-foreground" />
+            <BarChart3 className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">8</div>
+            <div className="text-2xl font-bold">{stats.coachingSessions}</div>
             <p className="text-xs text-muted-foreground">{t("thisMonth")}</p>
           </CardContent>
         </Card>
@@ -57,51 +135,39 @@ export function DashboardOverview() {
             <Award className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">5</div>
+            <div className="text-2xl font-bold">{stats.achievements}</div>
             <p className="text-xs text-muted-foreground">{t("badgesEarned")}</p>
           </CardContent>
         </Card>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Quick Actions */}
-        <Card className="md:col-span-2">
+        <Card>
           <CardHeader>
             <CardTitle>{t("quickActions")}</CardTitle>
             <CardDescription>{t("jumpInto")}</CardDescription>
           </CardHeader>
-          <CardContent className="grid gap-4 md:grid-cols-2">
-            <Button className="h-auto p-4 justify-start" variant="outline">
-              <Brain className="mr-3 h-5 w-5" />
-              <div className="text-left">
-                <div className="font-medium">AI Coach</div>
-                <div className="text-sm text-muted-foreground">{t("getPersonalizedCoaching")}</div>
+          <CardContent className="space-y-4">
+            {quickActions.map((action, index) => (
+              <div
+                key={index}
+                className="flex items-center space-x-4 p-3 rounded-lg border hover:bg-gray-50 transition-colors"
+              >
+                <div className={`p-2 rounded-lg ${action.color}`}>
+                  <action.icon className="h-5 w-5 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-medium">{action.title}</h3>
+                  <p className="text-sm text-gray-600">{action.description}</p>
+                </div>
+                <Button variant="ghost" size="sm" asChild>
+                  <a href={action.href}>
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                </Button>
               </div>
-            </Button>
-
-            <Button className="h-auto p-4 justify-start" variant="outline">
-              <Camera className="mr-3 h-5 w-5" />
-              <div className="text-left">
-                <div className="font-medium">Screenshot Analysis</div>
-                <div className="text-sm text-muted-foreground">{t("uploadAndAnalyze")}</div>
-              </div>
-            </Button>
-
-            <Button className="h-auto p-4 justify-start" variant="outline">
-              <Target className="mr-3 h-5 w-5" />
-              <div className="text-left">
-                <div className="font-medium">Exercises</div>
-                <div className="text-sm text-muted-foreground">{t("completePsychology")}</div>
-              </div>
-            </Button>
-
-            <Button className="h-auto p-4 justify-start" variant="outline">
-              <PenTool className="mr-3 h-5 w-5" />
-              <div className="text-left">
-                <div className="font-medium">Journal</div>
-                <div className="text-sm text-muted-foreground">{t("reflectOnTrading")}</div>
-              </div>
-            </Button>
+            ))}
           </CardContent>
         </Card>
 
@@ -112,32 +178,37 @@ export function DashboardOverview() {
             <CardDescription>{t("latestActivities")}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex items-center space-x-3">
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-              <div className="flex-1 space-y-1">
-                <p className="text-sm font-medium">{t("completedEmotionalControl")}</p>
-                <p className="text-xs text-muted-foreground">{t("hoursAgo")}</p>
+            {recentActivities.map((activity, index) => (
+              <div key={index} className="flex items-start space-x-3">
+                <div className="flex-shrink-0">
+                  {activity.type === "exercise" && <Target className="h-5 w-5 text-green-500" />}
+                  {activity.type === "coaching" && <Brain className="h-5 w-5 text-blue-500" />}
+                  {activity.type === "analysis" && <Camera className="h-5 w-5 text-purple-500" />}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-gray-900">{activity.title}</p>
+                  <div className="flex items-center space-x-2 mt-1">
+                    <Clock className="h-3 w-3 text-gray-400" />
+                    <p className="text-xs text-gray-500">{activity.time}</p>
+                    {activity.score && (
+                      <Badge variant="secondary" className="text-xs">
+                        {t("score")}: {activity.score}
+                      </Badge>
+                    )}
+                    {activity.duration && (
+                      <Badge variant="outline" className="text-xs">
+                        {activity.duration}
+                      </Badge>
+                    )}
+                    {activity.result && (
+                      <Badge variant="default" className="text-xs">
+                        {activity.result}
+                      </Badge>
+                    )}
+                  </div>
+                </div>
               </div>
-              <Badge variant="secondary">{t("score")}: 85</Badge>
-            </div>
-
-            <div className="flex items-center space-x-3">
-              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-              <div className="flex-1 space-y-1">
-                <p className="text-sm font-medium">{t("aiCoachingSession")}</p>
-                <p className="text-xs text-muted-foreground">{t("dayAgo")}</p>
-              </div>
-              <Badge variant="outline">{t("positive")}</Badge>
-            </div>
-
-            <div className="flex items-center space-x-3">
-              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-              <div className="flex-1 space-y-1">
-                <p className="text-sm font-medium">{t("screenshotAnalysisEUR")}</p>
-                <p className="text-xs text-muted-foreground">{t("daysAgo")}</p>
-              </div>
-              <Badge variant="outline">{t("minutes")}</Badge>
-            </div>
+            ))}
           </CardContent>
         </Card>
       </div>
@@ -148,29 +219,18 @@ export function DashboardOverview() {
           <CardTitle>{t("currentGoals")}</CardTitle>
           <CardDescription>{t("developmentObjectives")}</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium">{t("improveEmotionalControl")}</span>
-              <span className="text-sm text-muted-foreground">{t("scoreTarget")}</span>
-            </div>
-            <Progress value={82} className="h-2" />
-          </div>
-
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium">{t("complete20Exercises")}</span>
-              <span className="text-sm text-muted-foreground">{t("exercisesProgress")}</span>
-            </div>
-            <Progress value={60} className="h-2" />
-          </div>
-
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium">{t("weeklyCoachingSessions")}</span>
-              <span className="text-sm text-muted-foreground">{t("sessionsProgress")}</span>
-            </div>
-            <Progress value={80} className="h-2" />
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {currentGoals.map((goal, index) => (
+              <div key={index} className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <h3 className="font-medium">{goal.title}</h3>
+                  <span className="text-sm text-gray-500">{goal.progress}%</span>
+                </div>
+                <Progress value={goal.progress} className="h-2" />
+                <p className="text-xs text-gray-600">{goal.target}</p>
+              </div>
+            ))}
           </div>
         </CardContent>
       </Card>
