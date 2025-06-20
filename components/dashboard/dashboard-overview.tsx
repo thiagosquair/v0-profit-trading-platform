@@ -4,10 +4,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
-import { t } from "@/lib/simple-translations"
+import { useTranslations } from "next-intl"
 import { Brain, Target, Award, BarChart3, Camera, PenTool, ArrowRight, Clock } from "lucide-react"
 
 export function DashboardOverview() {
+  const t = useTranslations("dashboard")
+  
   // Mock data for demo
   const stats = {
     psychologyScore: 78,
