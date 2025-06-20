@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { LanguageSwitcher } from "@/components/language-switcher"
-import { useLanguage } from "@/hooks/use-language"
+import { t } from "@/lib/simple-translations"
 import {
   Brain,
   BarChart3,
@@ -101,7 +101,6 @@ interface DashboardSidebarProps {
 export function DashboardSidebar({ className }: DashboardSidebarProps) {
   const pathname = usePathname()
   const [collapsed, setCollapsed] = useState(false)
-  const { t } = useLanguage()
 
   return (
     <div className={cn("flex flex-col border-r bg-white/50 backdrop-blur-sm", collapsed ? "w-16" : "w-64", className)}>
@@ -134,10 +133,10 @@ export function DashboardSidebar({ className }: DashboardSidebarProps) {
                     collapsed && "px-2",
                     isActive && "bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg",
                   )}
-                  title={collapsed ? t(item.key) : undefined}
+                  title={collapsed ? t(item.key as any) : undefined}
                 >
                   <item.icon className={cn("h-5 w-5", !collapsed && "mr-3")} />
-                  {!collapsed && <span className="font-medium">{t(item.key)}</span>}
+                  {!collapsed && <span className="font-medium">{t(item.key as any)}</span>}
                 </Button>
               </Link>
             )
@@ -154,10 +153,10 @@ export function DashboardSidebar({ className }: DashboardSidebarProps) {
           <Button
             variant="ghost"
             className={cn("w-full justify-start h-10", collapsed && "px-2")}
-            title={collapsed ? t("nav.settings") : undefined}
+            title={collapsed ? t("nav.settings" as any) : undefined}
           >
             <Settings className={cn("h-5 w-5", !collapsed && "mr-3")} />
-            {!collapsed && <span className="font-medium">{t("nav.settings")}</span>}
+            {!collapsed && <span className="font-medium">{t("nav.settings" as any)}</span>}
           </Button>
         </Link>
       </div>
