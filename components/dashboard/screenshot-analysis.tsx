@@ -35,8 +35,8 @@ export function ScreenshotAnalysis() {
     setTimeout(() => {
       setAnalysisResult({
         overallScore: 78,
-        emotionalState: "Confident",
-        riskLevel: "Medium",
+        emotionalState: t("confident"),
+        riskLevel: t("medium"),
         recommendations: [
           "Consider reducing position size due to high volatility",
           "Your entry timing shows good patience",
@@ -66,24 +66,24 @@ export function ScreenshotAnalysis() {
       pair: "EUR/USD",
       date: "2024-01-15",
       score: 85,
-      result: "Profitable",
-      emotion: "Confident",
+      result: t("profitable"),
+      emotion: t("confident"),
     },
     {
       id: 2,
       pair: "GBP/JPY",
       date: "2024-01-14",
       score: 72,
-      result: "Loss",
-      emotion: "Anxious",
+      result: t("loss"),
+      emotion: t("anxious"),
     },
     {
       id: 3,
       pair: "USD/CAD",
       date: "2024-01-13",
       score: 90,
-      result: "Profitable",
-      emotion: "Calm",
+      result: t("profitable"),
+      emotion: t("calm"),
     },
   ]
 
@@ -92,7 +92,7 @@ export function ScreenshotAnalysis() {
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold text-gray-900">{t("screenshotAnalysis")}</h1>
-        <p className="text-gray-600 mt-2">Upload your trading screenshots for AI-powered analysis</p>
+        <p className="text-gray-600 mt-2">{t("uploadScreenshotForAnalysis")}</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -102,9 +102,9 @@ export function ScreenshotAnalysis() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Camera className="h-5 w-5 text-blue-500" />
-                Upload Screenshot
+                {t("uploadScreenshot")}
               </CardTitle>
-              <CardDescription>Upload a screenshot of your trading platform for comprehensive analysis</CardDescription>
+              <CardDescription>{t("uploadScreenshotDescription")}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div
@@ -113,11 +113,9 @@ export function ScreenshotAnalysis() {
               >
                 <Upload className="h-12 w-12 text-gray-400 mx-auto mb-4" />
                 <p className="text-lg font-medium text-gray-900 mb-2">
-                  {selectedFile ? selectedFile.name : "Drop your screenshot here"}
+                  {selectedFile ? selectedFile.name : t("dropScreenshotHere")}
                 </p>
-                <p className="text-sm text-gray-600">
-                  {selectedFile ? "File selected - click Analyze to continue" : "or click to browse files"}
-                </p>
+                <p className="text-sm text-gray-600">{selectedFile ? t("fileSelected") : t("orClickToBrowse")}</p>
                 <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileSelect} className="hidden" />
               </div>
 
@@ -131,10 +129,10 @@ export function ScreenshotAnalysis() {
                     {isAnalyzing ? (
                       <>
                         <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                        Analyzing...
+                        {t("analyzing")}
                       </>
                     ) : (
-                      "Analyze Screenshot"
+                      t("analyzeScreenshot")
                     )}
                   </Button>
                 </div>
@@ -146,36 +144,36 @@ export function ScreenshotAnalysis() {
           {analysisResult && (
             <Tabs defaultValue="overview" className="space-y-4">
               <TabsList className="grid w-full grid-cols-4">
-                <TabsTrigger value="overview">Overview</TabsTrigger>
-                <TabsTrigger value="technical">Technical</TabsTrigger>
-                <TabsTrigger value="psychology">Psychology</TabsTrigger>
-                <TabsTrigger value="recommendations">Tips</TabsTrigger>
+                <TabsTrigger value="overview">{t("overview")}</TabsTrigger>
+                <TabsTrigger value="technical">{t("technicalAnalysis")}</TabsTrigger>
+                <TabsTrigger value="psychology">{t("psychology")}</TabsTrigger>
+                <TabsTrigger value="recommendations">{t("recommendations")}</TabsTrigger>
               </TabsList>
 
               <TabsContent value="overview" className="space-y-4">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Analysis Overview</CardTitle>
-                    <CardDescription>Key insights from your trading screenshot</CardDescription>
+                    <CardTitle>{t("analysisOverview")}</CardTitle>
+                    <CardDescription>{t("keyInsightsFromScreenshot")}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="grid grid-cols-3 gap-4">
                       <div className="text-center">
                         <div className="text-2xl font-bold text-blue-600">{analysisResult.overallScore}</div>
-                        <p className="text-sm text-gray-600">Overall Score</p>
+                        <p className="text-sm text-gray-600">{t("overallScore")}</p>
                       </div>
                       <div className="text-center">
                         <div className="text-lg font-semibold text-green-600">{analysisResult.emotionalState}</div>
-                        <p className="text-sm text-gray-600">Emotional State</p>
+                        <p className="text-sm text-gray-600">{t("emotionalState")}</p>
                       </div>
                       <div className="text-center">
                         <div className="text-lg font-semibold text-orange-600">{analysisResult.riskLevel}</div>
-                        <p className="text-sm text-gray-600">Risk Level</p>
+                        <p className="text-sm text-gray-600">{t("riskLevel")}</p>
                       </div>
                     </div>
 
                     <div className="space-y-2">
-                      <h4 className="font-medium">Detected Patterns</h4>
+                      <h4 className="font-medium">{t("detectedPatterns")}</h4>
                       <div className="flex flex-wrap gap-2">
                         {analysisResult.detectedPatterns.map((pattern: string, index: number) => (
                           <Badge key={index} variant="outline">
@@ -191,8 +189,8 @@ export function ScreenshotAnalysis() {
               <TabsContent value="technical" className="space-y-4">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Technical Analysis</CardTitle>
-                    <CardDescription>Assessment of your trade setup and execution</CardDescription>
+                    <CardTitle>{t("technicalAnalysis")}</CardTitle>
+                    <CardDescription>{t("assessmentOfTradeSetup")}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     {Object.entries(analysisResult.technicalAnalysis).map(([key, value]) => (
@@ -211,8 +209,8 @@ export function ScreenshotAnalysis() {
               <TabsContent value="psychology" className="space-y-4">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Psychology Assessment</CardTitle>
-                    <CardDescription>Analysis of your mental state and decision-making</CardDescription>
+                    <CardTitle>{t("psychologyAssessment")}</CardTitle>
+                    <CardDescription>{t("analysisOfMentalState")}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     {Object.entries(analysisResult.psychologyInsights).map(([key, value]) => (
@@ -231,8 +229,8 @@ export function ScreenshotAnalysis() {
               <TabsContent value="recommendations" className="space-y-4">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Recommendations</CardTitle>
-                    <CardDescription>Actionable insights to improve your trading</CardDescription>
+                    <CardTitle>{t("recommendations")}</CardTitle>
+                    <CardDescription>{t("actionableInsights")}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-3">
                     {analysisResult.recommendations.map((rec: string, index: number) => (
@@ -252,21 +250,23 @@ export function ScreenshotAnalysis() {
         <div className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Recent Analyses</CardTitle>
-              <CardDescription>Your previous screenshot analyses</CardDescription>
+              <CardTitle className="text-lg">{t("recentAnalyses")}</CardTitle>
+              <CardDescription>{t("previousScreenshotAnalyses")}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               {recentAnalyses.map((analysis) => (
                 <div key={analysis.id} className="p-3 border rounded-lg space-y-2">
                   <div className="flex justify-between items-center">
                     <span className="font-medium">{analysis.pair}</span>
-                    <Badge variant={analysis.result === "Profitable" ? "default" : "destructive"}>
+                    <Badge variant={analysis.result === t("profitable") ? "default" : "destructive"}>
                       {analysis.result}
                     </Badge>
                   </div>
                   <div className="flex justify-between text-sm text-gray-600">
                     <span>{analysis.date}</span>
-                    <span>Score: {analysis.score}</span>
+                    <span>
+                      {t("score")}: {analysis.score}
+                    </span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <Brain className="h-4 w-4 text-blue-500" />
@@ -279,24 +279,24 @@ export function ScreenshotAnalysis() {
 
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Analysis Tips</CardTitle>
+              <CardTitle className="text-lg">{t("analysisTips")}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3 text-sm">
               <div className="flex items-start space-x-2">
                 <CheckCircle className="h-4 w-4 text-green-500 mt-0.5" />
-                <span>Include your full trading platform view</span>
+                <span>{t("includeFullTradingPlatform")}</span>
               </div>
               <div className="flex items-start space-x-2">
                 <CheckCircle className="h-4 w-4 text-green-500 mt-0.5" />
-                <span>Show your position size and risk management</span>
+                <span>{t("showPositionSizeRisk")}</span>
               </div>
               <div className="flex items-start space-x-2">
                 <CheckCircle className="h-4 w-4 text-green-500 mt-0.5" />
-                <span>Capture the moment of entry or exit</span>
+                <span>{t("captureMomentOfEntry")}</span>
               </div>
               <div className="flex items-start space-x-2">
                 <CheckCircle className="h-4 w-4 text-green-500 mt-0.5" />
-                <span>Ensure charts and indicators are visible</span>
+                <span>{t("ensureChartsVisible")}</span>
               </div>
             </CardContent>
           </Card>

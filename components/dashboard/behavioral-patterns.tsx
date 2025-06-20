@@ -8,6 +8,7 @@ import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import { t } from "@/lib/simple-translations"
 import {
   LineChart,
   Line,
@@ -52,29 +53,25 @@ export function BehavioralPatterns() {
   const patterns: BehavioralPattern[] = [
     {
       id: "fomo-trading",
-      name: "FOMO Trading",
-      description: "Entering trades impulsively due to fear of missing out on price movements",
+      name: t("fomoTrading"),
+      description: t("fomoTradingDesc"),
       severity: "high",
       frequency: 8,
       lastOccurrence: new Date(Date.now() - 86400000 * 2),
       trend: "improving",
-      category: "emotional",
+      category: t("emotional"),
       impact: 85,
-      recommendations: [
-        "Set specific entry criteria before market open",
-        "Use limit orders instead of market orders",
-        "Practice the 5-minute rule before entering trades",
-      ],
+      recommendations: [t("setSpecificEntryCriteria"), t("useLimitOrders"), t("practice5MinuteRule")],
     },
     {
       id: "revenge-trading",
-      name: "Revenge Trading",
-      description: "Increasing position sizes after losses to recover quickly",
+      name: t("revengeTrading"),
+      description: t("revengeTradingDesc"),
       severity: "high",
       frequency: 5,
       lastOccurrence: new Date(Date.now() - 86400000 * 5),
       trend: "improving",
-      category: "emotional",
+      category: t("emotional"),
       impact: 92,
       recommendations: [
         "Implement mandatory cooling-off periods after losses",
@@ -84,13 +81,13 @@ export function BehavioralPatterns() {
     },
     {
       id: "overconfidence",
-      name: "Overconfidence Bias",
-      description: "Taking larger risks after a series of winning trades",
+      name: t("overconfidenceBias"),
+      description: t("overconfidenceBiasDesc"),
       severity: "medium",
       frequency: 6,
       lastOccurrence: new Date(Date.now() - 86400000 * 7),
       trend: "stable",
-      category: "cognitive",
+      category: t("cognitive"),
       impact: 68,
       recommendations: [
         "Maintain consistent position sizing",
@@ -100,13 +97,13 @@ export function BehavioralPatterns() {
     },
     {
       id: "analysis-paralysis",
-      name: "Analysis Paralysis",
-      description: "Over-analyzing setups and missing trading opportunities",
+      name: t("analysisParalysis"),
+      description: t("analysisParalysisDesc"),
       severity: "low",
       frequency: 3,
       lastOccurrence: new Date(Date.now() - 86400000 * 10),
       trend: "improving",
-      category: "cognitive",
+      category: t("cognitive"),
       impact: 45,
       recommendations: [
         "Set time limits for trade analysis",
@@ -116,8 +113,8 @@ export function BehavioralPatterns() {
     },
     {
       id: "emotional-stops",
-      name: "Emotional Stop Moving",
-      description: "Moving stop losses when trades go against the initial plan",
+      name: t("emotionalStopMoving"),
+      description: t("emotionalStopMovingDesc"),
       severity: "high",
       frequency: 7,
       lastOccurrence: new Date(Date.now() - 86400000 * 1),
@@ -133,21 +130,21 @@ export function BehavioralPatterns() {
   ]
 
   const patternTrendData = [
-    { date: "Week 1", fomo: 12, revenge: 8, overconfidence: 6, paralysis: 4, emotionalStops: 10 },
-    { date: "Week 2", fomo: 10, revenge: 6, overconfidence: 7, paralysis: 3, emotionalStops: 9 },
-    { date: "Week 3", fomo: 8, revenge: 5, overconfidence: 6, paralysis: 3, emotionalStops: 8 },
-    { date: "Week 4", fomo: 6, revenge: 4, overconfidence: 5, paralysis: 2, emotionalStops: 7 },
+    { date: t("week") + " 1", fomo: 12, revenge: 8, overconfidence: 6, paralysis: 4, emotionalStops: 10 },
+    { date: t("week") + " 2", fomo: 10, revenge: 6, overconfidence: 7, paralysis: 3, emotionalStops: 9 },
+    { date: t("week") + " 3", fomo: 8, revenge: 5, overconfidence: 6, paralysis: 3, emotionalStops: 8 },
+    { date: t("week") + " 4", fomo: 6, revenge: 4, overconfidence: 5, paralysis: 2, emotionalStops: 7 },
   ]
 
   const severityDistribution = [
-    { name: "High Severity", value: 3, color: "#ef4444" },
-    { name: "Medium Severity", value: 1, color: "#f97316" },
-    { name: "Low Severity", value: 1, color: "#22c55e" },
+    { name: t("high") + " Severity", value: 3, color: "#ef4444" },
+    { name: t("medium") + " Severity", value: 1, color: "#f97316" },
+    { name: t("low") + " Severity", value: 1, color: "#22c55e" },
   ]
 
   const categoryData = [
-    { category: "Emotional", count: 2, improvement: 15 },
-    { category: "Cognitive", count: 2, improvement: 8 },
+    { category: t("emotional"), count: 2, improvement: 15 },
+    { category: t("cognitive"), count: 2, improvement: 8 },
     { category: "Discipline", count: 1, improvement: -5 },
   ]
 
@@ -193,8 +190,8 @@ export function BehavioralPatterns() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Behavioral Patterns</h1>
-          <p className="text-gray-600 mt-1">Identify and track your trading psychology patterns</p>
+          <h1 className="text-3xl font-bold text-gray-900">{t("behavioralPatternsTitle")}</h1>
+          <p className="text-gray-600 mt-1">{t("identifyAndTrackPatterns")}</p>
         </div>
         <div className="flex items-center gap-4">
           <Select value={selectedTimeframe} onValueChange={setSelectedTimeframe}>
@@ -209,7 +206,7 @@ export function BehavioralPatterns() {
           </Select>
           <Badge variant="secondary" className="flex items-center gap-2">
             <Brain className="h-4 w-4" />
-            AI Detection
+            {t("aiDetection")}
           </Badge>
         </div>
       </div>
@@ -218,15 +215,14 @@ export function BehavioralPatterns() {
       <Alert className="border-red-200 bg-red-50">
         <AlertTriangle className="h-4 w-4 text-red-600" />
         <AlertDescription className="text-red-800">
-          <strong>3 high-severity patterns detected.</strong> Focus on emotional stop moving and FOMO trading for
-          immediate improvement.
+          <strong>{t("highSeverityPatternsDetected")}</strong> {t("focusOnEmotionalStop")}
         </AlertDescription>
       </Alert>
 
       <Tabs defaultValue="overview" className="w-full">
         <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="patterns">Patterns</TabsTrigger>
+          <TabsTrigger value="overview">{t("overview")}</TabsTrigger>
+          <TabsTrigger value="patterns">{t("patterns")}</TabsTrigger>
           <TabsTrigger value="trends">Trends</TabsTrigger>
           <TabsTrigger value="recommendations">Action Plan</TabsTrigger>
         </TabsList>
@@ -237,12 +233,12 @@ export function BehavioralPatterns() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Eye className="h-5 w-5 text-royal-blue-500" />
-                  Patterns Detected
+                  {t("patternsDetected")}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-3xl font-bold text-royal-blue-600 mb-2">{patterns.length}</div>
-                <p className="text-sm text-gray-600">Active behavioral patterns identified</p>
+                <p className="text-sm text-gray-600">{t("activeBehavioralPatterns")}</p>
               </CardContent>
             </Card>
 
@@ -250,14 +246,14 @@ export function BehavioralPatterns() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <TrendingDown className="h-5 w-5 text-green-500" />
-                  Improving
+                  {t("improving")}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-3xl font-bold text-green-600 mb-2">
                   {patterns.filter((p) => p.trend === "improving").length}
                 </div>
-                <p className="text-sm text-gray-600">Patterns showing improvement</p>
+                <p className="text-sm text-gray-600">{t("patternsShowingImprovement")}</p>
               </CardContent>
             </Card>
 
@@ -265,14 +261,14 @@ export function BehavioralPatterns() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <AlertTriangle className="h-5 w-5 text-red-500" />
-                  High Priority
+                  {t("highPriority")}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-3xl font-bold text-red-600 mb-2">
                   {patterns.filter((p) => p.severity === "high").length}
                 </div>
-                <p className="text-sm text-gray-600">High-severity patterns requiring attention</p>
+                <p className="text-sm text-gray-600">{t("highSeverityPatternsRequiring")}</p>
               </CardContent>
             </Card>
           </div>
@@ -280,8 +276,8 @@ export function BehavioralPatterns() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card>
               <CardHeader>
-                <CardTitle>Pattern Severity Distribution</CardTitle>
-                <CardDescription>Breakdown of patterns by severity level</CardDescription>
+                <CardTitle>{t("patternSeverityDistribution")}</CardTitle>
+                <CardDescription>{t("breakdownPatternsBySeverity")}</CardDescription>
               </CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={250}>
@@ -307,8 +303,8 @@ export function BehavioralPatterns() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Category Performance</CardTitle>
-                <CardDescription>Improvement by pattern category</CardDescription>
+                <CardTitle>{t("categoryPerformance")}</CardTitle>
+                <CardDescription>{t("improvementByPatternCategory")}</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -317,7 +313,9 @@ export function BehavioralPatterns() {
                       <div className="flex justify-between items-center mb-2">
                         <span className="text-sm font-medium">{category.category}</span>
                         <div className="flex items-center gap-2">
-                          <span className="text-sm text-gray-600">{category.count} patterns</span>
+                          <span className="text-sm text-gray-600">
+                            {category.count} {t("patterns")}
+                          </span>
                           <span className={`text-sm ${category.improvement > 0 ? "text-green-600" : "text-red-600"}`}>
                             {category.improvement > 0 ? "+" : ""}
                             {category.improvement}%
@@ -340,9 +338,9 @@ export function BehavioralPatterns() {
                 <SelectValue placeholder="Filter by category" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Categories</SelectItem>
-                <SelectItem value="emotional">Emotional</SelectItem>
-                <SelectItem value="cognitive">Cognitive</SelectItem>
+                <SelectItem value="all">{t("all")} Categories</SelectItem>
+                <SelectItem value={t("emotional")}>{t("emotional")}</SelectItem>
+                <SelectItem value={t("cognitive")}>{t("cognitive")}</SelectItem>
                 <SelectItem value="discipline">Discipline</SelectItem>
               </SelectContent>
             </Select>
@@ -355,18 +353,20 @@ export function BehavioralPatterns() {
                   <div className="flex items-start justify-between">
                     <div className="flex items-center gap-3">
                       <div className="flex items-center gap-2">
-                        <Badge className={getSeverityColor(pattern.severity)}>{pattern.severity}</Badge>
+                        <Badge className={getSeverityColor(pattern.severity)}>{t(pattern.severity as any)}</Badge>
                         <Badge variant="outline" className="capitalize">
                           {pattern.category}
                         </Badge>
                       </div>
                       <div className="flex items-center gap-1">
                         {getTrendIcon(pattern.trend)}
-                        <span className={`text-sm ${getTrendColor(pattern.trend)}`}>{pattern.trend}</span>
+                        <span className={`text-sm ${getTrendColor(pattern.trend)}`}>{t(pattern.trend as any)}</span>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-sm text-gray-500">Impact Score</div>
+                      <div className="text-sm text-gray-500">
+                        {t("impact")} {t("score")}
+                      </div>
                       <div className="text-2xl font-bold text-royal-blue-600">{pattern.impact}</div>
                     </div>
                   </div>
@@ -378,25 +378,25 @@ export function BehavioralPatterns() {
                     <div className="flex items-center gap-2">
                       <BarChart3 className="h-4 w-4 text-gray-500" />
                       <span className="text-sm">
-                        <strong>Frequency:</strong> {pattern.frequency} times
+                        <strong>{t("frequency")}:</strong> {pattern.frequency} {t("times")}
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Clock className="h-4 w-4 text-gray-500" />
                       <span className="text-sm">
-                        <strong>Last seen:</strong> {pattern.lastOccurrence.toLocaleDateString()}
+                        <strong>{t("lastSeen")}:</strong> {pattern.lastOccurrence.toLocaleDateString()}
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Target className="h-4 w-4 text-gray-500" />
                       <span className="text-sm">
-                        <strong>Category:</strong> {pattern.category}
+                        <strong>{t("category")}:</strong> {pattern.category}
                       </span>
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-sm">Recommendations:</h4>
+                    <h4 className="font-semibold text-sm">{t("recommendations")}:</h4>
                     <ul className="space-y-1">
                       {pattern.recommendations.map((rec, index) => (
                         <li key={index} className="flex items-start gap-2 text-sm">
@@ -409,13 +409,13 @@ export function BehavioralPatterns() {
 
                   <div className="mt-4 pt-4 border-t">
                     <Button variant="outline" size="sm" className="mr-2">
-                      View Details
+                      {t("viewDetails")}
                     </Button>
                     <Button
                       size="sm"
                       className="bg-gradient-to-r from-navy-600 to-royal-blue-500 hover:from-navy-700 hover:to-royal-blue-600 text-white"
                     >
-                      Start Exercise
+                      {t("startExercise")}
                     </Button>
                   </div>
                 </CardContent>
