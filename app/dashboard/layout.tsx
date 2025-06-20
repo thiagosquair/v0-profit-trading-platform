@@ -1,17 +1,22 @@
-"use client"
-
 import type React from "react"
 import { AuthGuard } from "@/components/auth/auth-guard"
-import { DashboardLayout } from "@/components/dashboard/dashboard-layout"
+import { DashboardSidebar } from "@/components/dashboard/dashboard-sidebar"
+import { DashboardHeader } from "@/components/dashboard/dashboard-header"
 
-export default function DashboardLayoutPage({
+export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
     <AuthGuard>
-      <DashboardLayout>{children}</DashboardLayout>
+      <div className="flex h-screen bg-gray-50">
+        <DashboardSidebar />
+        <div className="flex-1 flex flex-col overflow-hidden">
+          <DashboardHeader />
+          <main className="flex-1 overflow-auto">{children}</main>
+        </div>
+      </div>
     </AuthGuard>
   )
 }

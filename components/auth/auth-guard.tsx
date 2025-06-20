@@ -4,26 +4,31 @@ import type React from "react"
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { demoAuth } from "@/lib/demo-auth"
-import { Loader2 } from "lucide-react"
 
 interface AuthGuardProps {
   children: React.ReactNode
 }
 
 export function AuthGuard({ children }: AuthGuardProps) {
-  const [isLoading, setIsLoading] = useState(true)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
 
   useEffect(() => {
     const checkAuth = () => {
       try {
-        const signedIn = demoAuth.isSignedIn()
-        setIsAuthenticated(signedIn)
-
-        if (!signedIn) {
-          router.push("/auth/signin")
+        if (typeof window !== "undefined") {
+          const authData = localStorage.getItem("demo-auth")
+          if (authData) {
+            const parsed = JSON.parse(authData)
+            if (parsed.isAuthenticated) {
+              setIsAuthenticated(true)
+            } else {
+              router.push("/auth/signin")
+            }
+          } else {
+            router.push("/auth/signin")
+          }
         }
       } catch (error) {
         console.error("Auth check error:", error)
@@ -38,23 +43,14 @@ export function AuthGuard({ children }: AuthGuardProps) {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="flex items-center space-x-2">
-          <Loader2 className="h-6 w-6 animate-spin" />
-          <span>Loading...</span>
-        </div>
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
       </div>
     )
   }
 
   if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <p>Redirecting to sign in...</p>
-        </div>
-      </div>
-    )
+    return null
   }
 
   return <>{children}</>
