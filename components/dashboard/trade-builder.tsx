@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
+import { t } from "@/lib/simple-translations"
 import { AlertTriangle, CheckCircle, Target, DollarSign } from "lucide-react"
 
 export function TradeBuilder() {
@@ -37,10 +38,10 @@ export function TradeBuilder() {
   ]
 
   const steps = [
-    { id: 1, title: "Trade Setup", description: "Define your trade parameters" },
-    { id: 2, title: "Psychology Check", description: "Verify your mental state" },
-    { id: 3, title: "Risk Assessment", description: "Calculate and confirm risk" },
-    { id: 4, title: "Final Review", description: "Review and execute" },
+    { id: 1, title: t("tradeSetup"), description: t("defineTradeParameters") },
+    { id: 2, title: t("psychologyCheck"), description: t("verifyMentalState") },
+    { id: 3, title: t("riskAssessment"), description: t("calculateConfirmRisk") },
+    { id: 4, title: t("finalReview"), description: t("reviewAndExecute") },
   ]
 
   const renderStepContent = () => {
@@ -50,7 +51,7 @@ export function TradeBuilder() {
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="symbol">Trading Symbol</Label>
+                <Label htmlFor="symbol">{t("tradingSymbol")}</Label>
                 <Input
                   id="symbol"
                   placeholder="e.g., EURUSD, AAPL, BTC/USD"
@@ -59,14 +60,14 @@ export function TradeBuilder() {
                 />
               </div>
               <div>
-                <Label htmlFor="direction">Direction</Label>
+                <Label htmlFor="direction">{t("direction")}</Label>
                 <Select onValueChange={(selectedValue) => setTradeData({ ...tradeData, direction: selectedValue })}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select direction" />
+                    <SelectValue placeholder={t("selectDirection")} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="long">Long (Buy)</SelectItem>
-                    <SelectItem value="short">Short (Sell)</SelectItem>
+                    <SelectItem value="long">{t("longBuy")}</SelectItem>
+                    <SelectItem value="short">{t("shortSell")}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -74,7 +75,7 @@ export function TradeBuilder() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <Label htmlFor="entry">Entry Price</Label>
+                <Label htmlFor="entry">{t("entryPrice")}</Label>
                 <Input
                   id="entry"
                   type="number"
@@ -84,7 +85,7 @@ export function TradeBuilder() {
                 />
               </div>
               <div>
-                <Label htmlFor="stopLoss">Stop Loss</Label>
+                <Label htmlFor="stopLoss">{t("stopLoss")}</Label>
                 <Input
                   id="stopLoss"
                   type="number"
@@ -94,7 +95,7 @@ export function TradeBuilder() {
                 />
               </div>
               <div>
-                <Label htmlFor="takeProfit">Take Profit</Label>
+                <Label htmlFor="takeProfit">{t("takeProfit")}</Label>
                 <Input
                   id="takeProfit"
                   type="number"
@@ -106,10 +107,10 @@ export function TradeBuilder() {
             </div>
 
             <div>
-              <Label htmlFor="reasoning">Trade Reasoning</Label>
+              <Label htmlFor="reasoning">{t("tradeReasoning")}</Label>
               <Textarea
                 id="reasoning"
-                placeholder="Explain why you're taking this trade..."
+                placeholder={t("explainWhyTakingTrade")}
                 value={tradeData.reasoning}
                 onChange={(e) => setTradeData({ ...tradeData, reasoning: e.target.value })}
                 rows={4}
@@ -122,10 +123,8 @@ export function TradeBuilder() {
         return (
           <div className="space-y-6">
             <div className="text-center mb-6">
-              <h3 className="text-lg font-semibold mb-2">Psychology Checkpoint</h3>
-              <p className="text-muted-foreground">
-                Complete these psychological checks before proceeding with your trade
-              </p>
+              <h3 className="text-lg font-semibold mb-2">{t("psychologyCheckpoint")}</h3>
+              <p className="text-muted-foreground">{t("completePsychologicalChecks")}</p>
             </div>
 
             <div className="space-y-4">
@@ -150,12 +149,9 @@ export function TradeBuilder() {
             <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
               <div className="flex items-center space-x-2">
                 <AlertTriangle className="h-5 w-5 text-yellow-600" />
-                <span className="font-medium text-yellow-800">Psychology Reminder</span>
+                <span className="font-medium text-yellow-800">{t("psychologyReminder")}</span>
               </div>
-              <p className="text-yellow-700 mt-2 text-sm">
-                Only proceed if you can honestly check all boxes. Trading with the wrong mindset leads to poor
-                decisions.
-              </p>
+              <p className="text-yellow-700 mt-2 text-sm">{t("onlyProceedIfHonest")}</p>
             </div>
           </div>
         )
@@ -164,8 +160,8 @@ export function TradeBuilder() {
         return (
           <div className="space-y-6">
             <div className="text-center mb-6">
-              <h3 className="text-lg font-semibold mb-2">Risk Assessment</h3>
-              <p className="text-muted-foreground">Review your risk parameters and position sizing</p>
+              <h3 className="text-lg font-semibold mb-2">{t("riskAssessment")}</h3>
+              <p className="text-muted-foreground">{t("reviewRiskParameters")}</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -173,25 +169,25 @@ export function TradeBuilder() {
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
                     <DollarSign className="h-5 w-5" />
-                    <span>Risk Calculation</span>
+                    <span>{t("riskCalculation")}</span>
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex justify-between">
-                    <span>Risk per Trade:</span>
+                    <span>{t("riskPerTrade")}:</span>
                     <span className="font-semibold">$250 (2.5%)</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Potential Profit:</span>
+                    <span>{t("potentialProfit")}:</span>
                     <span className="font-semibold text-green-600">$500 (5.0%)</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Risk/Reward Ratio:</span>
+                    <span>{t("riskRewardRatio")}:</span>
                     <span className="font-semibold">1:2</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Position Size:</span>
-                    <span className="font-semibold">0.5 lots</span>
+                    <span>{t("positionSize")}:</span>
+                    <span className="font-semibold">0.5 {t("lots")}</span>
                   </div>
                 </CardContent>
               </Card>
@@ -200,33 +196,33 @@ export function TradeBuilder() {
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
                     <Target className="h-5 w-5" />
-                    <span>Trade Metrics</span>
+                    <span>{t("tradeMetrics")}</span>
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
-                      <span>Risk Level</span>
+                      <span>{t("riskLevel")}</span>
                       <Badge variant="outline" className="text-green-600">
-                        Moderate
+                        {t("moderate")}
                       </Badge>
                     </div>
                     <Progress value={60} className="h-2" />
                   </div>
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
-                      <span>Confidence Level</span>
+                      <span>{t("confidenceLevel")}</span>
                       <Badge variant="outline" className="text-blue-600">
-                        High
+                        {t("high")}
                       </Badge>
                     </div>
                     <Progress value={80} className="h-2" />
                   </div>
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
-                      <span>Setup Quality</span>
+                      <span>{t("setupQuality")}</span>
                       <Badge variant="outline" className="text-purple-600">
-                        Excellent
+                        {t("excellent")}
                       </Badge>
                     </div>
                     <Progress value={90} className="h-2" />
@@ -242,40 +238,38 @@ export function TradeBuilder() {
           <div className="space-y-6">
             <div className="text-center mb-6">
               <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Trade Ready for Execution</h3>
-              <p className="text-muted-foreground">
-                Your trade has passed all psychological and risk management checks
-              </p>
+              <h3 className="text-lg font-semibold mb-2">{t("tradeReadyForExecution")}</h3>
+              <p className="text-muted-foreground">{t("tradePassedAllChecks")}</p>
             </div>
 
             <Card>
               <CardHeader>
-                <CardTitle>Trade Summary</CardTitle>
+                <CardTitle>{t("tradeSummary")}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
-                    <span className="text-muted-foreground">Symbol:</span>
+                    <span className="text-muted-foreground">{t("symbol")}:</span>
                     <span className="ml-2 font-semibold">{tradeData.symbol || "EURUSD"}</span>
                   </div>
                   <div>
-                    <span className="text-muted-foreground">Direction:</span>
+                    <span className="text-muted-foreground">{t("direction")}:</span>
                     <span className="ml-2 font-semibold">{tradeData.direction || "Long"}</span>
                   </div>
                   <div>
-                    <span className="text-muted-foreground">Entry:</span>
+                    <span className="text-muted-foreground">{t("entry")}:</span>
                     <span className="ml-2 font-semibold">{tradeData.entryPrice || "1.0850"}</span>
                   </div>
                   <div>
-                    <span className="text-muted-foreground">Stop Loss:</span>
+                    <span className="text-muted-foreground">{t("stopLoss")}:</span>
                     <span className="ml-2 font-semibold">{tradeData.stopLoss || "1.0800"}</span>
                   </div>
                   <div>
-                    <span className="text-muted-foreground">Take Profit:</span>
+                    <span className="text-muted-foreground">{t("takeProfit")}:</span>
                     <span className="ml-2 font-semibold">{tradeData.takeProfit || "1.0950"}</span>
                   </div>
                   <div>
-                    <span className="text-muted-foreground">Risk/Reward:</span>
+                    <span className="text-muted-foreground">{t("riskRewardRatio")}:</span>
                     <span className="ml-2 font-semibold">1:2</span>
                   </div>
                 </div>
@@ -284,10 +278,10 @@ export function TradeBuilder() {
 
             <div className="flex space-x-4">
               <Button className="flex-1" size="lg">
-                Execute Trade
+                {t("executeTrade")}
               </Button>
               <Button variant="outline" size="lg">
-                Save as Template
+                {t("saveAsTemplate")}
               </Button>
             </div>
           </div>
@@ -302,13 +296,11 @@ export function TradeBuilder() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Trade Builder</h1>
-          <p className="text-muted-foreground mt-2">
-            Plan your trades with psychological checkpoints and risk management
-          </p>
+          <h1 className="text-3xl font-bold">{t("tradeBuilderTitle")}</h1>
+          <p className="text-muted-foreground mt-2">{t("planTradesWithPsychology")}</p>
         </div>
         <Badge variant="outline" className="text-blue-600">
-          Step {currentStep} of {steps.length}
+          {t("step")} {currentStep} {t("of")} {steps.length}
         </Badge>
       </div>
 
@@ -349,13 +341,13 @@ export function TradeBuilder() {
               onClick={() => setCurrentStep(Math.max(1, currentStep - 1))}
               disabled={currentStep === 1}
             >
-              Previous
+              {t("previous")}
             </Button>
             <Button
               onClick={() => setCurrentStep(Math.min(steps.length, currentStep + 1))}
               disabled={currentStep === steps.length}
             >
-              {currentStep === steps.length ? "Complete" : "Next"}
+              {currentStep === steps.length ? t("complete") : t("next")}
             </Button>
           </div>
         </CardContent>

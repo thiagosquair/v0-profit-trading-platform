@@ -5,18 +5,19 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { TrendingUp, Activity, AlertTriangle, Brain, Globe, Clock, Users } from "lucide-react"
+import { t } from "@/lib/simple-translations"
+import { TrendingUp, Activity, AlertTriangle, Brain, Globe, Users } from "lucide-react"
 
 export function MarketInsights() {
   const [liveData, setLiveData] = useState({
     fearGreedIndex: 65,
-    marketSentiment: "Bullish",
+    marketSentiment: t("bullish"),
     volatilityIndex: 23.5,
     majorPairs: [
-      { pair: "EUR/USD", sentiment: "Bullish", strength: 75, change: "+0.45%" },
-      { pair: "GBP/USD", sentiment: "Bearish", strength: 35, change: "-0.23%" },
-      { pair: "USD/JPY", sentiment: "Neutral", strength: 50, change: "+0.12%" },
-      { pair: "AUD/USD", sentiment: "Bullish", strength: 68, change: "+0.31%" },
+      { pair: "EUR/USD", sentiment: t("bullish"), strength: 75, change: "+0.45%" },
+      { pair: "GBP/USD", sentiment: t("bearish"), strength: 35, change: "-0.23%" },
+      { pair: "USD/JPY", sentiment: t("neutral"), strength: 50, change: "+0.12%" },
+      { pair: "AUD/USD", sentiment: t("bullish"), strength: 68, change: "+0.31%" },
     ],
   })
 
@@ -40,7 +41,7 @@ export function MarketInsights() {
     {
       name: "Institutional Flow",
       value: 45,
-      status: "Neutral",
+      status: t("neutral"),
       description: "Balanced institutional positioning",
       color: "text-blue-600",
       bgColor: "bg-blue-100",
@@ -48,7 +49,7 @@ export function MarketInsights() {
     {
       name: "Volatility Expectation",
       value: 32,
-      status: "Low",
+      status: t("low"),
       description: "Markets expecting calm conditions",
       color: "text-green-600",
       bgColor: "bg-green-100",
@@ -59,7 +60,7 @@ export function MarketInsights() {
     {
       time: "2 hours ago",
       event: "Fed Chair Speech",
-      impact: "High",
+      impact: t("high"),
       sentiment: "Hawkish",
       pairs: ["USD/EUR", "USD/GBP", "USD/JPY"],
       psychologyNote: "Increased uncertainty may lead to risk-off behavior",
@@ -67,16 +68,16 @@ export function MarketInsights() {
     {
       time: "4 hours ago",
       event: "ECB Rate Decision",
-      impact: "Medium",
-      sentiment: "Neutral",
+      impact: t("medium"),
+      sentiment: t("neutral"),
       pairs: ["EUR/USD", "EUR/GBP"],
       psychologyNote: "As expected, minimal psychological impact",
     },
     {
       time: "6 hours ago",
       event: "US Employment Data",
-      impact: "High",
-      sentiment: "Positive",
+      impact: t("high"),
+      sentiment: t("positive"),
       pairs: ["USD/CAD", "USD/AUD"],
       psychologyNote: "Strong data boosting USD confidence",
     },
@@ -107,23 +108,23 @@ export function MarketInsights() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Market Live Insights</h1>
-          <p className="text-muted-foreground mt-2">Real-time market psychology and sentiment analysis</p>
+          <h1 className="text-3xl font-bold">{t("marketInsightsTitle")}</h1>
+          <p className="text-muted-foreground mt-2">{t("realTimeMarketPsychology")}</p>
         </div>
         <div className="flex items-center space-x-2">
           <div className="flex items-center space-x-1">
             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-            <span className="text-sm text-muted-foreground">Live</span>
+            <span className="text-sm text-muted-foreground">{t("live")}</span>
           </div>
         </div>
       </div>
 
       <Tabs defaultValue="overview" className="space-y-6">
         <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="psychology">Psychology</TabsTrigger>
-          <TabsTrigger value="sentiment">Sentiment</TabsTrigger>
-          <TabsTrigger value="news">News Impact</TabsTrigger>
+          <TabsTrigger value="overview">{t("overview")}</TabsTrigger>
+          <TabsTrigger value="psychology">{t("psychology")}</TabsTrigger>
+          <TabsTrigger value="sentiment">{t("sentiment")}</TabsTrigger>
+          <TabsTrigger value="news">{t("newsImpact")}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-6">
@@ -133,9 +134,9 @@ export function MarketInsights() {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-muted-foreground">Fear & Greed</p>
+                    <p className="text-sm font-medium text-muted-foreground">{t("fearGreed")}</p>
                     <p className="text-2xl font-bold">{liveData.fearGreedIndex}</p>
-                    <p className="text-sm text-orange-600">Greed Zone</p>
+                    <p className="text-sm text-orange-600">{t("greedZone")}</p>
                   </div>
                   <Brain className="h-8 w-8 text-orange-500" />
                 </div>
@@ -146,9 +147,9 @@ export function MarketInsights() {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-muted-foreground">Market Sentiment</p>
+                    <p className="text-sm font-medium text-muted-foreground">{t("marketSentiment")}</p>
                     <p className="text-2xl font-bold">{liveData.marketSentiment}</p>
-                    <p className="text-sm text-green-600">+2.3% today</p>
+                    <p className="text-sm text-green-600">+2.3% {t("today")}</p>
                   </div>
                   <TrendingUp className="h-8 w-8 text-green-500" />
                 </div>
@@ -159,9 +160,9 @@ export function MarketInsights() {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-muted-foreground">Volatility Index</p>
+                    <p className="text-sm font-medium text-muted-foreground">{t("volatilityIndex")}</p>
                     <p className="text-2xl font-bold">{liveData.volatilityIndex}</p>
-                    <p className="text-sm text-blue-600">Low volatility</p>
+                    <p className="text-sm text-blue-600">{t("lowVolatility")}</p>
                   </div>
                   <Activity className="h-8 w-8 text-blue-500" />
                 </div>
@@ -172,9 +173,9 @@ export function MarketInsights() {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-muted-foreground">Active Pairs</p>
+                    <p className="text-sm font-medium text-muted-foreground">{t("activePairs")}</p>
                     <p className="text-2xl font-bold">28</p>
-                    <p className="text-sm text-purple-600">High activity</p>
+                    <p className="text-sm text-purple-600">{t("highActivity")}</p>
                   </div>
                   <Globe className="h-8 w-8 text-purple-500" />
                 </div>
@@ -185,8 +186,8 @@ export function MarketInsights() {
           {/* Major Pairs Sentiment */}
           <Card>
             <CardHeader>
-              <CardTitle>Major Pairs Sentiment</CardTitle>
-              <CardDescription>Real-time sentiment analysis for major currency pairs</CardDescription>
+              <CardTitle>{t("majorPairsSentiment")}</CardTitle>
+              <CardDescription>{t("realTimeSentimentAnalysis")}</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -195,12 +196,13 @@ export function MarketInsights() {
                     <div className="flex items-center space-x-4">
                       <div className="font-semibold">{pair.pair}</div>
                       <Badge
-                        variant={
-                          pair.sentiment === "Bullish"
-                            ? "default"
-                            : pair.sentiment === "Bearish"
-                              ? "destructive"
-                              : "secondary"
+                        variant="outline"
+                        className={
+                          pair.sentiment === t("bullish")
+                            ? "text-green-600 border-green-600"
+                            : pair.sentiment === t("bearish")
+                              ? "text-red-600 border-red-600"
+                              : "text-blue-600 border-blue-600"
                         }
                       >
                         {pair.sentiment}
@@ -208,8 +210,8 @@ export function MarketInsights() {
                     </div>
                     <div className="flex items-center space-x-4">
                       <div className="text-right">
-                        <div className="text-sm text-muted-foreground">Strength</div>
-                        <Progress value={pair.strength} className="w-20" />
+                        <div className="text-sm text-muted-foreground">{t("strength")}</div>
+                        <Progress value={pair.strength} className="w-20 h-2" />
                       </div>
                       <div
                         className={`font-semibold ${pair.change.startsWith("+") ? "text-green-600" : "text-red-600"}`}
@@ -222,51 +224,33 @@ export function MarketInsights() {
               </div>
             </CardContent>
           </Card>
-        </TabsContent>
-
-        <TabsContent value="psychology" className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {psychologyIndicators.map((indicator) => (
-              <Card key={indicator.name}>
-                <CardHeader>
-                  <CardTitle className="flex items-center justify-between">
-                    <span>{indicator.name}</span>
-                    <Badge className={`${indicator.bgColor} ${indicator.color}`}>{indicator.status}</Badge>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div>
-                      <div className="flex justify-between text-sm mb-2">
-                        <span>Current Level</span>
-                        <span className="font-semibold">{indicator.value}</span>
-                      </div>
-                      <Progress value={indicator.value} className="h-2" />
-                    </div>
-                    <p className="text-sm text-muted-foreground">{indicator.description}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
 
           {/* Trading Psychology Tips */}
           <Card>
             <CardHeader>
-              <CardTitle>Psychology-Based Trading Tips</CardTitle>
-              <CardDescription>AI-generated insights based on current market psychology</CardDescription>
+              <CardTitle>Trading Psychology Alerts</CardTitle>
+              <CardDescription>Current market conditions and psychological considerations</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {tradingTips.map((tip, index) => (
-                  <div key={index} className="flex items-start space-x-3 p-4 border rounded-lg">
+                  <div
+                    key={index}
+                    className={`flex items-start space-x-3 p-4 rounded-lg border ${
+                      tip.type === "warning"
+                        ? "bg-yellow-50 border-yellow-200"
+                        : tip.type === "danger"
+                          ? "bg-red-50 border-red-200"
+                          : "bg-blue-50 border-blue-200"
+                    }`}
+                  >
                     <tip.icon
                       className={`h-5 w-5 mt-0.5 ${
                         tip.type === "warning"
-                          ? "text-orange-500"
+                          ? "text-yellow-600"
                           : tip.type === "danger"
-                            ? "text-red-500"
-                            : "text-blue-500"
+                            ? "text-red-600"
+                            : "text-blue-600"
                       }`}
                     />
                     <div>
@@ -280,6 +264,28 @@ export function MarketInsights() {
           </Card>
         </TabsContent>
 
+        <TabsContent value="psychology" className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {psychologyIndicators.map((indicator) => (
+              <Card key={indicator.name}>
+                <CardHeader>
+                  <CardTitle className="text-lg">{indicator.name}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-3xl font-bold">{indicator.value}</span>
+                      <Badge className={`${indicator.bgColor} ${indicator.color}`}>{indicator.status}</Badge>
+                    </div>
+                    <Progress value={indicator.value} className="h-3" />
+                    <p className="text-sm text-muted-foreground">{indicator.description}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </TabsContent>
+
         <TabsContent value="sentiment" className="space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card>
@@ -291,22 +297,16 @@ export function MarketInsights() {
                   <div>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm font-medium">Retail Traders</span>
-                      <span className="text-sm font-semibold">78% Bullish</span>
+                      <span className="text-sm text-muted-foreground">78% {t("bullish")}</span>
                     </div>
                     <Progress value={78} className="h-3" />
-                    <p className="text-xs text-muted-foreground mt-1">
-                      High retail bullishness often signals market tops
-                    </p>
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm font-medium">Institutional</span>
-                      <span className="text-sm font-semibold">45% Bullish</span>
+                      <span className="text-sm text-muted-foreground">45% {t("neutral")}</span>
                     </div>
                     <Progress value={45} className="h-3" />
-                    <p className="text-xs text-muted-foreground mt-1">
-                      Institutions remain cautious despite retail optimism
-                    </p>
                   </div>
                 </div>
               </CardContent>
@@ -314,23 +314,30 @@ export function MarketInsights() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Sentiment Divergence Alert</CardTitle>
+                <CardTitle>Sentiment Distribution</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div className="flex items-center space-x-2">
-                    <AlertTriangle className="h-5 w-5 text-orange-500" />
-                    <span className="font-semibold text-orange-700">High Divergence Detected</span>
+                  <div className="flex justify-between items-center">
+                    <span>{t("bullish")}</span>
+                    <div className="flex items-center space-x-2">
+                      <Progress value={65} className="w-20 h-2" />
+                      <span className="text-sm">65%</span>
+                    </div>
                   </div>
-                  <p className="text-sm text-muted-foreground">
-                    Large gap between retail (78% bullish) and institutional (45% bullish) sentiment suggests potential
-                    market reversal.
-                  </p>
-                  <div className="bg-orange-50 border border-orange-200 rounded-lg p-3">
-                    <p className="text-sm text-orange-800">
-                      <strong>Psychology Insight:</strong> When retail sentiment is extremely bullish while institutions
-                      remain neutral, it often indicates market euphoria and potential correction ahead.
-                    </p>
+                  <div className="flex justify-between items-center">
+                    <span>{t("neutral")}</span>
+                    <div className="flex items-center space-x-2">
+                      <Progress value={20} className="w-20 h-2" />
+                      <span className="text-sm">20%</span>
+                    </div>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span>{t("bearish")}</span>
+                    <div className="flex items-center space-x-2">
+                      <Progress value={15} className="w-20 h-2" />
+                      <span className="text-sm">15%</span>
+                    </div>
                   </div>
                 </div>
               </CardContent>
@@ -341,43 +348,47 @@ export function MarketInsights() {
         <TabsContent value="news" className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>News Impact & Psychology Analysis</CardTitle>
-              <CardDescription>How recent news events are affecting market psychology</CardDescription>
+              <CardTitle>{t("newsImpact")} & Market Psychology</CardTitle>
+              <CardDescription>Recent events and their psychological impact on markets</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
                 {newsImpact.map((news, index) => (
-                  <div key={index} className="border rounded-lg p-4">
-                    <div className="flex items-start justify-between mb-3">
-                      <div>
-                        <h4 className="font-semibold">{news.event}</h4>
-                        <div className="flex items-center space-x-2 mt-1">
-                          <Clock className="h-4 w-4 text-muted-foreground" />
-                          <span className="text-sm text-muted-foreground">{news.time}</span>
-                        </div>
-                      </div>
-                      <div className="flex space-x-2">
-                        <Badge variant={news.impact === "High" ? "destructive" : "secondary"}>
-                          {news.impact} Impact
+                  <div key={index} className="border-l-4 border-blue-500 pl-4 py-2">
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-semibold">{news.event}</h4>
+                      <div className="flex items-center space-x-2">
+                        <Badge
+                          variant="outline"
+                          className={
+                            news.impact === t("high")
+                              ? "text-red-600 border-red-600"
+                              : news.impact === t("medium")
+                                ? "text-yellow-600 border-yellow-600"
+                                : "text-green-600 border-green-600"
+                          }
+                        >
+                          {news.impact} {t("impact")}
                         </Badge>
-                        <Badge variant="outline">{news.sentiment}</Badge>
+                        <span className="text-sm text-muted-foreground">{news.time}</span>
                       </div>
                     </div>
-
                     <div className="space-y-2">
-                      <div>
-                        <span className="text-sm font-medium">Affected Pairs: </span>
-                        <span className="text-sm text-muted-foreground">{news.pairs.join(", ")}</span>
+                      <div className="flex items-center space-x-2">
+                        <span className="text-sm text-muted-foreground">Sentiment:</span>
+                        <Badge variant="outline">{news.sentiment}</Badge>
                       </div>
-                      <div className="bg-blue-50 border border-blue-200 rounded p-3">
-                        <div className="flex items-start space-x-2">
-                          <Brain className="h-4 w-4 text-blue-600 mt-0.5" />
-                          <div>
-                            <span className="text-sm font-medium text-blue-800">Psychology Note: </span>
-                            <span className="text-sm text-blue-700">{news.psychologyNote}</span>
-                          </div>
+                      <div className="flex items-center space-x-2">
+                        <span className="text-sm text-muted-foreground">Affected Pairs:</span>
+                        <div className="flex space-x-1">
+                          {news.pairs.map((pair) => (
+                            <Badge key={pair} variant="secondary" className="text-xs">
+                              {pair}
+                            </Badge>
+                          ))}
                         </div>
                       </div>
+                      <p className="text-sm text-muted-foreground italic">{news.psychologyNote}</p>
                     </div>
                   </div>
                 ))}

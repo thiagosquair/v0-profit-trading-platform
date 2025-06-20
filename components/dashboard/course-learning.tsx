@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { t } from "@/lib/simple-translations"
 import {
   BookOpen,
   Play,
@@ -56,8 +57,8 @@ export function CourseLearning() {
   const courses: Course[] = [
     {
       id: "psychology-fundamentals",
-      title: "Trading Psychology Fundamentals",
-      description: "Master the basics of trading psychology and emotional control for consistent performance.",
+      title: t("tradingPsychologyFundamentals"),
+      description: t("masterBasicsOfTradingPsychology"),
       instructor: "Dr. Sarah Chen",
       duration: 8,
       level: "beginner",
@@ -66,7 +67,7 @@ export function CourseLearning() {
       progress: 65,
       isEnrolled: true,
       isPremium: false,
-      category: "fundamentals",
+      category: t("fundamentals"),
       thumbnail: "/placeholder.svg?height=200&width=300",
       modules: [
         {
@@ -121,8 +122,8 @@ export function CourseLearning() {
     },
     {
       id: "risk-management-psychology",
-      title: "Advanced Risk Management Psychology",
-      description: "Deep dive into the psychological aspects of risk management and position sizing.",
+      title: t("advancedRiskManagementPsychology"),
+      description: t("deepDiveIntoPsychologicalAspects"),
       instructor: "Marcus Rodriguez",
       duration: 12,
       level: "advanced",
@@ -131,7 +132,7 @@ export function CourseLearning() {
       progress: 0,
       isEnrolled: false,
       isPremium: true,
-      category: "risk-management",
+      category: t("riskManagement"),
       thumbnail: "/placeholder.svg?height=200&width=300",
       modules: [
         {
@@ -148,8 +149,8 @@ export function CourseLearning() {
     },
     {
       id: "overcoming-fomo",
-      title: "Overcoming FOMO in Trading",
-      description: "Learn practical strategies to manage fear of missing out and make rational decisions.",
+      title: t("overcomingFOMOInTrading"),
+      description: t("learnPracticalStrategies"),
       instructor: "Emma Thompson",
       duration: 6,
       level: "intermediate",
@@ -182,8 +183,8 @@ export function CourseLearning() {
     },
     {
       id: "discipline-mastery",
-      title: "Trading Discipline Mastery",
-      description: "Build unshakeable discipline and stick to your trading plan consistently.",
+      title: t("tradingDisciplineMastery"),
+      description: t("buildUnshakeableDiscipline"),
       instructor: "Dr. James Wilson",
       duration: 10,
       level: "intermediate",
@@ -192,7 +193,7 @@ export function CourseLearning() {
       progress: 0,
       isEnrolled: false,
       isPremium: false,
-      category: "discipline",
+      category: t("discipline"),
       thumbnail: "/placeholder.svg?height=200&width=300",
       modules: [
         {
@@ -209,11 +210,11 @@ export function CourseLearning() {
   ]
 
   const categories = [
-    { id: "all", name: "All Courses", count: courses.length },
-    { id: "fundamentals", name: "Fundamentals", count: 1 },
-    { id: "risk-management", name: "Risk Management", count: 1 },
+    { id: "all", name: t("allCourses"), count: courses.length },
+    { id: t("fundamentals"), name: t("fundamentals"), count: 1 },
+    { id: t("riskManagement"), name: t("riskManagement"), count: 1 },
     { id: "behavioral-patterns", name: "Behavioral Patterns", count: 1 },
-    { id: "discipline", name: "Discipline", count: 1 },
+    { id: t("discipline"), name: t("discipline"), count: 1 },
   ]
 
   const enrolledCourses = courses.filter((course) => course.isEnrolled)
@@ -252,20 +253,20 @@ export function CourseLearning() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Psychology Courses</h1>
-          <p className="text-gray-600 mt-1">Structured learning paths for trading psychology mastery</p>
+          <h1 className="text-3xl font-bold text-gray-900">{t("psychologyCoursesTitle")}</h1>
+          <p className="text-gray-600 mt-1">{t("structuredLearningPaths")}</p>
         </div>
         <Badge variant="secondary" className="flex items-center gap-2">
           <BookOpen className="h-4 w-4" />
-          {enrolledCourses.length} Enrolled
+          {enrolledCourses.length} {t("enrolled")}
         </Badge>
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="browse">Browse Courses</TabsTrigger>
-          <TabsTrigger value="enrolled">My Courses</TabsTrigger>
-          <TabsTrigger value="progress">Progress</TabsTrigger>
+          <TabsTrigger value="browse">{t("browseCourses")}</TabsTrigger>
+          <TabsTrigger value="enrolled">{t("myCourses")}</TabsTrigger>
+          <TabsTrigger value="progress">{t("progress")}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="browse" className="space-y-6">
@@ -305,13 +306,13 @@ export function CourseLearning() {
                     </Badge>
                   )}
                   {course.isEnrolled && (
-                    <Badge className="absolute top-2 left-2 bg-green-500 text-white">Enrolled</Badge>
+                    <Badge className="absolute top-2 left-2 bg-green-500 text-white">{t("enrolled")}</Badge>
                   )}
                 </div>
 
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
-                    <Badge className={getLevelColor(course.level)}>{course.level}</Badge>
+                    <Badge className={getLevelColor(course.level)}>{t(course.level as any)}</Badge>
                     <div className="flex items-center gap-1">
                       <Star className="h-4 w-4 text-yellow-400 fill-current" />
                       <span className="text-sm font-medium">{course.rating}</span>
@@ -350,7 +351,7 @@ export function CourseLearning() {
                     {course.isEnrolled && (
                       <div>
                         <div className="flex justify-between items-center mb-2">
-                          <span className="text-sm font-medium">Progress</span>
+                          <span className="text-sm font-medium">{t("progress")}</span>
                           <span className="text-sm text-gray-600">{course.progress}%</span>
                         </div>
                         <Progress value={course.progress} className="h-2" />
@@ -368,12 +369,12 @@ export function CourseLearning() {
                       {course.isEnrolled ? (
                         <>
                           <Play className="h-4 w-4 mr-2" />
-                          Continue Learning
+                          {t("continueLearning")}
                         </>
                       ) : (
                         <>
                           <BookOpen className="h-4 w-4 mr-2" />
-                          Enroll Now
+                          {t("enrollNow")}
                         </>
                       )}
                     </Button>
@@ -389,9 +390,9 @@ export function CourseLearning() {
             <Card>
               <CardContent className="text-center py-12">
                 <BookOpen className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">No courses enrolled</h3>
-                <p className="text-gray-600 mb-4">Start your learning journey by enrolling in a course.</p>
-                <Button onClick={() => setActiveTab("browse")}>Browse Courses</Button>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">{t("noCoursesEnrolled")}</h3>
+                <p className="text-gray-600 mb-4">{t("startLearningJourney")}</p>
+                <Button onClick={() => setActiveTab("browse")}>{t("browseCourses")}</Button>
               </CardContent>
             </Card>
           ) : (
@@ -406,19 +407,22 @@ export function CourseLearning() {
                         <div className="flex items-center gap-4 mt-3 text-sm text-gray-600">
                           <div className="flex items-center gap-1">
                             <Clock className="h-4 w-4" />
-                            <span>{course.duration}h total</span>
+                            <span>
+                              {course.duration}h {t("totalEnrolled")}
+                            </span>
                           </div>
                           <div className="flex items-center gap-1">
                             <Target className="h-4 w-4" />
                             <span>
-                              {course.modules.filter((m) => m.isCompleted).length}/{course.modules.length} modules
+                              {course.modules.filter((m) => m.isCompleted).length}/{course.modules.length}{" "}
+                              {t("modulesCompleted")}
                             </span>
                           </div>
                         </div>
                       </div>
                       <div className="text-right">
                         <div className="text-3xl font-bold text-royal-blue-600">{course.progress}%</div>
-                        <div className="text-sm text-gray-600">Complete</div>
+                        <div className="text-sm text-gray-600">{t("completionRate")}</div>
                       </div>
                     </div>
                   </CardHeader>
@@ -427,7 +431,7 @@ export function CourseLearning() {
                       <Progress value={course.progress} className="h-2" />
 
                       <div className="space-y-2">
-                        <h4 className="font-semibold">Course Modules</h4>
+                        <h4 className="font-semibold">{t("courseModules")}</h4>
                         {course.modules.map((module, index) => (
                           <div
                             key={module.id}
@@ -452,7 +456,9 @@ export function CourseLearning() {
                               </div>
                               <div>
                                 <div className="font-medium">{module.title}</div>
-                                <div className="text-sm text-gray-600">{module.duration} minutes</div>
+                                <div className="text-sm text-gray-600">
+                                  {module.duration} {t("minutes")}
+                                </div>
                               </div>
                             </div>
                             <Button
@@ -465,7 +471,7 @@ export function CourseLearning() {
                                   : ""
                               }
                             >
-                              {module.isCompleted ? "Review" : module.isLocked ? "Locked" : "Start"}
+                              {module.isCompleted ? t("review") : module.isLocked ? t("locked") : t("start")}
                             </Button>
                           </div>
                         ))}
@@ -484,12 +490,12 @@ export function CourseLearning() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <BookOpen className="h-5 w-5 text-royal-blue-500" />
-                  Courses Enrolled
+                  {t("coursesEnrolled")}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-3xl font-bold text-royal-blue-600 mb-2">{enrolledCourses.length}</div>
-                <p className="text-sm text-gray-600">Active learning paths</p>
+                <p className="text-sm text-gray-600">{t("activeLearningPaths")}</p>
               </CardContent>
             </Card>
 
@@ -497,14 +503,14 @@ export function CourseLearning() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <CheckCircle className="h-5 w-5 text-green-500" />
-                  Modules Completed
+                  {t("modulesCompletedTotal")}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-3xl font-bold text-green-600 mb-2">
                   {enrolledCourses.reduce((acc, course) => acc + course.modules.filter((m) => m.isCompleted).length, 0)}
                 </div>
-                <p className="text-sm text-gray-600">Learning milestones achieved</p>
+                <p className="text-sm text-gray-600">{t("learningMilestonesAchieved")}</p>
               </CardContent>
             </Card>
 
@@ -512,7 +518,7 @@ export function CourseLearning() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Clock className="h-5 w-5 text-purple-500" />
-                  Learning Time
+                  {t("learningTime")}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -524,15 +530,15 @@ export function CourseLearning() {
                   )}
                   m
                 </div>
-                <p className="text-sm text-gray-600">Minutes of focused learning</p>
+                <p className="text-sm text-gray-600">{t("minutesOfFocusedLearning")}</p>
               </CardContent>
             </Card>
           </div>
 
           <Card>
             <CardHeader>
-              <CardTitle>Learning Achievements</CardTitle>
-              <CardDescription>Your course completion milestones</CardDescription>
+              <CardTitle>{t("learningAchievements")}</CardTitle>
+              <CardDescription>{t("courseCompletionMilestones")}</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -540,33 +546,33 @@ export function CourseLearning() {
                   <div className="flex items-center gap-3">
                     <Award className="h-8 w-8 text-green-600" />
                     <div>
-                      <h4 className="font-semibold text-green-800">First Course Started</h4>
-                      <p className="text-sm text-green-600">Began your psychology learning journey</p>
+                      <h4 className="font-semibold text-green-800">{t("firstCourseStarted")}</h4>
+                      <p className="text-sm text-green-600">{t("beganPsychologyLearningJourney")}</p>
                     </div>
                   </div>
-                  <Badge className="bg-green-500 text-white">Earned</Badge>
+                  <Badge className="bg-green-500 text-white">{t("earned")}</Badge>
                 </div>
 
                 <div className="flex items-center justify-between p-4 bg-blue-50 rounded-lg border border-blue-200">
                   <div className="flex items-center gap-3">
                     <TrendingUp className="h-8 w-8 text-blue-600" />
                     <div>
-                      <h4 className="font-semibold text-blue-800">Consistent Learner</h4>
-                      <p className="text-sm text-blue-600">Complete modules 3 days in a row</p>
+                      <h4 className="font-semibold text-blue-800">{t("consistentLearner")}</h4>
+                      <p className="text-sm text-blue-600">{t("completeModules3Days")}</p>
                     </div>
                   </div>
-                  <Badge variant="outline">2/3 days</Badge>
+                  <Badge variant="outline">2/3 {t("days")}</Badge>
                 </div>
 
                 <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-200">
                   <div className="flex items-center gap-3">
                     <Zap className="h-8 w-8 text-gray-400" />
                     <div>
-                      <h4 className="font-semibold text-gray-600">Course Completion</h4>
-                      <p className="text-sm text-gray-500">Complete your first full course</p>
+                      <h4 className="font-semibold text-gray-600">{t("courseCompletion")}</h4>
+                      <p className="text-sm text-gray-500">{t("completeFirstFullCourse")}</p>
                     </div>
                   </div>
-                  <Badge variant="outline">Locked</Badge>
+                  <Badge variant="outline">{t("locked")}</Badge>
                 </div>
               </div>
             </CardContent>
