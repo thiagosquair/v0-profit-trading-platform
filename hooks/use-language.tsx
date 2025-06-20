@@ -3,6 +3,7 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
 
 type Language = "en" | "pt" | "es" | "fr"
+const supportedLanguages: Language[] = ["en", "pt", "es", "fr"]
 
 interface LanguageContextType {
   language: Language
