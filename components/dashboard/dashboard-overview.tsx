@@ -19,28 +19,28 @@ export function DashboardOverview() {
   const quickActions = [
     {
       title: t("aiCoach"),
-      description: "Get personalized coaching insights",
+      description: t("getPersonalizedCoaching"),
       icon: Brain,
       href: "/dashboard/coach",
       color: "bg-blue-500",
     },
     {
       title: t("screenshotAnalysis"),
-      description: "Upload and analyze your trading screenshots",
+      description: t("uploadAndAnalyze"),
       icon: Camera,
       href: "/dashboard/analysis",
       color: "bg-purple-500",
     },
     {
       title: t("interactiveExercises"),
-      description: "Complete psychology exercises and assessments",
+      description: t("completePsychology"),
       icon: Target,
       href: "/dashboard/exercises",
       color: "bg-green-500",
     },
     {
       title: t("reflectionJournal"),
-      description: "Reflect on your trading experiences",
+      description: t("reflectOnTrading"),
       icon: PenTool,
       href: "/dashboard/journal",
       color: "bg-orange-500",
@@ -50,39 +50,39 @@ export function DashboardOverview() {
   const recentActivities = [
     {
       type: "exercise",
-      title: "Completed Emotional Control Assessment",
-      time: "2 hours ago",
+      title: t("completedEmotionalControl"),
+      time: t("hoursAgo"),
       score: 85,
     },
     {
       type: "coaching",
-      title: "AI Coaching Session on Risk Management",
-      time: "1 day ago",
-      duration: "15 min",
+      title: t("aiCoachingSession"),
+      time: t("dayAgo"),
+      duration: t("minutes"),
     },
     {
       type: "analysis",
-      title: "Screenshot Analysis - EUR/USD Trade",
-      time: "2 days ago",
-      result: "Positive",
+      title: t("screenshotAnalysisEUR"),
+      time: t("daysAgo"),
+      result: t("positive"),
     },
   ]
 
   const currentGoals = [
     {
-      title: "Improve Emotional Control",
+      title: t("improveEmotionalControl"),
       progress: 75,
-      target: "Score 85+",
+      target: t("scoreTarget"),
     },
     {
-      title: "Complete 20 Exercises",
+      title: t("complete20Exercises"),
       progress: 60,
-      target: "12/20 completed",
+      target: t("exercisesProgress"),
     },
     {
-      title: "Weekly Coaching Sessions",
+      title: t("weeklyCoachingSessions"),
       progress: 80,
-      target: "4/5 sessions",
+      target: t("sessionsProgress"),
     },
   ]
 
@@ -103,7 +103,7 @@ export function DashboardOverview() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.psychologyScore}</div>
-            <p className="text-xs text-muted-foreground">+5 from last week</p>
+            <p className="text-xs text-muted-foreground">{t("fromLastWeek")}</p>
           </CardContent>
         </Card>
 
@@ -114,7 +114,7 @@ export function DashboardOverview() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.exercisesCompleted}</div>
-            <p className="text-xs text-muted-foreground">This week</p>
+            <p className="text-xs text-muted-foreground">{t("thisWeek")}</p>
           </CardContent>
         </Card>
 
@@ -125,7 +125,7 @@ export function DashboardOverview() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.coachingSessions}</div>
-            <p className="text-xs text-muted-foreground">This month</p>
+            <p className="text-xs text-muted-foreground">{t("thisMonth")}</p>
           </CardContent>
         </Card>
 
@@ -136,7 +136,7 @@ export function DashboardOverview() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.achievements}</div>
-            <p className="text-xs text-muted-foreground">Badges earned</p>
+            <p className="text-xs text-muted-foreground">{t("badgesEarned")}</p>
           </CardContent>
         </Card>
       </div>
@@ -145,8 +145,8 @@ export function DashboardOverview() {
         {/* Quick Actions */}
         <Card>
           <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
-            <CardDescription>Jump into your training</CardDescription>
+            <CardTitle>{t("quickActions")}</CardTitle>
+            <CardDescription>{t("jumpInto")}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             {quickActions.map((action, index) => (
@@ -174,8 +174,8 @@ export function DashboardOverview() {
         {/* Recent Activity */}
         <Card>
           <CardHeader>
-            <CardTitle>Recent Activity</CardTitle>
-            <CardDescription>Your latest activities</CardDescription>
+            <CardTitle>{t("recentActivity")}</CardTitle>
+            <CardDescription>{t("latestActivities")}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             {recentActivities.map((activity, index) => (
@@ -192,7 +192,7 @@ export function DashboardOverview() {
                     <p className="text-xs text-gray-500">{activity.time}</p>
                     {activity.score && (
                       <Badge variant="secondary" className="text-xs">
-                        Score: {activity.score}
+                        {t("score")}: {activity.score}
                       </Badge>
                     )}
                     {activity.duration && (
@@ -216,8 +216,8 @@ export function DashboardOverview() {
       {/* Current Goals */}
       <Card>
         <CardHeader>
-          <CardTitle>Current Goals</CardTitle>
-          <CardDescription>Your development objectives</CardDescription>
+          <CardTitle>{t("currentGoals")}</CardTitle>
+          <CardDescription>{t("developmentObjectives")}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
