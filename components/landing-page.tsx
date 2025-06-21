@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import {
   Brain,
   TrendingUp,
@@ -18,6 +19,11 @@ import {
   Star,
   Settings,
   Activity,
+  Play,
+  Check,
+  Zap,
+  Shield,
+  Users,
 } from "lucide-react"
 import Link from "next/link"
 
@@ -487,6 +493,54 @@ export function LandingPage() {
     MessageSquare,
   ]
 
+  const pricingPlans = [
+    {
+      name: "Starter",
+      price: "$29",
+      period: "/month",
+      description: "Perfect for individual traders starting their psychology journey",
+      features: [
+        "AI Psychology Coach",
+        "Basic Progress Tracking",
+        "5 Interactive Exercises",
+        "Weekly Insights Report",
+        "Email Support",
+      ],
+      popular: false,
+    },
+    {
+      name: "Professional",
+      price: "$79",
+      period: "/month",
+      description: "Advanced features for serious traders",
+      features: [
+        "Everything in Starter",
+        "Advanced AI Analysis",
+        "Unlimited Exercises",
+        "Screenshot Analysis",
+        "Trade Builder",
+        "Priority Support",
+        "Custom Coaching Plans",
+      ],
+      popular: true,
+    },
+    {
+      name: "Elite",
+      price: "$149",
+      period: "/month",
+      description: "Complete psychology mastery suite",
+      features: [
+        "Everything in Professional",
+        "1-on-1 Coach Sessions",
+        "Advanced Market Insights",
+        "Custom Integrations",
+        "White-label Options",
+        "24/7 Phone Support",
+      ],
+      popular: false,
+    },
+  ]
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-sky-50 to-white">
       {/* Header */}
@@ -535,16 +589,16 @@ export function LandingPage() {
         </div>
       </header>
 
-      {/* Hero Section */}
+      {/* Enhanced Hero Section with Video Demo */}
       <section className="py-20 px-4">
         <div className="container mx-auto text-center">
           <Badge
-            className="mb-4 bg-gradient-to-r from-navy-100 to-royal-blue-100 text-navy-700 border-navy-200"
+            className="mb-4 bg-gradient-to-r from-navy-100 to-royal-blue-100 text-navy-700 border-navy-200 animate-pulse"
             variant="outline"
           >
             {t.badge}
           </Badge>
-          <h1 className="text-5xl md:text-6xl font-bold text-navy-900 mb-6">
+          <h1 className="text-5xl md:text-6xl font-bold text-navy-900 mb-6 animate-fade-in">
             {t.heroTitle.split(" ").slice(0, 2).join(" ")}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-navy-600 via-royal-blue-500 to-blue-500">
               {" "}
@@ -555,7 +609,7 @@ export function LandingPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               size="lg"
-              className="text-lg px-8 bg-gradient-to-r from-navy-600 to-royal-blue-500 hover:from-navy-700 hover:to-royal-blue-600 text-white border-0"
+              className="text-lg px-8 bg-gradient-to-r from-navy-600 to-royal-blue-500 hover:from-navy-700 hover:to-royal-blue-600 text-white border-0 transform hover:scale-105 transition-all duration-200"
               asChild
             >
               <Link href="/auth/signup">
@@ -563,9 +617,52 @@ export function LandingPage() {
                 <ChevronRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8 border-navy-300 text-navy-700 hover:bg-navy-50">
-              {t.learnMore}
-            </Button>
+
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="text-lg px-8 border-navy-300 text-navy-700 hover:bg-navy-50 group"
+                >
+                  <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+                  {t.learnMore}
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-4xl">
+                <div className="aspect-video bg-gradient-to-br from-navy-100 to-royal-blue-100 rounded-lg flex items-center justify-center">
+                  <div className="text-center">
+                    <Play className="h-16 w-16 text-royal-blue-500 mx-auto mb-4" />
+                    <h3 className="text-xl font-semibold text-navy-800 mb-2">Demo Video Coming Soon</h3>
+                    <p className="text-navy-600">Watch how ProFitz transforms trading psychology</p>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-16 px-4 bg-white">
+        <div className="container mx-auto">
+          <div className="grid md:grid-cols-4 gap-8 text-center">
+            <div className="space-y-2">
+              <div className="text-3xl font-bold text-royal-blue-600">10,000+</div>
+              <div className="text-navy-600">Active Traders</div>
+            </div>
+            <div className="space-y-2">
+              <div className="text-3xl font-bold text-royal-blue-600">85%</div>
+              <div className="text-navy-600">Improved Consistency</div>
+            </div>
+            <div className="space-y-2">
+              <div className="text-3xl font-bold text-royal-blue-600">4.9/5</div>
+              <div className="text-navy-600">User Rating</div>
+            </div>
+            <div className="space-y-2">
+              <div className="text-3xl font-bold text-royal-blue-600">24/7</div>
+              <div className="text-navy-600">AI Support</div>
+            </div>
           </div>
         </div>
       </section>
@@ -622,7 +719,63 @@ export function LandingPage() {
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* Enhanced Pricing Section */}
+      <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-sky-50">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-navy-900 mb-4">Choose Your Psychology Journey</h2>
+            <p className="text-xl text-navy-600">Start free, upgrade when you're ready</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {pricingPlans.map((plan, index) => (
+              <Card
+                key={index}
+                className={`relative border-0 shadow-lg hover:shadow-xl transition-all duration-300 ${
+                  plan.popular ? "ring-2 ring-royal-blue-500 scale-105" : ""
+                }`}
+              >
+                {plan.popular && (
+                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-royal-blue-500 text-white">
+                    Most Popular
+                  </Badge>
+                )}
+                <CardHeader className="text-center pb-4">
+                  <CardTitle className="text-2xl text-navy-800">{plan.name}</CardTitle>
+                  <div className="flex items-baseline justify-center">
+                    <span className="text-4xl font-bold text-royal-blue-600">{plan.price}</span>
+                    <span className="text-navy-500 ml-1">{plan.period}</span>
+                  </div>
+                  <CardDescription className="text-navy-600">{plan.description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3 mb-6">
+                    {plan.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center">
+                        <Check className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
+                        <span className="text-navy-700">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Button
+                    className={`w-full ${
+                      plan.popular
+                        ? "bg-gradient-to-r from-navy-600 to-royal-blue-500 hover:from-navy-700 hover:to-royal-blue-600 text-white"
+                        : "border-navy-300 text-navy-700 hover:bg-navy-50"
+                    }`}
+                    variant={plan.popular ? "default" : "outline"}
+                    asChild
+                  >
+                    <Link href="/auth/signup">Get Started</Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Enhanced Testimonials with more social proof */}
       <section className="py-20 px-4 bg-white">
         <div className="container mx-auto">
           <div className="text-center mb-16">
@@ -632,21 +785,60 @@ export function LandingPage() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="border-0 shadow-lg bg-gradient-to-br from-white to-blue-50 border-navy-100">
+              <Card
+                key={index}
+                className="border-0 shadow-lg bg-gradient-to-br from-white to-blue-50 border-navy-100 hover:shadow-xl transition-all duration-300"
+              >
                 <CardContent className="pt-6">
                   <div className="flex mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
                     ))}
                   </div>
-                  <p className="text-navy-600 mb-4">"{testimonial.content}"</p>
-                  <div>
-                    <p className="font-semibold text-navy-800">{testimonial.name}</p>
-                    <p className="text-sm text-navy-500">{testimonial.role}</p>
+                  <p className="text-navy-600 mb-4 italic">"{testimonial.content}"</p>
+                  <div className="flex items-center">
+                    <div className="w-12 h-12 bg-gradient-to-r from-navy-400 to-royal-blue-400 rounded-full flex items-center justify-center text-white font-semibold mr-3">
+                      {testimonial.name.charAt(0)}
+                    </div>
+                    <div>
+                      <p className="font-semibold text-navy-800">{testimonial.name}</p>
+                      <p className="text-sm text-navy-500">{testimonial.role}</p>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Indicators */}
+      <section className="py-16 px-4 bg-gradient-to-r from-navy-50 to-royal-blue-50">
+        <div className="container mx-auto">
+          <div className="text-center mb-12">
+            <h3 className="text-2xl font-bold text-navy-800 mb-4">Trusted by Professional Traders</h3>
+          </div>
+          <div className="grid md:grid-cols-4 gap-8 text-center">
+            <div className="flex flex-col items-center">
+              <Shield className="h-12 w-12 text-royal-blue-500 mb-3" />
+              <h4 className="font-semibold text-navy-800">Bank-Level Security</h4>
+              <p className="text-sm text-navy-600">Your data is encrypted and secure</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <Zap className="h-12 w-12 text-royal-blue-500 mb-3" />
+              <h4 className="font-semibold text-navy-800">Real-Time Analysis</h4>
+              <p className="text-sm text-navy-600">Instant psychological insights</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <Users className="h-12 w-12 text-royal-blue-500 mb-3" />
+              <h4 className="font-semibold text-navy-800">Expert Community</h4>
+              <p className="text-sm text-navy-600">Learn from top traders</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <Award className="h-12 w-12 text-royal-blue-500 mb-3" />
+              <h4 className="font-semibold text-navy-800">Proven Results</h4>
+              <p className="text-sm text-navy-600">85% improvement rate</p>
+            </div>
           </div>
         </div>
       </section>
