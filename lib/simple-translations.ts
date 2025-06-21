@@ -2,7 +2,7 @@ export type Language = "en" | "pt" | "es" | "fr"
 
 export const translations = {
   en: {
-    // Navigation keys
+    // Navigation
     "nav.overview": "Overview",
     "nav.aiCoach": "AI Coach",
     "nav.analysis": "Screenshot Analysis",
@@ -16,7 +16,7 @@ export const translations = {
     "nav.marketInsights": "Market Insights",
     "nav.settings": "Settings",
 
-    // Common keys
+    // Common
     "common.welcome": "Welcome",
     "common.profile": "Profile",
     "common.signOut": "Sign Out",
@@ -72,22 +72,77 @@ export const translations = {
     sessionsProgress: "4/5 sessions",
     profitzDashboard: "ProFitz Dashboard",
 
-    // Sidebar navigation
-    overview: "Overview",
-    aiCoach: "AI Coach",
-    screenshotAnalysis: "Screenshot Analysis",
-    progressTracking: "Progress Tracking",
-    interactiveExercises: "Interactive Exercises",
-    behavioralPatterns: "Behavioral Patterns",
-    psychologyCourses: "Psychology Courses",
-    reflectionJournal: "Reflection Journal",
-    coachingInsights: "Coaching Insights",
-    tradeBuilder: "Trade Builder",
-    marketInsights: "Market Insights",
-    signOut: "Sign Out",
+    // Interactive Exercises
+    interactiveExercisesTitle: "Interactive Exercises",
+    structuredExercisesForMastery: "Structured exercises designed to build trading psychology mastery",
+    emotionalCheckin: "Emotional Check-in",
+    emotionalCheckinDesc: "Assess your current emotional state before trading",
+    mindfulTrading: "Mindful Trading Meditation",
+    mindfulTradingDesc: "Center your mind and reduce trading anxiety through guided meditation",
+    riskVisualization: "Risk Visualization",
+    riskVisualizationDesc: "Visualize and mentally prepare for potential trading risks",
+    fomoTraining: "FOMO Resistance Training",
+    fomoTrainingDesc: "Build resistance against Fear of Missing Out in trading decisions",
+    lossAcceptance: "Loss Acceptance Training",
+    lossAcceptanceDesc: "Learn to accept and process trading losses in a healthy way",
+    confidenceBuilding: "Confidence Building",
+    confidenceBuildingDesc: "Build unshakeable confidence in your trading abilities",
+    all: "All",
+    emotionalControlCategory: "Emotional Control",
+    riskManagementCategory: "Risk Management",
+    behavioralPatternsCategory: "Behavioral Patterns",
+    mindfulness: "Mindfulness",
+    confidence: "Confidence",
+    completed: "Completed",
+    beginner: "Beginner",
+    intermediate: "Intermediate",
+    advanced: "Advanced",
+    assessment: "Assessment",
+    meditation: "Meditation",
+    visualization: "Visualization",
+    cognitive: "Cognitive",
+    simulation: "Simulation",
+    min: "min",
+    lastScore: "Last Score",
+    retry: "Retry",
+    start: "Start",
+    complete: "Complete",
+    exit: "Exit",
+    noneFound: "No exercises found",
+    tryAnotherCategory: "Try selecting another category",
+    exercisesSummary: "Exercises Summary",
+    progressOverview: "Your progress overview across all exercises",
+    avgScore: "Average Score",
+    totalMinutes: "Total Minutes",
+
+    // Auth
+    signIn: "Sign In",
+    signUp: "Sign Up",
+    email: "Email",
+    password: "Password",
+    confirmPassword: "Confirm Password",
+    firstName: "First Name",
+    lastName: "Last Name",
+    forgotPassword: "Forgot your password?",
+    noAccount: "Don't have an account?",
+    hasAccount: "Already have an account?",
+    welcomeBack: "Welcome Back",
+    createAccount: "Create Your Account",
+
+    // Landing Page
+    title: "ProFitz",
+    subtitle: "Psychology Lab",
+    description:
+      "Master your trading psychology with AI-powered coaching, behavioral analysis, and interactive exercises designed to build mental resilience and better decision-making.",
+    getStarted: "Start Your Journey",
+    learnMore: "Watch Demo",
+    badge: "AI-Powered Trading Psychology",
+    heroTitle: "Transform Your Trading Mindset",
+    featuresTitle: "Everything You Need to Master Trading Psychology",
+    featuresSubtitle: "Our comprehensive platform combines cutting-edge AI with proven psychological techniques",
   },
   pt: {
-    // Navigation keys
+    // Navigation
     "nav.overview": "Visão Geral",
     "nav.aiCoach": "Coach IA",
     "nav.analysis": "Análise de Screenshot",
@@ -101,7 +156,7 @@ export const translations = {
     "nav.marketInsights": "Insights de Mercado",
     "nav.settings": "Configurações",
 
-    // Common keys
+    // Common
     "common.welcome": "Bem-vindo",
     "common.profile": "Perfil",
     "common.signOut": "Sair",
@@ -157,22 +212,77 @@ export const translations = {
     sessionsProgress: "4/5 sessões",
     profitzDashboard: "Dashboard ProFitz",
 
-    // Sidebar navigation
-    overview: "Visão Geral",
-    aiCoach: "Coach IA",
-    screenshotAnalysis: "Análise de Screenshot",
-    progressTracking: "Acompanhamento de Progresso",
-    interactiveExercises: "Exercícios Interativos",
-    behavioralPatterns: "Padrões Comportamentais",
-    psychologyCourses: "Cursos de Psicologia",
-    reflectionJournal: "Diário de Reflexão",
-    coachingInsights: "Insights de Coaching",
-    tradeBuilder: "Construtor de Trade",
-    marketInsights: "Insights de Mercado",
-    signOut: "Sair",
+    // Interactive Exercises
+    interactiveExercisesTitle: "Exercícios Interativos",
+    structuredExercisesForMastery: "Exercícios estruturados para dominar a psicologia do trading",
+    emotionalCheckin: "Check-in Emocional",
+    emotionalCheckinDesc: "Avalie seu estado emocional atual antes de negociar",
+    mindfulTrading: "Meditação Mindful para Trading",
+    mindfulTradingDesc: "Centre sua mente e reduza a ansiedade do trading através de meditação guiada",
+    riskVisualization: "Visualização de Risco",
+    riskVisualizationDesc: "Visualize e prepare-se mentalmente para riscos potenciais de trading",
+    fomoTraining: "Treinamento Anti-FOMO",
+    fomoTrainingDesc: "Desenvolva resistência ao Medo de Perder Oportunidades nas decisões de trading",
+    lossAcceptance: "Treinamento de Aceitação de Perdas",
+    lossAcceptanceDesc: "Aprenda a aceitar e processar perdas de trading de forma saudável",
+    confidenceBuilding: "Construção de Confiança",
+    confidenceBuildingDesc: "Desenvolva confiança inabalável em suas habilidades de trading",
+    all: "Todos",
+    emotionalControlCategory: "Controle Emocional",
+    riskManagementCategory: "Gestão de Risco",
+    behavioralPatternsCategory: "Padrões Comportamentais",
+    mindfulness: "Mindfulness",
+    confidence: "Confiança",
+    completed: "Concluído",
+    beginner: "Iniciante",
+    intermediate: "Intermediário",
+    advanced: "Avançado",
+    assessment: "Avaliação",
+    meditation: "Meditação",
+    visualization: "Visualização",
+    cognitive: "Cognitivo",
+    simulation: "Simulação",
+    min: "min",
+    lastScore: "Última Pontuação",
+    retry: "Tentar Novamente",
+    start: "Iniciar",
+    complete: "Concluir",
+    exit: "Sair",
+    noneFound: "Nenhum exercício encontrado",
+    tryAnotherCategory: "Tente selecionar outra categoria",
+    exercisesSummary: "Resumo dos Exercícios",
+    progressOverview: "Visão geral do seu progresso em todos os exercícios",
+    avgScore: "Pontuação Média",
+    totalMinutes: "Total de Minutos",
+
+    // Auth
+    signIn: "Entrar",
+    signUp: "Cadastrar",
+    email: "Email",
+    password: "Senha",
+    confirmPassword: "Confirmar Senha",
+    firstName: "Nome",
+    lastName: "Sobrenome",
+    forgotPassword: "Esqueceu sua senha?",
+    noAccount: "Não tem uma conta?",
+    hasAccount: "Já tem uma conta?",
+    welcomeBack: "Bem-vindo de Volta",
+    createAccount: "Criar Sua Conta",
+
+    // Landing Page
+    title: "ProFitz",
+    subtitle: "Laboratório de Psicologia",
+    description:
+      "Domine sua psicologia de trading com coaching alimentado por IA, análise comportamental e exercícios interativos projetados para construir resistência mental e melhor tomada de decisão.",
+    getStarted: "Comece Sua Jornada",
+    learnMore: "Assistir Demo",
+    badge: "Psicologia de Trading Alimentada por IA",
+    heroTitle: "Transforme Sua Mentalidade de Trading",
+    featuresTitle: "Tudo que Você Precisa para Dominar a Psicologia de Trading",
+    featuresSubtitle: "Nossa plataforma abrangente combina IA de ponta com técnicas psicológicas comprovadas",
   },
   es: {
-    // Navigation keys
+    // Navigation
     "nav.overview": "Resumen",
     "nav.aiCoach": "Coach IA",
     "nav.analysis": "Análisis de Captura",
@@ -186,7 +296,7 @@ export const translations = {
     "nav.marketInsights": "Insights de Mercado",
     "nav.settings": "Configuración",
 
-    // Common keys
+    // Common
     "common.welcome": "Bienvenido",
     "common.profile": "Perfil",
     "common.signOut": "Cerrar Sesión",
@@ -242,22 +352,77 @@ export const translations = {
     sessionsProgress: "4/5 sesiones",
     profitzDashboard: "Dashboard ProFitz",
 
-    // Sidebar navigation
-    overview: "Resumen",
-    aiCoach: "Coach IA",
-    screenshotAnalysis: "Análisis de Captura",
-    progressTracking: "Seguimiento de Progreso",
-    interactiveExercises: "Ejercicios Interactivos",
-    behavioralPatterns: "Patrones Conductuales",
-    psychologyCourses: "Cursos de Psicología",
-    reflectionJournal: "Diario de Reflexión",
-    coachingInsights: "Insights de Coaching",
-    tradeBuilder: "Constructor de Trade",
-    marketInsights: "Insights de Mercado",
-    signOut: "Cerrar Sesión",
+    // Interactive Exercises
+    interactiveExercisesTitle: "Ejercicios Interactivos",
+    structuredExercisesForMastery: "Ejercicios estructurados para dominar la psicología del trading",
+    emotionalCheckin: "Chequeo Emocional",
+    emotionalCheckinDesc: "Evalúa tu estado emocional actual antes de operar",
+    mindfulTrading: "Meditación Mindful para Trading",
+    mindfulTradingDesc: "Centra tu mente y reduce la ansiedad del trading a través de meditación guiada",
+    riskVisualization: "Visualización de Riesgo",
+    riskVisualizationDesc: "Visualiza y prepárate mentalmente para riesgos potenciales de trading",
+    fomoTraining: "Entrenamiento Anti-FOMO",
+    fomoTrainingDesc: "Desarrolla resistencia al Miedo de Perderse Oportunidades en decisiones de trading",
+    lossAcceptance: "Entrenamiento de Aceptación de Pérdidas",
+    lossAcceptanceDesc: "Aprende a aceptar y procesar pérdidas de trading de manera saludable",
+    confidenceBuilding: "Construcción de Confianza",
+    confidenceBuildingDesc: "Desarrolla confianza inquebrantable en tus habilidades de trading",
+    all: "Todos",
+    emotionalControlCategory: "Control Emocional",
+    riskManagementCategory: "Gestión de Riesgo",
+    behavioralPatternsCategory: "Patrones Conductuales",
+    mindfulness: "Mindfulness",
+    confidence: "Confianza",
+    completed: "Completado",
+    beginner: "Principiante",
+    intermediate: "Intermedio",
+    advanced: "Avanzado",
+    assessment: "Evaluación",
+    meditation: "Meditación",
+    visualization: "Visualización",
+    cognitive: "Cognitivo",
+    simulation: "Simulación",
+    min: "min",
+    lastScore: "Última Puntuación",
+    retry: "Reintentar",
+    start: "Iniciar",
+    complete: "Completar",
+    exit: "Salir",
+    noneFound: "No se encontraron ejercicios",
+    tryAnotherCategory: "Intenta seleccionar otra categoría",
+    exercisesSummary: "Resumen de Ejercicios",
+    progressOverview: "Resumen de tu progreso en todos los ejercicios",
+    avgScore: "Puntuación Promedio",
+    totalMinutes: "Total de Minutos",
+
+    // Auth
+    signIn: "Iniciar Sesión",
+    signUp: "Registrarse",
+    email: "Email",
+    password: "Contraseña",
+    confirmPassword: "Confirmar Contraseña",
+    firstName: "Nombre",
+    lastName: "Apellido",
+    forgotPassword: "¿Olvidaste tu contraseña?",
+    noAccount: "¿No tienes una cuenta?",
+    hasAccount: "¿Ya tienes una cuenta?",
+    welcomeBack: "Bienvenido de Vuelta",
+    createAccount: "Crear Tu Cuenta",
+
+    // Landing Page
+    title: "ProFitz",
+    subtitle: "Laboratorio de Psicología",
+    description:
+      "Domina tu psicología de trading con coaching impulsado por IA, análisis conductual y ejercicios interactivos diseñados para construir resistencia mental y mejor toma de decisiones.",
+    getStarted: "Comienza Tu Viaje",
+    learnMore: "Ver Demo",
+    badge: "Psicología de Trading Impulsada por IA",
+    heroTitle: "Transforma Tu Mentalidad de Trading",
+    featuresTitle: "Todo lo que Necesitas para Dominar la Psicología de Trading",
+    featuresSubtitle: "Nuestra plataforma integral combina IA de vanguardia con técnicas psicológicas probadas",
   },
   fr: {
-    // Navigation keys
+    // Navigation
     "nav.overview": "Aperçu",
     "nav.aiCoach": "Coach IA",
     "nav.analysis": "Analyse de Capture",
@@ -271,7 +436,7 @@ export const translations = {
     "nav.marketInsights": "Insights de Marché",
     "nav.settings": "Paramètres",
 
-    // Common keys
+    // Common
     "common.welcome": "Bienvenue",
     "common.profile": "Profil",
     "common.signOut": "Se Déconnecter",
@@ -327,19 +492,74 @@ export const translations = {
     sessionsProgress: "4/5 sessions",
     profitzDashboard: "Tableau de Bord ProFitz",
 
-    // Sidebar navigation
-    overview: "Aperçu",
-    aiCoach: "Coach IA",
-    screenshotAnalysis: "Analyse de Capture",
-    progressTracking: "Suivi des Progrès",
-    interactiveExercises: "Exercices Interactifs",
-    behavioralPatterns: "Modèles Comportementaux",
-    psychologyCourses: "Cours de Psychologie",
-    reflectionJournal: "Journal de Réflexion",
-    coachingInsights: "Coaching Insights",
-    tradeBuilder: "Constructeur de Trade",
-    marketInsights: "Insights de Marché",
-    signOut: "Se Déconnecter",
+    // Interactive Exercises
+    interactiveExercisesTitle: "Exercices Interactifs",
+    structuredExercisesForMastery: "Exercices structurés pour maîtriser la psychologie du trading",
+    emotionalCheckin: "Bilan Émotionnel",
+    emotionalCheckinDesc: "Évaluez votre état émotionnel actuel avant de trader",
+    mindfulTrading: "Méditation Mindful pour Trading",
+    mindfulTradingDesc: "Centrez votre esprit et réduisez l'anxiété du trading grâce à la méditation guidée",
+    riskVisualization: "Visualisation des Risques",
+    riskVisualizationDesc: "Visualisez et préparez-vous mentalement aux risques potentiels du trading",
+    fomoTraining: "Entraînement Anti-FOMO",
+    fomoTrainingDesc: "Développez une résistance à la Peur de Manquer des Opportunités dans les décisions de trading",
+    lossAcceptance: "Entraînement d'Acceptation des Pertes",
+    lossAcceptanceDesc: "Apprenez à accepter et traiter les pertes de trading de manière saine",
+    confidenceBuilding: "Construction de Confiance",
+    confidenceBuildingDesc: "Développez une confiance inébranlable dans vos capacités de trading",
+    all: "Tous",
+    emotionalControlCategory: "Contrôle Émotionnel",
+    riskManagementCategory: "Gestion des Risques",
+    behavioralPatternsCategory: "Modèles Comportementaux",
+    mindfulness: "Pleine Conscience",
+    confidence: "Confiance",
+    completed: "Terminé",
+    beginner: "Débutant",
+    intermediate: "Intermédiaire",
+    advanced: "Avancé",
+    assessment: "Évaluation",
+    meditation: "Méditation",
+    visualization: "Visualisation",
+    cognitive: "Cognitif",
+    simulation: "Simulation",
+    min: "min",
+    lastScore: "Dernier Score",
+    retry: "Réessayer",
+    start: "Commencer",
+    complete: "Terminer",
+    exit: "Sortir",
+    noneFound: "Aucun exercice trouvé",
+    tryAnotherCategory: "Essayez de sélectionner une autre catégorie",
+    exercisesSummary: "Résumé des Exercices",
+    progressOverview: "Aperçu de votre progression dans tous les exercices",
+    avgScore: "Score Moyen",
+    totalMinutes: "Total Minutes",
+
+    // Auth
+    signIn: "Se Connecter",
+    signUp: "S'inscrire",
+    email: "Email",
+    password: "Mot de passe",
+    confirmPassword: "Confirmer le mot de passe",
+    firstName: "Prénom",
+    lastName: "Nom",
+    forgotPassword: "Mot de passe oublié ?",
+    noAccount: "Pas de compte ?",
+    hasAccount: "Déjà un compte ?",
+    welcomeBack: "Bon Retour",
+    createAccount: "Créer Votre Compte",
+
+    // Landing Page
+    title: "ProFitz",
+    subtitle: "Laboratoire de Psychologie",
+    description:
+      "Maîtrisez votre psychologie du trading avec un coaching alimenté par l'IA, une analyse comportementale et des exercices interactifs conçus pour construire la résilience mentale et une meilleure prise de décision.",
+    getStarted: "Commencez Votre Voyage",
+    learnMore: "Voir la Démo",
+    badge: "Psychologie du Trading Alimentée par l'IA",
+    heroTitle: "Transformez Votre Mentalité de Trading",
+    featuresTitle: "Tout ce dont Vous Avez Besoin pour Maîtriser la Psychologie du Trading",
+    featuresSubtitle: "Notre plateforme complète combine l'IA de pointe avec des techniques psychologiques éprouvées",
   },
 }
 
@@ -372,5 +592,14 @@ export function t(key: string): string {
   const enTranslations = translations.en as Record<string, string>
 
   // Try to get translation from current language, fallback to English, then return key
-  return langTranslations[key] || enTranslations[key] || key
+  const result = langTranslations[key] || enTranslations[key] || key
+
+  // Debug logging in development
+  if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
+    if (!langTranslations[key] && !enTranslations[key]) {
+      console.warn(`Translation key not found: ${key}`)
+    }
+  }
+
+  return result
 }

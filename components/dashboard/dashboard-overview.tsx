@@ -4,236 +4,156 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
-import { t } from "@/lib/simple-translations"
-import { Brain, Target, Award, BarChart3, Camera, PenTool, ArrowRight, Clock } from "lucide-react"
+import { Brain, Target, Trophy, MessageSquare, Camera, BookOpen, PenTool } from "lucide-react"
+import { t } from "@/lib/translations-complete"
 
 export function DashboardOverview() {
-  // Mock data for demo
-  const stats = {
-    psychologyScore: 78,
-    exercisesCompleted: 12,
-    coachingSessions: 5,
-    achievements: 8,
-  }
-
-  const quickActions = [
-    {
-      title: t("aiCoach"),
-      description: t("getPersonalizedCoaching"),
-      icon: Brain,
-      href: "/dashboard/coach",
-      color: "bg-blue-500",
-    },
-    {
-      title: t("screenshotAnalysis"),
-      description: t("uploadAndAnalyze"),
-      icon: Camera,
-      href: "/dashboard/analysis",
-      color: "bg-purple-500",
-    },
-    {
-      title: t("interactiveExercises"),
-      description: t("completePsychology"),
-      icon: Target,
-      href: "/dashboard/exercises",
-      color: "bg-green-500",
-    },
-    {
-      title: t("reflectionJournal"),
-      description: t("reflectOnTrading"),
-      icon: PenTool,
-      href: "/dashboard/journal",
-      color: "bg-orange-500",
-    },
-  ]
-
-  const recentActivities = [
-    {
-      type: "exercise",
-      title: t("completedEmotionalControl"),
-      time: t("hoursAgo"),
-      score: 85,
-    },
-    {
-      type: "coaching",
-      title: t("aiCoachingSession"),
-      time: t("dayAgo"),
-      duration: t("minutes"),
-    },
-    {
-      type: "analysis",
-      title: t("screenshotAnalysisEUR"),
-      time: t("daysAgo"),
-      result: t("positive"),
-    },
-  ]
-
-  const currentGoals = [
-    {
-      title: t("improveEmotionalControl"),
-      progress: 75,
-      target: t("scoreTarget"),
-    },
-    {
-      title: t("complete20Exercises"),
-      progress: 60,
-      target: t("exercisesProgress"),
-    },
-    {
-      title: t("weeklyCoachingSessions"),
-      progress: 80,
-      target: t("sessionsProgress"),
-    },
-  ]
-
   return (
-    <div className="space-y-6 p-6">
-      {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">{t("welcome")}</h1>
-        <p className="text-gray-600 mt-2">{t("subtitle")}</p>
+    <div className="space-y-6">
+      {/* Welcome Section */}
+      <div className="space-y-2">
+        <h1 className="text-3xl font-bold tracking-tight">{t("dashboard.welcome")}</h1>
+        <p className="text-muted-foreground">{t("dashboard.subtitle")}</p>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">{t("psychologyScore")}</CardTitle>
+            <CardTitle className="text-sm font-medium">{t("dashboard.psychologyScore")}</CardTitle>
             <Brain className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.psychologyScore}</div>
-            <p className="text-xs text-muted-foreground">{t("fromLastWeek")}</p>
+            <div className="text-2xl font-bold">78</div>
+            <p className="text-xs text-muted-foreground">{t("dashboard.fromLastWeek")}</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">{t("exercisesCompleted")}</CardTitle>
+            <CardTitle className="text-sm font-medium">{t("dashboard.exercisesCompleted")}</CardTitle>
             <Target className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.exercisesCompleted}</div>
-            <p className="text-xs text-muted-foreground">{t("thisWeek")}</p>
+            <div className="text-2xl font-bold">12</div>
+            <p className="text-xs text-muted-foreground">{t("dashboard.thisWeek")}</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">{t("coachingSessions")}</CardTitle>
-            <BarChart3 className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium">{t("dashboard.coachingSessions")}</CardTitle>
+            <MessageSquare className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.coachingSessions}</div>
-            <p className="text-xs text-muted-foreground">{t("thisMonth")}</p>
+            <div className="text-2xl font-bold">4</div>
+            <p className="text-xs text-muted-foreground">{t("dashboard.thisMonth")}</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">{t("achievements")}</CardTitle>
-            <Award className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium">{t("dashboard.achievements")}</CardTitle>
+            <Trophy className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.achievements}</div>
-            <p className="text-xs text-muted-foreground">{t("badgesEarned")}</p>
+            <div className="text-2xl font-bold">8</div>
+            <p className="text-xs text-muted-foreground">{t("dashboard.badgesEarned")}</p>
           </CardContent>
         </Card>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Quick Actions */}
-        <Card>
-          <CardHeader>
-            <CardTitle>{t("quickActions")}</CardTitle>
-            <CardDescription>{t("jumpInto")}</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {quickActions.map((action, index) => (
-              <div
-                key={index}
-                className="flex items-center space-x-4 p-3 rounded-lg border hover:bg-gray-50 transition-colors"
-              >
-                <div className={`p-2 rounded-lg ${action.color}`}>
-                  <action.icon className="h-5 w-5 text-white" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-medium">{action.title}</h3>
-                  <p className="text-sm text-gray-600">{action.description}</p>
-                </div>
-                <Button variant="ghost" size="sm" asChild>
-                  <a href={action.href}>
-                    <ArrowRight className="h-4 w-4" />
-                  </a>
-                </Button>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
-
-        {/* Recent Activity */}
-        <Card>
-          <CardHeader>
-            <CardTitle>{t("recentActivity")}</CardTitle>
-            <CardDescription>{t("latestActivities")}</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {recentActivities.map((activity, index) => (
-              <div key={index} className="flex items-start space-x-3">
-                <div className="flex-shrink-0">
-                  {activity.type === "exercise" && <Target className="h-5 w-5 text-green-500" />}
-                  {activity.type === "coaching" && <Brain className="h-5 w-5 text-blue-500" />}
-                  {activity.type === "analysis" && <Camera className="h-5 w-5 text-purple-500" />}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900">{activity.title}</p>
-                  <div className="flex items-center space-x-2 mt-1">
-                    <Clock className="h-3 w-3 text-gray-400" />
-                    <p className="text-xs text-gray-500">{activity.time}</p>
-                    {activity.score && (
-                      <Badge variant="secondary" className="text-xs">
-                        {t("score")}: {activity.score}
-                      </Badge>
-                    )}
-                    {activity.duration && (
-                      <Badge variant="outline" className="text-xs">
-                        {activity.duration}
-                      </Badge>
-                    )}
-                    {activity.result && (
-                      <Badge variant="default" className="text-xs">
-                        {activity.result}
-                      </Badge>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Current Goals */}
+      {/* Quick Actions */}
       <Card>
         <CardHeader>
-          <CardTitle>{t("currentGoals")}</CardTitle>
-          <CardDescription>{t("developmentObjectives")}</CardDescription>
+          <CardTitle>{t("dashboard.quickActions")}</CardTitle>
+          <CardDescription>{t("dashboard.jumpInto")}</CardDescription>
         </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {currentGoals.map((goal, index) => (
-              <div key={index} className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <h3 className="font-medium">{goal.title}</h3>
-                  <span className="text-sm text-gray-500">{goal.progress}%</span>
-                </div>
-                <Progress value={goal.progress} className="h-2" />
-                <p className="text-xs text-gray-600">{goal.target}</p>
-              </div>
-            ))}
-          </div>
+        <CardContent className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <Button variant="outline" className="h-auto flex-col space-y-2 p-4">
+            <MessageSquare className="h-6 w-6" />
+            <span className="text-sm text-center">{t("dashboard.getPersonalizedCoaching")}</span>
+          </Button>
+          <Button variant="outline" className="h-auto flex-col space-y-2 p-4">
+            <Camera className="h-6 w-6" />
+            <span className="text-sm text-center">{t("dashboard.uploadAndAnalyze")}</span>
+          </Button>
+          <Button variant="outline" className="h-auto flex-col space-y-2 p-4">
+            <BookOpen className="h-6 w-6" />
+            <span className="text-sm text-center">{t("dashboard.completePsychology")}</span>
+          </Button>
+          <Button variant="outline" className="h-auto flex-col space-y-2 p-4">
+            <PenTool className="h-6 w-6" />
+            <span className="text-sm text-center">{t("dashboard.reflectOnTrading")}</span>
+          </Button>
         </CardContent>
       </Card>
+
+      {/* Recent Activity & Current Goals */}
+      <div className="grid gap-4 md:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <CardTitle>{t("dashboard.recentActivity")}</CardTitle>
+            <CardDescription>{t("dashboard.latestActivities")}</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex items-center space-x-4">
+              <div className="w-2 h-2 bg-green-500 rounded-full" />
+              <div className="flex-1 space-y-1">
+                <p className="text-sm font-medium">{t("dashboard.completedEmotionalControl")}</p>
+                <p className="text-xs text-muted-foreground">{t("dashboard.hoursAgo")}</p>
+              </div>
+              <Badge variant="secondary">{t("dashboard.score")}: 85</Badge>
+            </div>
+            <div className="flex items-center space-x-4">
+              <div className="w-2 h-2 bg-blue-500 rounded-full" />
+              <div className="flex-1 space-y-1">
+                <p className="text-sm font-medium">{t("dashboard.aiCoachingSession")}</p>
+                <p className="text-xs text-muted-foreground">{t("dashboard.dayAgo")}</p>
+              </div>
+              <Badge variant="outline">{t("dashboard.positive")}</Badge>
+            </div>
+            <div className="flex items-center space-x-4">
+              <div className="w-2 h-2 bg-purple-500 rounded-full" />
+              <div className="flex-1 space-y-1">
+                <p className="text-sm font-medium">{t("dashboard.screenshotAnalysisEUR")}</p>
+                <p className="text-xs text-muted-foreground">{t("dashboard.daysAgo")}</p>
+              </div>
+              <Badge variant="outline">{t("dashboard.minutes")}</Badge>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>{t("dashboard.currentGoals")}</CardTitle>
+            <CardDescription>{t("dashboard.developmentObjectives")}</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <p className="text-sm font-medium">{t("dashboard.improveEmotionalControl")}</p>
+                <span className="text-sm text-muted-foreground">{t("dashboard.scoreTarget")}</span>
+              </div>
+              <Progress value={78} className="h-2" />
+            </div>
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <p className="text-sm font-medium">{t("dashboard.complete20Exercises")}</p>
+                <span className="text-sm text-muted-foreground">{t("dashboard.exercisesProgress")}</span>
+              </div>
+              <Progress value={60} className="h-2" />
+            </div>
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <p className="text-sm font-medium">{t("dashboard.weeklyCoachingSessions")}</p>
+                <span className="text-sm text-muted-foreground">{t("dashboard.sessionsProgress")}</span>
+              </div>
+              <Progress value={80} className="h-2" />
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   )
 }
