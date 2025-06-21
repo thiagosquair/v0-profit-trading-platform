@@ -1,23 +1,14 @@
-// Temporarily disabled to fix redirect loop
-// import createMiddleware from "next-intl/middleware"
+// middleware.ts
+import createMiddleware from 'next-intl/middleware';
 
-// export default createMiddleware({
-//   locales: ["en", "pt", "es", "fr"],
-//   defaultLocale: "en",
-//   localePrefix: "always",
-// })
-
-// export const config = {
-//   matcher: [
-//     "/((?!api|_next|_vercel|.*\\..*).*)",
-//   ],
-// }
-
-// Temporary: No middleware to avoid redirect loops
-export function middleware() {
-  // Do nothing for now
-}
+export default createMiddleware({
+  locales: ['en', 'pt-BR', 'es', 'fr'], // match your /messages/ folder
+  defaultLocale: 'en',
+  localePrefix: 'always', // ensures /en/ or /pt-BR/ is always in the URL
+});
 
 export const config = {
-  matcher: [],
-}
+  matcher: [
+    '/((?!api|_next|_vercel|.*\\..*).*)', // exclude API, assets, files
+  ],
+};
