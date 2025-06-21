@@ -6,23 +6,8 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { t } from "@/lib/simple-translations"
-import {
-  BookOpen,
-  Play,
-  CheckCircle,
-  Clock,
-  Star,
-  Users,
-  Award,
-  TrendingUp,
-  Brain,
-  Target,
-  Zap,
-  Lock,
-  PlayCircle,
-} from "lucide-react"
+import { BookOpen, Play, Star, Users, Clock } from "lucide-react"
 
 interface Course {
   id: string
@@ -52,12 +37,12 @@ interface Module {
 
 export function CourseLearning() {
   const [selectedCategory, setSelectedCategory] = useState("all")
-  const [activeTab, setActiveTab] = useState("browse")
+  const [activeTab, setActiveTab] = useState("available")
 
   const courses: Course[] = [
     {
       id: "psychology-fundamentals",
-      title: t("tradingPsychologyFundamentals"),
+      title: t("psychologyCoursesTitle"),
       description: t("masterBasicsOfTradingPsychology"),
       instructor: "Dr. Sarah Chen",
       duration: 8,
@@ -122,7 +107,7 @@ export function CourseLearning() {
     },
     {
       id: "risk-management-psychology",
-      title: t("advancedRiskManagementPsychology"),
+      title: t("riskManagement"),
       description: t("deepDiveIntoPsychologicalAspects"),
       instructor: "Marcus Rodriguez",
       duration: 12,
@@ -149,7 +134,7 @@ export function CourseLearning() {
     },
     {
       id: "overcoming-fomo",
-      title: t("overcomingFOMOInTrading"),
+      title: t("emotionalControl"),
       description: t("learnPracticalStrategies"),
       instructor: "Emma Thompson",
       duration: 6,
@@ -237,13 +222,13 @@ export function CourseLearning() {
   const getModuleIcon = (type: string) => {
     switch (type) {
       case "video":
-        return <PlayCircle className="h-4 w-4 text-royal-blue-500" />
+        return <Play className="h-4 w-4 text-royal-blue-500" />
       case "reading":
         return <BookOpen className="h-4 w-4 text-green-500" />
       case "exercise":
-        return <Target className="h-4 w-4 text-purple-500" />
+        return <BookOpen className="h-4 w-4 text-purple-500" />
       case "quiz":
-        return <Brain className="h-4 w-4 text-orange-500" />
+        return <BookOpen className="h-4 w-4 text-orange-500" />
       default:
         return <BookOpen className="h-4 w-4 text-gray-500" />
     }
@@ -251,25 +236,19 @@ export function CourseLearning() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">{t("psychologyCoursesTitle")}</h1>
-          <p className="text-gray-600 mt-1">{t("structuredLearningPaths")}</p>
-        </div>
-        <Badge variant="secondary" className="flex items-center gap-2">
-          <BookOpen className="h-4 w-4" />
-          {enrolledCourses.length} {t("enrolled")}
-        </Badge>
+      <div>
+        <h1 className="text-3xl font-bold">{t("psychologyCoursesTitle")}</h1>
+        <p className="text-muted-foreground mt-2">{t("psychologyCoursesSubtitle")}</p>
       </div>
 
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="browse">{t("browseCourses")}</TabsTrigger>
-          <TabsTrigger value="enrolled">{t("myCourses")}</TabsTrigger>
-          <TabsTrigger value="progress">{t("progress")}</TabsTrigger>
+      <Tabs defaultValue={activeTab} onValueChange={setActiveTab} className="space-y-4">
+        <TabsList>
+          <TabsTrigger value="available">{t("availableCourses")}</TabsTrigger>
+          <TabsTrigger value="enrolled">{t("enrolledCourses")}</TabsTrigger>
+          <TabsTrigger value="progress">{t("courseProgress")}</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="browse" className="space-y-6">
+        <TabsContent value="available" className="space-y-4">
           {/* Category Filter */}
           <div className="flex flex-wrap gap-2">
             {categories.map((category) => (
@@ -313,68 +292,48 @@ export function CourseLearning() {
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
                     <Badge className={getLevelColor(course.level)}>{t(course.level as any)}</Badge>
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center space-x-1">
                       <Star className="h-4 w-4 text-yellow-400 fill-current" />
                       <span className="text-sm font-medium">{course.rating}</span>
                     </div>
                   </div>
                   <CardTitle className="text-lg">{course.title}</CardTitle>
-                  <CardDescription>{course.description}</CardDescription>
+                  <CardDescription>{t("psychologyCoursesSubtitle")}</CardDescription>
                 </CardHeader>
 
                 <CardContent>
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between text-sm text-gray-600">
-                      <div className="flex items-center gap-1">
+                    <div className="flex items-center justify-between text-sm text-muted-foreground">
+                      <div className="flex items-center space-x-1">
                         <Clock className="h-4 w-4" />
                         <span>{course.duration}h</span>
                       </div>
-                      <div className="flex items-center gap-1">
+                      <div className="flex items-center space-x-1">
                         <Users className="h-4 w-4" />
                         <span>{course.students.toLocaleString()}</span>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2">
-                      <Avatar className="h-6 w-6">
-                        <AvatarImage src="/placeholder.svg?height=24&width=24" />
-                        <AvatarFallback>
-                          {course.instructor
-                            .split(" ")
-                            .map((n) => n[0])
-                            .join("")}
-                        </AvatarFallback>
-                      </Avatar>
-                      <span className="text-sm text-gray-600">{course.instructor}</span>
-                    </div>
-
-                    {course.isEnrolled && (
+                    {course.isEnrolled && course.progress > 0 && (
                       <div>
                         <div className="flex justify-between items-center mb-2">
-                          <span className="text-sm font-medium">{t("progress")}</span>
-                          <span className="text-sm text-gray-600">{course.progress}%</span>
+                          <span className="text-sm font-medium">{t("courseProgress")}</span>
+                          <span className="text-sm text-muted-foreground">{course.progress}%</span>
                         </div>
                         <Progress value={course.progress} className="h-2" />
                       </div>
                     )}
 
-                    <Button
-                      className={`w-full ${
-                        course.isEnrolled
-                          ? "bg-gradient-to-r from-navy-600 to-royal-blue-500 hover:from-navy-700 hover:to-royal-blue-600 text-white"
-                          : ""
-                      }`}
-                      variant={course.isEnrolled ? "default" : "outline"}
-                    >
+                    <Button className="w-full" variant={course.isEnrolled ? "default" : "outline"}>
                       {course.isEnrolled ? (
                         <>
                           <Play className="h-4 w-4 mr-2" />
-                          {t("continueLearning")}
+                          {course.progress > 0 ? t("continueCourse") : t("startCourse")}
                         </>
                       ) : (
                         <>
                           <BookOpen className="h-4 w-4 mr-2" />
-                          {t("enrollNow")}
+                          {t("startCourse")}
                         </>
                       )}
                     </Button>
@@ -385,196 +344,48 @@ export function CourseLearning() {
           </div>
         </TabsContent>
 
-        <TabsContent value="enrolled" className="space-y-6">
-          {enrolledCourses.length === 0 ? (
-            <Card>
-              <CardContent className="text-center py-12">
-                <BookOpen className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{t("noCoursesEnrolled")}</h3>
-                <p className="text-gray-600 mb-4">{t("startLearningJourney")}</p>
-                <Button onClick={() => setActiveTab("browse")}>{t("browseCourses")}</Button>
-              </CardContent>
-            </Card>
-          ) : (
-            <div className="space-y-6">
-              {enrolledCourses.map((course) => (
-                <Card key={course.id}>
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <CardTitle className="text-xl">{course.title}</CardTitle>
-                        <CardDescription className="mt-2">{course.description}</CardDescription>
-                        <div className="flex items-center gap-4 mt-3 text-sm text-gray-600">
-                          <div className="flex items-center gap-1">
-                            <Clock className="h-4 w-4" />
-                            <span>
-                              {course.duration}h {t("totalEnrolled")}
-                            </span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Target className="h-4 w-4" />
-                            <span>
-                              {course.modules.filter((m) => m.isCompleted).length}/{course.modules.length}{" "}
-                              {t("modulesCompleted")}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-3xl font-bold text-royal-blue-600">{course.progress}%</div>
-                        <div className="text-sm text-gray-600">{t("completionRate")}</div>
-                      </div>
+        <TabsContent value="enrolled">
+          <div className="space-y-4">
+            {enrolledCourses.map((course) => (
+              <Card key={course.id}>
+                <CardHeader>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <CardTitle>{course.title}</CardTitle>
+                      <CardDescription>
+                        {t("courseDuration")}: {course.duration} {t("hoursAgo")}
+                      </CardDescription>
                     </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      <Progress value={course.progress} className="h-2" />
-
-                      <div className="space-y-2">
-                        <h4 className="font-semibold">{t("courseModules")}</h4>
-                        {course.modules.map((module, index) => (
-                          <div
-                            key={module.id}
-                            className={`flex items-center justify-between p-3 rounded-lg border ${
-                              module.isCompleted
-                                ? "bg-green-50 border-green-200"
-                                : module.isLocked
-                                  ? "bg-gray-50 border-gray-200"
-                                  : "bg-blue-50 border-blue-200"
-                            }`}
-                          >
-                            <div className="flex items-center gap-3">
-                              <div className="flex items-center gap-2">
-                                {getModuleIcon(module.type)}
-                                {module.isCompleted ? (
-                                  <CheckCircle className="h-4 w-4 text-green-600" />
-                                ) : module.isLocked ? (
-                                  <Lock className="h-4 w-4 text-gray-400" />
-                                ) : (
-                                  <div className="h-4 w-4 rounded-full border-2 border-royal-blue-500" />
-                                )}
-                              </div>
-                              <div>
-                                <div className="font-medium">{module.title}</div>
-                                <div className="text-sm text-gray-600">
-                                  {module.duration} {t("minutes")}
-                                </div>
-                              </div>
-                            </div>
-                            <Button
-                              size="sm"
-                              variant={module.isCompleted ? "outline" : "default"}
-                              disabled={module.isLocked}
-                              className={
-                                !module.isCompleted && !module.isLocked
-                                  ? "bg-gradient-to-r from-navy-600 to-royal-blue-500 hover:from-navy-700 hover:to-royal-blue-600 text-white"
-                                  : ""
-                              }
-                            >
-                              {module.isCompleted ? t("review") : module.isLocked ? t("locked") : t("start")}
-                            </Button>
-                          </div>
-                        ))}
-                      </div>
+                    <div className="text-right">
+                      <div className="text-2xl font-bold text-blue-600">{course.progress}%</div>
+                      <div className="text-sm text-muted-foreground">{t("completed")}</div>
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          )}
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <Progress value={course.progress} className="mb-4" />
+                  <Button>
+                    <Play className="h-4 w-4 mr-2" />
+                    {t("continueCourse")}
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </TabsContent>
 
-        <TabsContent value="progress" className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <BookOpen className="h-5 w-5 text-royal-blue-500" />
-                  {t("coursesEnrolled")}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-bold text-royal-blue-600 mb-2">{enrolledCourses.length}</div>
-                <p className="text-sm text-gray-600">{t("activeLearningPaths")}</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <CheckCircle className="h-5 w-5 text-green-500" />
-                  {t("modulesCompletedTotal")}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-bold text-green-600 mb-2">
-                  {enrolledCourses.reduce((acc, course) => acc + course.modules.filter((m) => m.isCompleted).length, 0)}
-                </div>
-                <p className="text-sm text-gray-600">{t("learningMilestonesAchieved")}</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Clock className="h-5 w-5 text-purple-500" />
-                  {t("learningTime")}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-bold text-purple-600 mb-2">
-                  {enrolledCourses.reduce(
-                    (acc, course) =>
-                      acc + course.modules.filter((m) => m.isCompleted).reduce((sum, m) => sum + m.duration, 0),
-                    0,
-                  )}
-                  m
-                </div>
-                <p className="text-sm text-gray-600">{t("minutesOfFocusedLearning")}</p>
-              </CardContent>
-            </Card>
-          </div>
-
+        <TabsContent value="progress">
           <Card>
             <CardHeader>
-              <CardTitle>{t("learningAchievements")}</CardTitle>
-              <CardDescription>{t("courseCompletionMilestones")}</CardDescription>
+              <CardTitle>{t("overallProgress")}</CardTitle>
+              <CardDescription>
+                {t("courseProgress")} {t("analytics")}
+              </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
-                  <div className="flex items-center gap-3">
-                    <Award className="h-8 w-8 text-green-600" />
-                    <div>
-                      <h4 className="font-semibold text-green-800">{t("firstCourseStarted")}</h4>
-                      <p className="text-sm text-green-600">{t("beganPsychologyLearningJourney")}</p>
-                    </div>
-                  </div>
-                  <Badge className="bg-green-500 text-white">{t("earned")}</Badge>
-                </div>
-
-                <div className="flex items-center justify-between p-4 bg-blue-50 rounded-lg border border-blue-200">
-                  <div className="flex items-center gap-3">
-                    <TrendingUp className="h-8 w-8 text-blue-600" />
-                    <div>
-                      <h4 className="font-semibold text-blue-800">{t("consistentLearner")}</h4>
-                      <p className="text-sm text-blue-600">{t("completeModules3Days")}</p>
-                    </div>
-                  </div>
-                  <Badge variant="outline">2/3 {t("days")}</Badge>
-                </div>
-
-                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-200">
-                  <div className="flex items-center gap-3">
-                    <Zap className="h-8 w-8 text-gray-400" />
-                    <div>
-                      <h4 className="font-semibold text-gray-600">{t("courseCompletion")}</h4>
-                      <p className="text-sm text-gray-500">{t("completeFirstFullCourse")}</p>
-                    </div>
-                  </div>
-                  <Badge variant="outline">{t("locked")}</Badge>
-                </div>
-              </div>
+              <p className="text-muted-foreground">
+                {t("courseProgress")} {t("common.loading")}
+              </p>
             </CardContent>
           </Card>
         </TabsContent>
