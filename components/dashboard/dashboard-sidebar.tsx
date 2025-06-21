@@ -133,10 +133,10 @@ export function DashboardSidebar({ className }: DashboardSidebarProps) {
                     collapsed && "px-2",
                     isActive && "bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg",
                   )}
-                  title={collapsed ? t(item.key as any) : undefined}
+                  title={collapsed ? t(item.key) : undefined}
                 >
                   <item.icon className={cn("h-5 w-5", !collapsed && "mr-3")} />
-                  {!collapsed && <span className="font-medium">{t(item.key as any)}</span>}
+                  {!collapsed && <span className="font-medium">{t(item.key)}</span>}
                 </Button>
               </Link>
             )
@@ -153,10 +153,10 @@ export function DashboardSidebar({ className }: DashboardSidebarProps) {
           <Button
             variant="ghost"
             className={cn("w-full justify-start h-10", collapsed && "px-2")}
-            title={collapsed ? t("nav.settings" as any) : undefined}
+            title={collapsed ? t("nav.settings") : undefined}
           >
             <Settings className={cn("h-5 w-5", !collapsed && "mr-3")} />
-            {!collapsed && <span className="font-medium">{t("nav.settings" as any)}</span>}
+            {!collapsed && <span className="font-medium">{t("nav.settings")}</span>}
           </Button>
         </Link>
       </div>

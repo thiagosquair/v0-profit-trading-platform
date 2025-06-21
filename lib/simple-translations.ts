@@ -336,7 +336,7 @@ export const translations = {
     behavioralPatterns: "Modèles Comportementaux",
     psychologyCourses: "Cours de Psychologie",
     reflectionJournal: "Journal de Réflexion",
-    coachingInsights: "Insights de Coaching",
+    coachingInsights: "Coaching Insights",
     tradeBuilder: "Constructeur de Trade",
     marketInsights: "Insights de Marché",
     signOut: "Se Déconnecter",
@@ -360,12 +360,17 @@ export function getCurrentLanguage(): Language {
     const saved = localStorage.getItem("app-language") as Language
     if (saved && ["en", "pt", "es", "fr"].includes(saved)) {
       currentLanguage = saved
+      return saved
     }
   }
   return currentLanguage
 }
 
-export function t(key: keyof typeof translations.en): string {
+export function t(key: string): string {
   const lang = getCurrentLanguage()
-  return translations[lang][key] || translations.en[key] || key
+  const langTranslations = translations[lang] as Record<string, string>
+  const enTranslations = translations.en as Record<string, string>
+
+  // Try to get translation from current language, fallback to English, then return key
+  return langTranslations[key] || enTranslations[key] || key
 }
