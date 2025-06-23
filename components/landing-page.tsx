@@ -50,7 +50,7 @@ export function LandingPage() {
       learnMore: "Watch Demo",
       signIn: "Sign In",
       badge: "AI-Powered Trading Psychology",
-      heroTitle: "Master Your Trading Mindset",
+      heroTitle: "Master Your Mindset",
       featuresTitle: "Your Complete Toolkit for Trading Psychology Mastery",
       featuresSubtitle:
         "The Ultimate Platform for Mental Edge — Combining AI-Powered Insights, Personalized Coaching, and a Deeply Immersive Environment Where You Continuously Grow, Review Past Trades with Purpose, and Build Each New Trade with Clarity and Confidence.",
@@ -659,15 +659,17 @@ export function LandingPage() {
 
             {/* Right Column - Media Space */}
             <div className="flex justify-center lg:justify-end">
-              <div className="w-full max-w-lg aspect-video bg-gradient-to-br from-navy-100 to-royal-blue-100 rounded-2xl shadow-2xl flex items-center justify-center border border-navy-200">
-                {/* Placeholder for media content - can be replaced with actual image/video */}
-                <div className="text-center p-8">
-                  <div className="w-20 h-20 bg-gradient-to-r from-navy-600 to-royal-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-                    <Play className="h-10 w-10 text-white" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-navy-800 mb-2">Untitled design (14).mp4</h3>
-                  <p className="text-navy-600">Add your photo or video content</p>
-                </div>
+              <div className="w-full max-w-2xl aspect-video bg-gradient-to-br from-navy-100 to-royal-blue-100 rounded-2xl shadow-2xl flex items-center justify-center border border-navy-200 overflow-hidden">
+                <video 
+                  src="/images/Untitled design (14).mp4"
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                >
+                  Your browser does not support the video tag.
+                </video>
               </div>
             </div>
           </div>
