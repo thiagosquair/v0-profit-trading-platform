@@ -234,30 +234,62 @@ export function LandingPage() {
 
       {/* Hero Section */}
       <section className="py-20 px-4">
-        <div className="container mx-auto text-center max-w-4xl">
-          <Badge
-            variant="secondary"
-            className="mb-6 px-4 py-2 text-sm font-medium bg-blue-100 text-blue-800 border-blue-200"
-          >
-            {t("landing.badge")}
-          </Badge>
+        <div className="container mx-auto max-w-7xl">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div className="text-center lg:text-left">
+              <Badge
+                variant="secondary"
+                className="mb-6 px-4 py-2 text-sm font-medium bg-blue-100 text-blue-800 border-blue-200"
+              >
+                {t("landing.badge")}
+              </Badge>
 
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">{t("landing.heroTitle")}</h1>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                {t("landing.heroTitle")}
+              </h1>
 
-          <p className="text-xl text-gray-600 mb-8 leading-relaxed max-w-3xl mx-auto">{t("landing.description")}</p>
+              <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                {t("landing.description")}
+              </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button
-              size="lg"
-              className="px-8 py-3 text-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
-            >
-              {t("landing.getStarted")}
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            <Button variant="outline" size="lg" className="px-8 py-3 text-lg border-2">
-              <Play className="mr-2 h-5 w-5" />
-              {t("landing.learnMore")}
-            </Button>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
+                <Button
+                  size="lg"
+                  className="px-8 py-3 text-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                >
+                  {t("landing.getStarted")}
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+                <Button variant="outline" size="lg" className="px-8 py-3 text-lg border-2">
+                  <Play className="mr-2 h-5 w-5" />
+                  {t("landing.learnMore")}
+                </Button>
+              </div>
+            </div>
+
+            {/* Right Video */}
+            <div className="relative">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-100 to-purple-100 p-1">
+                <video
+                  className="w-full h-auto rounded-xl"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  poster="/placeholder.svg?height=400&width=600&text=Loading..."
+                >
+                  <source src="/hero-video.mp4" type="video/mp4" />
+                  <div className="w-full h-64 bg-gradient-to-br from-blue-200 to-purple-200 rounded-xl flex items-center justify-center">
+                    <Play className="h-16 w-16 text-blue-600" />
+                  </div>
+                </video>
+              </div>
+
+              {/* Decorative elements */}
+              <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full opacity-20 blur-xl"></div>
+              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full opacity-20 blur-xl"></div>
+            </div>
           </div>
         </div>
       </section>
