@@ -386,7 +386,7 @@ export function LandingPage() {
         },
         {
           title: "Modèles Comportementaux",
-          description: "Identifiez et comprenez vos comportements récurrents de trading et biais psychologiques.",
+          description: "Identifiez et comprenez vos comportements de trading récurrents et vos biais psychologiques.",
         },
         {
           title: "Exercices Interactifs",
@@ -408,19 +408,17 @@ export function LandingPage() {
             "Indicateurs de psychologie de marché en temps réel et analyse de sentiment pour vous aider à prendre des décisions éclairées.",
         },
         {
-          title: "Analyse de Capture",
+          title: "Analyse de Capture d'Écran",
           description:
             "Téléchargez des captures d'écran de trading pour une analyse alimentée par l'IA de votre prise de décision et état émotionnel.",
         },
         {
           title: "Suivi des Progrès",
-          description:
-            "Surveillez votre développement psychologique avec des métriques détaillées et des rapports de performance.",
+          description: "Surveillez votre développement psychologique avec des métriques détaillées et des rapports de performance.",
         },
         {
           title: "Gamification",
-          description:
-            "Gagnez des badges et récompenses en développant une meilleure psychologie et discipline de trading.",
+          description: "Gagnez des badges et des récompenses en développant une meilleure psychologie et discipline de trading.",
         },
         {
           title: "Cours de Psychologie",
@@ -429,20 +427,18 @@ export function LandingPage() {
         },
         {
           title: "Outils de Réflexion",
-          description:
-            "Journalisez vos trades et émotions avec des invites guidées pour une auto-analyse plus profonde.",
+          description: "Journalisez vos trades et émotions avec des invites guidées pour une auto-analyse plus profonde.",
         },
       ],
       steps: [
         {
           title: "Complétez l'Évaluation",
           description:
-            "Passez notre profil complet de personnalité de trader pour comprendre votre base psychologique.",
+            "Passez notre profil complet de personnalité de trader pour comprendre votre ligne de base psychologique.",
         },
         {
-          title: "Obtenez du Coaching IA",
-          description:
-            "Recevez des conseils personnalisés de notre coach de psychologie IA basé sur votre profil unique.",
+          title: "Obtenez un Coaching IA",
+          description: "Recevez des conseils personnalisés de notre coach de psychologie IA basé sur votre profil unique.",
         },
         {
           title: "Pratiquez et Apprenez",
@@ -451,104 +447,84 @@ export function LandingPage() {
         },
         {
           title: "Suivez les Progrès",
-          description:
-            "Surveillez votre développement psychologique avec des analyses détaillées et célébrez les étapes importantes.",
+          description: "Surveillez votre développement psychologique avec des analyses détaillées et célébrez les jalons.",
         },
       ],
     },
   }
 
-  // pick the current language pack (fallback to English)
-  const t = content[selectedLanguage as keyof typeof content] ?? content.en
+  const t = content[selectedLanguage as keyof typeof content]
+
+  const pricingPlans = [
+    {
+      name: "Free",
+      price: "$0",
+      period: "/month",
+      description: "Perfect for getting started",
+      popular: false,
+      features: [
+        "Basic AI Psychology Coach",
+        "5 Trade Analyses per month",
+        "Basic Progress Tracking",
+        "Community Access",
+        "Mobile App Access",
+      ],
+    },
+    {
+      name: "Pro",
+      price: "$29",
+      period: "/month",
+      description: "For serious traders",
+      popular: true,
+      features: [
+        "Advanced AI Psychology Coach",
+        "Unlimited Trade Analyses",
+        "Advanced Progress Tracking",
+        "Priority Support",
+        "All Psychology Courses",
+        "Screenshot Analysis",
+        "Trade Builder",
+        "Market Live Insights",
+      ],
+    },
+    {
+      name: "Elite",
+      price: "$99",
+      period: "/month",
+      description: "For professional traders",
+      popular: false,
+      features: [
+        "Everything in Pro",
+        "1-on-1 Expert Sessions",
+        "Custom Trading Plans",
+        "Advanced Analytics",
+        "API Access",
+        "White-label Options",
+        "Dedicated Account Manager",
+      ],
+    },
+  ]
 
   const testimonials = [
     {
       name: "Sarah Chen",
       role: "Day Trader",
-      content:
-        "ProFitz helped me identify my emotional triggers and develop better discipline. My consistency improved dramatically.",
+      content: "ProFitz helped me overcome my fear of taking profits. My consistency improved by 300% in just 3 months.",
       rating: 5,
     },
     {
       name: "Marcus Rodriguez",
       role: "Swing Trader",
-      content: "The AI coach feels like having a personal trading psychologist. The insights are incredibly accurate.",
+      content: "The AI coach is like having a trading psychologist available 24/7. It's transformed how I approach the markets.",
       rating: 5,
     },
     {
-      name: "Emma Thompson",
+      name: "Emily Johnson",
       role: "Options Trader",
-      content: "The screenshot analysis feature is game-changing. It shows me patterns I never noticed before.",
+      content: "Finally, a platform that addresses the mental game. My emotional control has never been better.",
       rating: 5,
     },
   ]
-
-  const featureIcons = [
-    Brain,
-    BarChart3,
-    Target,
-    TrendingUp,
-    Settings,
-    Activity,
-    Camera,
-    TrendingUp,
-    Award,
-    BookOpen,
-    MessageSquare,
-  ]
-
-  const pricingPlans = [
-    {
-      name: "Starter",
-      price: "$29",
-      period: "/month",
-      description: "Perfect for individual traders starting their psychology journey",
-      features: [
-        "AI Psychology Coach",
-        "Basic Progress Tracking",
-        "5 Interactive Exercises",
-        "Weekly Insights Report",
-        "Email Support",
-      ],
-      popular: false,
-    },
-    {
-      name: "Professional",
-      price: "$79",
-      period: "/month",
-      description: "Advanced features for serious traders",
-      features: [
-        "Everything in Starter",
-        "Advanced AI Analysis",
-        "Unlimited Exercises",
-        "Screenshot Analysis",
-        "Trade Builder",
-        "Priority Support",
-        "Custom Coaching Plans",
-      ],
-      popular: true,
-    },
-    {
-      name: "Elite",
-      price: "$149",
-      period: "/month",
-      description: "Complete psychology mastery suite",
-      features: [
-        "Everything in Professional",
-        "1-on-1 Coach Sessions",
-        "Advanced Market Insights",
-        "Custom Integrations",
-        "White-label Options",
-        "24/7 Phone Support",
-      ],
-      popular: false,
-    },
-  ]
-
-  const toggleAllFeatures = () => {
-    setAllExpanded(!allExpanded)
-    setExpandedFeatures(allExpanded ? {} : { 0: true, 1: true, 2: true })
-  }
 
   const toggleFeature = (index: number) => {
     setExpandedFeatures((prev) => ({
@@ -557,42 +533,61 @@ export function LandingPage() {
     }))
   }
 
+  const toggleAllFeatures = () => {
+    const newState = !allExpanded
+    setAllExpanded(newState)
+    const newExpandedFeatures: { [key: number]: boolean } = {}
+    for (let i = 0; i < 3; i++) {
+      newExpandedFeatures[i] = newState
+    }
+    setExpandedFeatures(newExpandedFeatures)
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-sky-50 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-sky-50">
       {/* Header */}
-      <header className="border-b bg-white/90 backdrop-blur-sm sticky top-0 z-50 border-navy-100">
+      <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Brain className="h-8 w-8 text-royal-blue-500" />
-            <span className="text-2xl font-bold bg-gradient-to-r from-navy-800 to-royal-blue-600 bg-clip-text text-transparent">
-              {t.title}
-            </span>
-            <Badge
-              variant="secondary"
-              className="bg-gradient-to-r from-navy-100 to-royal-blue-100 text-navy-700 border-navy-200"
-            >
-              {t.subtitle}
-            </Badge>
+            <div className="w-8 h-8 bg-gradient-to-r from-navy-600 to-royal-blue-500 rounded-lg flex items-center justify-center">
+              <Brain className="h-5 w-5 text-white" />
+            </div>
+            <div>
+              <h1 className="text-xl font-bold text-navy-900">{t.title}</h1>
+              <p className="text-xs text-navy-600">{t.subtitle}</p>
+            </div>
           </div>
 
-          <div className="flex items-center space-x-4">
-            {/* Language Selector */}
-            <div className="flex items-center space-x-2">
-              <Globe className="h-4 w-4 text-navy-600" />
-              <select
-                value={selectedLanguage}
-                onChange={(e) => setSelectedLanguage(e.target.value)}
-                className="bg-transparent border-none text-sm font-medium focus:outline-none text-navy-700"
-              >
-                {languages.map((lang) => (
-                  <option key={lang.code} value={lang.code}>
-                    {lang.flag} {lang.name}
-                  </option>
-                ))}
-              </select>
-            </div>
+          <nav className="hidden md:flex items-center space-x-8">
+            <Link href="#features" className="text-navy-700 hover:text-royal-blue-600 transition-colors">
+              {t.footerFeatures}
+            </Link>
+            <Link href="#pricing" className="text-navy-700 hover:text-royal-blue-600 transition-colors">
+              {t.footerPricing}
+            </Link>
+            <Link href="#demo" className="text-navy-700 hover:text-royal-blue-600 transition-colors">
+              {t.footerDemo}
+            </Link>
 
-            <Button variant="ghost" className="text-navy-600 hover:text-navy-800 hover:bg-navy-50" asChild>
+            <div className="relative">
+              <Button
+                variant="ghost"
+                className="flex items-center space-x-2 text-navy-700 hover:text-royal-blue-600"
+                onClick={() => {
+                  const currentIndex = languages.findIndex((lang) => lang.code === selectedLanguage)
+                  const nextIndex = (currentIndex + 1) % languages.length
+                  setSelectedLanguage(languages[nextIndex].code)
+                }}
+              >
+                <Globe className="h-4 w-4" />
+                <span>{languages.find((lang) => lang.code === selectedLanguage)?.flag}</span>
+                <span>{languages.find((lang) => lang.code === selectedLanguage)?.name}</span>
+              </Button>
+            </div>
+          </nav>
+
+          <div className="flex items-center space-x-4">
+            <Button variant="ghost" className="text-navy-700 hover:text-royal-blue-600" asChild>
               <Link href="/auth/signin">{t.signIn}</Link>
             </Button>
             <Button
@@ -605,56 +600,75 @@ export function LandingPage() {
         </div>
       </header>
 
-      {/* Enhanced Hero Section with Video Demo */}
+      {/* Enhanced Hero Section with Media Space */}
       <section className="py-20 px-4">
-        <div className="container mx-auto text-center">
-          <Badge
-            className="mb-4 bg-gradient-to-r from-navy-100 to-royal-blue-100 text-navy-700 border-navy-200 animate-pulse"
-            variant="outline"
-          >
-            {t.badge}
-          </Badge>
-          <h1 className="text-5xl md:text-6xl font-bold text-navy-900 mb-6 animate-fade-in">
-            {t.heroTitle.split(" ").slice(0, 2).join(" ")}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-navy-600 via-royal-blue-500 to-blue-500">
-              {" "}
-              {t.heroTitle.split(" ").slice(2).join(" ")}
-            </span>
-          </h1>
-          <p className="text-xl text-navy-600 mb-8 max-w-3xl mx-auto">{t.description}</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              className="text-lg px-8 bg-gradient-to-r from-navy-600 to-royal-blue-500 hover:from-navy-700 hover:to-royal-blue-600 text-white border-0 transform hover:scale-105 transition-all duration-200"
-              asChild
-            >
-              <Link href="/auth/signup">
-                {t.getStarted}
-                <ChevronRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
-
-            <Dialog>
-              <DialogTrigger asChild>
+        <div className="container mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Column - Text Content */}
+            <div className="text-center lg:text-left">
+              <Badge
+                className="mb-4 bg-gradient-to-r from-navy-100 to-royal-blue-100 text-navy-700 border-navy-200 animate-pulse"
+                variant="outline"
+              >
+                {t.badge}
+              </Badge>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-navy-900 mb-6 animate-fade-in">
+                {t.heroTitle.split(" ").slice(0, 2).join(" ")}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-navy-600 via-royal-blue-500 to-blue-500">
+                  {" "}
+                  {t.heroTitle.split(" ").slice(2).join(" ")}
+                </span>
+              </h1>
+              <p className="text-xl text-navy-600 mb-8 max-w-2xl lg:max-w-none">{t.description}</p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="text-lg px-8 border-navy-300 text-navy-700 hover:bg-navy-50 group"
+                  className="text-lg px-8 bg-gradient-to-r from-navy-600 to-royal-blue-500 hover:from-navy-700 hover:to-royal-blue-600 text-white border-0 transform hover:scale-105 transition-all duration-200"
+                  asChild
                 >
-                  <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                  {t.learnMore}
+                  <Link href="/auth/signup">
+                    {t.getStarted}
+                    <ChevronRight className="ml-2 h-5 w-5" />
+                  </Link>
                 </Button>
-              </DialogTrigger>
-              <DialogContent className="max-w-4xl">
-                <div className="aspect-video bg-gradient-to-br from-navy-100 to-royal-blue-100 rounded-lg flex items-center justify-center">
-                  <div className="text-center">
-                    <Play className="h-16 w-16 text-royal-blue-500 mx-auto mb-4" />
-                    <h3 className="text-xl font-semibold text-navy-800 mb-2">Demo Video Coming Soon</h3>
-                    <p className="text-navy-600">Watch how ProFitz transforms trading psychology</p>
+
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="text-lg px-8 border-navy-300 text-navy-700 hover:bg-navy-50 group"
+                    >
+                      <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+                      {t.learnMore}
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-4xl">
+                    <div className="aspect-video bg-gradient-to-br from-navy-100 to-royal-blue-100 rounded-lg flex items-center justify-center">
+                      <div className="text-center">
+                        <Play className="h-16 w-16 text-royal-blue-500 mx-auto mb-4" />
+                        <h3 className="text-xl font-semibold text-navy-800 mb-2">Demo Video Coming Soon</h3>
+                        <p className="text-navy-600">Watch how ProFitz transforms trading psychology</p>
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+              </div>
+            </div>
+
+            {/* Right Column - Media Space */}
+            <div className="flex justify-center lg:justify-end">
+              <div className="w-full max-w-lg aspect-video bg-gradient-to-br from-navy-100 to-royal-blue-100 rounded-2xl shadow-2xl flex items-center justify-center border border-navy-200">
+                {/* Placeholder for media content - can be replaced with actual image/video */}
+                <div className="text-center p-8">
+                  <div className="w-20 h-20 bg-gradient-to-r from-navy-600 to-royal-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <Play className="h-10 w-10 text-white" />
                   </div>
+                  <h3 className="text-xl font-semibold text-navy-800 mb-2">Your Media Here</h3>
+                  <p className="text-navy-600">Add your photo or video content</p>
                 </div>
-              </DialogContent>
-            </Dialog>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -930,21 +944,20 @@ export function LandingPage() {
             <div className="flex flex-col items-center">
               <Award className="h-12 w-12 text-royal-blue-500 mb-3" />
               <h4 className="font-semibold text-navy-800">Proven Results</h4>
-              <p className="text-sm text-navy-600">85% improvement rate</p>
+              <p className="text-sm text-navy-600">Backed by trading psychology research</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-navy-800 via-royal-blue-600 to-navy-800 text-white">
+      {/* Final CTA */}
+      <section className="py-20 px-4 bg-gradient-to-r from-navy-600 to-royal-blue-500 text-white">
         <div className="container mx-auto text-center">
           <h2 className="text-4xl font-bold mb-4">{t.ctaTitle}</h2>
           <p className="text-xl mb-8 opacity-90">{t.ctaSubtitle}</p>
           <Button
             size="lg"
-            variant="secondary"
-            className="text-lg px-8 bg-white text-navy-800 hover:bg-navy-50"
+            className="text-lg px-8 bg-white text-navy-600 hover:bg-gray-100 border-0 transform hover:scale-105 transition-all duration-200"
             asChild
           >
             <Link href="/auth/signup">
@@ -956,67 +969,73 @@ export function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-navy-900 text-white py-12 px-4">
+      <footer className="bg-navy-900 text-white py-16 px-4">
         <div className="container mx-auto">
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <Brain className="h-6 w-6 text-royal-blue-400" />
-                <span className="text-xl font-bold bg-gradient-to-r from-white to-royal-blue-200 bg-clip-text text-transparent">
-                  ProFitz
-                </span>
+                <div className="w-8 h-8 bg-gradient-to-r from-navy-600 to-royal-blue-500 rounded-lg flex items-center justify-center">
+                  <Brain className="h-5 w-5 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold">{t.title}</h3>
+                  <p className="text-xs text-gray-400">{t.subtitle}</p>
+                </div>
               </div>
-              <p className="text-navy-300">{t.footerTagline}</p>
+              <p className="text-gray-400">{t.footerTagline}</p>
             </div>
+
             <div>
-              <h3 className="font-semibold mb-4 text-royal-blue-200">{t.footerProduct}</h3>
-              <ul className="space-y-2 text-navy-300">
+              <h4 className="font-semibold mb-4">{t.footerProduct}</h4>
+              <ul className="space-y-2 text-gray-400">
                 <li>
-                  <Link href="#" className="hover:text-royal-blue-200 transition-colors">
+                  <Link href="#features" className="hover:text-white transition-colors">
                     {t.footerFeatures}
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-royal-blue-200 transition-colors">
+                  <Link href="#pricing" className="hover:text-white transition-colors">
                     {t.footerPricing}
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-royal-blue-200 transition-colors">
+                  <Link href="#demo" className="hover:text-white transition-colors">
                     {t.footerDemo}
                   </Link>
                 </li>
               </ul>
             </div>
+
             <div>
-              <h3 className="font-semibold mb-4 text-royal-blue-200">{t.footerSupport}</h3>
-              <ul className="space-y-2 text-navy-300">
+              <h4 className="font-semibold mb-4">{t.footerSupport}</h4>
+              <ul className="space-y-2 text-gray-400">
                 <li>
-                  <Link href="#" className="hover:text-royal-blue-200 transition-colors">
+                  <Link href="/help" className="hover:text-white transition-colors">
                     {t.footerHelp}
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-royal-blue-200 transition-colors">
+                  <Link href="/contact" className="hover:text-white transition-colors">
                     {t.footerContact}
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-royal-blue-200 transition-colors">
+                  <Link href="/community" className="hover:text-white transition-colors">
                     {t.footerCommunity}
                   </Link>
                 </li>
               </ul>
             </div>
+
             <div>
-              <h3 className="font-semibold mb-4 text-royal-blue-200">{t.footerLanguages}</h3>
-              <div className="grid grid-cols-2 gap-2">
+              <h4 className="font-semibold mb-4">{t.footerLanguages}</h4>
+              <div className="space-y-2">
                 {languages.map((lang) => (
                   <button
                     key={lang.code}
                     onClick={() => setSelectedLanguage(lang.code)}
-                    className={`text-left text-sm p-2 rounded hover:bg-navy-800 transition-colors ${
-                      selectedLanguage === lang.code ? "bg-navy-800 text-royal-blue-200" : "text-navy-300"
+                    className={`block text-left hover:text-white transition-colors ${
+                      selectedLanguage === lang.code ? "text-white" : "text-gray-400"
                     }`}
                   >
                     {lang.flag} {lang.name}
@@ -1025,7 +1044,8 @@ export function LandingPage() {
               </div>
             </div>
           </div>
-          <div className="border-t border-navy-800 mt-8 pt-8 text-center text-navy-400">
+
+          <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
             <p>{t.footerCopyright}</p>
           </div>
         </div>
@@ -1033,3 +1053,4 @@ export function LandingPage() {
     </div>
   )
 }
+
