@@ -9,7 +9,7 @@ const LandingPage: React.FC = () => {
           <div className="flex justify-between items-center">
             {/* Logo */}
             <div className="flex items-center">
-              <img src="/images/profitz-logo.png" alt="ProFitz Trading Psychology Lab" className="h-12 w-auto" />
+              <img src="/images/profitz-logo.png" alt="ProFitz Trading Psychology Lab" className="h-8 md:h-10 w-auto" />
             </div>
 
             {/* Navigation */}
@@ -114,7 +114,11 @@ const LandingPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <div className="flex items-center mb-4">
-                <img src="/images/profitz-logo.png" alt="ProFitz Trading Psychology Lab" className="h-16 w-auto" />
+                <img
+                  src="/images/profitz-logo.png"
+                  alt="ProFitz Trading Psychology Lab"
+                  className="h-10 md:h-12 w-auto"
+                />
               </div>
               <p className="text-gray-400">© 2023 ProFitz. All rights reserved.</p>
             </div>
@@ -138,4 +142,5 @@ const LandingPage: React.FC = () => {
   )
 }
 
+export { LandingPage }
 export default LandingPage
