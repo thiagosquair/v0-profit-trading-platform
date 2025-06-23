@@ -49,7 +49,8 @@ export function LandingPage() {
       badge: "AI-Powered Trading Psychology",
       heroTitle: "Master Your Trading Mindset",
       featuresTitle: "Your Complete Toolkit for Trading Psychology Mastery",
-      featuresSubtitle: "The Ultimate Platform for Mental Edge — Combining AI-Powered Insights, Personalized Coaching, and a Deeply Immersive Environment Where You Continuously Grow, Review Past Trades with Purpose, and Build Each New Trade with Clarity and Confidence.",
+      featuresSubtitle:
+        "The Ultimate Platform for Mental Edge — Combining AI-Powered Insights, Personalized Coaching, and a Deeply Immersive Environment Where You Continuously Grow, Review Past Trades with Purpose, and Build Each New Trade with Clarity and Confidence.",
       howItWorksTitle: "How ProFitz Works",
       howItWorksSubtitle: "Your Path to Trading Mastery in 4 Simple Steps",
       testimonialsTitle: "Join Thousands of Successful Traders",
@@ -667,32 +668,93 @@ export function LandingPage() {
         </div>
       </section>
 
-      {/* Features Grid */}
-      <section className="py-20 px-4 bg-white">
+      {/* Headline Features Section */}
+      <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-sky-50">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-navy-900 mb-4">{t.featuresTitle}</h2>
-            <p className="text-xl text-navy-600 max-w-2xl mx-auto">{t.featuresSubtitle}</p>
+            <h2 className="text-4xl font-bold text-navy-900 mb-4">Our Flagship Features</h2>
+            <p className="text-xl text-navy-600 max-w-2xl mx-auto">
+              The core tools that set ProFitz apart from every other trading platform
+            </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {t.features.map((feature, index) => {
-              const IconComponent = featureIcons[index]
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[
+              {
+                title: "AI Psychology Coach",
+                description:
+                  "Get personalized psychological guidance powered by advanced AI to improve your trading mindset.",
+                icon: Brain,
+              },
+              {
+                title: "Trade Builder",
+                description:
+                  "Plan and structure your trades with psychological checkpoints to ensure disciplined execution.",
+                icon: Settings,
+              },
+              {
+                title: "AI Trade Analysis",
+                description:
+                  "Advanced AI analyzes your trades to identify psychological patterns and suggest improvements for better performance.",
+                icon: TrendingUp,
+              },
+            ].map((feature, index) => {
+              const IconComponent = feature.icon
               return (
                 <Card
                   key={index}
-                  className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-gradient-to-br from-white to-blue-50 border-navy-100"
+                  className="border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 bg-gradient-to-br from-white to-blue-50 border-navy-100 p-6"
                 >
-                  <CardHeader>
-                    <IconComponent className="h-12 w-12 text-royal-blue-500 mb-4" />
-                    <CardTitle className="text-lg text-navy-800">{feature.title}</CardTitle>
+                  <CardHeader className="text-center pb-6">
+                    <div className="w-20 h-20 bg-gradient-to-r from-navy-600 to-royal-blue-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                      <IconComponent className="h-10 w-10 text-white" />
+                    </div>
+                    <CardTitle className="text-2xl text-navy-800 mb-4">{feature.title}</CardTitle>
                   </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-navy-600">{feature.description}</CardDescription>
+                  <CardContent className="text-center">
+                    <CardDescription className="text-navy-600 text-lg leading-relaxed">
+                      {feature.description}
+                    </CardDescription>
                   </CardContent>
                 </Card>
               )
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Features Grid */}
+      <section className="py-20 px-4 bg-white">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-navy-900 mb-4">Complete Trading Psychology Toolkit</h2>
+            <p className="text-xl text-navy-600 max-w-2xl mx-auto">
+              Additional powerful features to support your trading psychology journey
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {t.features
+              .filter((_, index) => ![0, 4, 3].includes(index))
+              .map((feature, index) => {
+                // Adjust icon mapping for remaining features
+                const iconMap = [BarChart3, Target, Activity, Camera, TrendingUp, Award, BookOpen, MessageSquare]
+                const IconComponent = iconMap[index]
+                return (
+                  <Card
+                    key={index}
+                    className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-gradient-to-br from-white to-blue-50 border-navy-100"
+                  >
+                    <CardHeader>
+                      <IconComponent className="h-12 w-12 text-royal-blue-500 mb-4" />
+                      <CardTitle className="text-lg text-navy-800">{feature.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription className="text-navy-600">{feature.description}</CardDescription>
+                    </CardContent>
+                  </Card>
+                )
+              })}
           </div>
         </div>
       </section>
