@@ -49,7 +49,7 @@ export function LandingPage() {
       badge: "AI-Powered Trading Psychology",
       heroTitle: "Master Your Trading Mindset",
       featuresTitle: "Your Complete Toolkit for Trading Psychology Mastery",
-      featuresSubtitle: "From AI-Driven Insights to Personalized Coaching, Everything You Need to Conquer the Mental Game of Trading",
+      featuresSubtitle: "The Ultimate Platform for Mental Edge — Combining AI-Powered Insights, Personalized Coaching, and a Deeply Immersive Environment Where You Continuously Grow, Review Past Trades with Purpose, and Build Each New Trade with Clarity and Confidence.",
       howItWorksTitle: "How ProFitz Works",
       howItWorksSubtitle: "Your Path to Trading Mastery in 4 Simple Steps",
       testimonialsTitle: "Join Thousands of Successful Traders",
