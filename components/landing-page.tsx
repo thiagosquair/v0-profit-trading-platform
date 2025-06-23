@@ -1,5 +1,6 @@
 "use client"
 
+import React from "react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -25,6 +26,7 @@ import {
   Shield,
   Users,
   ChevronDown,
+  X,
 } from "lucide-react"
 import Link from "next/link"
 
@@ -32,6 +34,7 @@ export function LandingPage() {
   const [selectedLanguage, setSelectedLanguage] = useState("en")
   const [expandedFeatures, setExpandedFeatures] = useState<{ [key: number]: boolean }>({})
   const [allExpanded, setAllExpanded] = useState(false)
+  const [selectedFeatureModal, setSelectedFeatureModal] = useState<number | null>(null)
 
   const languages = [
     { code: "en", name: "English", flag: "🇺🇸" },
@@ -533,6 +536,65 @@ export function LandingPage() {
     },
   ]
 
+  const detailedFeatures = [
+    {
+      title: "Behavioral Patterns",
+      icon: BarChart3,
+      description: "Identify and understand your recurring trading behaviors and psychological biases.",
+      detailedContent:
+        "Our advanced behavioral pattern analysis uses machine learning to identify recurring patterns in your trading behavior. We analyze your decision-making processes, emotional triggers, and psychological biases that may be affecting your trading performance. The system tracks patterns like revenge trading, FOMO (Fear of Missing Out), overconfidence after wins, and fear after losses. You'll receive personalized insights about your trading psychology, including detailed reports on your risk tolerance, emotional state during different market conditions, and recommendations for improving your mental discipline. This feature helps you understand the 'why' behind your trading decisions, enabling you to develop better self-awareness and make more rational, profitable trades.",
+    },
+    {
+      title: "Interactive Exercises",
+      icon: Target,
+      description: "Engage with CBT exercises, meditations, and simulations designed for traders.",
+      detailedContent:
+        "Our comprehensive library of interactive exercises is specifically designed for traders to build mental resilience and emotional control. These include Cognitive Behavioral Therapy (CBT) exercises that help you identify and change negative thought patterns, guided meditation sessions for stress reduction and focus enhancement, and realistic trading simulations that allow you to practice decision-making in a risk-free environment. The exercises cover various scenarios like handling losing streaks, managing winning streaks without overconfidence, dealing with market volatility, and maintaining discipline during high-stress situations. Each exercise is gamified with progress tracking, achievements, and personalized recommendations based on your performance and psychological profile.",
+    },
+    {
+      title: "Market Live Insights",
+      icon: Activity,
+      description: "Real-time market psychology indicators and sentiment analysis to help you make informed decisions.",
+      detailedContent:
+        "Get real-time insights into market psychology and sentiment with our advanced analytics dashboard. This feature provides live market sentiment analysis, fear and greed indicators, volatility stress levels, and crowd psychology metrics. We analyze social media sentiment, news sentiment, options flow, and institutional behavior to give you a comprehensive view of market psychology. The system alerts you to potential market turning points based on extreme sentiment readings, helps you identify when the market is driven by emotion rather than fundamentals, and provides contrarian signals when crowd psychology reaches extremes. This tool is invaluable for timing entries and exits, understanding market dynamics, and avoiding common psychological traps that affect most traders.",
+    },
+    {
+      title: "Screenshot Analysis",
+      icon: Camera,
+      description: "Upload trading screenshots for AI-powered analysis of your decision-making and emotional state.",
+      detailedContent:
+        "Our revolutionary screenshot analysis feature uses advanced AI to analyze your trading platform screenshots and provide deep insights into your decision-making process. Simply upload screenshots of your trades, charts, or trading platform, and our AI will analyze your setup, timing, risk management, and emotional state at the time of the trade. The system can identify signs of emotional trading, poor risk management, FOMO entries, revenge trading, and other psychological issues by analyzing your chart patterns, position sizes, and timing. You'll receive detailed feedback on what you did well, what could be improved, and specific recommendations for better decision-making. This feature is like having a professional trading coach review every single one of your trades and provide personalized feedback.",
+    },
+    {
+      title: "Progress Tracking",
+      icon: TrendingUp,
+      description: "Monitor your psychological development with detailed metrics and performance reports.",
+      detailedContent:
+        "Track your psychological development and trading improvement with our comprehensive progress tracking system. This feature monitors your emotional control, discipline levels, consistency metrics, and psychological growth over time. You'll see detailed charts showing your progress in areas like emotional regulation, risk management discipline, patience levels, and decision-making quality. The system tracks your streaks (both winning and losing), how you handle different market conditions, your improvement in various psychological areas, and your overall trading psychology score. Regular progress reports highlight your strengths, areas for improvement, and celebrate your achievements. This data-driven approach to psychological development ensures you can see tangible improvements in your trading mindset and make informed decisions about your continued growth.",
+    },
+    {
+      title: "Gamification",
+      icon: Award,
+      description: "Earn badges and rewards as you develop better trading psychology and discipline.",
+      detailedContent:
+        "Make your psychological development engaging and motivating with our comprehensive gamification system. Earn badges for achieving milestones like 'Discipline Master' for following your trading plan for 30 consecutive days, 'Emotional Control Expert' for maintaining composure during volatile markets, or 'Risk Management Pro' for consistently managing your risk properly. The system includes achievement levels, progress bars, leaderboards (anonymous), and reward systems that keep you motivated on your journey to better trading psychology. You can unlock new features, exercises, and content as you progress. The gamification system is designed to make the often challenging work of psychological development fun and engaging, while still maintaining the serious focus on improving your trading performance.",
+    },
+    {
+      title: "Psychology Courses",
+      icon: BookOpen,
+      description: "Access structured learning paths covering all aspects of trading psychology.",
+      detailedContent:
+        "Access our comprehensive library of trading psychology courses designed by professional trading psychologists and successful traders. Our structured learning paths cover everything from basic emotional control to advanced psychological strategies used by professional traders. Courses include 'Mastering Trading Emotions', 'Building Unshakeable Discipline', 'The Psychology of Risk Management', 'Overcoming Trading Trauma', and 'Developing a Winning Mindset'. Each course includes video lessons, interactive exercises, quizzes, and practical assignments. The content is regularly updated with the latest research in trading psychology and behavioral finance. You can learn at your own pace, track your progress through each course, and receive certificates of completion. These courses provide the theoretical foundation to complement the practical tools and exercises available throughout the platform.",
+    },
+    {
+      title: "Reflection Tools",
+      icon: MessageSquare,
+      description: "Journal your trades and emotions with guided prompts for deeper self-analysis.",
+      detailedContent:
+        "Develop deeper self-awareness with our comprehensive reflection and journaling tools. Our guided journaling system provides specific prompts to help you analyze your trades, emotions, and decision-making processes. After each trading session, you'll be prompted to reflect on your emotional state, what influenced your decisions, how well you followed your plan, and what you learned. The system includes mood tracking, emotion mapping, and pattern recognition to help you identify recurring themes in your trading psychology. You can also set up custom reflection prompts, track your psychological goals, and review your journal entries to see your growth over time. This feature is essential for developing the self-awareness needed to become a consistently profitable trader, as it helps you understand your psychological patterns and make conscious improvements to your trading approach.",
+    },
+  ]
+
   const toggleFeature = (index: number) => {
     setExpandedFeatures((prev) => ({
       ...prev,
@@ -791,28 +853,75 @@ export function LandingPage() {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {t.features
-              .filter((_, index) => ![0, 4, 3].includes(index))
-              .map((feature, index) => {
-                // Adjust icon mapping for remaining features
-                const iconMap = [BarChart3, Target, Activity, Camera, TrendingUp, Award, BookOpen, MessageSquare]
-                const IconComponent = iconMap[index]
-                return (
-                  <Card
-                    key={index}
-                    className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-gradient-to-br from-white to-blue-50 border-navy-100"
-                  >
-                    <CardHeader>
-                      <IconComponent className="h-12 w-12 text-royal-blue-500 mb-4" />
-                      <CardTitle className="text-lg text-navy-800">{feature.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <CardDescription className="text-navy-600">{feature.description}</CardDescription>
-                    </CardContent>
-                  </Card>
-                )
-              })}
+            {detailedFeatures.map((feature, index) => {
+              const IconComponent = feature.icon
+              return (
+                <Card
+                  key={index}
+                  className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 bg-gradient-to-br from-white to-blue-50 border-navy-100 cursor-pointer group"
+                  onClick={() => setSelectedFeatureModal(index)}
+                >
+                  <CardHeader>
+                    <IconComponent className="h-12 w-12 text-royal-blue-500 mb-4 group-hover:scale-110 transition-transform" />
+                    <CardTitle className="text-lg text-navy-800 group-hover:text-royal-blue-600 transition-colors">
+                      {feature.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="text-navy-600">{feature.description}</CardDescription>
+                    <div className="mt-4 text-sm text-royal-blue-600 font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                      Click to learn more →
+                    </div>
+                  </CardContent>
+                </Card>
+              )
+            })}
           </div>
+
+          {/* Feature Detail Modals */}
+          {selectedFeatureModal !== null && (
+            <Dialog open={selectedFeatureModal !== null} onOpenChange={() => setSelectedFeatureModal(null)}>
+              <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-white to-blue-50 border-0 shadow-2xl">
+                <div className="relative p-6">
+                  <button
+                    onClick={() => setSelectedFeatureModal(null)}
+                    className="absolute top-4 right-4 p-2 rounded-full bg-navy-100 hover:bg-navy-200 transition-colors z-10"
+                  >
+                    <X className="h-5 w-5 text-navy-600" />
+                  </button>
+
+                  <div className="text-center mb-8">
+                    <div className="w-24 h-24 bg-gradient-to-r from-navy-600 to-royal-blue-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                      {React.createElement(detailedFeatures[selectedFeatureModal].icon, {
+                        className: "h-12 w-12 text-white",
+                      })}
+                    </div>
+                    <h3 className="text-3xl font-bold text-navy-900 mb-4">
+                      {detailedFeatures[selectedFeatureModal].title}
+                    </h3>
+                  </div>
+
+                  <div className="prose prose-lg max-w-none">
+                    <p className="text-navy-700 leading-relaxed text-lg">
+                      {detailedFeatures[selectedFeatureModal].detailedContent}
+                    </p>
+                  </div>
+
+                  <div className="mt-8 text-center">
+                    <Button
+                      className="bg-gradient-to-r from-navy-600 to-royal-blue-500 hover:from-navy-700 hover:to-royal-blue-600 text-white px-8 py-3 text-lg"
+                      asChild
+                    >
+                      <Link href="/auth/signup">
+                        Get Started with {detailedFeatures[selectedFeatureModal].title}
+                        <ChevronRight className="ml-2 h-5 w-5" />
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
+          )}
         </div>
       </section>
 
