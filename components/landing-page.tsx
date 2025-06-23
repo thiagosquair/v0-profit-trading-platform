@@ -881,40 +881,40 @@ export function LandingPage() {
           {/* Feature Detail Modals */}
           {selectedFeatureModal !== null && (
             <Dialog open={selectedFeatureModal !== null} onOpenChange={() => setSelectedFeatureModal(null)}>
-              <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-white to-blue-50 border-0 shadow-2xl">
-                <div className="relative p-6">
+              <DialogContent className="max-w-4xl md:max-w-4xl max-w-[95vw] max-h-[90vh] md:max-h-[80vh] overflow-y-auto bg-gradient-to-br from-white to-blue-50 border-0 shadow-2xl mx-4 md:mx-0">
+                <div className="relative p-4 md:p-6">
                   <button
                     onClick={() => setSelectedFeatureModal(null)}
-                    className="absolute top-4 right-4 p-2 rounded-full bg-navy-100 hover:bg-navy-200 transition-colors z-10"
+                    className="absolute top-2 right-2 md:top-4 md:right-4 p-2 rounded-full bg-navy-100 hover:bg-navy-200 transition-colors z-10"
                   >
-                    <X className="h-5 w-5 text-navy-600" />
+                    <X className="h-4 w-4 md:h-5 md:w-5 text-navy-600" />
                   </button>
 
-                  <div className="text-center mb-8">
-                    <div className="w-24 h-24 bg-gradient-to-r from-navy-600 to-royal-blue-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                  <div className="text-center mb-6 md:mb-8">
+                    <div className="w-16 h-16 md:w-24 md:h-24 bg-gradient-to-r from-navy-600 to-royal-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 shadow-lg">
                       {React.createElement(detailedFeatures[selectedFeatureModal].icon, {
-                        className: "h-12 w-12 text-white",
+                        className: "h-8 w-8 md:h-12 md:w-12 text-white",
                       })}
                     </div>
-                    <h3 className="text-3xl font-bold text-navy-900 mb-4">
+                    <h3 className="text-2xl md:text-3xl font-bold text-navy-900 mb-3 md:mb-4">
                       {detailedFeatures[selectedFeatureModal].title}
                     </h3>
                   </div>
 
-                  <div className="prose prose-lg max-w-none">
-                    <p className="text-navy-700 leading-relaxed text-lg">
+                  <div className="prose prose-base md:prose-lg max-w-none">
+                    <p className="text-navy-700 leading-relaxed text-base md:text-lg">
                       {detailedFeatures[selectedFeatureModal].detailedContent}
                     </p>
                   </div>
 
-                  <div className="mt-8 text-center">
+                  <div className="mt-6 md:mt-8 text-center">
                     <Button
-                      className="bg-gradient-to-r from-navy-600 to-royal-blue-500 hover:from-navy-700 hover:to-royal-blue-600 text-white px-8 py-3 text-lg"
+                      className="bg-gradient-to-r from-navy-600 to-royal-blue-500 hover:from-navy-700 hover:to-royal-blue-600 text-white px-6 md:px-8 py-2 md:py-3 text-base md:text-lg w-full md:w-auto"
                       asChild
                     >
                       <Link href="/auth/signup">
                         Get Started with {detailedFeatures[selectedFeatureModal].title}
-                        <ChevronRight className="ml-2 h-5 w-5" />
+                        <ChevronRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
                       </Link>
                     </Button>
                   </div>
