@@ -951,7 +951,7 @@ export function LandingPage() {
       <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-sky-50">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-navy-900 mb-4">Find the Perfect Plan for Your Trading Journey</h2>
+            <h2 className="text-4xl font-bold text-navy-900 mb-4">Your Trading Journey Transformation Starts Here</h2>
             <p className="text-xl text-navy-600">Start free, upgrade when you're ready</p>
           </div>
 
