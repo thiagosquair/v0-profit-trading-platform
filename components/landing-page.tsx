@@ -49,7 +49,7 @@ export function LandingPage() {
       badge: "AI-Powered Trading Psychology",
       heroTitle: "Transform Your Trading Mindset",
       featuresTitle: "Everything You Need to Master Trading Psychology",
-      featuresSubtitle: "Our comprehensive platform combines cutting-edge AI with proven psychological techniques",
+      featuresSubtitle: "Our comprehensive platform combines cutting-edge AI with proven Psychological Techniques",
       howItWorksTitle: "How ProFitz Works",
       howItWorksSubtitle: "A simple 4-step process to transform your trading psychology",
       testimonialsTitle: "What Traders Say About ProFitz",
