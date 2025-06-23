@@ -331,7 +331,7 @@ export function LandingPage() {
         {
           title: "Completa la Evaluación",
           description:
-            "Realiza nuestro perfil integral de personalidad de trader para entender tu línea base psicológica.",
+            "Realiza nuestro perfil integral de personalidad de trader para entender tu línea de base psicológica.",
         },
         {
           title: "Obtén Coaching IA",
@@ -414,11 +414,13 @@ export function LandingPage() {
         },
         {
           title: "Suivi des Progrès",
-          description: "Surveillez votre développement psychologique avec des métriques détaillées et des rapports de performance.",
+          description:
+            "Surveillez votre développement psychologique avec des métriques détaillées et des rapports de performance.",
         },
         {
           title: "Gamification",
-          description: "Gagnez des badges et des récompenses en développant une meilleure psychologie et discipline de trading.",
+          description:
+            "Gagnez des badges et des récompenses en développant une meilleure psychologie et discipline de trading.",
         },
         {
           title: "Cursos de Psicología",
@@ -439,7 +441,8 @@ export function LandingPage() {
         },
         {
           title: "Obtenez un Coaching IA",
-          description: "Recevez des conseils personnalisés de notre coach de psychologie IA basé sur votre profil unique.",
+          description:
+            "Recevez des conseils personnalisés de notre coach de psychologie IA basé sur votre profil unique.",
         },
         {
           title: "Pratiquez et Apprenez",
@@ -448,7 +451,8 @@ export function LandingPage() {
         },
         {
           title: "Suivez les Progrès",
-          description: "Surveillez votre développement psychologique avec des analyses détaillées et célébrez les jalons.",
+          description:
+            "Surveillez votre développement psychologique avec des analyses détaillées et célébrez les jalons.",
         },
       ],
     },
@@ -510,13 +514,15 @@ export function LandingPage() {
     {
       name: "Sarah Chen",
       role: "Day Trader",
-      content: "ProFitz helped me overcome my fear of taking profits. My consistency improved by 300% in just 3 months.",
+      content:
+        "ProFitz helped me overcome my fear of taking profits. My consistency improved by 300% in just 3 months.",
       rating: 5,
     },
     {
       name: "Marcus Rodriguez",
       role: "Swing Trader",
-      content: "The AI coach is like having a trading psychologist available 24/7. It's transformed how I approach the markets.",
+      content:
+        "The AI coach is like having a trading psychologist available 24/7. It's transformed how I approach the markets.",
       rating: 5,
     },
     {
@@ -595,7 +601,10 @@ export function LandingPage() {
               className="bg-gradient-to-r from-navy-600 to-royal-blue-500 hover:from-navy-700 hover:to-royal-blue-600 text-white border-0"
               asChild
             >
-              <Link href="/auth/signup">{t.getStarted}</Link>
+              <Link href="/auth/signup">
+                {t.getStarted}
+                <ChevronRight className="ml-2 h-5 w-5" />
+              </Link>
             </Button>
           </div>
         </div>
@@ -660,7 +669,7 @@ export function LandingPage() {
             {/* Right Column - Media Space */}
             <div className="flex justify-center lg:justify-end">
               <div className="w-full max-w-2xl aspect-video bg-gradient-to-br from-navy-100 to-royal-blue-100 rounded-2xl shadow-2xl flex items-center justify-center border border-navy-200 overflow-hidden">
-                <video 
+                <video
                   src="/images/Untitled design (14).mp4"
                   className="w-full h-full object-cover"
                   autoPlay
@@ -1056,5 +1065,3 @@ export function LandingPage() {
     </div>
   )
 }
-
-
