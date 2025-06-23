@@ -53,7 +53,7 @@ export function LandingPage() {
       learnMore: "Watch Demo",
       signIn: "Sign In",
       badge: "AI-Powered Trading Psychology",
-      heroTitle: "Master Your Mindset",
+      heroTitle: "Master Your Mindset. Master Your Trading.",
       featuresTitle: "Developed for Trading Psychology Mastery and High Performance",
       featuresSubtitle:
         "The Ultimate Platform for Mental Edge — Combining AI-Powered Insights, Personalized Coaching, and a Deeply Immersive Environment Where You Continuously Grow, Review Past Trades with Purpose, and Build Each New Trade with Clarity and Confidence.",
