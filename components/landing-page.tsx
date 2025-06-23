@@ -276,16 +276,12 @@ export function LandingPage() {
             <div className="relative">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-100 to-purple-100 p-1">
                 <video className="w-full h-auto rounded-xl" autoPlay loop muted playsInline>
-                  <source
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Untitled%20design%20%2814%29-fKB9xWOb2fmiEQlywtPHPHQnINaSR0.mp4"
-                    type="video/mp4"
-                  />
+                  <source src="/hero-video.mp4" type="video/mp4" />
                   <div className="w-full h-64 bg-gradient-to-br from-blue-200 to-purple-200 rounded-xl flex items-center justify-center">
                     <Play className="h-16 w-16 text-blue-600" />
                   </div>
                 </video>
               </div>
-
               {/* Decorative elements */}
               <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full opacity-20 blur-xl"></div>
               <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full opacity-20 blur-xl"></div>
