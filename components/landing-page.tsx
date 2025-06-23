@@ -672,7 +672,7 @@ export function LandingPage() {
       <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-sky-50">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-navy-900 mb-4">Our Flagship Features</h2>
+            <h2 className="text-4xl font-bold text-navy-900 mb-4">Our Ultimate Trading Features</h2>
             <p className="text-xl text-navy-600 max-w-2xl mx-auto">
               The core tools that set ProFitz apart from every other trading platform
             </p>
@@ -683,19 +683,19 @@ export function LandingPage() {
               {
                 title: "AI Psychology Coach",
                 description:
-                  "Get personalized psychological guidance powered by advanced AI to improve your trading mindset.",
+                  "Your Personal AI Mindset Coach: Receive real-time, personalized guidance from our advanced AI. It's like having a world-class trading psychologist by your side, 24/7, helping you conquer fear, greed, and other emotional hurdles.",
                 icon: Brain,
               },
               {
                 title: "Trade Builder",
                 description:
-                  "Plan and structure your trades with psychological checkpoints to ensure disciplined execution.",
+                  "Build Discipline into Every Trade: Structure your trades with our guided Trade Builder, incorporating psychological checkpoints to ensure you stick to your plan and avoid impulsive decisions.",
                 icon: Settings,
               },
               {
                 title: "AI Trade Analysis",
                 description:
-                  "Advanced AI analyzes your trades to identify psychological patterns and suggest improvements for better performance.",
+                  "Transform Every Trade into a Learning Opportunity: Our AI analyzes your trades through a psychological lens, providing actionable insights to improve your decision-making and boost your profitability.",
                 icon: TrendingUp,
               },
             ].map((feature, index) => {
