@@ -24,11 +24,14 @@ import {
   Zap,
   Shield,
   Users,
+  ChevronDown,
 } from "lucide-react"
 import Link from "next/link"
 
 export function LandingPage() {
   const [selectedLanguage, setSelectedLanguage] = useState("en")
+  const [expandedFeatures, setExpandedFeatures] = useState<{ [key: number]: boolean }>({})
+  const [allExpanded, setAllExpanded] = useState(false)
 
   const languages = [
     { code: "en", name: "English", flag: "🇺🇸" },
@@ -245,7 +248,7 @@ export function LandingPage() {
       title: "ProFitz",
       subtitle: "Laboratorio de Psicología",
       description:
-        "Domina tu psicología de trading con coaching impulsado por IA, análisis conductual y ejercicios interactivos diseñados para construir resistencia mental y mejor toma de decisiones.",
+        "Domina tu psicología de trading com coaching impulsado por IA, análisis conductual y ejercicios interactivos diseñados para construir resistencia mental y mejor toma de decisiones.",
       getStarted: "Comenzar Viaje",
       learnMore: "Ver Demo",
       signIn: "Iniciar Sesión",
@@ -542,6 +545,18 @@ export function LandingPage() {
     },
   ]
 
+  const toggleAllFeatures = () => {
+    setAllExpanded(!allExpanded)
+    setExpandedFeatures(allExpanded ? {} : { 0: true, 1: true, 2: true })
+  }
+
+  const toggleFeature = (index: number) => {
+    setExpandedFeatures((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }))
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-sky-50 to-white">
       {/* Header */}
@@ -673,9 +688,17 @@ export function LandingPage() {
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-navy-900 mb-4">Our Ultimate Trading Features</h2>
-            <p className="text-xl text-navy-600 max-w-2xl mx-auto">
+            <p className="text-xl text-navy-600 max-w-2xl mx-auto mb-6">
               The core tools that set ProFitz apart from every other trading platform
             </p>
+            <Button
+              variant="outline"
+              onClick={toggleAllFeatures}
+              className="border-navy-300 text-navy-700 hover:bg-navy-50"
+            >
+              {allExpanded ? "Collapse All" : "Expand All"}
+              <ChevronDown className={`ml-2 h-4 w-4 transition-transform ${allExpanded ? "rotate-180" : ""}`} />
+            </Button>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -700,6 +723,7 @@ export function LandingPage() {
               },
             ].map((feature, index) => {
               const IconComponent = feature.icon
+              const isExpanded = expandedFeatures[index] || false
               return (
                 <Card
                   key={index}
@@ -710,12 +734,21 @@ export function LandingPage() {
                       <IconComponent className="h-10 w-10 text-white" />
                     </div>
                     <CardTitle className="text-2xl text-navy-800 mb-4">{feature.title}</CardTitle>
+                    <Button
+                      variant="ghost"
+                      onClick={() => toggleFeature(index)}
+                      className="text-navy-600 hover:text-navy-800 hover:bg-navy-50 p-2"
+                    >
+                      <ChevronDown className={`h-5 w-5 transition-transform ${isExpanded ? "rotate-180" : ""}`} />
+                    </Button>
                   </CardHeader>
-                  <CardContent className="text-center">
-                    <CardDescription className="text-navy-600 text-lg leading-relaxed">
-                      {feature.description}
-                    </CardDescription>
-                  </CardContent>
+                  {isExpanded && (
+                    <CardContent className="text-center">
+                      <CardDescription className="text-navy-600 text-lg leading-relaxed">
+                        {feature.description}
+                      </CardDescription>
+                    </CardContent>
+                  )}
                 </Card>
               )
             })}
@@ -727,10 +760,8 @@ export function LandingPage() {
       <section className="py-20 px-4 bg-white">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-navy-900 mb-4">Complete Trading Psychology Toolkit</h2>
-            <p className="text-xl text-navy-600 max-w-2xl mx-auto">
-              Additional powerful features to support your trading psychology journey
-            </p>
+            <h2 className="text-4xl font-bold text-navy-900 mb-4">{t.featuresTitle}</h2>
+            <p className="text-xl text-navy-600 max-w-2xl mx-auto">{t.featuresSubtitle}</p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
