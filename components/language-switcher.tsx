@@ -1,10 +1,11 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Globe } from "lucide-react"
-import { useLanguage } from "@/hooks/use-language"
-import type { Language } from "@/lib/simple-translations"
+import { getCurrentLanguage, setGlobalLanguage, type Language } from "@/lib/simple-translations"
+import { cn } from "@/lib/utils"
 
 const languages = [
   { code: "en" as Language, name: "English", flag: "🇺🇸" },
@@ -13,31 +14,69 @@ const languages = [
   { code: "fr" as Language, name: "Français", flag: "🇫🇷" },
 ]
 
-export function LanguageSwitcher() {
-  const { language, setLanguage } = useLanguage()
+interface LanguageSwitcherProps {
+  variant?: "header" | "sidebar"
+  className?: string
+}
 
-  const currentLang = languages.find((lang) => lang.code === language) || languages[0]
+export function LanguageSwitcher({ variant = "header", className }: LanguageSwitcherProps) {
+  const [currentLanguage, setCurrentLanguage] = useState<Language>("en")
+
+  useEffect(() => {
+    setCurrentLanguage(getCurrentLanguage())
+  }, [])
+
+  const handleLanguageChange = (language: Language) => {
+    setCurrentLanguage(language)
+    setGlobalLanguage(language)
+  }
+
+  const currentLang = languages.find((lang) => lang.code === currentLanguage)
+
+  if (variant === "sidebar") {
+    return (
+      <div className={cn("border-t p-3", className)}>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="w-full justify-start h-10">
+              <Globe className="h-5 w-5 mr-3" />
+              <span className="font-medium">{currentLang?.name}</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-48">
+            {languages.map((language) => (
+              <DropdownMenuItem
+                key={language.code}
+                onClick={() => handleLanguageChange(language.code)}
+                className={cn("flex items-center space-x-2", currentLanguage === language.code && "bg-accent")}
+              >
+                <span className="text-lg">{language.flag}</span>
+                <span>{language.name}</span>
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+    )
+  }
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="gap-2">
+        <Button variant="ghost" size="sm" className={cn("flex items-center space-x-1", className)}>
           <Globe className="h-4 w-4" />
-          <span className="hidden sm:inline">
-            {currentLang.flag} {currentLang.name}
-          </span>
-          <span className="sm:hidden">{currentLang.flag}</span>
+          <span className="text-sm">{currentLang?.flag}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        {languages.map((lang) => (
+      <DropdownMenuContent align="end" className="w-48">
+        {languages.map((language) => (
           <DropdownMenuItem
-            key={lang.code}
-            onClick={() => setLanguage(lang.code)}
-            className={language === lang.code ? "bg-accent" : ""}
+            key={language.code}
+            onClick={() => handleLanguageChange(language.code)}
+            className={cn("flex items-center space-x-2", currentLanguage === language.code && "bg-accent")}
           >
-            <span className="mr-2">{lang.flag}</span>
-            {lang.name}
+            <span className="text-lg">{language.flag}</span>
+            <span>{language.name}</span>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

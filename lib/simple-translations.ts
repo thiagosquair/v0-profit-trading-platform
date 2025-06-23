@@ -33,121 +33,6 @@ export const translations = {
     "common.continue": "Continue",
     "common.submit": "Submit",
     "common.close": "Close",
-    "common.expandAll": "Expand All",
-    "common.collapseAll": "Collapse All",
-
-    // Landing Page
-    "landing.title": "ProFitz",
-    "landing.subtitle": "Trading Psychology Lab",
-    "landing.description":
-      "Master your trading psychology with AI-powered coaching, behavioral analysis, and interactive exercises designed to build mental resilience and better decision-making.",
-    "landing.getStarted": "Start Your Journey",
-    "landing.learnMore": "Watch Demo",
-    "landing.signIn": "Sign In",
-    "landing.badge": "AI-Powered Trading Psychology",
-    "landing.heroTitle": "Master Your Trading Mindset",
-    "landing.featuresTitle": "Your Complete Toolkit for Trading Psychology Mastery",
-    "landing.featuresSubtitle":
-      "The Ultimate Platform for Mental Edge — Combining AI-Powered Insights, Personalized Coaching, and a Deeply Immersive Environment Where You Continuously Grow, Review Past Trades with Purpose, and Build Each New Trade with Clarity and Confidence.",
-    "landing.howItWorksTitle": "How ProFitz Works",
-    "landing.howItWorksSubtitle": "Your Path to Trading Mastery in 4 Simple Steps",
-    "landing.testimonialsTitle": "Join Thousands of Successful Traders",
-    "landing.testimonialsSubtitle": "Join thousands of traders who have transformed their mindset",
-    "landing.ctaTitle": "Ready to Unlock Your Full Trading Potential?",
-    "landing.ctaSubtitle":
-      "Join ProFitz Today and Start Your Journey to Consistent, Disciplined and Profitable Trading.",
-    "landing.ctaButton": "Start Free Plan",
-    "landing.footerTagline": "Transforming traders through AI-powered psychology coaching.",
-    "landing.footerProduct": "Product",
-    "landing.footerSupport": "Support",
-    "landing.footerLanguages": "Languages",
-    "landing.footerFeatures": "Features",
-    "landing.footerPricing": "Pricing",
-    "landing.footerDemo": "Demo",
-    "landing.footerHelp": "Help Center",
-    "landing.footerContact": "Contact",
-    "landing.footerCommunity": "Community",
-    "landing.footerCopyright": "© 2025 ProFitz. All rights reserved.",
-
-    // Headline Features
-    "landing.headlineFeaturesTitle": "Our Ultimate Trading Features",
-    "landing.headlineFeaturesSubtitle": "The core tools that set ProFitz apart from every other trading platform",
-    "landing.feature.aiCoach.title": "AI Psychology Coach",
-    "landing.feature.aiCoach.description":
-      "Your Personal AI Mindset Coach: Receive real-time, personalized guidance from our advanced AI. It's like having a world-class trading psychologist by your side, 24/7, helping you conquer fear, greed, and other emotional hurdles.",
-    "landing.feature.tradeBuilder.title": "Trade Builder",
-    "landing.feature.tradeBuilder.description":
-      "Build Discipline into Every Trade: Structure your trades with our guided Trade Builder, incorporating psychological checkpoints to ensure you stick to your plan and avoid impulsive decisions.",
-    "landing.feature.aiAnalysis.title": "AI Trade Analysis",
-    "landing.feature.aiAnalysis.description":
-      "Transform Every Trade into a Learning Opportunity: Our AI analyzes your trades through a psychological lens, providing actionable insights to improve your decision-making and boost your profitability.",
-
-    // Regular Features
-    "landing.feature.behavioralPatterns.title": "Behavioral Patterns",
-    "landing.feature.behavioralPatterns.description":
-      "Identify and understand your recurring trading behaviors and psychological biases.",
-    "landing.feature.interactiveExercises.title": "Interactive Exercises",
-    "landing.feature.interactiveExercises.description":
-      "Engage with CBT exercises, meditations, and simulations designed for traders.",
-    "landing.feature.marketInsights.title": "Market Live Insights",
-    "landing.feature.marketInsights.description":
-      "Real-time market psychology indicators and sentiment analysis to help you make informed decisions.",
-    "landing.feature.screenshotAnalysis.title": "Screenshot Analysis",
-    "landing.feature.screenshotAnalysis.description":
-      "Upload trading screenshots for AI-powered analysis of your decision-making and emotional state.",
-    "landing.feature.progressTracking.title": "Progress Tracking",
-    "landing.feature.progressTracking.description":
-      "Monitor your psychological development with detailed metrics and performance reports.",
-    "landing.feature.gamification.title": "Gamification",
-    "landing.feature.gamification.description":
-      "Earn badges and rewards as you develop better trading psychology and discipline.",
-    "landing.feature.psychologyCourses.title": "Psychology Courses",
-    "landing.feature.psychologyCourses.description":
-      "Access structured learning paths covering all aspects of trading psychology.",
-    "landing.feature.reflectionTools.title": "Reflection Tools",
-    "landing.feature.reflectionTools.description":
-      "Journal your trades and emotions with guided prompts for deeper self-analysis.",
-
-    // Steps
-    "landing.step.assessment.title": "Complete Assessment",
-    "landing.step.assessment.description":
-      "Take our comprehensive trader personality profile to understand your psychological baseline.",
-    "landing.step.coaching.title": "Get AI Coaching",
-    "landing.step.coaching.description":
-      "Receive personalized guidance from our AI psychology coach based on your unique profile.",
-    "landing.step.practice.title": "Practice & Learn",
-    "landing.step.practice.description":
-      "Engage with interactive exercises, courses, and reflection tools to build new habits.",
-    "landing.step.track.title": "Track Progress",
-    "landing.step.track.description":
-      "Monitor your psychological development with detailed analytics and celebrate milestones.",
-
-    // Stats
-    "landing.stats.activeTraders": "Active Traders",
-    "landing.stats.improvedConsistency": "Improved Consistency",
-    "landing.stats.userRating": "User Rating",
-    "landing.stats.aiSupport": "AI Support",
-
-    // Pricing
-    "landing.pricing.title": "Find the Perfect Plan for Your Trading Journey",
-    "landing.pricing.subtitle": "Start free, upgrade when you're ready",
-    "landing.pricing.getStarted": "Get Started",
-    "landing.pricing.mostPopular": "Most Popular",
-
-    // Trust Indicators
-    "landing.trust.title": "The Professional's Choice for a Reason",
-    "landing.trust.security.title": "Bank-Level Security",
-    "landing.trust.security.description": "Your data is encrypted and secure",
-    "landing.trust.realtime.title": "Real-Time Analysis",
-    "landing.trust.realtime.description": "Instant psychological insights",
-    "landing.trust.community.title": "Expert Community",
-    "landing.trust.community.description": "Learn from top traders",
-    "landing.trust.results.title": "Proven Results",
-    "landing.trust.results.description": "85% improvement rate",
-
-    // Demo
-    "landing.demo.title": "Demo Video Coming Soon",
-    "landing.demo.description": "Watch how ProFitz transforms trading psychology",
 
     // Dashboard Overview
     welcome: "Welcome back",
@@ -274,6 +159,116 @@ export const translations = {
     avgScore: "Average Score",
     totalMinutes: "Total Minutes",
 
+    // Behavioral Patterns
+    behavioralPatternsTitle: "Behavioral Patterns",
+    behavioralPatternsSubtitle: "Identify and track your trading behavior patterns",
+    patternAnalysis: "Pattern Analysis",
+    identifiedPatterns: "Identified Patterns",
+    patternFrequency: "Pattern Frequency",
+    patternImpact: "Pattern Impact",
+    improvementSuggestions: "Improvement Suggestions",
+    fomoPattern: "FOMO Trading Pattern",
+    revengeTrading: "Revenge Trading",
+    overconfidence: "Overconfidence Bias",
+    analysisParalysis: "Analysis Paralysis",
+    emotionalTrading: "Emotional Trading",
+    patternSeverity: "Pattern Severity",
+    high: "High",
+    medium: "Medium",
+    low: "Low",
+    improving: "Improving",
+    stable: "Stable",
+    worsening: "Worsening",
+
+    // Psychology Courses
+    psychologyCoursesTitle: "Psychology Courses",
+    psychologyCoursesSubtitle: "Structured learning paths for trading psychology mastery",
+    availableCourses: "Available Courses",
+    enrolledCourses: "Enrolled Courses",
+    courseProgress: "Course Progress",
+    startCourse: "Start Course",
+    continueCourse: "Continue Course",
+    courseCompleted: "Course Completed",
+    courseDuration: "Course Duration",
+    courseLevel: "Course Level",
+    courseRating: "Course Rating",
+    courseStudents: "Students",
+    courseModules: "Course Modules",
+    nextLesson: "Next Lesson",
+    previousLesson: "Previous Lesson",
+
+    // Reflection Journal
+    reflectionJournalTitle: "Reflection Journal",
+    reflectionJournalSubtitle: "Document your trading psychology journey",
+    newEntry: "New Entry",
+    journalEntries: "Journal Entries",
+    entryTitle: "Entry Title",
+    entryContent: "Entry Content",
+    entryDate: "Entry Date",
+    entryMood: "Mood Rating",
+    entryTags: "Tags",
+    saveEntry: "Save Entry",
+    editEntry: "Edit Entry",
+    deleteEntry: "Delete Entry",
+    searchEntries: "Search Entries",
+    filterByMood: "Filter by Mood",
+    filterByDate: "Filter by Date",
+    moodAnalysis: "Mood Analysis",
+    journalInsights: "Journal Insights",
+
+    // Coaching Insights
+    coachingInsightsTitle: "Coaching Insights",
+    coachingInsightsSubtitle: "AI-powered analysis of your coaching sessions",
+    insightsSummary: "Insights Summary",
+    keyInsights: "Key Insights",
+    improvementAreas: "Improvement Areas",
+    strengthsIdentified: "Strengths Identified",
+    actionItems: "Action Items",
+    followUpRecommendations: "Follow-up Recommendations",
+    insightsHistory: "Insights History",
+    trendAnalysis: "Trend Analysis",
+    performanceMetrics: "Performance Metrics",
+
+    // Trade Builder
+    tradeBuilderTitle: "Trade Builder",
+    tradeBuilderSubtitle: "Plan your trades with psychology-focused analysis",
+    newTrade: "New Trade",
+    tradePlan: "Trade Plan",
+    tradeSetup: "Trade Setup",
+    entryPrice: "Entry Price",
+    stopLoss: "Stop Loss",
+    takeProfit: "Take Profit",
+    positionSize: "Position Size",
+    riskReward: "Risk/Reward",
+    tradingPair: "Trading Pair",
+    timeframe: "Timeframe",
+    tradeReason: "Trade Reason",
+    emotionalState: "Emotional State",
+    confidenceLevel: "Confidence Level",
+    saveTrade: "Save Trade",
+    executeTrade: "Execute Trade",
+    tradeHistory: "Trade History",
+
+    // Market Insights
+    marketInsightsTitle: "Market Insights",
+    marketInsightsSubtitle: "Real-time market psychology and sentiment analysis",
+    marketSentiment: "Market Sentiment",
+    fearGreedIndex: "Fear & Greed Index",
+    volatilityIndex: "Volatility Index",
+    marketTrends: "Market Trends",
+    sentimentAnalysis: "Sentiment Analysis",
+    psychologyIndicators: "Psychology Indicators",
+    marketNews: "Market News",
+    newsImpact: "News Impact",
+    tradingOpportunities: "Trading Opportunities",
+    marketWarnings: "Market Warnings",
+    bullish: "Bullish",
+    bearish: "Bearish",
+    neutral: "Neutral",
+    greed: "Greed",
+    fear: "Fear",
+    extreme: "Extreme",
+
     // Additional common terms
     overview: "Overview",
     analytics: "Analytics",
@@ -344,122 +339,6 @@ export const translations = {
     "common.continue": "Continuar",
     "common.submit": "Enviar",
     "common.close": "Fechar",
-    "common.expandAll": "Expandir Tudo",
-    "common.collapseAll": "Recolher Tudo",
-
-    // Landing Page
-    "landing.title": "ProFitz",
-    "landing.subtitle": "Laboratório de Psicologia",
-    "landing.description":
-      "Domine sua psicologia de trading com coaching alimentado por IA, análise comportamental e exercícios interativos projetados para construir resistência mental e melhor tomada de decisões.",
-    "landing.getStarted": "Começar Jornada",
-    "landing.learnMore": "Assistir Demo",
-    "landing.signIn": "Entrar",
-    "landing.badge": "Psicologia de Trading Alimentada por IA",
-    "landing.heroTitle": "Domine Sua Mentalidade de Trading",
-    "landing.featuresTitle": "Seu Kit Completo para Dominar a Psicologia de Trading",
-    "landing.featuresSubtitle":
-      "A Plataforma Definitiva para Vantagem Mental — Combinando Insights Alimentados por IA, Coaching Personalizado e um Ambiente Profundamente Imersivo Onde Você Cresce Continuamente, Revisa Trades Passados com Propósito e Constrói Cada Novo Trade com Clareza e Confiança.",
-    "landing.howItWorksTitle": "Como o ProFitz Funciona",
-    "landing.howItWorksSubtitle": "Seu Caminho para o Domínio do Trading em 4 Passos Simples",
-    "landing.testimonialsTitle": "Junte-se a Milhares de Traders Bem-Sucedidos",
-    "landing.testimonialsSubtitle": "Junte-se a milhares de traders que transformaram sua mentalidade",
-    "landing.ctaTitle": "Pronto Para Desbloquear Seu Potencial Total de Trading?",
-    "landing.ctaSubtitle":
-      "Junte-se ao ProFitz Hoje e Comece Sua Jornada para Trading Consistente, Disciplinado e Lucrativo.",
-    "landing.ctaButton": "Começar Plano Gratuito",
-    "landing.footerTagline": "Transformando traders através de coaching psicológico alimentado por IA.",
-    "landing.footerProduct": "Produto",
-    "landing.footerSupport": "Suporte",
-    "landing.footerLanguages": "Idiomas",
-    "landing.footerFeatures": "Recursos",
-    "landing.footerPricing": "Preços",
-    "landing.footerDemo": "Demo",
-    "landing.footerHelp": "Central de Ajuda",
-    "landing.footerContact": "Contato",
-    "landing.footerCommunity": "Comunidade",
-    "landing.footerCopyright": "© 2025 ProFitz. Todos os direitos reservados.",
-
-    // Headline Features
-    "landing.headlineFeaturesTitle": "Nossos Recursos Definitivos de Trading",
-    "landing.headlineFeaturesSubtitle":
-      "As ferramentas principais que diferenciam o ProFitz de todas as outras plataformas de trading",
-    "landing.feature.aiCoach.title": "Coach de Psicologia IA",
-    "landing.feature.aiCoach.description":
-      "Seu Coach Pessoal de Mentalidade IA: Receba orientação personalizada em tempo real de nossa IA avançada. É como ter um psicólogo de trading de classe mundial ao seu lado, 24/7, ajudando você a conquistar medo, ganância e outros obstáculos emocionais.",
-    "landing.feature.tradeBuilder.title": "Construtor de Trade",
-    "landing.feature.tradeBuilder.description":
-      "Construa Disciplina em Cada Trade: Estruture seus trades com nosso Construtor de Trade guiado, incorporando pontos de verificação psicológicos para garantir que você siga seu plano e evite decisões impulsivas.",
-    "landing.feature.aiAnalysis.title": "Análise de Trade IA",
-    "landing.feature.aiAnalysis.description":
-      "Transforme Cada Trade em uma Oportunidade de Aprendizado: Nossa IA analisa seus trades através de uma lente psicológica, fornecendo insights acionáveis para melhorar sua tomada de decisão e aumentar sua lucratividade.",
-
-    // Regular Features
-    "landing.feature.behavioralPatterns.title": "Padrões Comportamentais",
-    "landing.feature.behavioralPatterns.description":
-      "Identifique e compreenda seus comportamentos recorrentes de trading e vieses psicológicos.",
-    "landing.feature.interactiveExercises.title": "Exercícios Interativos",
-    "landing.feature.interactiveExercises.description":
-      "Participe de exercícios de TCC, meditações e simulações projetadas para traders.",
-    "landing.feature.marketInsights.title": "Insights de Mercado ao Vivo",
-    "landing.feature.marketInsights.description":
-      "Indicadores de psicologia de mercado em tempo real e análise de sentimento para ajudá-lo a tomar decisões informadas.",
-    "landing.feature.screenshotAnalysis.title": "Análise de Screenshot",
-    "landing.feature.screenshotAnalysis.description":
-      "Carregue screenshots de trading para análise alimentada por IA de sua tomada de decisão e estado emocional.",
-    "landing.feature.progressTracking.title": "Acompanhamento de Progresso",
-    "landing.feature.progressTracking.description":
-      "Monitore seu desenvolvimento psicológico com métricas detalhadas e relatórios de desempenho.",
-    "landing.feature.gamification.title": "Gamificação",
-    "landing.feature.gamification.description":
-      "Ganhe distintivos e recompensas enquanto desenvolve melhor psicologia e disciplina de trading.",
-    "landing.feature.psychologyCourses.title": "Cursos de Psicologia",
-    "landing.feature.psychologyCourses.description":
-      "Acesse caminhos de aprendizado estruturados cobrindo todos os aspectos da psicologia de trading.",
-    "landing.feature.reflectionTools.title": "Ferramentas de Reflexão",
-    "landing.feature.reflectionTools.description":
-      "Registre seus trades e emoções com prompts guiados para auto-análise mais profunda.",
-
-    // Steps
-    "landing.step.assessment.title": "Complete a Avaliação",
-    "landing.step.assessment.description":
-      "Faça nosso perfil abrangente de personalidade de trader para entender sua linha de base psicológica.",
-    "landing.step.coaching.title": "Obtenha Coaching IA",
-    "landing.step.coaching.description":
-      "Receba orientação personalizada de nosso coach de psicologia IA baseado em seu perfil único.",
-    "landing.step.practice.title": "Pratique e Aprenda",
-    "landing.step.practice.description":
-      "Participe de exercícios interativos, cursos e ferramentas de reflexão para construir novos hábitos.",
-    "landing.step.track.title": "Acompanhe o Progresso",
-    "landing.step.track.description":
-      "Monitore seu desenvolvimento psicológico com análises detalhadas e celebre marcos importantes.",
-
-    // Stats
-    "landing.stats.activeTraders": "Traders Ativos",
-    "landing.stats.improvedConsistency": "Consistência Melhorada",
-    "landing.stats.userRating": "Avaliação do Usuário",
-    "landing.stats.aiSupport": "Suporte IA",
-
-    // Pricing
-    "landing.pricing.title": "Encontre o Plano Perfeito para Sua Jornada de Trading",
-    "landing.pricing.subtitle": "Comece grátis, atualize quando estiver pronto",
-    "landing.pricing.getStarted": "Começar",
-    "landing.pricing.mostPopular": "Mais Popular",
-
-    // Trust Indicators
-    "landing.trust.title": "A Escolha dos Profissionais por uma Razão",
-    "landing.trust.security.title": "Segurança de Nível Bancário",
-    "landing.trust.security.description": "Seus dados são criptografados e seguros",
-    "landing.trust.realtime.title": "Análise em Tempo Real",
-    "landing.trust.realtime.description": "Insights psicológicos instantâneos",
-    "landing.trust.community.title": "Comunidade de Especialistas",
-    "landing.trust.community.description": "Aprenda com os melhores traders",
-    "landing.trust.results.title": "Resultados Comprovados",
-    "landing.trust.results.description": "85% de taxa de melhoria",
-
-    // Demo
-    "landing.demo.title": "Vídeo Demo Em Breve",
-    "landing.demo.description": "Veja como o ProFitz transforma a psicologia de trading",
 
     // Dashboard Overview
     welcome: "Bem-vindo de volta",
@@ -586,6 +465,116 @@ export const translations = {
     avgScore: "Pontuação Média",
     totalMinutes: "Total de Minutos",
 
+    // Behavioral Patterns
+    behavioralPatternsTitle: "Padrões Comportamentais",
+    behavioralPatternsSubtitle: "Identifique e acompanhe seus padrões de comportamento no trading",
+    patternAnalysis: "Análise de Padrões",
+    identifiedPatterns: "Padrões Identificados",
+    patternFrequency: "Frequência do Padrão",
+    patternImpact: "Impacto do Padrão",
+    improvementSuggestions: "Sugestões de Melhoria",
+    fomoPattern: "Padrão de Trading FOMO",
+    revengeTrading: "Trading de Vingança",
+    overconfidence: "Viés de Excesso de Confiança",
+    analysisParalysis: "Paralisia de Análise",
+    emotionalTrading: "Trading Emocional",
+    patternSeverity: "Severidade do Padrão",
+    high: "Alta",
+    medium: "Média",
+    low: "Baixa",
+    improving: "Melhorando",
+    stable: "Estável",
+    worsening: "Piorando",
+
+    // Psychology Courses
+    psychologyCoursesTitle: "Cursos de Psicologia",
+    psychologyCoursesSubtitle: "Caminhos de aprendizado estruturados para domínio da psicologia de trading",
+    availableCourses: "Cursos Disponíveis",
+    enrolledCourses: "Cursos Inscritos",
+    courseProgress: "Progresso do Curso",
+    startCourse: "Iniciar Curso",
+    continueCourse: "Continuar Curso",
+    courseCompleted: "Curso Concluído",
+    courseDuration: "Duração do Curso",
+    courseLevel: "Nível do Curso",
+    courseRating: "Avaliação do Curso",
+    courseStudents: "Estudantes",
+    courseModules: "Módulos do Curso",
+    nextLesson: "Próxima Lição",
+    previousLesson: "Lição Anterior",
+
+    // Reflection Journal
+    reflectionJournalTitle: "Diário de Reflexão",
+    reflectionJournalSubtitle: "Documente sua jornada de psicologia de trading",
+    newEntry: "Nova Entrada",
+    journalEntries: "Entradas do Diário",
+    entryTitle: "Título da Entrada",
+    entryContent: "Conteúdo da Entrada",
+    entryDate: "Data da Entrada",
+    entryMood: "Avaliação do Humor",
+    entryTags: "Tags",
+    saveEntry: "Salvar Entrada",
+    editEntry: "Editar Entrada",
+    deleteEntry: "Excluir Entrada",
+    searchEntries: "Buscar Entradas",
+    filterByMood: "Filtrar por Humor",
+    filterByDate: "Filtrar por Data",
+    moodAnalysis: "Análise de Humor",
+    journalInsights: "Insights do Diário",
+
+    // Coaching Insights
+    coachingInsightsTitle: "Insights de Coaching",
+    coachingInsightsSubtitle: "Análise com IA das suas sessões de coaching",
+    insightsSummary: "Resumo dos Insights",
+    keyInsights: "Insights Principais",
+    improvementAreas: "Áreas de Melhoria",
+    strengthsIdentified: "Pontos Fortes Identificados",
+    actionItems: "Itens de Ação",
+    followUpRecommendations: "Recomendações de Acompanhamento",
+    insightsHistory: "Histórico de Insights",
+    trendAnalysis: "Análise de Tendências",
+    performanceMetrics: "Métricas de Performance",
+
+    // Trade Builder
+    tradeBuilderTitle: "Construtor de Trade",
+    tradeBuilderSubtitle: "Planeje seus trades com análise focada em psicologia",
+    newTrade: "Novo Trade",
+    tradePlan: "Plano de Trade",
+    tradeSetup: "Configuração do Trade",
+    entryPrice: "Preço de Entrada",
+    stopLoss: "Stop Loss",
+    takeProfit: "Take Profit",
+    positionSize: "Tamanho da Posição",
+    riskReward: "Risco/Recompensa",
+    tradingPair: "Par de Trading",
+    timeframe: "Timeframe",
+    tradeReason: "Razão do Trade",
+    emotionalState: "Estado Emocional",
+    confidenceLevel: "Nível de Confiança",
+    saveTrade: "Salvar Trade",
+    executeTrade: "Executar Trade",
+    tradeHistory: "Histórico de Trades",
+
+    // Market Insights
+    marketInsightsTitle: "Insights de Mercado",
+    marketInsightsSubtitle: "Análise em tempo real da psicologia e sentimento do mercado",
+    marketSentiment: "Sentimento do Mercado",
+    fearGreedIndex: "Índice Medo & Ganância",
+    volatilityIndex: "Índice de Volatilidade",
+    marketTrends: "Tendências do Mercado",
+    sentimentAnalysis: "Análise de Sentimento",
+    psychologyIndicators: "Indicadores de Psicologia",
+    marketNews: "Notícias do Mercado",
+    newsImpact: "Impacto das Notícias",
+    tradingOpportunities: "Oportunidades de Trading",
+    marketWarnings: "Avisos do Mercado",
+    bullish: "Otimista",
+    bearish: "Pessimista",
+    neutral: "Neutro",
+    greed: "Ganância",
+    fear: "Medo",
+    extreme: "Extremo",
+
     // Additional common terms
     overview: "Visão Geral",
     analytics: "Análises",
@@ -656,122 +645,6 @@ export const translations = {
     "common.continue": "Continuar",
     "common.submit": "Enviar",
     "common.close": "Cerrar",
-    "common.expandAll": "Expandir Todo",
-    "common.collapseAll": "Contraer Todo",
-
-    // Landing Page
-    "landing.title": "ProFitz",
-    "landing.subtitle": "Laboratorio de Psicología",
-    "landing.description":
-      "Domina tu psicología de trading con coaching impulsado por IA, análisis conductual y ejercicios interactivos diseñados para construir resistencia mental y mejor toma de decisiones.",
-    "landing.getStarted": "Comenzar Viaje",
-    "landing.learnMore": "Ver Demo",
-    "landing.signIn": "Iniciar Sesión",
-    "landing.badge": "Psicología de Trading Impulsada por IA",
-    "landing.heroTitle": "Domina Tu Mentalidad de Trading",
-    "landing.featuresTitle": "Tu Kit Completo para Dominar la Psicología de Trading",
-    "landing.featuresSubtitle":
-      "La Plataforma Definitiva para Ventaja Mental — Combinando Insights Impulsados por IA, Coaching Personalizado y un Entorno Profundamente Inmersivo Donde Creces Continuamente, Revisas Trades Pasados con Propósito y Construyes Cada Nuevo Trade con Claridad y Confianza.",
-    "landing.howItWorksTitle": "Cómo Funciona ProFitz",
-    "landing.howItWorksSubtitle": "Tu Camino hacia el Dominio del Trading en 4 Pasos Simples",
-    "landing.testimonialsTitle": "Únete a Miles de Traders Exitosos",
-    "landing.testimonialsSubtitle": "Únete a miles de traders que han transformado su mentalidad",
-    "landing.ctaTitle": "¿Listo Para Desbloquear Tu Potencial Total de Trading?",
-    "landing.ctaSubtitle":
-      "Únete a ProFitz Hoy y Comienza Tu Viaje hacia Trading Consistente, Disciplinado y Rentable.",
-    "landing.ctaButton": "Comenzar Plan Gratuito",
-    "landing.footerTagline": "Transformando traders a través de coaching psicológico impulsado por IA.",
-    "landing.footerProduct": "Producto",
-    "landing.footerSupport": "Soporte",
-    "landing.footerLanguages": "Idiomas",
-    "landing.footerFeatures": "Características",
-    "landing.footerPricing": "Precios",
-    "landing.footerDemo": "Demo",
-    "landing.footerHelp": "Centro de Ayuda",
-    "landing.footerContact": "Contacto",
-    "landing.footerCommunity": "Comunidad",
-    "landing.footerCopyright": "© 2025 ProFitz. Todos los derechos reservados.",
-
-    // Headline Features
-    "landing.headlineFeaturesTitle": "Nuestras Características Definitivas de Trading",
-    "landing.headlineFeaturesSubtitle":
-      "Las herramientas principales que distinguen a ProFitz de todas las demás plataformas de trading",
-    "landing.feature.aiCoach.title": "Coach de Psicología IA",
-    "landing.feature.aiCoach.description":
-      "Tu Coach Personal de Mentalidad IA: Recibe orientación personalizada en tiempo real de nuestra IA avanzada. Es como tener un psicólogo de trading de clase mundial a tu lado, 24/7, ayudándote a conquistar el miedo, la codicia y otros obstáculos emocionales.",
-    "landing.feature.tradeBuilder.title": "Constructor de Trade",
-    "landing.feature.tradeBuilder.description":
-      "Construye Disciplina en Cada Trade: Estructura tus trades con nuestro Constructor de Trade guiado, incorporando puntos de control psicológicos para asegurar que sigas tu plan y evites decisiones impulsivas.",
-    "landing.feature.aiAnalysis.title": "Análisis de Trade IA",
-    "landing.feature.aiAnalysis.description":
-      "Transforma Cada Trade en una Oportunidad de Aprendizaje: Nuestra IA analiza tus trades a través de una lente psicológica, proporcionando insights accionables para mejorar tu toma de decisiones y aumentar tu rentabilidad.",
-
-    // Regular Features
-    "landing.feature.behavioralPatterns.title": "Patrones Conductuales",
-    "landing.feature.behavioralPatterns.description":
-      "Identifica y comprende tus comportamientos recurrentes de trading y sesgos psicológicos.",
-    "landing.feature.interactiveExercises.title": "Ejercicios Interactivos",
-    "landing.feature.interactiveExercises.description":
-      "Participa en ejercicios de TCC, meditaciones y simulaciones diseñadas para traders.",
-    "landing.feature.marketInsights.title": "Insights de Mercado en Vivo",
-    "landing.feature.marketInsights.description":
-      "Indicadores de psicología de mercado en tiempo real y análisis de sentimiento para ayudarte a tomar decisiones informadas.",
-    "landing.feature.screenshotAnalysis.title": "Análisis de Captura",
-    "landing.feature.screenshotAnalysis.description":
-      "Sube capturas de trading para análisis impulsado por IA de tu toma de decisiones y estado emocional.",
-    "landing.feature.progressTracking.title": "Seguimiento de Progreso",
-    "landing.feature.progressTracking.description":
-      "Monitorea tu desarrollo psicológico con métricas detalladas e informes de rendimiento.",
-    "landing.feature.gamification.title": "Gamificación",
-    "landing.feature.gamification.description":
-      "Gana insignias y recompensas mientras desarrollas mejor psicología y disciplina de trading.",
-    "landing.feature.psychologyCourses.title": "Cursos de Psicología",
-    "landing.feature.psychologyCourses.description":
-      "Accede a rutas de aprendizaje estructuradas que cubren todos los aspectos de la psicología de trading.",
-    "landing.feature.reflectionTools.title": "Herramientas de Reflexión",
-    "landing.feature.reflectionTools.description":
-      "Registra tus operaciones y emociones con indicaciones guiadas para un auto-análisis más profundo.",
-
-    // Steps
-    "landing.step.assessment.title": "Completa la Evaluación",
-    "landing.step.assessment.description":
-      "Realiza nuestro perfil integral de personalidad de trader para entender tu línea base psicológica.",
-    "landing.step.coaching.title": "Obtén Coaching IA",
-    "landing.step.coaching.description":
-      "Recibe orientación personalizada de nuestro coach de psicología IA basado en tu perfil único.",
-    "landing.step.practice.title": "Practica y Aprende",
-    "landing.step.practice.description":
-      "Participa en ejercicios interactivos, cursos y herramientas de reflexión para construir nuevos hábitos.",
-    "landing.step.track.title": "Rastrea el Progreso",
-    "landing.step.track.description":
-      "Monitorea tu desarrollo psicológico con análisis detallados y celebra hitos importantes.",
-
-    // Stats
-    "landing.stats.activeTraders": "Traders Activos",
-    "landing.stats.improvedConsistency": "Consistencia Mejorada",
-    "landing.stats.userRating": "Calificación del Usuario",
-    "landing.stats.aiSupport": "Soporte IA",
-
-    // Pricing
-    "landing.pricing.title": "Encuentra el Plan Perfecto para Tu Viaje de Trading",
-    "landing.pricing.subtitle": "Comienza gratis, actualiza cuando estés listo",
-    "landing.pricing.getStarted": "Comenzar",
-    "landing.pricing.mostPopular": "Más Popular",
-
-    // Trust Indicators
-    "landing.trust.title": "La Elección de los Profesionales por una Razón",
-    "landing.trust.security.title": "Seguridad de Nivel Bancario",
-    "landing.trust.security.description": "Tus datos están encriptados y seguros",
-    "landing.trust.realtime.title": "Análisis en Tiempo Real",
-    "landing.trust.realtime.description": "Insights psicológicos instantáneos",
-    "landing.trust.community.title": "Comunidad de Expertos",
-    "landing.trust.community.description": "Aprende de los mejores traders",
-    "landing.trust.results.title": "Resultados Comprobados",
-    "landing.trust.results.description": "85% de tasa de mejora",
-
-    // Demo
-    "landing.demo.title": "Video Demo Próximamente",
-    "landing.demo.description": "Mira cómo ProFitz transforma la psicología de trading",
 
     // Dashboard Overview
     welcome: "Bienvenido de vuelta",
@@ -898,6 +771,116 @@ export const translations = {
     avgScore: "Puntuación Promedio",
     totalMinutes: "Total de Minutos",
 
+    // Behavioral Patterns
+    behavioralPatternsTitle: "Patrones Conductuales",
+    behavioralPatternsSubtitle: "Identifica y rastrea tus patrones de comportamiento en trading",
+    patternAnalysis: "Análisis de Patrones",
+    identifiedPatterns: "Patrones Identificados",
+    patternFrequency: "Frecuencia del Patrón",
+    patternImpact: "Impacto del Patrón",
+    improvementSuggestions: "Sugerencias de Mejora",
+    fomoPattern: "Patrón de Trading FOMO",
+    revengeTrading: "Trading de Venganza",
+    overconfidence: "Sesgo de Exceso de Confianza",
+    analysisParalysis: "Parálisis de Análisis",
+    emotionalTrading: "Trading Emocional",
+    patternSeverity: "Severidad del Patrón",
+    high: "Alta",
+    medium: "Media",
+    low: "Baja",
+    improving: "Mejorando",
+    stable: "Estable",
+    worsening: "Empeorando",
+
+    // Psychology Courses
+    psychologyCoursesTitle: "Cursos de Psicología",
+    psychologyCoursesSubtitle: "Rutas de aprendizaje estructuradas para dominio de psicología de trading",
+    availableCourses: "Cursos Disponibles",
+    enrolledCourses: "Cursos Inscritos",
+    courseProgress: "Progreso del Curso",
+    startCourse: "Iniciar Curso",
+    continueCourse: "Continuar Curso",
+    courseCompleted: "Curso Completado",
+    courseDuration: "Duración del Curso",
+    courseLevel: "Nivel del Curso",
+    courseRating: "Calificación del Curso",
+    courseStudents: "Estudiantes",
+    courseModules: "Módulos del Curso",
+    nextLesson: "Próxima Lección",
+    previousLesson: "Lección Anterior",
+
+    // Reflection Journal
+    reflectionJournalTitle: "Diario de Reflexión",
+    reflectionJournalSubtitle: "Documenta tu viaje de psicología de trading",
+    newEntry: "Nueva Entrada",
+    journalEntries: "Entradas del Diario",
+    entryTitle: "Título de la Entrada",
+    entryContent: "Contenido de la Entrada",
+    entryDate: "Fecha de la Entrada",
+    entryMood: "Calificación del Estado de Ánimo",
+    entryTags: "Etiquetas",
+    saveEntry: "Guardar Entrada",
+    editEntry: "Editar Entrada",
+    deleteEntry: "Eliminar Entrada",
+    searchEntries: "Buscar Entradas",
+    filterByMood: "Filtrar por Estado de Ánimo",
+    filterByDate: "Filtrar por Fecha",
+    moodAnalysis: "Análisis del Estado de Ánimo",
+    journalInsights: "Insights del Diario",
+
+    // Coaching Insights
+    coachingInsightsTitle: "Insights de Coaching",
+    coachingInsightsSubtitle: "Análisis con IA de tus sesiones de coaching",
+    insightsSummary: "Resumen de Insights",
+    keyInsights: "Insights Clave",
+    improvementAreas: "Áreas de Mejora",
+    strengthsIdentified: "Fortalezas Identificadas",
+    actionItems: "Elementos de Acción",
+    followUpRecommendations: "Recomendaciones de Seguimiento",
+    insightsHistory: "Historial de Insights",
+    trendAnalysis: "Análisis de Tendencias",
+    performanceMetrics: "Métricas de Rendimiento",
+
+    // Trade Builder
+    tradeBuilderTitle: "Constructor de Trade",
+    tradeBuilderSubtitle: "Planifica tus trades con análisis enfocado en psicología",
+    newTrade: "Nuevo Trade",
+    tradePlan: "Plan de Trade",
+    tradeSetup: "Configuración del Trade",
+    entryPrice: "Precio de Entrada",
+    stopLoss: "Stop Loss",
+    takeProfit: "Take Profit",
+    positionSize: "Tamaño de Posición",
+    riskReward: "Riesgo/Recompensa",
+    tradingPair: "Par de Trading",
+    timeframe: "Marco Temporal",
+    tradeReason: "Razón del Trade",
+    emotionalState: "Estado Emocional",
+    confidenceLevel: "Nivel de Confianza",
+    saveTrade: "Guardar Trade",
+    executeTrade: "Ejecutar Trade",
+    tradeHistory: "Historial de Trades",
+
+    // Market Insights
+    marketInsightsTitle: "Insights de Mercado",
+    marketInsightsSubtitle: "Análisis en tiempo real de psicología y sentimiento del mercado",
+    marketSentiment: "Sentimiento del Mercado",
+    fearGreedIndex: "Índice Miedo y Codicia",
+    volatilityIndex: "Índice de Volatilidad",
+    marketTrends: "Tendencias del Mercado",
+    sentimentAnalysis: "Análisis de Sentimiento",
+    psychologyIndicators: "Indicadores de Psicología",
+    marketNews: "Noticias del Mercado",
+    newsImpact: "Impacto de Noticias",
+    tradingOpportunities: "Oportunidades de Trading",
+    marketWarnings: "Advertencias del Mercado",
+    bullish: "Alcista",
+    bearish: "Bajista",
+    neutral: "Neutral",
+    greed: "Codicia",
+    fear: "Miedo",
+    extreme: "Extremo",
+
     // Additional common terms
     overview: "Resumen",
     analytics: "Análisis",
@@ -968,128 +951,12 @@ export const translations = {
     "common.continue": "Continuer",
     "common.submit": "Soumettre",
     "common.close": "Fermer",
-    "common.expandAll": "Tout Développer",
-    "common.collapseAll": "Tout Réduire",
-
-    // Landing Page
-    "landing.title": "ProFitz",
-    "landing.subtitle": "Laboratoire de Psychologie",
-    "landing.description":
-      "Maîtrisez votre psychologie de trading avec un coaching alimenté par l'IA, une analyse comportementale et des exercices interactifs conçus pour renforcer la résistance mentale et améliorer la prise de décision.",
-    "landing.getStarted": "Commencer le Voyage",
-    "landing.learnMore": "Voir la Démo",
-    "landing.signIn": "Se Connecter",
-    "landing.badge": "Psychologie de Trading Alimentée par l'IA",
-    "landing.heroTitle": "Maîtrisez Votre Mentalité de Trading",
-    "landing.featuresTitle": "Votre Kit Complet pour Maîtriser la Psychologie de Trading",
-    "landing.featuresSubtitle":
-      "La Plateforme Ultime pour l'Avantage Mental — Combinant des Insights Alimentés par l'IA, un Coaching Personnalisé et un Environnement Profondément Immersif Où Vous Grandissez Continuellement, Révisez les Trades Passés avec un Objectif et Construisez Chaque Nouveau Trade avec Clarté et Confiance.",
-    "landing.howItWorksTitle": "Comment ProFitz Fonctionne",
-    "landing.howItWorksSubtitle": "Votre Chemin vers la Maîtrise du Trading en 4 Étapes Simples",
-    "landing.testimonialsTitle": "Rejoignez des Milliers de Traders Prospères",
-    "landing.testimonialsSubtitle": "Rejoignez des milliers de traders qui ont transformé leur mentalité",
-    "landing.ctaTitle": "Prêt à Débloquer Votre Plein Potentiel de Trading?",
-    "landing.ctaSubtitle":
-      "Rejoignez ProFitz Aujourd'hui et Commencez Votre Voyage vers un Trading Cohérent, Discipliné et Rentable.",
-    "landing.ctaButton": "Commencer le Plan Gratuit",
-    "landing.footerTagline": "Transformer les traders grâce au coaching psychologique alimenté par l'IA.",
-    "landing.footerProduct": "Produit",
-    "landing.footerSupport": "Support",
-    "landing.footerLanguages": "Langues",
-    "landing.footerFeatures": "Fonctionnalités",
-    "landing.footerPricing": "Tarifs",
-    "landing.footerDemo": "Démo",
-    "landing.footerHelp": "Centre d'Aide",
-    "landing.footerContact": "Contact",
-    "landing.footerCommunity": "Communauté",
-    "landing.footerCopyright": "© 2025 ProFitz. Tous droits réservés.",
-
-    // Headline Features
-    "landing.headlineFeaturesTitle": "Nos Fonctionnalités de Trading Ultimes",
-    "landing.headlineFeaturesSubtitle":
-      "Les outils principaux qui distinguent ProFitz de toutes les autres plateformes de trading",
-    "landing.feature.aiCoach.title": "Coach de Psychologie IA",
-    "landing.feature.aiCoach.description":
-      "Votre Coach Personnel de Mentalité IA: Recevez des conseils personnalisés en temps réel de notre IA avancée. C'est comme avoir un psychologue de trading de classe mondiale à vos côtés, 24/7, vous aidant à conquérir la peur, la cupidité et autres obstacles émotionnels.",
-    "landing.feature.tradeBuilder.title": "Constructeur de Trade",
-    "landing.feature.tradeBuilder.description":
-      "Construisez la Discipline dans Chaque Trade: Structurez vos trades avec notre Constructeur de Trade guidé, incorporant des points de contrôle psychologiques pour vous assurer de suivre votre plan et d'éviter les décisions impulsives.",
-    "landing.feature.aiAnalysis.title": "Analyse de Trade IA",
-    "landing.feature.aiAnalysis.description":
-      "Transformez Chaque Trade en Opportunité d'Apprentissage: Notre IA analyse vos trades à travers une lentille psychologique, fournissant des insights actionnables pour améliorer votre prise de décision et augmenter votre rentabilité.",
-
-    // Regular Features
-    "landing.feature.behavioralPatterns.title": "Modèles Comportementaux",
-    "landing.feature.behavioralPatterns.description":
-      "Identifiez et comprenez vos comportements récurrents de trading et biais psychologiques.",
-    "landing.feature.interactiveExercises.title": "Exercices Interactifs",
-    "landing.feature.interactiveExercises.description":
-      "Participez à des exercices de TCC, méditations et simulations conçues pour les traders.",
-    "landing.feature.marketInsights.title": "Insights de Marché en Direct",
-    "landing.feature.marketInsights.description":
-      "Indicateurs de psychologie de marché en temps réel et analyse de sentiment pour vous aider à prendre des décisions éclairées.",
-    "landing.feature.screenshotAnalysis.title": "Analyse de Capture",
-    "landing.feature.screenshotAnalysis.description":
-      "Téléchargez des captures d'écran de trading pour une analyse alimentée par l'IA de votre prise de décision et état émotionnel.",
-    "landing.feature.progressTracking.title": "Suivi des Progrès",
-    "landing.feature.progressTracking.description":
-      "Surveillez votre développement psychologique avec des métriques détaillées et des rapports de performance.",
-    "landing.feature.gamification.title": "Gamification",
-    "landing.feature.gamification.description":
-      "Gagnez des badges et récompenses en développant une meilleure psychologie et discipline de trading.",
-    "landing.feature.psychologyCourses.title": "Cours de Psychologie",
-    "landing.feature.psychologyCourses.description":
-      "Accédez à des parcours d'apprentissage structurés couvrant tous les aspects de la psychologie de trading.",
-    "landing.feature.reflectionTools.title": "Outils de Réflexion",
-    "landing.feature.reflectionTools.description":
-      "Journalisez vos trades et émotions avec des invites guidées pour une auto-analyse plus profonde.",
-
-    // Steps
-    "landing.step.assessment.title": "Complétez l'Évaluation",
-    "landing.step.assessment.description":
-      "Passez notre profil complet de personnalité de trader pour comprendre votre base psychologique.",
-    "landing.step.coaching.title": "Obtenez du Coaching IA",
-    "landing.step.coaching.description":
-      "Recevez des conseils personnalisés de notre coach de psychologie IA basé sur votre profil unique.",
-    "landing.step.practice.title": "Pratiquez et Apprenez",
-    "landing.step.practice.description":
-      "Participez à des exercices interactifs, cours et outils de réflexion pour construire de nouvelles habitudes.",
-    "landing.step.track.title": "Suivez les Progrès",
-    "landing.step.track.description":
-      "Surveillez votre développement psychologique avec des analyses détaillées et célébrez les étapes importantes.",
-
-    // Stats
-    "landing.stats.activeTraders": "Traders Actifs",
-    "landing.stats.improvedConsistency": "Consistance Améliorée",
-    "landing.stats.userRating": "Note Utilisateur",
-    "landing.stats.aiSupport": "Support IA",
-
-    // Pricing
-    "landing.pricing.title": "Trouvez le Plan Parfait pour Votre Voyage de Trading",
-    "landing.pricing.subtitle": "Commencez gratuitement, mettez à niveau quand vous êtes prêt",
-    "landing.pricing.getStarted": "Commencer",
-    "landing.pricing.mostPopular": "Le Plus Populaire",
-
-    // Trust Indicators
-    "landing.trust.title": "Le Choix des Professionnels pour une Raison",
-    "landing.trust.security.title": "Sécurité de Niveau Bancaire",
-    "landing.trust.security.description": "Vos données sont cryptées et sécurisées",
-    "landing.trust.realtime.title": "Analyse en Temps Réel",
-    "landing.trust.realtime.description": "Insights psychologiques instantanés",
-    "landing.trust.community.title": "Communauté d'Experts",
-    "landing.trust.community.description": "Apprenez des meilleurs traders",
-    "landing.trust.results.title": "Résultats Prouvés",
-    "landing.trust.results.description": "85% de taux d'amélioration",
-
-    // Demo
-    "landing.demo.title": "Vidéo Démo Bientôt Disponible",
-    "landing.demo.description": "Regardez comment ProFitz transforme la psychologie de trading",
 
     // Dashboard Overview
     welcome: "Bon retour",
-    subtitle: "Prêt à améliorer votre psychologie de trading aujourd'hui?",
+    subtitle: "Prêt à améliorer votre psychologie du trading aujourd'hui ?",
     psychologyScore: "Score de Psychologie",
-    exercisesCompleted: "Exercices Terminés",
+    exercisesCompleted: "Exercices Complétés",
     coachingSessions: "Sessions de Coaching",
     achievements: "Réalisations",
     thisWeek: "Cette semaine",
@@ -1097,14 +964,14 @@ export const translations = {
     fromLastWeek: "+5 de la semaine dernière",
     badgesEarned: "Badges gagnés",
     quickActions: "Actions Rapides",
-    jumpInto: "Plongez dans votre entraînement",
+    jumpInto: "Plongez dans votre formation",
     getPersonalizedCoaching: "Obtenez des insights de coaching personnalisés",
     uploadAndAnalyze: "Téléchargez et analysez vos captures d'écran de trading",
     completePsychology: "Complétez les exercices et évaluations de psychologie",
     reflectOnTrading: "Réfléchissez sur vos expériences de trading",
     recentActivity: "Activité Récente",
     latestActivities: "Vos dernières activités",
-    completedEmotionalControl: "Évaluation de Contrôle Émotionnel Terminée",
+    completedEmotionalControl: "Évaluation de Contrôle Émotionnel Complétée",
     aiCoachingSession: "Session de Coaching IA sur la Gestion des Risques",
     screenshotAnalysisEUR: "Analyse de Capture - Trade EUR/USD",
     hoursAgo: "il y a 2 heures",
@@ -1116,16 +983,16 @@ export const translations = {
     currentGoals: "Objectifs Actuels",
     developmentObjectives: "Vos objectifs de développement",
     improveEmotionalControl: "Améliorer le Contrôle Émotionnel",
-    complete20Exercises: "Terminer 20 Exercices",
+    complete20Exercises: "Compléter 20 Exercices",
     weeklyCoachingSessions: "Sessions de Coaching Hebdomadaires",
     scoreTarget: "Score 85+",
-    exercisesProgress: "12/20 terminés",
+    exercisesProgress: "12/20 complétés",
     sessionsProgress: "4/5 sessions",
 
     // AI Coach
     aiCoachTitle: "Coach IA de Psychologie de Trading",
-    aiCoachSubtitle: "Obtenez un coaching personnalisé avec une IA avancée",
-    startCoachingSession: "Commencer une Session de Coaching",
+    aiCoachSubtitle: "Obtenez un coaching personnalisé avec IA avancée",
+    startCoachingSession: "Commencer Session de Coaching",
     coachingHistory: "Historique de Coaching",
     personalizedInsights: "Insights Personnalisés",
     emotionalState: "État Émotionnel",
@@ -1135,12 +1002,12 @@ export const translations = {
     coachingRecommendations: "Recommandations de Coaching",
     sessionNotes: "Notes de Session",
     nextSession: "Prochaine Session",
-    scheduleSession: "Programmer une Session",
+    scheduleSession: "Programmer Session",
 
     // Screenshot Analysis
     screenshotAnalysisTitle: "Analyse de Capture",
-    screenshotAnalysisSubtitle: "Téléchargez vos captures d'écran de trading pour une analyse avec l'IA",
-    uploadScreenshot: "Télécharger une Capture",
+    screenshotAnalysisSubtitle: "Téléchargez vos captures d'écran de trading pour analyse IA",
+    uploadScreenshot: "Télécharger Capture",
     analyzeNow: "Analyser Maintenant",
     analysisResults: "Résultats de l'Analyse",
     technicalAnalysis: "Analyse Technique",
@@ -1164,18 +1031,18 @@ export const translations = {
     stressManagement: "Gestion du Stress",
     discipline: "Discipline",
     progressChart: "Graphique de Progrès",
-    milestones: "Étapes",
-    nextMilestone: "Prochaine Étape",
+    milestones: "Jalons",
+    nextMilestone: "Prochain Jalon",
 
     // Interactive Exercises
     interactiveExercisesTitle: "Exercices Interactifs",
     structuredExercisesForMastery: "Exercices structurés pour maîtriser la psychologie du trading",
-    emotionalCheckin: "Vérification Émotionnelle",
+    emotionalCheckin: "Bilan Émotionnel",
     emotionalCheckinDesc: "Évaluez votre état émotionnel actuel avant de trader",
     mindfulTrading: "Méditation Mindful pour Trading",
     mindfulTradingDesc: "Centrez votre esprit et réduisez l'anxiété du trading grâce à la méditation guidée",
     riskVisualization: "Visualisation des Risques",
-    riskVisualizationDesc: "Visualisez et préparez-vous mentalement aux risques potentiels de trading",
+    riskVisualizationDesc: "Visualisez et préparez-vous mentalement aux risques potentiels du trading",
     fomoTraining: "Entraînement Anti-FOMO",
     fomoTrainingDesc: "Développez une résistance à la Peur de Manquer des Opportunités dans les décisions de trading",
     lossAcceptance: "Entraînement d'Acceptation des Pertes",
@@ -1206,9 +1073,119 @@ export const translations = {
     noneFound: "Aucun exercice trouvé",
     tryAnotherCategory: "Essayez de sélectionner une autre catégorie",
     exercisesSummary: "Résumé des Exercices",
-    progressOverview: "Aperçu de votre progrès dans tous les exercices",
+    progressOverview: "Aperçu de votre progression dans tous les exercices",
     avgScore: "Score Moyen",
-    totalMinutes: "Total des Minutes",
+    totalMinutes: "Total Minutes",
+
+    // Behavioral Patterns
+    behavioralPatternsTitle: "Modèles Comportementaux",
+    behavioralPatternsSubtitle: "Identifiez et suivez vos modèles de comportement en trading",
+    patternAnalysis: "Analyse des Modèles",
+    identifiedPatterns: "Modèles Identifiés",
+    patternFrequency: "Fréquence du Modèle",
+    patternImpact: "Impact du Modèle",
+    improvementSuggestions: "Suggestions d'Amélioration",
+    fomoPattern: "Modèle de Trading FOMO",
+    revengeTrading: "Trading de Vengeance",
+    overconfidence: "Biais de Surconfiance",
+    analysisParalysis: "Paralysie d'Analyse",
+    emotionalTrading: "Trading Émotionnel",
+    patternSeverity: "Sévérité du Modèle",
+    high: "Élevée",
+    medium: "Moyenne",
+    low: "Faible",
+    improving: "S'améliorant",
+    stable: "Stable",
+    worsening: "Se détériorant",
+
+    // Psychology Courses
+    psychologyCoursesTitle: "Cours de Psychologie",
+    psychologyCoursesSubtitle: "Parcours d'apprentissage structurés pour maîtriser la psychologie du trading",
+    availableCourses: "Cours Disponibles",
+    enrolledCourses: "Cours Inscrits",
+    courseProgress: "Progrès du Cours",
+    startCourse: "Commencer le Cours",
+    continueCourse: "Continuer le Cours",
+    courseCompleted: "Cours Terminé",
+    courseDuration: "Durée du Cours",
+    courseLevel: "Niveau du Cours",
+    courseRating: "Note du Cours",
+    courseStudents: "Étudiants",
+    courseModules: "Modules du Cours",
+    nextLesson: "Prochaine Leçon",
+    previousLesson: "Leçon Précédente",
+
+    // Reflection Journal
+    reflectionJournalTitle: "Journal de Réflexion",
+    reflectionJournalSubtitle: "Documentez votre parcours de psychologie de trading",
+    newEntry: "Nouvelle Entrée",
+    journalEntries: "Entrées du Journal",
+    entryTitle: "Titre de l'Entrée",
+    entryContent: "Contenu de l'Entrée",
+    entryDate: "Date de l'Entrée",
+    entryMood: "Évaluation de l'Humeur",
+    entryTags: "Étiquettes",
+    saveEntry: "Sauvegarder l'Entrée",
+    editEntry: "Modifier l'Entrée",
+    deleteEntry: "Supprimer l'Entrée",
+    searchEntries: "Rechercher des Entrées",
+    filterByMood: "Filtrer par Humeur",
+    filterByDate: "Filtrer par Date",
+    moodAnalysis: "Analyse de l'Humeur",
+    journalInsights: "Insights du Journal",
+
+    // Coaching Insights
+    coachingInsightsTitle: "Insights de Coaching",
+    coachingInsightsSubtitle: "Analyse IA de vos sessions de coaching",
+    insightsSummary: "Résumé des Insights",
+    keyInsights: "Insights Clés",
+    improvementAreas: "Domaines d'Amélioration",
+    strengthsIdentified: "Forces Identifiées",
+    actionItems: "Éléments d'Action",
+    followUpRecommendations: "Recommandations de Suivi",
+    insightsHistory: "Historique des Insights",
+    trendAnalysis: "Analyse des Tendances",
+    performanceMetrics: "Métriques de Performance",
+
+    // Trade Builder
+    tradeBuilderTitle: "Constructeur de Trade",
+    tradeBuilderSubtitle: "Planifiez vos trades avec analyse axée sur la psychologie",
+    newTrade: "Nouveau Trade",
+    tradePlan: "Plan de Trade",
+    tradeSetup: "Configuration du Trade",
+    entryPrice: "Prix d'Entrée",
+    stopLoss: "Stop Loss",
+    takeProfit: "Take Profit",
+    positionSize: "Taille de Position",
+    riskReward: "Risque/Récompense",
+    tradingPair: "Paire de Trading",
+    timeframe: "Période",
+    tradeReason: "Raison du Trade",
+    emotionalState: "État Émotionnel",
+    confidenceLevel: "Niveau de Confiance",
+    saveTrade: "Sauvegarder Trade",
+    executeTrade: "Exécuter Trade",
+    tradeHistory: "Historique des Trades",
+
+    // Market Insights
+    marketInsightsTitle: "Insights de Marché",
+    marketInsightsSubtitle: "Analyse en temps réel de la psychologie et du sentiment du marché",
+    marketSentiment: "Sentiment du Marché",
+    fearGreedIndex: "Indice Peur et Cupidité",
+    volatilityIndex: "Indice de Volatilité",
+    marketTrends: "Tendances du Marché",
+    sentimentAnalysis: "Analyse du Sentiment",
+    psychologyIndicators: "Indicateurs de Psychologie",
+    marketNews: "Actualités du Marché",
+    newsImpact: "Impact des Actualités",
+    tradingOpportunities: "Opportunités de Trading",
+    marketWarnings: "Avertissements du Marché",
+    bullish: "Haussier",
+    bearish: "Baissier",
+    neutral: "Neutre",
+    greed: "Cupidité",
+    fear: "Peur",
+    extreme: "Extrême",
 
     // Additional common terms
     overview: "Aperçu",
@@ -1229,7 +1206,7 @@ export const translations = {
     share: "Partager",
     print: "Imprimer",
     download: "Télécharger",
-    upload: "Téléverser",
+    upload: "Télécharger",
     refresh: "Actualiser",
     reset: "Réinitialiser",
     clear: "Effacer",
@@ -1250,44 +1227,34 @@ export const translations = {
   },
 }
 
+// Simple global language state
 let currentLanguage: Language = "en"
 
-export function setLanguage(lang: Language) {
+export function setGlobalLanguage(lang: Language) {
   currentLanguage = lang
-  // Trigger a custom event to notify components of language change
   if (typeof window !== "undefined") {
-    window.dispatchEvent(new CustomEvent("languageChange", { detail: lang }))
+    localStorage.setItem("app-language", lang)
+    // Force page refresh to update all text
+    window.location.reload()
   }
 }
 
 export function getCurrentLanguage(): Language {
+  if (typeof window !== "undefined") {
+    const saved = localStorage.getItem("app-language") as Language
+    if (saved && ["en", "pt", "es", "fr"].includes(saved)) {
+      currentLanguage = saved
+      return saved
+    }
+  }
   return currentLanguage
 }
 
 export function t(key: string): string {
-  const keys = key.split(".")
-  let value: any = translations[currentLanguage]
+  const lang = getCurrentLanguage()
+  const langTranslations = translations[lang] as Record<string, string>
+  const enTranslations = translations.en as Record<string, string>
 
-  for (const k of keys) {
-    if (value && typeof value === "object" && k in value) {
-      value = value[k]
-    } else {
-      // Fallback to English if key not found
-      value = translations.en
-      for (const fallbackKey of keys) {
-        if (value && typeof value === "object" && fallbackKey in value) {
-          value = value[fallbackKey]
-        } else {
-          return key // Return the key itself if not found
-        }
-      }
-      break
-    }
-  }
-
-  return typeof value === "string" ? value : key
-}
-
-export function useTranslation() {
-  return { t, currentLanguage, setLanguage }
+  // Try to get translation from current language, fallback to English, then return key
+  return langTranslations[key] || enTranslations[key] || key
 }
