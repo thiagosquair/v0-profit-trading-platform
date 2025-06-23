@@ -665,7 +665,7 @@ export function LandingPage() {
                   <div className="w-20 h-20 bg-gradient-to-r from-navy-600 to-royal-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
                     <Play className="h-10 w-10 text-white" />
                   </div>
-                  <h3 className="text-xl font-semibold text-navy-800 mb-2">Your Media Here</h3>
+                  <h3 className="text-xl font-semibold text-navy-800 mb-2">Untitled design (14).mp4</h3>
                   <p className="text-navy-600">Add your photo or video content</p>
                 </div>
               </div>
