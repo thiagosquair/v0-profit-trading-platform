@@ -771,79 +771,6 @@ export function LandingPage() {
         </div>
       </section>
 
-      {/* Headline Features Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-sky-50">
-        <div className="container mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-navy-900 mb-4">Our Ultimate Trading Features</h2>
-            <p className="text-xl text-navy-600 max-w-2xl mx-auto mb-6">
-              The core tools that set ProFitz apart from every other trading platform
-            </p>
-            <Button
-              variant="outline"
-              onClick={toggleAllFeatures}
-              className="border-navy-300 text-navy-700 hover:bg-navy-50"
-            >
-              {allExpanded ? "Collapse All" : "Expand All"}
-              <ChevronDown className={`ml-2 h-4 w-4 transition-transform ${allExpanded ? "rotate-180" : ""}`} />
-            </Button>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {[
-              {
-                title: "AI Psychology Coach",
-                description:
-                  "Your Personal AI Mindset Coach: Receive real-time, personalized guidance from our advanced AI. It's like having a world-class trading psychologist by your side, 24/7, helping you conquer fear, greed, and other emotional hurdles.",
-                icon: Brain,
-              },
-              {
-                title: "Trade Builder",
-                description:
-                  "Build Discipline into Every Trade: Structure your trades with our guided Trade Builder, incorporating psychological checkpoints to ensure you stick to your plan and avoid impulsive decisions.",
-                icon: Settings,
-              },
-              {
-                title: "AI Trade Analysis",
-                description:
-                  "Transform Every Trade into a Learning Opportunity: Our AI analyzes your trades through a psychological lens, providing actionable insights to improve your decision-making and boost your profitability.",
-                icon: TrendingUp,
-              },
-            ].map((feature, index) => {
-              const IconComponent = feature.icon
-              const isExpanded = expandedFeatures[index] || false
-              return (
-                <Card
-                  key={index}
-                  className="border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 bg-gradient-to-br from-white to-blue-50 border-navy-100 p-6"
-                >
-                  <CardHeader className="text-center pb-6">
-                    <div className="w-20 h-20 bg-gradient-to-r from-navy-600 to-royal-blue-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                      <IconComponent className="h-10 w-10 text-white" />
-                    </div>
-                    <CardTitle className="text-2xl text-navy-800 mb-4">{feature.title}</CardTitle>
-                    <Button
-                      variant="ghost"
-                      onClick={() => toggleFeature(index)}
-                      className="text-navy-600 hover:text-navy-800 hover:bg-navy-50 p-2"
-                    >
-                      <ChevronDown className={`h-5 w-5 transition-transform ${isExpanded ? "rotate-180" : ""}`} />
-                    </Button>
-                  </CardHeader>
-                  {isExpanded && (
-                    <CardContent className="text-center">
-                      <CardDescription className="text-navy-600 text-lg leading-relaxed">
-                        {feature.description}
-                      </CardDescription>
-                    </CardContent>
-                  )}
-                </Card>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
       {/* Features Grid */}
       <section className="py-20 px-4 bg-white">
         <div className="container mx-auto">
@@ -922,6 +849,79 @@ export function LandingPage() {
               </DialogContent>
             </Dialog>
           )}
+        </div>
+      </section>
+
+      {/* Headline Features Section */}
+      <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-sky-50">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-navy-900 mb-4">Our Ultimate Trading Features</h2>
+            <p className="text-xl text-navy-600 max-w-2xl mx-auto mb-6">
+              The core tools that set ProFitz apart from every other trading platform
+            </p>
+            <Button
+              variant="outline"
+              onClick={toggleAllFeatures}
+              className="border-navy-300 text-navy-700 hover:bg-navy-50"
+            >
+              {allExpanded ? "Collapse All" : "Expand All"}
+              <ChevronDown className={`ml-2 h-4 w-4 transition-transform ${allExpanded ? "rotate-180" : ""}`} />
+            </Button>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[
+              {
+                title: "AI Psychology Coach",
+                description:
+                  "Your Personal AI Mindset Coach: Receive real-time, personalized guidance from our advanced AI. It's like having a world-class trading psychologist by your side, 24/7, helping you conquer fear, greed, and other emotional hurdles.",
+                icon: Brain,
+              },
+              {
+                title: "Trade Builder",
+                description:
+                  "Build Discipline into Every Trade: Structure your trades with our guided Trade Builder, incorporating psychological checkpoints to ensure you stick to your plan and avoid impulsive decisions.",
+                icon: Settings,
+              },
+              {
+                title: "AI Trade Analysis",
+                description:
+                  "Transform Every Trade into a Learning Opportunity: Our AI analyzes your trades through a psychological lens, providing actionable insights to improve your decision-making and boost your profitability.",
+                icon: TrendingUp,
+              },
+            ].map((feature, index) => {
+              const IconComponent = feature.icon
+              const isExpanded = expandedFeatures[index] || false
+              return (
+                <Card
+                  key={index}
+                  className="border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 bg-gradient-to-br from-white to-blue-50 border-navy-100 p-6"
+                >
+                  <CardHeader className="text-center pb-6">
+                    <div className="w-20 h-20 bg-gradient-to-r from-navy-600 to-royal-blue-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                      <IconComponent className="h-10 w-10 text-white" />
+                    </div>
+                    <CardTitle className="text-2xl text-navy-800 mb-4">{feature.title}</CardTitle>
+                    <Button
+                      variant="ghost"
+                      onClick={() => toggleFeature(index)}
+                      className="text-navy-600 hover:text-navy-800 hover:bg-navy-50 p-2"
+                    >
+                      <ChevronDown className={`h-5 w-5 transition-transform ${isExpanded ? "rotate-180" : ""}`} />
+                    </Button>
+                  </CardHeader>
+                  {isExpanded && (
+                    <CardContent className="text-center">
+                      <CardDescription className="text-navy-600 text-lg leading-relaxed">
+                        {feature.description}
+                      </CardDescription>
+                    </CardContent>
+                  )}
+                </Card>
+              )
+            })}
+          </div>
         </div>
       </section>
 
