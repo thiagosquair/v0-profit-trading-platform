@@ -82,70 +82,73 @@ export function LandingPage() {
     {
       key: "behavioralPatterns",
       icon: <Brain className="h-5 w-5 text-blue-600" />,
-      title: t("landing.feature.behavioralPatterns.title"),
-      description: t("landing.feature.behavioralPatterns.description"),
+      title: "Behavioral Pattern Analysis",
+      description: "Identify and understand your unique trading behavior patterns to improve decision-making.",
     },
     {
       key: "interactiveExercises",
       icon: <Target className="h-5 w-5 text-blue-600" />,
-      title: t("landing.feature.interactiveExercises.title"),
-      description: t("landing.feature.interactiveExercises.description"),
+      title: "Interactive Trading Exercises",
+      description:
+        "Engage in practical exercises that simulate real-world trading scenarios to build mental resilience.",
     },
     {
       key: "marketInsights",
       icon: <TrendingUp className="h-5 w-5 text-blue-600" />,
-      title: t("landing.feature.marketInsights.title"),
-      description: t("landing.feature.marketInsights.description"),
+      title: "Personalized Market Insights",
+      description:
+        "Receive tailored market analysis and insights based on your trading style and psychological profile.",
     },
     {
       key: "screenshotAnalysis",
       icon: <BarChart3 className="h-5 w-5 text-blue-600" />,
-      title: t("landing.feature.screenshotAnalysis.title"),
-      description: t("landing.feature.screenshotAnalysis.description"),
+      title: "Screenshot Analysis",
+      description: "Analyze screenshots of your trades to identify emotional biases and improve future performance.",
     },
     {
       key: "progressTracking",
       icon: <TrendingUp className="h-5 w-5 text-blue-600" />,
-      title: t("landing.feature.progressTracking.title"),
-      description: t("landing.feature.progressTracking.description"),
+      title: "Progress Tracking",
+      description: "Monitor your psychological progress over time with detailed reports and visualizations.",
     },
     {
       key: "gamification",
       icon: <Award className="h-5 w-5 text-blue-600" />,
-      title: t("landing.feature.gamification.title"),
-      description: t("landing.feature.gamification.description"),
+      title: "Gamified Challenges",
+      description: "Participate in fun challenges and earn rewards as you improve your trading psychology.",
     },
     {
       key: "psychologyCourses",
       icon: <Brain className="h-5 w-5 text-blue-600" />,
-      title: t("landing.feature.psychologyCourses.title"),
-      description: t("landing.feature.psychologyCourses.description"),
+      title: "Psychology Courses",
+      description: "Access a library of courses designed to help you master your trading mindset.",
     },
     {
       key: "reflectionTools",
       icon: <Target className="h-5 w-5 text-blue-600" />,
-      title: t("landing.feature.reflectionTools.title"),
-      description: t("landing.feature.reflectionTools.description"),
+      title: "Reflection Tools",
+      description:
+        "Use journaling prompts and other tools to reflect on your trading experiences and identify areas for improvement.",
     },
   ]
 
   const headlineFeatures = [
     {
       icon: <Brain className="h-8 w-8 text-white" />,
-      title: t("landing.feature.aiCoach.title"),
-      description: t("landing.feature.aiCoach.description"),
+      title: "AI-Powered Coaching",
+      description: "Receive personalized guidance from an AI coach that understands your trading psychology.",
       gradient: "from-blue-600 to-purple-600",
     },
     {
       icon: <Target className="h-8 w-8 text-white" />,
-      title: t("landing.feature.tradeBuilder.title"),
-      description: t("landing.feature.tradeBuilder.description"),
+      title: "Trade Builder",
+      description: "Simulate trades in a risk-free environment to test your strategies and build confidence.",
       gradient: "from-green-600 to-blue-600",
     },
     {
       icon: <BarChart3 className="h-8 w-8 text-white" />,
-      title: t("landing.feature.aiAnalysis.title"),
-      description: t("landing.feature.aiAnalysis.description"),
+      title: "AI Analysis",
+      description: "Get instant feedback on your trades with AI-powered analysis.",
       gradient: "from-purple-600 to-pink-600",
     },
   ]
@@ -153,57 +156,57 @@ export function LandingPage() {
   const steps = [
     {
       number: "01",
-      title: t("landing.step.assessment.title"),
-      description: t("landing.step.assessment.description"),
+      title: "Assessment",
+      description: "Take a comprehensive assessment to identify your psychological strengths and weaknesses.",
       icon: <CheckCircle className="h-6 w-6 text-blue-600" />,
     },
     {
       number: "02",
-      title: t("landing.step.coaching.title"),
-      description: t("landing.step.coaching.description"),
+      title: "Coaching",
+      description: "Receive personalized coaching from an AI that understands your trading psychology.",
       icon: <Brain className="h-6 w-6 text-blue-600" />,
     },
     {
       number: "03",
-      title: t("landing.step.practice.title"),
-      description: t("landing.step.practice.description"),
+      title: "Practice",
+      description: "Practice your trading strategies in a risk-free environment.",
       icon: <Target className="h-6 w-6 text-blue-600" />,
     },
     {
       number: "04",
-      title: t("landing.step.track.title"),
-      description: t("landing.step.track.description"),
+      title: "Track",
+      description: "Track your progress and see how your trading psychology improves over time.",
       icon: <TrendingUp className="h-6 w-6 text-blue-600" />,
     },
   ]
 
   const stats = [
-    { value: "10,000+", label: t("landing.stats.activeTraders") },
-    { value: "85%", label: t("landing.stats.improvedConsistency") },
-    { value: "4.9/5", label: t("landing.stats.userRating") },
-    { value: "24/7", label: t("landing.stats.aiSupport") },
+    { value: "10,000+", label: "Active Traders" },
+    { value: "85%", label: "Improved Consistency" },
+    { value: "4.9/5", label: "User Rating" },
+    { value: "24/7", label: "AI Support" },
   ]
 
   const trustIndicators = [
     {
       icon: <Shield className="h-6 w-6 text-blue-600" />,
-      title: t("landing.trust.security.title"),
-      description: t("landing.trust.security.description"),
+      title: "Secure Platform",
+      description: "Your data is protected with bank-level security.",
     },
     {
       icon: <Zap className="h-6 w-6 text-blue-600" />,
-      title: t("landing.trust.realtime.title"),
-      description: t("landing.trust.realtime.description"),
+      title: "Real-Time Analysis",
+      description: "Get instant feedback on your trades.",
     },
     {
       icon: <Users className="h-6 w-6 text-blue-600" />,
-      title: t("landing.trust.community.title"),
-      description: t("landing.trust.community.description"),
+      title: "Community Support",
+      description: "Connect with other traders and share your experiences.",
     },
     {
       icon: <Award className="h-6 w-6 text-blue-600" />,
-      title: t("landing.trust.results.title"),
-      description: t("landing.trust.results.description"),
+      title: "Proven Results",
+      description: "Our platform is designed to help you achieve your trading goals.",
     },
   ]
 
@@ -218,14 +221,14 @@ export function LandingPage() {
                 <Brain className="h-5 w-5 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">{t("landing.title")}</h1>
-                <p className="text-xs text-gray-600">{t("landing.subtitle")}</p>
+                <h1 className="text-xl font-bold text-gray-900">ProFitz</h1>
+                <p className="text-xs text-gray-600">Trading Psychology Lab</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
               <LanguageSwitcher />
               <Button variant="ghost" size="sm">
-                {t("landing.signIn")}
+                Sign In
               </Button>
             </div>
           </div>
@@ -242,15 +245,16 @@ export function LandingPage() {
                 variant="secondary"
                 className="mb-6 px-4 py-2 text-sm font-medium bg-blue-100 text-blue-800 border-blue-200"
               >
-                {t("landing.badge")}
+                AI-Powered Trading Psychology
               </Badge>
 
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-                {t("landing.heroTitle")}
+                Master Your Trading Mindset
               </h1>
 
               <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                {t("landing.description")}
+                Master your trading psychology with AI-powered coaching, behavioral analysis, and interactive exercises
+                designed to build mental resilience and better decision-making.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
@@ -258,12 +262,12 @@ export function LandingPage() {
                   size="lg"
                   className="px-8 py-3 text-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
                 >
-                  {t("landing.getStarted")}
+                  Start Your Journey
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 <Button variant="outline" size="lg" className="px-8 py-3 text-lg border-2">
                   <Play className="mr-2 h-5 w-5" />
-                  {t("landing.learnMore")}
+                  Watch Demo
                 </Button>
               </div>
             </div>
@@ -271,15 +275,11 @@ export function LandingPage() {
             {/* Right Video */}
             <div className="relative">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-100 to-purple-100 p-1">
-                <video
-                  className="w-full h-auto rounded-xl"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  poster="/placeholder.svg?height=400&width=600&text=Loading..."
-                >
-                  <source src="/hero-video.mp4" type="video/mp4" />
+                <video className="w-full h-auto rounded-xl" autoPlay loop muted playsInline>
+                  <source
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Untitled%20design%20%2813%29-Yj6lPNskxrTQ3I69XWutaZGuyp4wwy.mp4"
+                    type="video/mp4"
+                  />
                   <div className="w-full h-64 bg-gradient-to-br from-blue-200 to-purple-200 rounded-xl flex items-center justify-center">
                     <Play className="h-16 w-16 text-blue-600" />
                   </div>
@@ -312,9 +312,9 @@ export function LandingPage() {
       <section className="py-20 px-4 bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">{t("landing.headlineFeaturesTitle")}</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Supercharge Your Trading</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              {t("landing.headlineFeaturesSubtitle")}
+              Unlock your trading potential with our AI-powered tools and personalized insights.
             </p>
           </div>
 
@@ -343,12 +343,12 @@ export function LandingPage() {
       <section className="py-20 px-4 bg-white">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">{t("landing.featuresTitle")}</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Key Features</h2>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
-              {t("landing.featuresSubtitle")}
+              Explore the features that make our platform the ultimate tool for mastering your trading psychology.
             </p>
             <Button onClick={toggleAllFeatures} variant="outline" className="mb-8">
-              {expandedFeatures.size === features.length ? t("common.collapseAll") : t("common.expandAll")}
+              {expandedFeatures.size === features.length ? "Collapse All" : "Expand All"}
             </Button>
           </div>
 
@@ -371,8 +371,10 @@ export function LandingPage() {
       <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-purple-50">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">{t("landing.howItWorksTitle")}</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">{t("landing.howItWorksSubtitle")}</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">How It Works</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Our simple four-step process to improve your trading psychology.
+            </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -396,7 +398,7 @@ export function LandingPage() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">{t("landing.trust.title")}</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Why Trust Us</h2>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -414,12 +416,14 @@ export function LandingPage() {
       {/* Demo Section */}
       <section className="py-20 px-4 bg-gradient-to-br from-gray-900 to-blue-900 text-white">
         <div className="container mx-auto text-center max-w-4xl">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">{t("landing.demo.title")}</h2>
-          <p className="text-xl text-blue-100 mb-8">{t("landing.demo.description")}</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">Watch a Demo</h2>
+          <p className="text-xl text-blue-100 mb-8">
+            See how our platform can help you master your trading psychology.
+          </p>
           <div className="bg-gray-800 rounded-lg p-8 aspect-video flex items-center justify-center">
             <div className="text-center">
               <Play className="h-16 w-16 text-blue-400 mx-auto mb-4" />
-              <p className="text-gray-400">{t("landing.demo.title")}</p>
+              <p className="text-gray-400">Watch a Demo</p>
             </div>
           </div>
         </div>
@@ -428,10 +432,12 @@ export function LandingPage() {
       {/* CTA Section */}
       <section className="py-20 px-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
         <div className="container mx-auto text-center max-w-4xl">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">{t("landing.ctaTitle")}</h2>
-          <p className="text-xl text-blue-100 mb-8 leading-relaxed">{t("landing.ctaSubtitle")}</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Transform Your Trading?</h2>
+          <p className="text-xl text-blue-100 mb-8 leading-relaxed">
+            Start your journey to a more disciplined and profitable trading mindset today.
+          </p>
           <Button size="lg" className="px-8 py-3 text-lg bg-white text-blue-600 hover:bg-gray-100">
-            {t("landing.ctaButton")}
+            Get Started Now
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </div>
@@ -447,57 +453,57 @@ export function LandingPage() {
                   <Brain className="h-5 w-5 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold">{t("landing.title")}</h3>
-                  <p className="text-xs text-gray-400">{t("landing.subtitle")}</p>
+                  <h3 className="text-lg font-bold">ProFitz</h3>
+                  <p className="text-xs text-gray-400">Trading Psychology Lab</p>
                 </div>
               </div>
-              <p className="text-gray-400 text-sm leading-relaxed">{t("landing.footerTagline")}</p>
+              <p className="text-gray-400 text-sm leading-relaxed">Your AI-Powered Trading Psychology Coach</p>
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4">{t("landing.footerProduct")}</h4>
+              <h4 className="font-semibold mb-4">Product</h4>
               <ul className="space-y-2 text-sm text-gray-400">
                 <li>
                   <a href="#" className="hover:text-white transition-colors">
-                    {t("landing.footerFeatures")}
+                    Features
                   </a>
                 </li>
                 <li>
                   <a href="#" className="hover:text-white transition-colors">
-                    {t("landing.footerPricing")}
+                    Pricing
                   </a>
                 </li>
                 <li>
                   <a href="#" className="hover:text-white transition-colors">
-                    {t("landing.footerDemo")}
+                    Demo
                   </a>
                 </li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4">{t("landing.footerSupport")}</h4>
+              <h4 className="font-semibold mb-4">Support</h4>
               <ul className="space-y-2 text-sm text-gray-400">
                 <li>
                   <a href="#" className="hover:text-white transition-colors">
-                    {t("landing.footerHelp")}
+                    Help Center
                   </a>
                 </li>
                 <li>
                   <a href="#" className="hover:text-white transition-colors">
-                    {t("landing.footerContact")}
+                    Contact Us
                   </a>
                 </li>
                 <li>
                   <a href="#" className="hover:text-white transition-colors">
-                    {t("landing.footerCommunity")}
+                    Community
                   </a>
                 </li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4">{t("landing.footerLanguages")}</h4>
+              <h4 className="font-semibold mb-4">Languages</h4>
               <div className="text-sm text-gray-400">
                 <LanguageSwitcher />
               </div>
@@ -507,7 +513,7 @@ export function LandingPage() {
           <Separator className="bg-gray-800 mb-8" />
 
           <div className="text-center text-sm text-gray-400">
-            <p>{t("landing.footerCopyright")}</p>
+            <p>Copyright © 2024 ProFitz. All rights reserved.</p>
           </div>
         </div>
       </footer>
