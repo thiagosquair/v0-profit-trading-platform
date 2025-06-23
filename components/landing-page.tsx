@@ -253,7 +253,8 @@ export function LandingPage() {
               </h1>
 
               <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                {t("landing.heroDescription")}
+                Master your trading psychology with AI-powered coaching, behavioral analysis, and interactive exercises
+                designed to build mental resilience and better decision-making.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
@@ -261,12 +262,12 @@ export function LandingPage() {
                   size="lg"
                   className="px-8 py-3 text-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
                 >
-                  {t("landing.getStarted")}
+                  Start Your Journey
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 <Button variant="outline" size="lg" className="px-8 py-3 text-lg border-2">
                   <Play className="mr-2 h-5 w-5" />
-                  {t("landing.watchDemo")}
+                  Watch Demo
                 </Button>
               </div>
             </div>
@@ -279,9 +280,6 @@ export function LandingPage() {
                     src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Untitled%20design%20%2814%29-JZOHGFprjAYiSZZUU6CaIo1E6iQENu.mp4"
                     type="video/mp4"
                   />
-                  <div className="w-full h-64 bg-gradient-to-br from-blue-200 to-purple-200 rounded-xl flex items-center justify-center">
-                    <Play className="h-16 w-16 text-blue-600" />
-                  </div>
                 </video>
               </div>
               {/* Decorative elements */}
