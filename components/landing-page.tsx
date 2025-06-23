@@ -40,23 +40,23 @@ export function LandingPage() {
   const content = {
     en: {
       title: "ProFitz",
-      subtitle: "Psychology Lab",
+      subtitle: "Trading Psychology Lab",
       description:
         "Master your trading psychology with AI-powered coaching, behavioral analysis, and interactive exercises designed to build mental resilience and better decision-making.",
       getStarted: "Start Your Journey",
       learnMore: "Watch Demo",
       signIn: "Sign In",
       badge: "AI-Powered Trading Psychology",
-      heroTitle: "Transform Your Trading Mindset",
-      featuresTitle: "Everything You Need to Master Trading Psychology",
-      featuresSubtitle: "Our comprehensive platform combines cutting-edge AI with proven Psychological Techniques",
+      heroTitle: "Master Your Trading Mindset",
+      featuresTitle: "Your Complete Toolkit for Trading Psychology Mastery",
+      featuresSubtitle: "From AI-Driven Insights to Personalized Coaching, Everything You Need to Conquer the Mental Game of Trading",
       howItWorksTitle: "How ProFitz Works",
-      howItWorksSubtitle: "A simple 4-step process to transform your trading psychology",
-      testimonialsTitle: "What Traders Say About ProFitz",
+      howItWorksSubtitle: "Your Path to Trading Mastery in 4 Simple Steps",
+      testimonialsTitle: "Join Thousands of Successful Traders",
       testimonialsSubtitle: "Join thousands of traders who have transformed their mindset",
-      ctaTitle: "Ready to Master Your Trading Psychology?",
-      ctaSubtitle: "Join ProFitz today and start your journey toward consistent, disciplined trading.",
-      ctaButton: "Start Free Trial",
+      ctaTitle: "Ready to Unlock Your Full Trading Potential??",
+      ctaSubtitle: "Join ProFitz Today and Start Your Journey to Consistent, Disciplined and Profitable Trading.",
+      ctaButton: "Start Free Plan",
       footerTagline: "Transforming traders through AI-powered psychology coaching.",
       footerProduct: "Product",
       footerSupport: "Support",
@@ -723,7 +723,7 @@ export function LandingPage() {
       <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-sky-50">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-navy-900 mb-4">Choose Your Psychology Journey</h2>
+            <h2 className="text-4xl font-bold text-navy-900 mb-4">Find the Perfect Plan for Your Trading Journey</h2>
             <p className="text-xl text-navy-600">Start free, upgrade when you're ready</p>
           </div>
 
@@ -816,7 +816,7 @@ export function LandingPage() {
       <section className="py-16 px-4 bg-gradient-to-r from-navy-50 to-royal-blue-50">
         <div className="container mx-auto">
           <div className="text-center mb-12">
-            <h3 className="text-2xl font-bold text-navy-800 mb-4">Trusted by Professional Traders</h3>
+            <h3 className="text-2xl font-bold text-navy-800 mb-4">The Professional's Choice for a Reason</h3>
           </div>
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <div className="flex flex-col items-center">
