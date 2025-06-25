@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
 import { put } from '@vercel/blob';
-import { 
-  TradeContext, 
-  AnalysisAPIResponse, 
-  ANALYSIS_CONSTRAINTS 
-} from '../../lib/types'; // Corrected path
-import { 
+import {
+  TradeContext,
+  AnalysisAPIResponse,
+  ANALYSIS_CONSTRAINTS
+} from '@/lib/types'; // Corrected path using @/ alias
+import {
   validateFormData,
   extractContextFromFormData,
   buildAnalysisPrompt,
@@ -14,7 +14,7 @@ import {
   validateImageUrl,
   formatAnalysisResponse,
   formatErrorResponse
-} from '../../lib/analysisUtils'; // Corrected path
+} from '@/lib/analysisUtils'; // Corrected path using @/ alias
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! });
 
