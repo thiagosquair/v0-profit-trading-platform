@@ -5,7 +5,7 @@ import {
   TradeContext, 
   AnalysisAPIResponse, 
   ANALYSIS_CONSTRAINTS 
-} from './types';
+} from '../../lib/types'; // Corrected path
 import { 
   validateFormData,
   extractContextFromFormData,
@@ -14,7 +14,7 @@ import {
   validateImageUrl,
   formatAnalysisResponse,
   formatErrorResponse
-} from './utils';
+} from '../../lib/analysisUtils'; // Corrected path
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! });
 
