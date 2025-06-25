@@ -1,12 +1,24 @@
 // app/api/analyze/route.ts
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
+import { put } from '@vercel/blob';
 import OpenAI from 'openai';
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! });
 
-export async function POST(req: NextRequest) {
-  const body = await req.json();
-  const { base64Image } = body;
+export async function POST(req: Request) {
+  const formData = await req.formData();
+  const file = formData.get('image') as File;
+
+  if (!file) {
+    return NextResponse.json({ success: false, error: 'No image provided' }, { status: 400 });
+  }
+
+  // Upload the file to Vercel Blob
+  const blob = await put(file.name, file.stream(), {
+    access: 'public',
+  });
+
+  const imageUrl = blob.url;
 
   const prompt = `
 You are a professional trading coach and mentor. Analyze the attached screenshot of a completed trade, which includes a projection with entry, stop loss, and take profit levels marked on a chart.
@@ -34,9 +46,7 @@ Keep your tone helpful and coach-like. Mention if anything is unclear in the ima
             { type: 'text', text: prompt },
             {
               type: 'image_url',
-              image_url: {
-                url: `data:image/png;base64,${base64Image}`,
-              },
+              image_url: { url: imageUrl },
             },
           ],
         },
