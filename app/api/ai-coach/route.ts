@@ -1,41 +1,49 @@
-import { type NextRequest, NextResponse } from "next/server"
-import { generateText } from "ai"
-import { openai } from "@/lib/openai"
+import { NextResponse } from "next/server"
+import { generateText, openai } from "@/lib/openai"
 
-export async function POST(request: NextRequest) {
+export async function POST(request: Request) {
   try {
-    const { message, userProfile, context } = await request.json()
+    const body = await request.json()
+    const { message, sessionId, context } = body
 
-    const systemPrompt = `You are an expert trading psychology coach with deep knowledge of behavioral finance, cognitive biases, and emotional regulation in trading. Your role is to provide personalized, actionable guidance to help traders improve their psychological approach to trading.
+    if (!message) {
+      return NextResponse.json({ error: "Message is required" }, { status: 400 })
+    }
 
-User Profile:
-- Trading Experience: ${userProfile?.tradingExperience || "Not specified"}
-- Trading Style: ${userProfile?.tradingStyle || "Not specified"}
-- Risk Tolerance: ${userProfile?.riskTolerance || "Not specified"}
-- Main Challenges: ${userProfile?.psychologicalChallenges?.join(", ") || "Not specified"}
-- Goals: ${userProfile?.goals?.join(", ") || "Not specified"}
+    // Create a more comprehensive system prompt based on context
+    const systemPrompt = `You are an expert trading psychology coach with deep knowledge of behavioral finance, emotional regulation, and performance optimization for traders. 
 
-Context: ${context || "General coaching session"}
+Current context: ${context || "general coaching"}
 
-Guidelines:
-1. Be empathetic and understanding
-2. Provide specific, actionable advice
-3. Reference relevant psychological concepts when appropriate
-4. Ask follow-up questions to better understand the situation
-5. Encourage self-reflection and awareness
-6. Keep responses concise but comprehensive
-7. Focus on practical strategies that can be implemented immediately`
+Your role is to:
+- Provide personalized coaching insights
+- Help traders identify and overcome psychological barriers
+- Offer practical strategies for emotional regulation
+- Guide traders through performance analysis
+- Support goal setting and achievement
+
+Respond in a supportive, professional, and actionable manner. Keep responses concise but comprehensive.`
 
     const { text } = await generateText({
-      model: openai("gpt-4o"),
+      model: openai("gpt-4o-mini"),
       system: systemPrompt,
       prompt: message,
       maxTokens: 500,
     })
 
-    return NextResponse.json({ response: text })
+    return NextResponse.json({
+      response: text,
+      sessionId: sessionId || `session_${Date.now()}`,
+      timestamp: new Date().toISOString(),
+    })
   } catch (error) {
     console.error("AI Coach API Error:", error)
-    return NextResponse.json({ error: "Failed to generate response" }, { status: 500 })
+    return NextResponse.json(
+      {
+        error: "Failed to process coaching request",
+        details: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 },
+    )
   }
 }
