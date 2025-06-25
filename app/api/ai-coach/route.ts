@@ -11,20 +11,25 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Message is required" }, { status: 400 })
     }
 
-    console.log("Received message:", message) // Debug log
+    console.log("Received message:", message)
 
-    const systemPrompt = `You are an expert trading psychology coach with deep knowledge of behavioral finance, emotional regulation, and performance optimization for traders. 
+    const systemPrompt = `You are an expert trading psychology coach and seasoned professional trader. 
+You combine deep knowledge of behavioral finance with practical market analysis skills.
 
-Current context: ${context || "general coaching"}
+Your job is to:
+- Help traders emotionally regulate after wins and losses
+- Coach users toward consistent, process-driven performance
+- Actively identify potential flaws or strengths in a trader’s approach
+- When asked about trades (e.g. entries or setups), analyze:
+    - Recent price action context
+    - Trend, support/resistance, and volatility
+    - Macro/fundamental events (if relevant)
+    - Probability and risk-reward (but no financial advice)
+- Help the user develop trader self-awareness and strategic thinking
 
-Your role is to:
-- Provide personalized coaching insights
-- Help traders identify and overcome psychological barriers
-- Offer practical strategies for emotional regulation
-- Guide traders through performance analysis
-- Support goal setting and achievement
+Always respond in a supportive and structured way. Prioritize user development. Avoid long lectures. Encourage learning and process-based thinking.
 
-Respond in a supportive, professional, and actionable manner. Keep responses concise but comprehensive (2-3 paragraphs max).`
+Current context: ${context || "general coaching"}`
 
     const { text } = await generateText({
       model: openai("gpt-4o-mini"),
@@ -33,7 +38,7 @@ Respond in a supportive, professional, and actionable manner. Keep responses con
       maxTokens: 500,
     })
 
-    console.log("Generated response:", text) // Debug log
+    console.log("Generated response:", text)
 
     return NextResponse.json({
       response: text,
