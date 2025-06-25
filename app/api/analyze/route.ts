@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
   const imageUrl = blob.url;
 
   const prompt = `
-You are a professional trading coach and mentor. Analyze the attached screenshot of a completed trade, which includes a projection with entry, stop loss, and take profit levels marked on a chart.
+You are a professional trading coach and mentor. Analyze the attached screenshot of a completed trade, which includes a projection with entry, stop loss, and take profit levels marked on a charts.
 
 Your role is to provide constructive feedback to help the trader improve.
 
