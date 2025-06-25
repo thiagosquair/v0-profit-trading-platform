@@ -1,19 +1,18 @@
-// app/api/analyze/route.ts
-import { NextResponse } from 'next/server';
-import { put } from '@vercel/blob';
+import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
+import { put } from '@vercel/blob';
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! });
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   const formData = await req.formData();
   const file = formData.get('image') as File;
 
   if (!file) {
-    return NextResponse.json({ success: false, error: 'No image provided' }, { status: 400 });
+    return NextResponse.json({ success: false, error: 'No file uploaded' }, { status: 400 });
   }
 
-  // Upload the file to Vercel Blob
+  // Upload image to Vercel Blob Storage
   const blob = await put(file.name, file.stream(), {
     access: 'public',
   });
@@ -46,7 +45,9 @@ Keep your tone helpful and coach-like. Mention if anything is unclear in the ima
             { type: 'text', text: prompt },
             {
               type: 'image_url',
-              image_url: { url: imageUrl },
+              image_url: {
+                url: imageUrl,
+              },
             },
           ],
         },
