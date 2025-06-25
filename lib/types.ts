@@ -1,4 +1,14 @@
-// Types for the enhanced screenshot analysis system
+// Types for the enhanced screenshot analysis system with trade data
+
+export interface TradeData {
+  instrument: string;
+  tradeDirection: 'long' | 'short';
+  entryPrice: string;
+  stopLossPrice: string;
+  takeProfitPrice: string;
+  riskRewardRatio: string;
+  percentageAchieved: string;
+}
 
 export interface TradeContext {
   tradingStrategy?: string;
@@ -8,6 +18,13 @@ export interface TradeContext {
   experienceLevel?: string;
   tradeDirection?: string;
   entryReason?: string;
+  // New trade data fields
+  instrument?: string;
+  entryPrice?: string;
+  stopLossPrice?: string;
+  takeProfitPrice?: string;
+  riskRewardRatio?: string;
+  percentageAchieved?: string;
 }
 
 export interface AnalysisFormData {
@@ -19,6 +36,13 @@ export interface AnalysisFormData {
   marketConditions: string;
   specificQuestions: string;
   experienceLevel: string;
+  // New trade data fields
+  instrument: string;
+  entryPrice: string;
+  stopLossPrice: string;
+  takeProfitPrice: string;
+  riskRewardRatio: string;
+  percentageAchieved: string;
 }
 
 export interface AnalysisResult {
@@ -101,7 +125,7 @@ export const SUPPORTED_IMAGE_TYPES = [
 export const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 
 export const ANALYSIS_CONSTRAINTS = {
-  MAX_TOKENS: 2500,
+  MAX_TOKENS: 3000, // Increased for more comprehensive coaching
   TEMPERATURE: 0.7,
   MODEL: 'gpt-4o'
 } as const;
