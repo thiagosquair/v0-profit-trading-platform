@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
-import { generateText, openai } from "@/lib/openai"
+import { generateText } from "ai"
+import { openai } from "@ai-sdk/openai"
 
 export async function POST(request: Request) {
   try {
@@ -10,7 +11,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Message is required" }, { status: 400 })
     }
 
-    // Create a more comprehensive system prompt based on context
+    console.log("Received message:", message) // Debug log
+
     const systemPrompt = `You are an expert trading psychology coach with deep knowledge of behavioral finance, emotional regulation, and performance optimization for traders. 
 
 Current context: ${context || "general coaching"}
@@ -22,7 +24,7 @@ Your role is to:
 - Guide traders through performance analysis
 - Support goal setting and achievement
 
-Respond in a supportive, professional, and actionable manner. Keep responses concise but comprehensive.`
+Respond in a supportive, professional, and actionable manner. Keep responses concise but comprehensive (2-3 paragraphs max).`
 
     const { text } = await generateText({
       model: openai("gpt-4o-mini"),
@@ -30,6 +32,8 @@ Respond in a supportive, professional, and actionable manner. Keep responses con
       prompt: message,
       maxTokens: 500,
     })
+
+    console.log("Generated response:", text) // Debug log
 
     return NextResponse.json({
       response: text,
