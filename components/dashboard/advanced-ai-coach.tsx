@@ -53,13 +53,13 @@ export function AdvancedAICoach() {
       if (res.ok) {
         setResponse(data.response)
       } else {
-        setResponse(`Error: ${data.error || "Unknown error"}`)
+        setResponse(`❗ Error: ${data.error || "Unknown error"}`)
       }
 
       setMessage("")
     } catch (err) {
       console.error("Failed to fetch AI response", err)
-      setResponse("Error contacting AI Coach.")
+      setResponse("❗ Error contacting AI Coach.")
     } finally {
       setIsLoading(false)
     }
@@ -69,9 +69,7 @@ export function AdvancedAICoach() {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold">{t("nav.aiCoach")}</h1>
-        <p className="text-muted-foreground mt-2">
-          {t("getPersonalizedCoaching")}
-        </p>
+        <p className="text-muted-foreground mt-2">{t("getPersonalizedCoaching")}</p>
       </div>
 
       <Tabs defaultValue="chat" className="space-y-4">
@@ -99,18 +97,25 @@ export function AdvancedAICoach() {
                     <Brain className="h-5 w-5 text-blue-600" />
                     <span>AI {t("nav.aiCoach")}</span>
                   </CardTitle>
-                  <CardDescription>
-                    {t("getPersonalizedCoaching")}
-                  </CardDescription>
+                  <CardDescription>{t("getPersonalizedCoaching")}</CardDescription>
                 </CardHeader>
 
                 <CardContent className="flex-1 flex flex-col">
-                  <div className="flex-1 space-y-4 mb-4 overflow-y-auto">
-                    <div className="bg-muted p-4 rounded-lg space-y-2">
-                      <p className="text-sm">
-                        <strong>AI Coach:</strong>{" "}
+                  <div className="flex-1 mb-4 overflow-y-auto flex flex-col space-y-6">
+                    {/* User message bubble */}
+                    {message && (
+                      <div className="self-end max-w-[75%] bg-blue-100 text-blue-900 p-4 rounded-xl whitespace-pre-line shadow-sm">
+                        <p className="font-semibold mb-1">You 🧑‍💻:</p>
+                        <p>{message}</p>
+                      </div>
+                    )}
+
+                    {/* AI Coach response bubble */}
+                    <div className="self-start max-w-[75%] bg-green-100 text-green-900 p-4 rounded-xl whitespace-pre-line shadow-sm">
+                      <p className="font-semibold mb-1">AI Coach 🤖:</p>
+                      <p>
                         {response ||
-                          `${t("common.welcome")}! ${t("jumpInto")}`}
+                          `${t("common.welcome")}! ${t("jumpInto")} 🤗`}
                       </p>
                     </div>
                   </div>
