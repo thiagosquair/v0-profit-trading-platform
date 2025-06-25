@@ -483,32 +483,49 @@ export function LandingPage() {
       price: "$29",
       period: "/month",
       description: "For serious traders",
-      popular: true,
+      popular: false,
       features: [
         "Advanced AI Psychology Coach",
-        "Unlimited Trade Analyses",
+        "25 Trade Analyses per month",
         "Advanced Progress Tracking",
         "Priority Support",
-        "All Psychology Courses",
+        "Psychology Courses",
         "Screenshot Analysis",
         "Trade Builder",
+      ],
+    },
+    {
+      name: "Premium",
+      price: "$59",
+      period: "/month",
+      description: "For professional traders",
+      popular: true,
+      features: [
+        "Everything in Pro",
+        "Unlimited Trade Analyses",
         "Market Live Insights",
+        "Gamification System",
+        "Reflection Tools",
+        "Advanced Analytics",
+        "API Access",
+        "1-on-1 Monthly Session",
       ],
     },
     {
       name: "Elite",
-      price: "$99",
+      price: "$149",
       period: "/month",
-      description: "For professional traders",
+      description: "For trading firms & institutions",
       popular: false,
       features: [
-        "Everything in Pro",
-        "1-on-1 Expert Sessions",
+        "Everything in Premium",
+        "Weekly 1-on-1 Expert Sessions",
         "Custom Trading Plans",
-        "Advanced Analytics",
-        "API Access",
+        "Team Management",
         "White-label Options",
         "Dedicated Account Manager",
+        "Custom Integrations",
+        "Priority Feature Requests",
       ],
     },
   ]
@@ -955,7 +972,7 @@ export function LandingPage() {
             <p className="text-xl text-navy-600">Start free, upgrade when you're ready</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             {pricingPlans.map((plan, index) => (
               <Card
                 key={index}
