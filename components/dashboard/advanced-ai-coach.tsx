@@ -1,68 +1,27 @@
 "use client"
 
 import { useState } from "react"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Textarea } from "@/components/ui/textarea"
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs"
-import {
-  Brain,
-  MessageCircle,
-  Target,
-  TrendingUp,
-  Lightbulb,
-  Send,
-  Mic,
-  Settings,
-} from "lucide-react"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Brain, MessageCircle, Target, TrendingUp, Lightbulb, Send, Mic, Settings } from "lucide-react"
 import { t } from "@/lib/simple-translations"
 
 export function AdvancedAICoach() {
   const [message, setMessage] = useState("")
-  const [response, setResponse] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
   const handleSendMessage = async () => {
     if (!message.trim()) return
 
     setIsLoading(true)
-    try {
-      const res = await fetch("/api/ai-coach", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message,
-          context: "chat",
-        }),
-      })
-
-      const data = await res.json()
-
-      if (res.ok) {
-        setResponse(data.response)
-      } else {
-        setResponse(`❗ Error: ${data.error || "Unknown error"}`)
-      }
-
-      setMessage("")
-    } catch (err) {
-      console.error("Failed to fetch AI response", err)
-      setResponse("❗ Error contacting AI Coach.")
-    } finally {
+    // Simulate AI response
+    setTimeout(() => {
       setIsLoading(false)
-    }
+      setMessage("")
+    }, 2000)
   }
 
   return (
@@ -101,21 +60,10 @@ export function AdvancedAICoach() {
                 </CardHeader>
 
                 <CardContent className="flex-1 flex flex-col">
-                  <div className="flex-1 mb-4 overflow-y-auto flex flex-col space-y-6">
-                    {/* User message bubble */}
-                    {message && (
-                      <div className="self-end max-w-[75%] bg-blue-100 text-blue-900 p-4 rounded-xl whitespace-pre-line shadow-sm">
-                        <p className="font-semibold mb-1">You 🧑‍💻:</p>
-                        <p>{message}</p>
-                      </div>
-                    )}
-
-                    {/* AI Coach response bubble */}
-                    <div className="self-start max-w-[75%] bg-green-100 text-green-900 p-4 rounded-xl whitespace-pre-line shadow-sm">
-                      <p className="font-semibold mb-1">AI Coach 🤖:</p>
-                      <p>
-                        {response ||
-                          `${t("common.welcome")}! ${t("jumpInto")} 🤗`}
+                  <div className="flex-1 space-y-4 mb-4 overflow-y-auto">
+                    <div className="bg-muted p-4 rounded-lg">
+                      <p className="text-sm">
+                        <strong>AI Coach:</strong> {t("common.welcome")}! {t("jumpInto")}
                       </p>
                     </div>
                   </div>
@@ -136,10 +84,7 @@ export function AdvancedAICoach() {
                           <Settings className="h-4 w-4" />
                         </Button>
                       </div>
-                      <Button
-                        onClick={handleSendMessage}
-                        disabled={!message.trim() || isLoading}
-                      >
+                      <Button onClick={handleSendMessage} disabled={!message.trim() || isLoading}>
                         {isLoading ? (
                           t("common.loading")
                         ) : (
@@ -184,9 +129,7 @@ export function AdvancedAICoach() {
                   <div className="text-sm">
                     <div className="font-medium">{t("aiCoachingSession")}</div>
                     <div className="text-muted-foreground">{t("dayAgo")}</div>
-                    <Badge className="mt-1 bg-green-100 text-green-800">
-                      {t("positive")}
-                    </Badge>
+                    <Badge className="mt-1 bg-green-100 text-green-800">{t("positive")}</Badge>
                   </div>
                   <div className="text-sm">
                     <div className="font-medium">{t("completedEmotionalControl")}</div>
