@@ -499,16 +499,45 @@ export function TradeBuilder() {
                           <SelectValue placeholder="Select instrument" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="EURUSD">EUR/USD</SelectItem>
-                          <SelectItem value="GBPUSD">GBP/USD</SelectItem>
-                          <SelectItem value="USDJPY">USD/JPY</SelectItem>
-                          <SelectItem value="AUDUSD">AUD/USD</SelectItem>
-                          <SelectItem value="USDCAD">USD/CAD</SelectItem>
-                          <SelectItem value="USDCHF">USD/CHF</SelectItem>
-                          <SelectItem value="NZDUSD">NZD/USD</SelectItem>
-                          <SelectItem value="XAUUSD">XAU/USD (Gold)</SelectItem>
-                          <SelectItem value="BTCUSD">BTC/USD</SelectItem>
-                          <SelectItem value="ETHUSD">ETH/USD</SelectItem>
+                          <SelectItem value="EURAUD">EUR/AUD</SelectItem>
+ <SelectItem value="EURCAD">EUR/CAD</SelectItem>
+<SelectItem value="EURCHF">EUR/CHF</SelectItem>
+<SelectItem value="EURGBP">EUR/GBP</SelectItem>
+<SelectItem value="EURJPY">EUR/JPY</SelectItem>
+<SelectItem value="EURNZD">EUR/NZD</SelectItem>
+<SelectItem value="EURUSD">EUR/USD</SelectItem>
+<SelectItem value="GBPAUD">GBP/AUD</SelectItem>
+<SelectItem value="GBPCAD">GBP/CAD</SelectItem>
+<SelectItem value="GBPCHF">GBP/CHF</SelectItem>
+<SelectItem value="GBPJPY">GBP/JPY</SelectItem>
+<SelectItem value="GBPNZD">GBP/NZD</SelectItem>
+<SelectItem value="GBPUSD">GBP/USD</SelectItem>
+<SelectItem value="USDAUD">USD/AUD</SelectItem>
+<SelectItem value="USDCAD">USD/CAD</SelectItem>
+<SelectItem value="USDCHF">USD/CHF</SelectItem>
+<SelectItem value="USDJPY">USD/JPY</SelectItem>
+<SelectItem value="USDNZD">USD/NZD</SelectItem>
+<SelectItem value="AUDCAD">AUD/CAD</SelectItem>
+<SelectItem value="AUDCHF">AUD/CHF</SelectItem>
+<SelectItem value="AUDJPY">AUD/JPY</SelectItem>
+<SelectItem value="AUDNZD">AUD/NZD</SelectItem>
+<SelectItem value="CADCHF">CAD/CHF</SelectItem>
+<SelectItem value="CADJPY">CAD/JPY</SelectItem>
+<SelectItem value="CHFJPY">CHF/JPY</SelectItem>
+<SelectItem value="NZDCAD">NZD/CAD</SelectItem>
+<SelectItem value="NZDCHF">NZD/CHF</SelectItem>
+<SelectItem value="NZDJPY">NZD/JPY</SelectItem>
+<SelectItem value="XAGUSD">Silver (XAG/USD)</SelectItem>
+<SelectItem value="XAUUSD">XAU/USD (Gold)</SelectItem>
+<SelectItem value="USOIL">US Oil</SelectItem>
+<SelectItem value="SPX500">S&P 500</SelectItem>
+<SelectItem value="NAS100">Nasdaq 100</SelectItem>
+<SelectItem value="US30">Dow Jones (US30)</SelectItem>
+<SelectItem value="GER40">DAX (GER40)</SelectItem>
+<SelectItem value="UK100">FTSE 100 (UK100)</SelectItem>
+<SelectItem value="JPN225">Nikkei 225 (JPN225)</SelectItem>
+<SelectItem value="BTCUSD">BTC/USD</SelectItem>
+<SelectItem value="ETHUSD">ETH/USD</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
