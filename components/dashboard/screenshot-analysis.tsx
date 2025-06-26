@@ -55,7 +55,9 @@ const STORAGE_KEY = 'profitz_trade_analyses'
 
 const saveAnalysesToStorage = (analyses: Analysis[]) => {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(analyses))
+    if (typeof window !== 'undefined') { // Ensure localStorage is available
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(analyses))
+    }
   } catch (error) {
     console.error('Failed to save analyses to storage:', error)
   }
@@ -63,13 +65,15 @@ const saveAnalysesToStorage = (analyses: Analysis[]) => {
 
 const loadAnalysesFromStorage = (): Analysis[] => {
   try {
-    const stored = localStorage.getItem(STORAGE_KEY)
-    if (stored) {
-      const parsed = JSON.parse(stored)
-      return parsed.map((analysis: any) => ({
-        ...analysis,
-        timestamp: new Date(analysis.timestamp)
-      }))
+    if (typeof window !== 'undefined') { // Ensure localStorage is available
+      const stored = localStorage.getItem(STORAGE_KEY)
+      if (stored) {
+        const parsed = JSON.parse(stored)
+        return parsed.map((analysis: any) => ({
+          ...analysis,
+          timestamp: new Date(analysis.timestamp)
+        }))
+      }
     }
   } catch (error) {
     console.error('Failed to load analyses from storage:', error)
@@ -146,9 +150,9 @@ const calculateTradingInsights = (analyses: Analysis[]): TradingInsights => {
     const olderAvgRRR = olderTrades.reduce((sum, t) => sum + (parseFloat(t.tradeData.riskRewardRatio) || 0), 0) / olderTrades.length
     
     if (recentAvgRRR > olderAvgRRR) {
-      recentImprovement = `Risk-Reward ratio improved by ${((recentAvgRRR - olderAvgRRR) * 100).toFixed(1)}%`
+      recentImprovement = `Risk-Reward ratio improved by ${((recentAvgRRR - olderAvgRRR) / olderAvgRRR * 100).toFixed(1)}%`
     } else if (recentAvgRRR < olderAvgRRR) {
-      recentImprovement = `Focus needed: Risk-Reward ratio decreased by ${((olderAvgRRR - recentAvgRRR) * 100).toFixed(1)}%`
+      recentImprovement = `Focus needed: Risk-Reward ratio decreased by ${((olderAvgRRR - recentAvgRRR) / olderAvgRRR * 100).toFixed(1)}%`
     } else {
       recentImprovement = 'Consistent risk management maintained'
     }
@@ -218,7 +222,9 @@ export function ScreenshotAnalysis() {
   const [analyses, setAnalyses] = useState<Analysis[]>([])
   const [error, setError] = useState<string | null>(null)
   const [showTradeForm, setShowTradeForm] = useState(false)
-  const [insights, setInsights] = useState<TradingInsights | null>(null)
+  
+  // Initialize insights with a default object to prevent null access
+  const [insights, setInsights] = useState<TradingInsights>(calculateTradingInsights([]))
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   // Trade data state
