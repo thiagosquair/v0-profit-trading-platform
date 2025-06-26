@@ -184,7 +184,7 @@ export function TradeBuilder() {
 
   // Calculate risk-reward ratio and potential P&L
   const calculateRiskMetrics = () => {
-    if (tradeData.entryPrice && tradeData.stopLoss && tradeData.takeProfit && tradeData.direction) {
+    if (tradeData.entryPrice !== null && tradeData.stopLoss !== null && tradeData.takeProfit !== null && tradeData.direction) {
       const entry = tradeData.entryPrice
       const sl = tradeData.stopLoss
       const tp = tradeData.takeProfit
@@ -192,20 +192,30 @@ export function TradeBuilder() {
       let risk: number, reward: number
       
       if (tradeData.direction === 'long') {
-        risk = entry - sl
-        reward = tp - entry
+        risk = Math.abs(entry - sl)
+        reward = Math.abs(tp - entry)
       } else {
-        risk = sl - entry
-        reward = entry - tp
+        risk = Math.abs(sl - entry)
+        reward = Math.abs(entry - tp)
       }
       
+      if (risk === 0) {
+        setTradeData(prev => ({
+          ...prev,
+          riskRewardRatio: null,
+          potentialLoss: 0,
+          potentialProfit: reward
+        }))
+        return // Avoid division by zero
+      }
+
       const rrRatio = reward / risk
       
       setTradeData(prev => ({
         ...prev,
-        riskRewardRatio: Math.round(rrRatio * 100) / 100,
-        potentialLoss: risk,
-        potentialProfit: reward
+        riskRewardRatio: parseFloat(rrRatio.toFixed(2)),
+        potentialLoss: parseFloat(risk.toFixed(2)),
+        potentialProfit: parseFloat(reward.toFixed(2))
       }))
     }
   }
@@ -269,8 +279,8 @@ export function TradeBuilder() {
           errors.push('Trade direction is required')
         }
       } else if (['entryPrice', 'stopLoss', 'takeProfit'].includes(field)) {
-        if (!tradeData[field as keyof EnhancedTrade]) {
-          errors.push(`${field.replace(/([A-Z])/g, ' $1').toLowerCase()} is required`)
+        if (tradeData[field as keyof EnhancedTrade] === null || isNaN(Number(tradeData[field as keyof EnhancedTrade]))) {
+          errors.push(`${field.replace(/([A-Z])/g, ' $1').toLowerCase()} is required and must be a number`)
         }
       }
     })
@@ -499,45 +509,18 @@ export function TradeBuilder() {
                           <SelectValue placeholder="Select instrument" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="EURAUD">EUR/AUD</SelectItem>
- <SelectItem value="EURCAD">EUR/CAD</SelectItem>
-<SelectItem value="EURCHF">EUR/CHF</SelectItem>
-<SelectItem value="EURGBP">EUR/GBP</SelectItem>
-<SelectItem value="EURJPY">EUR/JPY</SelectItem>
-<SelectItem value="EURNZD">EUR/NZD</SelectItem>
-<SelectItem value="EURUSD">EUR/USD</SelectItem>
-<SelectItem value="GBPAUD">GBP/AUD</SelectItem>
-<SelectItem value="GBPCAD">GBP/CAD</SelectItem>
-<SelectItem value="GBPCHF">GBP/CHF</SelectItem>
-<SelectItem value="GBPJPY">GBP/JPY</SelectItem>
-<SelectItem value="GBPNZD">GBP/NZD</SelectItem>
-<SelectItem value="GBPUSD">GBP/USD</SelectItem>
-<SelectItem value="USDAUD">USD/AUD</SelectItem>
-<SelectItem value="USDCAD">USD/CAD</SelectItem>
-<SelectItem value="USDCHF">USD/CHF</SelectItem>
-<SelectItem value="USDJPY">USD/JPY</SelectItem>
-<SelectItem value="USDNZD">USD/NZD</SelectItem>
-<SelectItem value="AUDCAD">AUD/CAD</SelectItem>
-<SelectItem value="AUDCHF">AUD/CHF</SelectItem>
-<SelectItem value="AUDJPY">AUD/JPY</SelectItem>
-<SelectItem value="AUDNZD">AUD/NZD</SelectItem>
-<SelectItem value="CADCHF">CAD/CHF</SelectItem>
-<SelectItem value="CADJPY">CAD/JPY</SelectItem>
-<SelectItem value="CHFJPY">CHF/JPY</SelectItem>
-<SelectItem value="NZDCAD">NZD/CAD</SelectItem>
-<SelectItem value="NZDCHF">NZD/CHF</SelectItem>
-<SelectItem value="NZDJPY">NZD/JPY</SelectItem>
-<SelectItem value="XAGUSD">Silver (XAG/USD)</SelectItem>
-<SelectItem value="XAUUSD">XAU/USD (Gold)</SelectItem>
-<SelectItem value="USOIL">US Oil</SelectItem>
-<SelectItem value="SPX500">S&P 500</SelectItem>
-<SelectItem value="NAS100">Nasdaq 100</SelectItem>
-<SelectItem value="US30">Dow Jones (US30)</SelectItem>
-<SelectItem value="GER40">DAX (GER40)</SelectItem>
-<SelectItem value="UK100">FTSE 100 (UK100)</SelectItem>
-<SelectItem value="JPN225">Nikkei 225 (JPN225)</SelectItem>
-<SelectItem value="BTCUSD">BTC/USD</SelectItem>
-<SelectItem value="ETHUSD">ETH/USD</SelectItem>
+                          <SelectItem value="EURUSD">EUR/USD</SelectItem>
+                          <SelectItem value="GBPUSD">GBP/USD</SelectItem>
+                          <SelectItem value="USDJPY">USD/JPY</SelectItem>
+                          <SelectItem value="AUDUSD">AUD/USD</SelectItem>
+                          <SelectItem value="USDCAD">USD/CAD</SelectItem>
+                          <SelectItem value="USDCHF">USD/CHF</SelectItem>
+                          <SelectItem value="NZDUSD">NZD/USD</SelectItem>
+                          <SelectItem value="XAUUSD">XAU/USD (Gold)</SelectItem>
+                          <SelectItem value="SPX500">S&P 500</SelectItem>
+                          <SelectItem value="NAS100">NASDAQ 100</SelectItem>
+                          <SelectItem value="BTCUSD">BTC/USD</SelectItem>
+                          <SelectItem value="ETHUSD">ETH/USD</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -551,22 +534,23 @@ export function TradeBuilder() {
                           <SelectValue placeholder="Select timeframe" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="1m">1 Minute</SelectItem>
-                          <SelectItem value="5m">5 Minutes</SelectItem>
-                          <SelectItem value="15m">15 Minutes</SelectItem>
-                          <SelectItem value="30m">30 Minutes</SelectItem>
-                          <SelectItem value="1h">1 Hour</SelectItem>
-                          <SelectItem value="4h">4 Hours</SelectItem>
-                          <SelectItem value="1d">1 Day</SelectItem>
-                          <SelectItem value="1w">1 Week</SelectItem>
+                          <SelectItem value="M1">1 Minute</SelectItem>
+                          <SelectItem value="M5">5 Minute</SelectItem>
+                          <SelectItem value="M15">15 Minute</SelectItem>
+                          <SelectItem value="M30">30 Minute</SelectItem>
+                          <SelectItem value="H1">1 Hour</SelectItem>
+                          <SelectItem value="H4">4 Hour</SelectItem>
+                          <SelectItem value="D1">1 Day</SelectItem>
+                          <SelectItem value="W1">1 Week</SelectItem>
+                          <SelectItem value="MN1">1 Month</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                     <div>
-                      <Label className="text-sm font-medium">Direction *</Label>
+                      <Label className="text-sm font-medium">Trade Direction *</Label>
                       <Select 
                         value={tradeData.direction || ''} 
-                        onValueChange={(value) => setTradeData(prev => ({...prev, direction: value as 'long' | 'short'}))}
+                        onValueChange={(value: 'long' | 'short') => setTradeData(prev => ({...prev, direction: value}))}
                       >
                         <SelectTrigger>
                           <SelectValue placeholder="Select direction" />
@@ -578,525 +562,382 @@ export function TradeBuilder() {
                       </Select>
                     </div>
                   </div>
-
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
-                      <Label className="text-sm font-medium">Entry Price *</Label>
+                      <Label htmlFor="entryPrice" className="text-sm font-medium">Entry Price *</Label>
                       <Input 
+                        id="entryPrice" 
                         type="number" 
-                        step="0.00001"
-                        placeholder="1.08500" 
-                        value={tradeData.entryPrice || ''}
-                        onChange={(e) => setTradeData(prev => ({...prev, entryPrice: parseFloat(e.target.value) || null}))}
+                        step="any" 
+                        placeholder="e.g., 1.07500" 
+                        value={tradeData.entryPrice !== null ? tradeData.entryPrice : ''}
+                        onChange={(e) => setTradeData(prev => ({...prev, entryPrice: parseFloat(e.target.value)}))}
                       />
                     </div>
                     <div>
-                      <Label className="text-sm font-medium">Stop Loss *</Label>
+                      <Label htmlFor="stopLoss" className="text-sm font-medium">Stop Loss *</Label>
                       <Input 
+                        id="stopLoss" 
                         type="number" 
-                        step="0.00001"
-                        placeholder="1.08000" 
-                        value={tradeData.stopLoss || ''}
-                        onChange={(e) => setTradeData(prev => ({...prev, stopLoss: parseFloat(e.target.value) || null}))}
+                        step="any" 
+                        placeholder="e.g., 1.07400" 
+                        value={tradeData.stopLoss !== null ? tradeData.stopLoss : ''}
+                        onChange={(e) => setTradeData(prev => ({...prev, stopLoss: parseFloat(e.target.value)}))}
                       />
                     </div>
                     <div>
-                      <Label className="text-sm font-medium">Take Profit *</Label>
+                      <Label htmlFor="takeProfit" className="text-sm font-medium">Take Profit *</Label>
                       <Input 
+                        id="takeProfit" 
                         type="number" 
-                        step="0.00001"
-                        placeholder="1.09500" 
-                        value={tradeData.takeProfit || ''}
-                        onChange={(e) => setTradeData(prev => ({...prev, takeProfit: parseFloat(e.target.value) || null}))}
+                        step="any" 
+                        placeholder="e.g., 1.07700" 
+                        value={tradeData.takeProfit !== null ? tradeData.takeProfit : ''}
+                        onChange={(e) => setTradeData(prev => ({...prev, takeProfit: parseFloat(e.target.value)}))}
                       />
                     </div>
                   </div>
-
-                  {/* Risk-Reward Display */}
-                  {tradeData.riskRewardRatio && (
-                    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="text-sm font-medium text-blue-900">Risk:Reward Ratio</p>
-                          <p className="text-3xl font-bold text-blue-600">1:{tradeData.riskRewardRatio}</p>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-sm text-blue-700">
-                            Risk: {tradeData.potentialLoss?.toFixed(5)} | 
-                            Reward: {tradeData.potentialProfit?.toFixed(5)}
-                          </p>
-                          <Badge variant={tradeData.riskRewardRatio >= 2 ? "default" : "secondary"} className="mt-1">
-                            {tradeData.riskRewardRatio >= 2 ? "Excellent" : tradeData.riskRewardRatio >= 1.5 ? "Good" : "Needs Improvement"}
-                          </Badge>
-                        </div>
-                      </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label className="text-sm font-medium">Calculated Risk:Reward Ratio</Label>
+                      <Input 
+                        type="text" 
+                        readOnly 
+                        value={tradeData.riskRewardRatio !== null ? `1:${tradeData.riskRewardRatio.toFixed(2)}` : 'N/A'}
+                        className="bg-gray-100 dark:bg-gray-800"
+                      />
                     </div>
-                  )}
+                    <div>
+                      <Label className="text-sm font-medium">Potential Profit / Loss (Units)</Label>
+                      <Input 
+                        type="text" 
+                        readOnly 
+                        value={tradeData.potentialProfit !== null && tradeData.potentialLoss !== null 
+                          ? `+${tradeData.potentialProfit.toFixed(2)} / -${tradeData.potentialLoss.toFixed(2)}` 
+                          : 'N/A'}
+                        className="bg-gray-100 dark:bg-gray-800"
+                      />
+                    </div>
+                  </div>
                 </div>
               )}
 
               {/* Step 2: Screenshot Upload */}
               {currentStep === 2 && (
                 <div className="space-y-4">
-                  <div>
-                    <Label className="text-sm font-medium">TradingView Chart Screenshot *</Label>
-                    <p className="text-sm text-muted-foreground mb-4">
-                      Upload a screenshot of your TradingView chart showing the trade setup with projection tool
-                    </p>
-                    
-                    {!tradeData.screenshotPreview ? (
-                      <div 
-                        className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-blue-400 hover:bg-blue-50 transition-all duration-200"
-                        onClick={() => fileInputRef.current?.click()}
-                      >
-                        <Upload className="h-12 w-12 mx-auto text-gray-400 mb-4" />
-                        <p className="text-lg font-medium text-gray-600">Click to upload screenshot</p>
-                        <p className="text-sm text-gray-500">PNG, JPG up to 10MB</p>
-                        <input
-                          ref={fileInputRef}
-                          type="file"
-                          accept="image/*"
-                          onChange={handleScreenshotUpload}
-                          className="hidden"
-                        />
-                      </div>
-                    ) : (
-                      <div className="relative">
-                        <img 
-                          src={tradeData.screenshotPreview} 
-                          alt="Trade setup screenshot" 
-                          className="w-full max-h-96 object-contain rounded-lg border shadow-lg"
-                        />
-                        <Button
-                          variant="destructive"
-                          size="sm"
-                          className="absolute top-2 right-2"
-                          onClick={removeScreenshot}
+                  <Label className="text-sm font-medium">Upload TradingView Chart Screenshot *</Label>
+                  <div 
+                    className="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    onDragOver={(e) => e.preventDefault()}
+                    onDrop={(e) => {
+                      e.preventDefault()
+                      const file = e.dataTransfer.files?.[0]
+                      if (file) handleScreenshotUpload({ target: { files: [file] } } as React.ChangeEvent<HTMLInputElement>)
+                    }}
+                    onClick={() => fileInputRef.current?.click()}
+                  >
+                    {tradeData.screenshotPreview ? (
+                      <div className="relative w-full h-full">
+                        <img src={tradeData.screenshotPreview} alt="Screenshot Preview" className="object-contain w-full h-full" />
+                        <Button 
+                          variant="destructive" 
+                          size="icon" 
+                          className="absolute top-2 right-2 rounded-full"
+                          onClick={(e) => { e.stopPropagation(); removeScreenshot() }}
                         >
                           <X className="h-4 w-4" />
                         </Button>
-                        <div className="mt-3 flex items-center text-green-600 bg-green-50 p-2 rounded">
-                          <CheckCircle className="h-4 w-4 mr-2" />
-                          <span className="text-sm font-medium">Screenshot uploaded successfully</span>
-                        </div>
+                      </div>
+                    ) : (
+                      <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                        <Upload className="w-10 h-10 mb-3 text-gray-400" />
+                        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or drag and drop</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, GIF (MAX. 5MB)</p>
                       </div>
                     )}
+                    <Input 
+                      id="screenshot-upload" 
+                      type="file" 
+                      className="hidden" 
+                      accept="image/*" 
+                      onChange={handleScreenshotUpload}
+                      ref={fileInputRef}
+                    />
                   </div>
                 </div>
               )}
 
               {/* Step 3: Trade Context */}
               {currentStep === 3 && (
-                <div className="space-y-6">
+                <div className="space-y-4">
                   <div>
-                    <Label className="text-sm font-medium">Trade Reason *</Label>
+                    <Label htmlFor="tradeReason" className="text-sm font-medium">Trade Reason *</Label>
                     <Textarea 
-                      placeholder="Explain your reasoning for this trade setup. Include technical analysis, market conditions, and any other factors influencing your decision..."
-                      rows={4}
+                      id="tradeReason" 
+                      placeholder="Explain your reasoning for taking this trade..."
                       value={tradeData.tradeReason}
                       onChange={(e) => setTradeData(prev => ({...prev, tradeReason: e.target.value}))}
-                      className="resize-none"
+                      rows={5}
                     />
                   </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <Label className="text-sm font-medium">Emotional State</Label>
-                      <Select 
-                        value={tradeData.emotionalState} 
-                        onValueChange={(value) => setTradeData(prev => ({...prev, emotionalState: value}))}
-                      >
-                        <SelectTrigger>
-                          <SelectValue placeholder="How are you feeling?" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="calm">😌 Calm & Focused</SelectItem>
-                          <SelectItem value="confident">😎 Confident</SelectItem>
-                          <SelectItem value="excited">🤩 Excited</SelectItem>
-                          <SelectItem value="anxious">😰 Anxious</SelectItem>
-                          <SelectItem value="frustrated">😤 Frustrated</SelectItem>
-                          <SelectItem value="neutral">😐 Neutral</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div>
-                      <Label className="text-sm font-medium">Market Conditions</Label>
-                      <Select 
-                        value={tradeData.marketConditions} 
-                        onValueChange={(value) => setTradeData(prev => ({...prev, marketConditions: value}))}
-                      >
-                        <SelectTrigger>
-                          <SelectValue placeholder="Current market state" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="trending">📈 Strong Trend</SelectItem>
-                          <SelectItem value="ranging">📊 Range-bound</SelectItem>
-                          <SelectItem value="volatile">⚡ High Volatility</SelectItem>
-                          <SelectItem value="quiet">😴 Low Volatility</SelectItem>
-                          <SelectItem value="news">📰 News Event</SelectItem>
-                          <SelectItem value="session">🌍 Session Change</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-
                   <div>
-                    <Label className="text-sm font-medium">Confidence Level: {tradeData.confidenceLevel}%</Label>
-                    <div className="mt-3">
-                      <input
-                        type="range"
-                        min="0"
-                        max="100"
-                        value={tradeData.confidenceLevel}
-                        onChange={(e) => setTradeData(prev => ({...prev, confidenceLevel: parseInt(e.target.value)}))}
-                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
-                      />
-                      <div className="flex justify-between text-sm text-muted-foreground mt-2">
-                        <span>Low Confidence</span>
-                        <span className={`font-medium ${
-                          tradeData.confidenceLevel >= 70 ? 'text-green-600' : 
-                          tradeData.confidenceLevel >= 40 ? 'text-yellow-600' : 'text-red-600'
-                        }`}>
-                          {tradeData.confidenceLevel}%
-                        </span>
-                        <span>High Confidence</span>
-                      </div>
-                    </div>
+                    <Label htmlFor="emotionalState" className="text-sm font-medium">Emotional State</Label>
+                    <Textarea 
+                      id="emotionalState" 
+                      placeholder="Describe your emotional state before and during the trade..."
+                      value={tradeData.emotionalState}
+                      onChange={(e) => setTradeData(prev => ({...prev, emotionalState: e.target.value}))}
+                      rows={3}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="marketConditions" className="text-sm font-medium">Market Conditions</Label>
+                    <Textarea 
+                      id="marketConditions" 
+                      placeholder="Describe the overall market conditions at the time of the trade..."
+                      value={tradeData.marketConditions}
+                      onChange={(e) => setTradeData(prev => ({...prev, marketConditions: e.target.value}))}
+                      rows={3}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="confidenceLevel" className="text-sm font-medium">Confidence Level (0-100)</Label>
+                    <Input 
+                      id="confidenceLevel" 
+                      type="range" 
+                      min="0" 
+                      max="100" 
+                      value={tradeData.confidenceLevel}
+                      onChange={(e) => setTradeData(prev => ({...prev, confidenceLevel: parseInt(e.target.value)}))}
+                    />
+                    <div className="text-center text-sm text-muted-foreground">{tradeData.confidenceLevel}</div>
                   </div>
                 </div>
               )}
 
               {/* Step 4: Risk Management */}
               {currentStep === 4 && (
-                <div className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <Label className="text-sm font-medium">Position Size (lots)</Label>
-                      <Input 
-                        type="number" 
-                        step="0.01"
-                        placeholder="0.10" 
-                        value={tradeData.positionSize || ''}
-                        onChange={(e) => setTradeData(prev => ({...prev, positionSize: parseFloat(e.target.value) || null}))}
-                      />
-                    </div>
-                    <div>
-                      <Label className="text-sm font-medium">Risk Percentage</Label>
-                      <Input 
-                        type="number" 
-                        step="0.1"
-                        placeholder="2.0" 
-                        value={tradeData.riskPercentage || ''}
-                        onChange={(e) => setTradeData(prev => ({...prev, riskPercentage: parseFloat(e.target.value) || null}))}
-                      />
-                    </div>
+                <div className="space-y-4">
+                  <div>
+                    <Label htmlFor="riskPercentage" className="text-sm font-medium">Risk Percentage (%)</Label>
+                    <Input 
+                      id="riskPercentage" 
+                      type="number" 
+                      step="0.1" 
+                      min="0" 
+                      max="100" 
+                      placeholder="e.g., 1 (for 1% risk)"
+                      value={tradeData.riskPercentage !== null ? tradeData.riskPercentage : ''}
+                      onChange={(e) => setTradeData(prev => ({...prev, riskPercentage: parseFloat(e.target.value)}))}
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">Percentage of your total capital you are willing to risk on this trade.</p>
                   </div>
-
-                  <div className="bg-gradient-to-r from-gray-50 to-blue-50 p-6 rounded-lg border">
-                    <h4 className="font-semibold mb-4 flex items-center">
-                      <Shield className="h-5 w-5 mr-2 text-blue-600" />
-                      Trade Summary
-                    </h4>
-                    <div className="grid grid-cols-2 gap-6 text-sm">
-                      <div className="space-y-2">
-                        <p><strong>Instrument:</strong> {tradeData.tradingInstrument}</p>
-                        <p><strong>Direction:</strong> 
-                          <Badge variant="outline" className="ml-2">
-                            {tradeData.direction?.toUpperCase()}
-                          </Badge>
-                        </p>
-                        <p><strong>Entry:</strong> {tradeData.entryPrice}</p>
-                      </div>
-                      <div className="space-y-2">
-                        <p><strong>Stop Loss:</strong> {tradeData.stopLoss}</p>
-                        <p><strong>Take Profit:</strong> {tradeData.takeProfit}</p>
-                        <p><strong>R:R Ratio:</strong> 
-                          <Badge variant={tradeData.riskRewardRatio && tradeData.riskRewardRatio >= 2 ? "default" : "secondary"} className="ml-2">
-                            1:{tradeData.riskRewardRatio}
-                          </Badge>
-                        </p>
-                      </div>
-                    </div>
+                  <div>
+                    <Label htmlFor="positionSize" className="text-sm font-medium">Position Size (Units/Lots)</Label>
+                    <Input 
+                      id="positionSize" 
+                      type="number" 
+                      step="any" 
+                      min="0" 
+                      placeholder="e.g., 10000 (for 0.1 lots EUR/USD)"
+                      value={tradeData.positionSize !== null ? tradeData.positionSize : ''}
+                      onChange={(e) => setTradeData(prev => ({...prev, positionSize: parseFloat(e.target.value)}))}
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">The number of units or lots you plan to trade.</p>
                   </div>
                 </div>
               )}
 
-              {/* Step 5: AI Analysis */}
+              {/* Step 5: AI Analysis Result */}
               {currentStep === 5 && (
                 <div className="space-y-6">
                   {!analysisResult ? (
-                    <div className="text-center py-12">
-                      <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-6">
-                        <Brain className="h-12 w-12 text-blue-600" />
-                      </div>
-                      <h3 className="text-2xl font-semibold mb-3">Ready for AI Analysis</h3>
-                      <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-                        Our advanced AI will analyze your trade setup, screenshot, and context to provide comprehensive coaching feedback
-                      </p>
-                      <Button 
-                        size="lg" 
-                        onClick={handleAIAnalysis}
-                        disabled={isAnalyzing}
-                        className="min-w-40 h-12"
-                      >
-                        {isAnalyzing ? (
-                          <>
-                            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
-                            Analyzing...
-                          </>
-                        ) : (
-                          <>
-                            <Brain className="h-5 w-5 mr-3" />
-                            Analyze Trade
-                          </>
-                        )}
+                    <div className="flex flex-col items-center justify-center space-y-4 py-10">
+                      <Brain className="w-16 h-16 text-blue-500 animate-pulse" />
+                      <p className="text-lg font-medium">Analyzing your trade...</p>
+                      <p className="text-sm text-muted-foreground">This may take a few moments as AI processes your data and screenshot.</p>
+                      <Button onClick={handleAIAnalysis} disabled={isAnalyzing}>
+                        {isAnalyzing ? 'Analyzing...' : 'Start AI Analysis'}
                       </Button>
                     </div>
                   ) : (
                     <div className="space-y-6">
-                      {/* Overall Score */}
-                      <Card className="border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50">
+                      <div className="flex items-center justify-between">
+                        <h2 className="text-2xl font-bold">Analysis Results</h2>
+                        <Badge variant={getScoreBadgeVariant(analysisResult.overallScore)} className="text-lg px-4 py-2">
+                          Score: {analysisResult.overallScore}
+                        </Badge>
+                      </div>
+
+                      <Card className="bg-blue-50/50 border-blue-200">
                         <CardHeader>
-                          <CardTitle className="flex items-center text-xl">
-                            <Award className="h-6 w-6 mr-3 text-blue-600" />
-                            Overall Trade Score
-                          </CardTitle>
+                          <CardTitle className="text-blue-700 flex items-center"><Lightbulb className="h-5 w-5 mr-2" />AI Coaching Feedback</CardTitle>
                         </CardHeader>
                         <CardContent>
-                          <div className="flex items-center space-x-6">
-                            <div className={`text-5xl font-bold ${getScoreColor(analysisResult.overallScore)}`}>
-                              {analysisResult.overallScore}/100
-                            </div>
-                            <div className="flex-1">
-                              <Progress value={analysisResult.overallScore} className="h-3 mb-2" />
-                              <Badge variant={getScoreBadgeVariant(analysisResult.overallScore)} className="text-sm">
-                                {analysisResult.overallScore >= 80 ? 'Excellent' : 
-                                 analysisResult.overallScore >= 60 ? 'Good' : 
-                                 analysisResult.overallScore >= 40 ? 'Fair' : 'Needs Improvement'}
-                              </Badge>
-                            </div>
-                          </div>
+                          <p className="text-blue-800 whitespace-pre-wrap">{analysisResult.aiCoachingFeedback}</p>
                         </CardContent>
                       </Card>
 
-                      {/* Analysis Results Grid */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <Card className="border-green-200 bg-green-50">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <Card className="bg-green-50/50 border-green-200">
                           <CardHeader>
-                            <CardTitle className="text-green-700 flex items-center">
-                              <CheckCircle className="h-5 w-5 mr-2" />
-                              Strengths
-                            </CardTitle>
+                            <CardTitle className="text-green-700 flex items-center"><CheckCircle className="h-5 w-5 mr-2" />Strengths</CardTitle>
                           </CardHeader>
                           <CardContent>
-                            <ul className="space-y-3">
-                              {analysisResult.strengths.map((strength, index) => (
-                                <li key={index} className="flex items-start">
-                                  <Star className="h-4 w-4 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                                  <span className="text-sm text-green-800">{strength}</span>
-                                </li>
-                              ))}
+                            <ul className="list-disc list-inside text-green-800 space-y-1">
+                              {analysisResult.strengths.map((s, i) => <li key={i}>{s}</li>)}
                             </ul>
                           </CardContent>
                         </Card>
-
-                        <Card className="border-orange-200 bg-orange-50">
+                        <Card className="bg-red-50/50 border-red-200">
                           <CardHeader>
-                            <CardTitle className="text-orange-700 flex items-center">
-                              <Lightbulb className="h-5 w-5 mr-2" />
-                              Areas for Improvement
-                            </CardTitle>
+                            <CardTitle className="text-red-700 flex items-center"><AlertTriangle className="h-5 w-5 mr-2" />Areas for Improvement</CardTitle>
                           </CardHeader>
                           <CardContent>
-                            <ul className="space-y-3">
-                              {analysisResult.weaknesses.map((weakness, index) => (
-                                <li key={index} className="flex items-start">
-                                  <AlertTriangle className="h-4 w-4 text-orange-500 mr-3 mt-0.5 flex-shrink-0" />
-                                  <span className="text-sm text-orange-800">{weakness}</span>
-                                </li>
-                              ))}
+                            <ul className="list-disc list-inside text-red-800 space-y-1">
+                              {analysisResult.weaknesses.map((w, i) => <li key={i}>{w}</li>)}
                             </ul>
                           </CardContent>
                         </Card>
                       </div>
 
-                      {/* AI Coaching Feedback */}
-                      <Card className="border-purple-200 bg-purple-50">
-                        <CardHeader>
-                          <CardTitle className="flex items-center text-purple-700">
-                            <Brain className="h-5 w-5 mr-2" />
-                            AI Coach Feedback
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <p className="text-sm leading-relaxed text-purple-800">{analysisResult.aiCoachingFeedback}</p>
-                        </CardContent>
-                      </Card>
-
-                      {/* Recommendations */}
                       <Card>
                         <CardHeader>
-                          <CardTitle className="flex items-center">
-                            <Target className="h-5 w-5 mr-2" />
-                            Action Recommendations
-                          </CardTitle>
+                          <CardTitle className="flex items-center"><Award className="h-5 w-5 mr-2" />Recommendations</CardTitle>
                         </CardHeader>
                         <CardContent>
-                          <ul className="space-y-3">
-                            {analysisResult.recommendations.map((rec, index) => (
-                              <li key={index} className="flex items-start">
-                                <div className="bg-blue-100 text-blue-600 rounded-full w-7 h-7 flex items-center justify-center text-xs font-bold mr-4 mt-0.5 flex-shrink-0">
-                                  {index + 1}
-                                </div>
-                                <span className="text-sm">{rec}</span>
-                              </li>
-                            ))}
+                          <ul className="list-decimal list-inside space-y-2">
+                            {analysisResult.recommendations.map((r, i) => <li key={i}>{r}</li>)}
                           </ul>
                         </CardContent>
                       </Card>
 
-                      {/* Technical & Risk Analysis */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <Card>
                           <CardHeader>
-                            <CardTitle className="flex items-center">
-                              <Activity className="h-5 w-5 mr-2" />
-                              Technical Analysis
-                            </CardTitle>
+                            <CardTitle className="flex items-center"><BarChart3 className="h-5 w-5 mr-2" />Technical Analysis</CardTitle>
                           </CardHeader>
-                          <CardContent className="space-y-3">
+                          <CardContent className="space-y-2">
                             <div>
-                              <p className="text-sm font-medium">Entry Quality:</p>
-                              <p className="text-sm text-muted-foreground">{analysisResult.technicalAnalysis.entryQuality}</p>
+                              <h3 className="font-semibold">Entry Quality:</h3>
+                              <p>{analysisResult.technicalAnalysis.entryQuality}</p>
                             </div>
                             <div>
-                              <p className="text-sm font-medium">Trend Analysis:</p>
-                              <p className="text-sm text-muted-foreground">{analysisResult.technicalAnalysis.trendAnalysis}</p>
+                              <h3 className="font-semibold">Trend Analysis:</h3>
+                              <p>{analysisResult.technicalAnalysis.trendAnalysis}</p>
+                            </div>
+                            <div>
+                              <h3 className="font-semibold">Patterns Identified:</h3>
+                              <ul className="list-disc list-inside ml-4">
+                                {analysisResult.technicalAnalysis.patterns.map((p, i) => <li key={i}>{p}</li>)}
+                              </ul>
+                            </div>
+                            <div>
+                              <h3 className="font-semibold">Support/Resistance:</h3>
+                              <ul className="list-disc list-inside ml-4">
+                                {analysisResult.technicalAnalysis.supportResistance.map((sr, i) => <li key={i}>{sr}</li>)}
+                              </ul>
                             </div>
                           </CardContent>
                         </Card>
+                        <Card>
+                          <CardHeader>
+                            <CardTitle className="flex items-center"><Shield className="h-5 w-5 mr-2" />Risk Management</CardTitle>
+                          </CardHeader>
+                          <CardContent className="space-y-2">
+                            <div>
+                              <h3 className="font-semibold">Position Sizing:</h3>
+                              <p>{analysisResult.riskManagement.positionSizing}</p>
+                            </div>
+                            <div>
+                              <h3 className="font-semibold">Risk:Reward Ratio:</h3>
+                              <p>{analysisResult.riskManagement.riskRewardRatio}</p>
+                            </div>
+                            <div>
+                              <h3 className="font-semibold">Stop Loss Placement:</h3>
+                              <p>{analysisResult.riskManagement.stopLossPlacement}</p>
+                            </div>
+                            <div>
+                              <h3 className="font-semibold">Take Profit Placement:</h3>
+                              <p>{analysisResult.riskManagement.takeProfitPlacement}</p>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </div>
 
-                        <Card>
-                          <CardHeader>
-                            <CardTitle className="flex items-center">
-                              <Shield className="h-5 w-5 mr-2" />
-                              Risk Management
-                            </CardTitle>
-                          </CardHeader>
-                          <CardContent className="space-y-3">
-                            <div>
-                              <p className="text-sm font-medium">Position Sizing:</p>
-                              <p className="text-sm text-muted-foreground">{analysisResult.riskManagement.positionSizing}</p>
-                            </div>
-                            <div>
-                              <p className="text-sm font-medium">Stop Loss Placement:</p>
-                              <p className="text-sm text-muted-foreground">{analysisResult.riskManagement.stopLossPlacement}</p>
-                            </div>
-                          </CardContent>
-                        </Card>
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="flex items-center"><Activity className="h-5 w-5 mr-2" />Psychology Insights</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="whitespace-pre-wrap">{analysisResult.psychologyInsights}</p>
+                        </CardContent>
+                      </Card>
+
+                      <div className="flex justify-end space-x-2">
+                        <Button onClick={saveTrade} disabled={isSaving}>
+                          {isSaving ? 'Saving...' : <><Save className="h-4 w-4 mr-2" />Save Analysis</>}
+                        </Button>
+                        <Button variant="outline" onClick={startNewAnalysis}>
+                          <RefreshCw className="h-4 w-4 mr-2" />Start New Trade
+                        </Button>
                       </div>
                     </div>
                   )}
                 </div>
               )}
 
-              {/* Navigation */}
-              <div className="flex justify-between mt-8 pt-6 border-t">
-                <Button
-                  variant="outline"
-                  onClick={() => setCurrentStep(Math.max(1, currentStep - 1))}
-                  disabled={currentStep === 1}
-                  className="min-w-24"
-                >
-                  Previous
-                </Button>
-                
-                {currentStep < steps.length ? (
-                  <Button onClick={handleNext} className="min-w-24">
+              {/* Navigation Buttons */}
+              <div className="flex justify-between mt-6">
+                {currentStep > 1 && (
+                  <Button variant="outline" onClick={() => setCurrentStep(currentStep - 1)}>
+                    Previous
+                  </Button>
+                )}
+                {currentStep < steps.length && (
+                  <Button onClick={handleNext}>
                     Next
                   </Button>
-                ) : (
-                  <div className="space-x-3">
-                    <Button 
-                      variant="outline" 
-                      onClick={saveTrade}
-                      disabled={!analysisResult || isSaving}
-                      className="min-w-32"
-                    >
-                      {isSaving ? (
-                        <>
-                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-600 mr-2"></div>
-                          Saving...
-                        </>
-                      ) : (
-                        <>
-                          <Save className="h-4 w-4 mr-2" />
-                          Save Trade
-                        </>
-                      )}
-                    </Button>
-                    <Button onClick={startNewAnalysis} className="min-w-32">
-                      <RefreshCw className="h-4 w-4 mr-2" />
-                      New Analysis
-                    </Button>
-                  </div>
+                )}
+                {currentStep === steps.length && !analysisResult && (
+                  <Button onClick={handleAIAnalysis} disabled={isAnalyzing}>
+                    {isAnalyzing ? 'Analyzing...' : 'Start AI Analysis'}
+                  </Button>
                 )}
               </div>
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent value="history">
+        <TabsContent value="history" className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center">
-                <Clock className="h-5 w-5 mr-2" />
-                Trade History ({savedTrades.length})
-              </CardTitle>
-              <CardDescription>
-                Your previous trade analyses and performance tracking
-              </CardDescription>
+              <CardTitle>Trade History</CardTitle>
+              <CardDescription>Review your past trade analyses.</CardDescription>
             </CardHeader>
             <CardContent>
               {savedTrades.length === 0 ? (
-                <div className="text-center py-8">
-                  <BarChart3 className="h-12 w-12 mx-auto text-gray-400 mb-4" />
-                  <p className="text-muted-foreground">No trade analyses yet. Complete your first analysis to see it here.</p>
-                </div>
+                <p className="text-center text-muted-foreground py-10">No trades saved yet. Start a new trade analysis to build your history!</p>
               ) : (
                 <div className="space-y-4">
                   {savedTrades.map((trade) => (
-                    <Card key={trade.id} className="border-l-4 border-l-blue-500">
-                      <CardContent className="pt-4">
-                        <div className="flex justify-between items-start mb-3">
-                          <div>
-                            <h4 className="font-semibold">{trade.tradeData.tradingInstrument} - {trade.tradeData.direction?.toUpperCase()}</h4>
-                            <p className="text-sm text-muted-foreground">
-                              {trade.timestamp.toLocaleDateString()} at {trade.timestamp.toLocaleTimeString()}
-                            </p>
-                          </div>
-                          <Badge variant={getScoreBadgeVariant(trade.analysis.overallScore)}>
-                            Score: {trade.analysis.overallScore}/100
-                          </Badge>
+                    <Card key={trade.id} className="border-l-4 border-blue-500">
+                      <CardHeader className="flex flex-row items-center justify-between pb-2">
+                        <CardTitle className="text-lg">{trade.tradeData.tradingInstrument} - {trade.tradeData.timeframe} ({trade.tradeData.direction === 'long' ? 'Long' : 'Short'})</CardTitle>
+                        <Badge variant={getScoreBadgeVariant(trade.analysis.overallScore)}>{trade.analysis.overallScore}</Badge>
+                      </CardHeader>
+                      <CardContent className="space-y-2">
+                        <p className="text-sm text-muted-foreground">{trade.timestamp.toLocaleString()}</p>
+                        <div className="grid grid-cols-2 gap-2 text-sm">
+                          <p><strong>Entry:</strong> {trade.tradeData.entryPrice}</p>
+                          <p><strong>SL:</strong> {trade.tradeData.stopLoss}</p>
+                          <p><strong>TP:</strong> {trade.tradeData.takeProfit}</p>
+                          <p><strong>R:R:</strong> {trade.tradeData.riskRewardRatio !== null ? `1:${trade.tradeData.riskRewardRatio.toFixed(2)}` : 'N/A'}</p>
                         </div>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                          <div>
-                            <p className="font-medium">Entry: {trade.tradeData.entryPrice}</p>
-                            <p className="text-muted-foreground">SL: {trade.tradeData.stopLoss}</p>
-                          </div>
-                          <div>
-                            <p className="font-medium">TP: {trade.tradeData.takeProfit}</p>
-                            <p className="text-muted-foreground">R:R: 1:{trade.tradeData.riskRewardRatio}</p>
-                          </div>
-                          <div>
-                            <p className="font-medium">Risk: {trade.tradeData.riskPercentage}%</p>
-                            <p className="text-muted-foreground">Size: {trade.tradeData.positionSize} lots</p>
-                          </div>
-                          <div>
-                            <p className="font-medium">Confidence: {trade.tradeData.confidenceLevel}%</p>
-                            <p className="text-muted-foreground">State: {trade.tradeData.emotionalState}</p>
-                          </div>
-                        </div>
+                        <p className="text-sm whitespace-pre-wrap mt-2"><strong>AI Feedback:</strong> {trade.analysis.aiCoachingFeedback.substring(0, 200)}...</p>
+                        <Button variant="outline" size="sm" onClick={() => setAnalysisResult(trade.analysis)}>
+                          View Full Analysis
+                        </Button>
                       </CardContent>
                     </Card>
                   ))}
@@ -1106,53 +947,51 @@ export function TradeBuilder() {
           </Card>
         </TabsContent>
 
-        <TabsContent value="analytics">
+        <TabsContent value="analytics" className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <BarChart3 className="h-5 w-5" />
-                <span>Performance Analytics</span>
-              </CardTitle>
-              <CardDescription>
-                Insights and trends from your trading decisions
-              </CardDescription>
+              <CardTitle>Trade Analytics</CardTitle>
+              <CardDescription>Insights into your trading performance.</CardDescription>
             </CardHeader>
             <CardContent>
               {savedTrades.length === 0 ? (
-                <div className="text-center py-8">
-                  <BarChart3 className="h-12 w-12 mx-auto text-gray-400 mb-4" />
-                  <p className="text-muted-foreground">Complete more trade analyses to see performance insights.</p>
-                </div>
+                <p className="text-center text-muted-foreground py-10">Analyze more trades to see your analytics!</p>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   <Card>
-                    <CardContent className="pt-6">
-                      <div className="text-center">
-                        <p className="text-2xl font-bold">{savedTrades.length}</p>
-                        <p className="text-sm text-muted-foreground">Total Analyses</p>
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                      <CardTitle className="text-sm font-medium">Total Trades Analyzed</CardTitle>
+                      <Clock className="h-4 w-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent>
+                      <div className="text-2xl font-bold">{savedTrades.length}</div>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                      <CardTitle className="text-sm font-medium">Average R:R</CardTitle>
+                      <Calculator className="h-4 w-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent>
+                      <div className="text-2xl font-bold">
+                        {savedTrades.filter(t => t.tradeData.riskRewardRatio !== null).length > 0
+                          ? `1:${(savedTrades.reduce((sum, t) => sum + (t.tradeData.riskRewardRatio || 0), 0) / savedTrades.filter(t => t.tradeData.riskRewardRatio !== null).length).toFixed(2)}`
+                          : 'N/A'}
                       </div>
                     </CardContent>
                   </Card>
                   <Card>
-                    <CardContent className="pt-6">
-                      <div className="text-center">
-                        <p className="text-2xl font-bold">
-                          {Math.round(savedTrades.reduce((sum, trade) => sum + trade.analysis.overallScore, 0) / savedTrades.length)}
-                        </p>
-                        <p className="text-sm text-muted-foreground">Average Score</p>
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                      <CardTitle className="text-sm font-medium">Avg. Overall Score</CardTitle>
+                      <Star className="h-4 w-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent>
+                      <div className="text-2xl font-bold">
+                        {(savedTrades.reduce((sum, t) => sum + t.analysis.overallScore, 0) / savedTrades.length).toFixed(0)}%
                       </div>
                     </CardContent>
                   </Card>
-                  <Card>
-                    <CardContent className="pt-6">
-                      <div className="text-center">
-                        <p className="text-2xl font-bold">
-                          {Math.round(savedTrades.reduce((sum, trade) => sum + (trade.tradeData.riskRewardRatio || 0), 0) / savedTrades.length * 100) / 100}
-                        </p>
-                        <p className="text-sm text-muted-foreground">Avg R:R Ratio</p>
-                      </div>
-                    </CardContent>
-                  </Card>
+                  {/* Add more analytics cards here */}
                 </div>
               )}
             </CardContent>
