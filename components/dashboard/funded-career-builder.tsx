@@ -1,4 +1,4 @@
-use client"
+"use client"
 
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -366,5 +366,90 @@ export function FundedCareerBuilder() {
                             </div>
                             
                             <p className="text-sm text-muted-foreground">{stage.description}</p>
-                            <ul className="text-xs text-mut
-(Content truncated due to size limit. Use line ranges to read in chunks)
+                            <ul className="text-xs text-muted-foreground space-y-1">
+                              {stage.requirements.map((req, reqIndex) => (
+                                <li key={reqIndex} className="flex items-center gap-1">
+                                  <CheckCircle className="h-3 w-3 text-green-500" /> {req}
+                                </li>
+                              ))}
+                            </ul>
+                            {isCurrent && nextStage && (
+                              <div className="mt-2">
+                                <p className="text-xs font-medium text-muted-foreground">Progress to Next Stage ({nextStage.name}):</p>
+                                <Progress value={progressToNext} className="h-2 mt-1" />
+                                <p className="text-xs text-muted-foreground">{progressToNext.toFixed(0)}% Completed</p>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        {index < careerStages.length - 1 && (
+                          <div className="absolute left-6 top-full h-4 w-px bg-border" />
+                        )}
+                      </div>
+                    )
+                  })}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Achievements Section */}
+            <Card>
+              <CardHeader>
+                <CardTitle>All Achievements</CardTitle>
+                <CardDescription>
+                  A complete list of all achievements you can unlock
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                  {availableAchievements.map((achievement) => {
+                    const isUnlocked = careerProgression.achievements.some(a => a.id === achievement.id && a.unlockedDate)
+                    return (
+                      <Card key={achievement.id} className={`p-4 ${
+                        isUnlocked ? "border-green-400 bg-green-50/50 dark:bg-green-900/20" : "border-muted"
+                      }`}>
+                        <CardHeader className="p-0 pb-2">
+                          <CardTitle className="text-base flex items-center gap-2">
+                            {isUnlocked ? (
+                              <CheckCircle className="h-5 w-5 text-green-600" />
+                            ) : (
+                              <Award className="h-5 w-5 text-muted-foreground" />
+                            )}
+                            {achievement.title}
+                          </CardTitle>
+                          <CardDescription className="text-xs">
+                            {achievement.description}
+                          </CardDescription>
+                        </CardHeader>
+                        <CardContent className="p-0">
+                          {isUnlocked ? (
+                            <Badge variant="secondary" className="text-xs">
+                              Unlocked {careerProgression.achievements.find(a => a.id === achievement.id)?.unlockedDate ? new Date(careerProgression.achievements.find(a => a.id === achievement.id)!.unlockedDate!).toLocaleDateString() : ""}
+                            </Badge>
+                          ) : (
+                            <Badge variant="outline" className="text-xs">
+                              Locked
+                            </Badge>
+                          )}
+                        </CardContent>
+                      </Card>
+                    )
+                  })}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+
+        <TabsContent value="assessments">
+          <AssessmentTools />
+        </TabsContent>
+
+        <TabsContent value="projections">
+          <ProjectionTools />
+        </TabsContent>
+      </Tabs>
+    </div>
+  )
+}
+
