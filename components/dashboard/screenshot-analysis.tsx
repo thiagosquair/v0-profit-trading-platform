@@ -168,6 +168,8 @@ const calculateTradingInsights = (analyses: Analysis[]): TradingInsights => {
   if (winRate >= 60) strengthAreas.push('Strong Win Rate')
   else if (winRate < 40 && closedTrades.length >= 5) improvementAreas.push('Win Rate needs attention')
 
+  // Ensure longTradePercentage is a valid number before comparison
+  const longTradePercentage = (longTrades / totalTrades) * 100;
   if (longTradePercentage > 20 && longTradePercentage < 80) strengthAreas.push('Good Directional Balance')
   else improvementAreas.push('Consider diversifying trade directions')
 
@@ -198,8 +200,8 @@ const calculateTradingInsights = (analyses: Analysis[]): TradingInsights => {
   return {
     totalTrades,
     avgRiskReward,
-    longTradePercentage: (longTrades / totalTrades) * 100,
-    shortTradePercentage: (shortTrades / totalTrades) * 100,
+    longTradePercentage: isNaN(longTradePercentage) ? 0 : longTradePercentage, // Ensure it's a number
+    shortTradePercentage: isNaN((shortTrades / totalTrades) * 100) ? 0 : (shortTrades / totalTrades) * 100,
     winRate,
     avgWinPercentage,
     avgLossPercentage,
@@ -224,7 +226,22 @@ export function ScreenshotAnalysis() {
   const [showTradeForm, setShowTradeForm] = useState(false)
   
   // Initialize insights with a default object to prevent null access
-  const [insights, setInsights] = useState<TradingInsights>(calculateTradingInsights([]))
+  const [insights, setInsights] = useState<TradingInsights>({
+    totalTrades: 0,
+    avgRiskReward: 0,
+    longTradePercentage: 0,
+    shortTradePercentage: 0,
+    winRate: 0,
+    avgWinPercentage: 0,
+    avgLossPercentage: 0,
+    mostTradedInstrument: '',
+    bestRRRTrade: null,
+    recentImprovement: '',
+    strengthAreas: [],
+    improvementAreas: [],
+    tradingStreak: 0,
+    consistencyScore: 0
+  })
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   // Trade data state
@@ -792,7 +809,7 @@ export function ScreenshotAnalysis() {
                 <CardDescription>AI-generated insights from your trading journey</CardDescription>
               </CardHeader>
               <CardContent>
-                {insights && insights.totalTrades > 0 ? (
+                {insights.totalTrades > 0 ? (
                   <div className="space-y-6">
                     {/* Key Metrics */}
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
