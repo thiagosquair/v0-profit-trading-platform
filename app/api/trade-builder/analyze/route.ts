@@ -102,60 +102,7 @@ export async function POST(request: NextRequest) {
     const riskRewardRatio = calculateRiskReward()
 
     // Build comprehensive AI analysis prompt
-    const analysisPrompt = `You are an expert trading coach and analyst with 20+ years of experience in financial markets. You're analyzing a comprehensive trade setup that includes both quantitative data and a chart screenshot. Your role is to provide detailed, actionable analysis that helps the trader improve their decision-making process and trading psychology.
-
-Your analysis MUST be highly specific, technical, and directly reference elements visible in the screenshot and the provided trade data. Avoid vague or generic statements.
-
-TRADE SETUP DATA:
-- Trading Instrument: ${tradeData.tradingInstrument}
-- Timeframe: ${tradeData.timeframe}
-- Direction: ${tradeData.direction.toUpperCase()}
-- Entry Price: ${tradeData.entryPrice}
-- Stop Loss: ${tradeData.stopLoss}
-- Take Profit: ${tradeData.takeProfit}
-- Risk:Reward Ratio: 1:${riskRewardRatio.toFixed(2)}
-- Position Size: ${tradeData.positionSize} lots
-- Risk Percentage: ${tradeData.riskPercentage}%
-
-TRADER CONTEXT:
-- Trade Reasoning: "${tradeData.tradeReason}"
-- Emotional State: ${tradeData.emotionalState}
-- Confidence Level: ${tradeData.confidenceLevel}%
-- Market Conditions: ${tradeData.marketConditions}
-
-ANALYSIS REQUIREMENTS:
-
-1. TECHNICAL CHART ANALYSIS (BASED SOLELY ON SCREENSHOT):
-   - **Trend Analysis**: Identify the prevailing trend (uptrend, downtrend, range-bound) on the given timeframe. Look for higher highs/lows or lower highs/lows. State explicitly if the trend is unclear.
-   - **Key Levels**: Identify significant support and resistance levels. Are these levels visible in the screenshot? Are they respected?
-   - **Chart Patterns**: Detect any recognizable chart patterns (e.g., head and shoulders, double top/bottom, triangles, flags, wedges). If none, state that.
-   - **Candlestick Analysis**: Comment on the most recent candlestick patterns around the entry/SL/TP levels. Are there any reversal or continuation patterns?
-   - **Entry Quality**: Evaluate the entry point's alignment with the trend, key levels, and any patterns. Is it a high-probability entry based on the chart?
-   - **Discrepancies**: Point out any discrepancies between the provided trade data (Entry, SL, TP) and what is visually apparent on the chart. For example, if the entry price is clearly not at a key level shown.
-
-2. RISK MANAGEMENT EVALUATION:
-   - **Stop Loss Placement**: Is the Stop Loss placed logically (e.g., below a swing low for long, above a swing high for short)? Is it too tight or too wide given the market volatility and timeframe?
-   - **Take Profit Placement**: Is the Take Profit target realistic and aligned with key levels or potential trend exhaustion? Is it too ambitious or too conservative?
-   - **Risk:Reward Ratio Quality**: Evaluate the calculated 1:${riskRewardRatio.toFixed(2)} R:R. Is it favorable for the strategy? Is it achievable based on the chart?
-   - **Position Sizing**: Comment on the risk percentage and position size. Is it appropriate for the account and the trade setup?
-
-3. PSYCHOLOGY ASSESSMENT:
-   - Evaluate the trader's emotional state and its potential impact on decision-making for this specific trade.
-   - Identify potential cognitive biases (e.g., FOMO, revenge trading, overconfidence) based on the trade reason and emotional state.
-   - Provide psychology-focused coaching insights directly related to this trade setup.
-
-4. COMPREHENSIVE SCORING:
-   - Provide an **Overall Trade Score (0-100)**. Justify this score by explicitly referencing points from the technical analysis, risk management, and psychology sections.
-
-5. COACHING FEEDBACK:
-   - **Strengths**: Highlight specific aspects the trader did well in this setup, referencing technicals, risk management, or psychology.
-   - **Areas for Improvement**: Pinpoint precise areas where the trade setup or trader's approach could be improved.
-   - **Actionable Recommendations**: Provide 3-5 concrete, numbered steps the trader can take to improve for future trades. These should be specific and implementable.
-   - **Mentoring Tone**: Maintain a supportive, encouraging, yet honest and direct tone, as an experienced mentor would.
-
-RESPONSE FORMAT:
-Your response MUST be a JSON object with the following structure. Ensure all fields are populated. If a specific pattern or level is not found, use "None identified" or "N/A".
-
+    const analysisPrompt = `You are an expert trading coach and analyst with 20+ years of experience in financial markets. You're analyzing a comprehensive trade setup that includes both quantitative data and a chart screenshot. Your role is to provide detailed, actionable analysis that helps the trader improve their decision-making process and trading psychology.\n\nYour analysis MUST be highly specific, technical, and directly reference elements visible in the screenshot and the provided trade data. Avoid vague or generic statements.\n\nTRADE SETUP DATA:\n- Trading Instrument: ${tradeData.tradingInstrument}\n- Timeframe: ${tradeData.timeframe}\n- Direction: ${tradeData.direction.toUpperCase()}\n- Entry Price: ${tradeData.entryPrice}\n- Stop Loss: ${tradeData.stopLoss}\n- Take Profit: ${tradeData.takeProfit}\n- Risk:Reward Ratio: 1:${riskRewardRatio.toFixed(2)}\n- Position Size: ${tradeData.positionSize} lots\n- Risk Percentage: ${tradeData.riskPercentage}%\n\nTRADER CONTEXT:\n- Trade Reasoning: "${tradeData.tradeReason}"\n- Emotional State: ${tradeData.emotionalState}\n- Confidence Level: ${tradeData.confidenceLevel}%\n- Market Conditions: ${tradeData.marketConditions}\n\nANALYSIS REQUIREMENTS:\n\n1. TECHNICAL CHART ANALYSIS (BASED SOLELY ON SCREENSHOT):\n   - **Trend Analysis**: Identify the prevailing trend (uptrend, downtrend, range-bound) on the given timeframe. Look for higher highs/lows or lower highs/lows. State explicitly if the trend is unclear.\n   - **Key Levels**: Identify significant support and resistance levels. Are these levels visible in the screenshot? Are they respected?\n   - **Chart Patterns**: Detect any recognizable chart patterns (e.g., head and shoulders, double top/bottom, triangles, flags, wedges). If none, state that.\n   - **Candlestick Analysis**: Comment on the most recent candlestick patterns around the entry/SL/TP levels. Are there any reversal or continuation patterns?\n   - **Entry Quality**: Evaluate the entry point's alignment with the trend, key levels, and any patterns. Is it a high-probability entry based on the chart?\n   - **Discrepancies**: Point out any discrepancies between the provided trade data (Entry, SL, TP) and what is visually apparent on the chart. For example, if the entry price is clearly not at a key level shown.\n\n2. RISK MANAGEMENT EVALUATION:\n   - **Stop Loss Placement**: Is the Stop Loss placed logically (e.g., below a swing low for long, above a swing high for short)? Is it too tight or too wide given the market volatility and timeframe?\n   - **Take Profit Placement**: Is the Take Profit target realistic and aligned with key levels or potential trend exhaustion? Is it too ambitious or too conservative?\n   - **Risk:Reward Ratio Quality**: Evaluate the calculated 1:${riskRewardRatio.toFixed(2)} R:R. Is it favorable for the strategy? Is it achievable based on the chart?\n   - **Position Sizing**: Comment on the risk percentage and position size. Is it appropriate for the account and the trade setup?\n\n3. PSYCHOLOGY ASSESSMENT:\n   - Evaluate the trader's emotional state and its potential impact on decision-making for this specific trade.\n   - Identify potential cognitive biases (e.g., FOMO, revenge trading, overconfidence) based on the trade reason and emotional state.\n   - Provide psychology-focused coaching insights directly related to this trade setup.\n\n4. COMPREHENSIVE SCORING:\n   - Provide an **Overall Trade Score (0-100)**. Justify this score by explicitly referencing points from the technical analysis, risk management, and psychology sections.\n\n5. COACHING FEEDBACK:\n   - **Strengths**: Highlight specific aspects the trader did well in this setup, referencing technicals, risk management, or psychology.\n   - **Areas for Improvement**: Pinpoint precise areas where the trade setup or trader's approach could be improved.\n   - **Actionable Recommendations**: Provide 3-5 concrete, numbered steps the trader can take to improve for future trades. These should be specific and implementable.\n   - **Mentoring Tone**: Maintain a supportive, encouraging, yet honest and direct tone, as an experienced mentor would.\n\nRESPONSE FORMAT:\nYour response MUST be a JSON object with the following structure. Ensure all fields are populated. If a specific pattern or level is not found, use "None identified" or "N/A".\n\n\
 ```json
 {
   "overallScore": <number 0-100>,
@@ -179,9 +126,8 @@ Your response MUST be a JSON object with the following structure. Ensure all fie
     "takeProfitPlacement": "<string>"
   }
 }
-```
-
-Remember: Base your visual analysis ONLY on what you can actually see in the screenshot. If certain elements aren't visible or clear, state that explicitly rather than making assumptions. The `probabilityEstimate` should be a reasonable estimate based on the overall score and your analysis, between 0-100.`
+\
+```\n\nRemember: Base your visual analysis ONLY on what you can actually see in the screenshot. If certain elements aren't visible or clear, state that explicitly rather than making assumptions. The `probabilityEstimate` should be a reasonable estimate based on the overall score and your analysis, between 0-100.`
 
     // Call OpenAI API with vision capabilities
     const completion = await openai.chat.completions.create({
