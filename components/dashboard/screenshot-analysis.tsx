@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -11,7 +11,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Camera, Upload, BarChart3, Brain, Clock, X, TrendingUp, TrendingDown, Target, DollarSign, Percent, AlertTriangle } from "lucide-react"
+import { Progress } from "@/components/ui/progress"
+import { Camera, Upload, BarChart3, Brain, Clock, X, TrendingUp, TrendingDown, Target, DollarSign, Percent, AlertTriangle, Award, Calendar, Activity, Zap } from "lucide-react"
 
 interface TradeData {
   instrument: string
@@ -29,6 +30,183 @@ interface Analysis {
   analysis: string
   imageName: string
   tradeData: TradeData
+  context: string
+}
+
+interface TradingInsights {
+  totalTrades: number
+  avgRiskReward: number
+  longTradePercentage: number
+  shortTradePercentage: number
+  winRate: number
+  avgWinPercentage: number
+  avgLossPercentage: number
+  mostTradedInstrument: string
+  bestRRRTrade: Analysis | null
+  recentImprovement: string
+  strengthAreas: string[]
+  improvementAreas: string[]
+  tradingStreak: number
+  consistencyScore: number
+}
+
+// Local storage utilities
+const STORAGE_KEY = 'profitz_trade_analyses'
+
+const saveAnalysesToStorage = (analyses: Analysis[]) => {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(analyses))
+  } catch (error) {
+    console.error('Failed to save analyses to storage:', error)
+  }
+}
+
+const loadAnalysesFromStorage = (): Analysis[] => {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY)
+    if (stored) {
+      const parsed = JSON.parse(stored)
+      return parsed.map((analysis: any) => ({
+        ...analysis,
+        timestamp: new Date(analysis.timestamp)
+      }))
+    }
+  } catch (error) {
+    console.error('Failed to load analyses from storage:', error)
+  }
+  return []
+}
+
+// Insights calculation utilities
+const calculateTradingInsights = (analyses: Analysis[]): TradingInsights => {
+  if (analyses.length === 0) {
+    return {
+      totalTrades: 0,
+      avgRiskReward: 0,
+      longTradePercentage: 0,
+      shortTradePercentage: 0,
+      winRate: 0,
+      avgWinPercentage: 0,
+      avgLossPercentage: 0,
+      mostTradedInstrument: '',
+      bestRRRTrade: null,
+      recentImprovement: '',
+      strengthAreas: [],
+      improvementAreas: [],
+      tradingStreak: 0,
+      consistencyScore: 0
+    }
+  }
+
+  const totalTrades = analyses.length
+  const longTrades = analyses.filter(a => a.tradeData.tradeDirection === 'long').length
+  const shortTrades = totalTrades - longTrades
+  
+  // Calculate average risk-reward ratio
+  const avgRiskReward = analyses.reduce((sum, a) => {
+    const rrr = parseFloat(a.tradeData.riskRewardRatio) || 0
+    return sum + rrr
+  }, 0) / totalTrades
+
+  // Calculate win rate from trades with percentage achieved
+  const closedTrades = analyses.filter(a => a.tradeData.percentageAchieved && a.tradeData.percentageAchieved !== '')
+  const winningTrades = closedTrades.filter(a => parseFloat(a.tradeData.percentageAchieved) > 0)
+  const losingTrades = closedTrades.filter(a => parseFloat(a.tradeData.percentageAchieved) < 0)
+  
+  const winRate = closedTrades.length > 0 ? (winningTrades.length / closedTrades.length) * 100 : 0
+  
+  const avgWinPercentage = winningTrades.length > 0 ? 
+    winningTrades.reduce((sum, t) => sum + parseFloat(t.tradeData.percentageAchieved), 0) / winningTrades.length : 0
+  
+  const avgLossPercentage = losingTrades.length > 0 ? 
+    Math.abs(losingTrades.reduce((sum, t) => sum + parseFloat(t.tradeData.percentageAchieved), 0) / losingTrades.length) : 0
+
+  // Find most traded instrument
+  const instrumentCounts: { [key: string]: number } = {}
+  analyses.forEach(a => {
+    instrumentCounts[a.tradeData.instrument] = (instrumentCounts[a.tradeData.instrument] || 0) + 1
+  })
+  const mostTradedInstrument = Object.keys(instrumentCounts).reduce((a, b) => 
+    instrumentCounts[a] > instrumentCounts[b] ? a : b, '')
+
+  // Find best RRR trade
+  const bestRRRTrade = analyses.reduce((best, current) => {
+    const currentRRR = parseFloat(current.tradeData.riskRewardRatio) || 0
+    const bestRRR = best ? parseFloat(best.tradeData.riskRewardRatio) || 0 : 0
+    return currentRRR > bestRRR ? current : best
+  }, null as Analysis | null)
+
+  // Calculate recent improvement
+  const recentTrades = analyses.slice(0, Math.min(5, analyses.length))
+  const olderTrades = analyses.slice(5, Math.min(10, analyses.length))
+  
+  let recentImprovement = ''
+  if (recentTrades.length >= 3 && olderTrades.length >= 3) {
+    const recentAvgRRR = recentTrades.reduce((sum, t) => sum + (parseFloat(t.tradeData.riskRewardRatio) || 0), 0) / recentTrades.length
+    const olderAvgRRR = olderTrades.reduce((sum, t) => sum + (parseFloat(t.tradeData.riskRewardRatio) || 0), 0) / olderTrades.length
+    
+    if (recentAvgRRR > olderAvgRRR) {
+      recentImprovement = `Risk-Reward ratio improved by ${((recentAvgRRR - olderAvgRRR) * 100).toFixed(1)}%`
+    } else if (recentAvgRRR < olderAvgRRR) {
+      recentImprovement = `Focus needed: Risk-Reward ratio decreased by ${((olderAvgRRR - recentAvgRRR) * 100).toFixed(1)}%`
+    } else {
+      recentImprovement = 'Consistent risk management maintained'
+    }
+  }
+
+  // Determine strength and improvement areas
+  const strengthAreas: string[] = []
+  const improvementAreas: string[] = []
+
+  if (avgRiskReward >= 2.0) strengthAreas.push('Excellent Risk-Reward Management')
+  else if (avgRiskReward < 1.5) improvementAreas.push('Risk-Reward Ratio needs improvement')
+
+  if (winRate >= 60) strengthAreas.push('Strong Win Rate')
+  else if (winRate < 40 && closedTrades.length >= 5) improvementAreas.push('Win Rate needs attention')
+
+  if (longTradePercentage > 20 && longTradePercentage < 80) strengthAreas.push('Good Directional Balance')
+  else improvementAreas.push('Consider diversifying trade directions')
+
+  // Calculate trading streak (consecutive wins/losses)
+  let tradingStreak = 0
+  if (closedTrades.length > 0) {
+    const sortedTrades = closedTrades.sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime())
+    const lastTradeResult = parseFloat(sortedTrades[0].tradeData.percentageAchieved) > 0
+    
+    for (const trade of sortedTrades) {
+      const isWin = parseFloat(trade.tradeData.percentageAchieved) > 0
+      if (isWin === lastTradeResult) {
+        tradingStreak++
+      } else {
+        break
+      }
+    }
+  }
+
+  // Calculate consistency score (0-100)
+  const rrVariance = analyses.reduce((sum, a) => {
+    const rrr = parseFloat(a.tradeData.riskRewardRatio) || 0
+    return sum + Math.pow(rrr - avgRiskReward, 2)
+  }, 0) / totalTrades
+  
+  const consistencyScore = Math.max(0, Math.min(100, 100 - (rrVariance * 20)))
+
+  return {
+    totalTrades,
+    avgRiskReward,
+    longTradePercentage: (longTrades / totalTrades) * 100,
+    shortTradePercentage: (shortTrades / totalTrades) * 100,
+    winRate,
+    avgWinPercentage,
+    avgLossPercentage,
+    mostTradedInstrument,
+    bestRRRTrade,
+    recentImprovement,
+    strengthAreas,
+    improvementAreas,
+    tradingStreak,
+    consistencyScore
+  }
 }
 
 export function ScreenshotAnalysis() {
@@ -40,6 +218,7 @@ export function ScreenshotAnalysis() {
   const [analyses, setAnalyses] = useState<Analysis[]>([])
   const [error, setError] = useState<string | null>(null)
   const [showTradeForm, setShowTradeForm] = useState(false)
+  const [insights, setInsights] = useState<TradingInsights | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   // Trade data state
@@ -53,6 +232,18 @@ export function ScreenshotAnalysis() {
     percentageAchieved: ''
   })
 
+  // Load analyses from storage on component mount
+  useEffect(() => {
+    const storedAnalyses = loadAnalysesFromStorage()
+    setAnalyses(storedAnalyses)
+    setInsights(calculateTradingInsights(storedAnalyses))
+  }, [])
+
+  // Update insights whenever analyses change
+  useEffect(() => {
+    setInsights(calculateTradingInsights(analyses))
+  }, [analyses])
+
   const handleFileSelect = (file: File) => {
     if (!file.type.startsWith("image/")) {
       setError("Please select an image file")
@@ -60,10 +251,9 @@ export function ScreenshotAnalysis() {
     }
 
     setSelectedFile(file)
-    setShowTradeForm(true) // Show trade form after image selection
+    setShowTradeForm(true)
     setError(null)
 
-    // Create preview URL
     const url = URL.createObjectURL(file)
     setPreviewUrl(url)
   }
@@ -139,7 +329,6 @@ export function ScreenshotAnalysis() {
       formData.append("image", selectedFile)
       formData.append("context", context)
       
-      // Add trade data to form
       Object.entries(tradeData).forEach(([key, value]) => {
         formData.append(key, value)
       })
@@ -156,15 +345,19 @@ export function ScreenshotAnalysis() {
       const data = await response.json()
       setAnalysis(data.analysis)
 
-      // Add to history
       const newAnalysis: Analysis = {
         id: Date.now().toString(),
         timestamp: new Date(),
         analysis: data.analysis,
         imageName: selectedFile.name,
-        tradeData: { ...tradeData }
+        tradeData: { ...tradeData },
+        context
       }
-      setAnalyses((prev) => [newAnalysis, ...prev])
+      
+      const updatedAnalyses = [newAnalysis, ...analyses]
+      setAnalyses(updatedAnalyses)
+      saveAnalysesToStorage(updatedAnalyses)
+      
     } catch (err) {
       setError("Failed to analyze screenshot. Please try again.")
       console.error("Analysis error:", err)
@@ -188,8 +381,22 @@ export function ScreenshotAnalysis() {
       riskRewardRatio: '',
       percentageAchieved: ''
     })
+    setContext('')
     if (fileInputRef.current) {
       fileInputRef.current.value = ""
+    }
+  }
+
+  const getTradeStatusBadge = (percentageAchieved: string) => {
+    if (!percentageAchieved) return <Badge variant="outline">Active</Badge>
+    
+    const percentage = parseFloat(percentageAchieved)
+    if (percentage > 0) {
+      return <Badge className="bg-green-100 text-green-800">Win +{percentage}%</Badge>
+    } else if (percentage < 0) {
+      return <Badge className="bg-red-100 text-red-800">Loss {percentage}%</Badge>
+    } else {
+      return <Badge variant="outline">Breakeven</Badge>
     }
   }
 
@@ -208,7 +415,7 @@ export function ScreenshotAnalysis() {
           </TabsTrigger>
           <TabsTrigger value="history">
             <Clock className="h-4 w-4 mr-2" />
-            Trade History
+            Trade History ({analyses.length})
           </TabsTrigger>
           <TabsTrigger value="insights">
             <Brain className="h-4 w-4 mr-2" />
@@ -217,6 +424,7 @@ export function ScreenshotAnalysis() {
         </TabsList>
 
         <TabsContent value="upload" className="space-y-4">
+          {/* Upload content remains the same as before */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card>
               <CardHeader>
@@ -289,7 +497,6 @@ export function ScreenshotAnalysis() {
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {/* Instrument */}
                         <div>
                           <Label htmlFor="instrument" className="flex items-center gap-1">
                             <BarChart3 className="h-4 w-4" />
@@ -304,7 +511,6 @@ export function ScreenshotAnalysis() {
                           />
                         </div>
 
-                        {/* Trade Direction */}
                         <div>
                           <Label className="flex items-center gap-1">
                             Trade Direction *
@@ -333,7 +539,6 @@ export function ScreenshotAnalysis() {
                           </Select>
                         </div>
 
-                        {/* Entry Price */}
                         <div>
                           <Label htmlFor="entryPrice" className="flex items-center gap-1">
                             <DollarSign className="h-4 w-4" />
@@ -351,7 +556,6 @@ export function ScreenshotAnalysis() {
                           />
                         </div>
 
-                        {/* Stop Loss */}
                         <div>
                           <Label htmlFor="stopLossPrice" className="flex items-center gap-1">
                             <AlertTriangle className="h-4 w-4 text-red-500" />
@@ -369,7 +573,6 @@ export function ScreenshotAnalysis() {
                           />
                         </div>
 
-                        {/* Take Profit */}
                         <div>
                           <Label htmlFor="takeProfitPrice" className="flex items-center gap-1">
                             <Target className="h-4 w-4 text-green-500" />
@@ -387,7 +590,6 @@ export function ScreenshotAnalysis() {
                           />
                         </div>
 
-                        {/* Risk Reward Ratio */}
                         <div>
                           <Label htmlFor="riskRewardRatio" className="flex items-center gap-1">
                             <BarChart3 className="h-4 w-4" />
@@ -404,7 +606,6 @@ export function ScreenshotAnalysis() {
                           <p className="text-xs text-muted-foreground mt-1">Auto-calculated from your prices</p>
                         </div>
 
-                        {/* Percentage Achieved */}
                         <div className="md:col-span-2">
                           <Label htmlFor="percentageAchieved" className="flex items-center gap-1">
                             <Percent className="h-4 w-4" />
@@ -499,6 +700,7 @@ export function ScreenshotAnalysis() {
                           <Badge variant={item.tradeData.tradeDirection === 'long' ? 'default' : 'destructive'} className="text-xs">
                             {item.tradeData.tradeDirection.toUpperCase()}
                           </Badge>
+                          {getTradeStatusBadge(item.tradeData.percentageAchieved)}
                         </div>
                         <p className="text-xs text-muted-foreground mb-1">
                           RRR: {item.tradeData.riskRewardRatio} | {item.timestamp.toLocaleDateString()}
@@ -539,6 +741,7 @@ export function ScreenshotAnalysis() {
                               {item.tradeData.tradeDirection.toUpperCase()}
                             </Badge>
                             <Badge variant="outline">RRR: {item.tradeData.riskRewardRatio}</Badge>
+                            {getTradeStatusBadge(item.tradeData.percentageAchieved)}
                           </div>
                           <span className="text-xs text-muted-foreground">{item.timestamp.toLocaleString()}</span>
                         </div>
@@ -547,10 +750,15 @@ export function ScreenshotAnalysis() {
                           <span>SL: {item.tradeData.stopLossPrice}</span>
                           <span>TP: {item.tradeData.takeProfitPrice}</span>
                         </div>
+                        {item.context && (
+                          <div className="text-sm text-muted-foreground mt-2">
+                            <strong>Context:</strong> {item.context}
+                          </div>
+                        )}
                       </CardHeader>
                       <CardContent>
                         <div className="text-sm text-muted-foreground whitespace-pre-wrap leading-relaxed">
-                          {item.analysis.substring(0, 300)}...
+                          {item.analysis}
                         </div>
                       </CardContent>
                     </Card>
@@ -571,52 +779,205 @@ export function ScreenshotAnalysis() {
         </TabsContent>
 
         <TabsContent value="insights">
-          <Card>
-            <CardHeader>
-              <CardTitle>Your Trading Progress & Insights</CardTitle>
-              <CardDescription>AI-generated insights from your trading journey</CardDescription>
-            </CardHeader>
-            <CardContent>
-              {analyses.length > 0 ? (
-                <div className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <Card className="text-center">
-                      <CardContent className="pt-6">
-                        <div className="text-2xl font-bold text-blue-600">{analyses.length}</div>
-                        <p className="text-sm text-muted-foreground">Trades Analyzed</p>
-                      </CardContent>
-                    </Card>
-                    <Card className="text-center">
-                      <CardContent className="pt-6">
-                        <div className="text-2xl font-bold text-green-600">
-                          {(analyses.reduce((sum, a) => sum + parseFloat(a.tradeData.riskRewardRatio || '0'), 0) / analyses.length).toFixed(1)}
-                        </div>
-                        <p className="text-sm text-muted-foreground">Avg Risk:Reward</p>
-                      </CardContent>
-                    </Card>
-                    <Card className="text-center">
-                      <CardContent className="pt-6">
-                        <div className="text-2xl font-bold text-purple-600">
-                          {Math.round((analyses.filter(a => a.tradeData.tradeDirection === 'long').length / analyses.length) * 100)}%
-                        </div>
-                        <p className="text-sm text-muted-foreground">Long Trades</p>
-                      </CardContent>
-                    </Card>
+          <div className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Your Trading Progress & Insights</CardTitle>
+                <CardDescription>AI-generated insights from your trading journey</CardDescription>
+              </CardHeader>
+              <CardContent>
+                {insights && insights.totalTrades > 0 ? (
+                  <div className="space-y-6">
+                    {/* Key Metrics */}
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                      <Card className="text-center">
+                        <CardContent className="pt-6">
+                          <div className="text-2xl font-bold text-blue-600">{insights.totalTrades}</div>
+                          <p className="text-sm text-muted-foreground">Trades Analyzed</p>
+                        </CardContent>
+                      </Card>
+                      <Card className="text-center">
+                        <CardContent className="pt-6">
+                          <div className="text-2xl font-bold text-green-600">{insights.avgRiskReward.toFixed(1)}</div>
+                          <p className="text-sm text-muted-foreground">Avg Risk:Reward</p>
+                        </CardContent>
+                      </Card>
+                      <Card className="text-center">
+                        <CardContent className="pt-6">
+                          <div className="text-2xl font-bold text-purple-600">{insights.winRate.toFixed(0)}%</div>
+                          <p className="text-sm text-muted-foreground">Win Rate</p>
+                        </CardContent>
+                      </Card>
+                      <Card className="text-center">
+                        <CardContent className="pt-6">
+                          <div className="text-2xl font-bold text-orange-600">{insights.consistencyScore.toFixed(0)}</div>
+                          <p className="text-sm text-muted-foreground">Consistency Score</p>
+                        </CardContent>
+                      </Card>
+                    </div>
+
+                    {/* Progress Indicators */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="flex items-center gap-2">
+                            <Activity className="h-5 w-5" />
+                            Trading Balance
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-4">
+                          <div>
+                            <div className="flex justify-between text-sm mb-1">
+                              <span>Long Trades</span>
+                              <span>{insights.longTradePercentage.toFixed(0)}%</span>
+                            </div>
+                            <Progress value={insights.longTradePercentage} className="h-2" />
+                          </div>
+                          <div>
+                            <div className="flex justify-between text-sm mb-1">
+                              <span>Short Trades</span>
+                              <span>{insights.shortTradePercentage.toFixed(0)}%</span>
+                            </div>
+                            <Progress value={insights.shortTradePercentage} className="h-2" />
+                          </div>
+                        </CardContent>
+                      </Card>
+
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="flex items-center gap-2">
+                            <Zap className="h-5 w-5" />
+                            Current Streak
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="text-center">
+                            <div className="text-3xl font-bold text-blue-600 mb-2">{insights.tradingStreak}</div>
+                            <p className="text-sm text-muted-foreground">
+                              {insights.tradingStreak > 0 ? 'Consecutive trades in current direction' : 'No active streak'}
+                            </p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+
+                    {/* Insights and Recommendations */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="flex items-center gap-2 text-green-600">
+                            <Award className="h-5 w-5" />
+                            Your Strengths
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          {insights.strengthAreas.length > 0 ? (
+                            <ul className="space-y-2">
+                              {insights.strengthAreas.map((strength, index) => (
+                                <li key={index} className="flex items-center gap-2 text-sm">
+                                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                  {strength}
+                                </li>
+                              ))}
+                            </ul>
+                          ) : (
+                            <p className="text-sm text-muted-foreground">Keep analyzing trades to identify your strengths!</p>
+                          )}
+                        </CardContent>
+                      </Card>
+
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="flex items-center gap-2 text-orange-600">
+                            <Target className="h-5 w-5" />
+                            Growth Areas
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          {insights.improvementAreas.length > 0 ? (
+                            <ul className="space-y-2">
+                              {insights.improvementAreas.map((area, index) => (
+                                <li key={index} className="flex items-center gap-2 text-sm">
+                                  <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                                  {area}
+                                </li>
+                              ))}
+                            </ul>
+                          ) : (
+                            <p className="text-sm text-muted-foreground">Great job! No major areas for improvement identified.</p>
+                          )}
+                        </CardContent>
+                      </Card>
+                    </div>
+
+                    {/* Recent Improvement */}
+                    {insights.recentImprovement && (
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="flex items-center gap-2">
+                            <TrendingUp className="h-5 w-5" />
+                            Recent Progress
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-sm">{insights.recentImprovement}</p>
+                        </CardContent>
+                      </Card>
+                    )}
+
+                    {/* Best Trade */}
+                    {insights.bestRRRTrade && (
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="flex items-center gap-2">
+                            <Award className="h-5 w-5 text-yellow-500" />
+                            Best Risk:Reward Trade
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="flex items-center gap-4">
+                            <div>
+                              <p className="font-medium">{insights.bestRRRTrade.tradeData.instrument}</p>
+                              <p className="text-sm text-muted-foreground">
+                                RRR: {insights.bestRRRTrade.tradeData.riskRewardRatio} | {insights.bestRRRTrade.timestamp.toLocaleDateString()}
+                              </p>
+                            </div>
+                            <Badge variant={insights.bestRRRTrade.tradeData.tradeDirection === 'long' ? 'default' : 'destructive'}>
+                              {insights.bestRRRTrade.tradeData.tradeDirection.toUpperCase()}
+                            </Badge>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    )}
+
+                    {/* Most Traded Instrument */}
+                    {insights.mostTradedInstrument && (
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="flex items-center gap-2">
+                            <BarChart3 className="h-5 w-5" />
+                            Most Traded Instrument
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="text-center">
+                            <div className="text-2xl font-bold text-blue-600 mb-2">{insights.mostTradedInstrument}</div>
+                            <p className="text-sm text-muted-foreground">Your most frequently analyzed instrument</p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    )}
                   </div>
-                  <div className="text-center py-8">
-                    <Brain className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                    <p className="text-muted-foreground">Detailed progress insights coming soon...</p>
+                ) : (
+                  <div className="text-center py-12">
+                    <Brain className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
+                    <h3 className="text-lg font-medium mb-2">No Insights Yet</h3>
+                    <p className="text-muted-foreground">Upload and analyze trades to see your progress insights</p>
                   </div>
-                </div>
-              ) : (
-                <div className="text-center py-12">
-                  <Brain className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
-                  <h3 className="text-lg font-medium mb-2">No Insights Yet</h3>
-                  <p className="text-muted-foreground">Upload and analyze trades to see your progress insights</p>
-                </div>
-              )}
-            </CardContent>
-          </Card>
+                )}
+              </CardContent>
+            </Card>
+          </div>
         </TabsContent>
       </Tabs>
     </div>
