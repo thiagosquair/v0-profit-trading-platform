@@ -90,7 +90,7 @@ export function LandingPage() {
           description: "Engage with CBT exercises, meditations, and simulations designed for traders.",
         },
         {
-          title: "AI Trade Analysis",
+          title: "Ai Trade Analysis",
           description:
             "Advanced AI analyzes your trades to identify psychological patterns and suggest improvements for better performance.",
         },
