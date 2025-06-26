@@ -1,4 +1,4 @@
-"use client"
+use client"
 
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -22,7 +22,7 @@ import {
 import { AccountManager } from "./account-manager"
 import { PerformanceTracker } from "./performance-tracker"
 import { AssessmentTools } from "./assessment-tools"
-import { ProjectionTools } from "./projection-tools"
+import { ProjectionTools } from "././projection-tools"
 import {
   sampleAccounts,
   sampleCareerProgression,
@@ -108,7 +108,7 @@ export function FundedCareerBuilder() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
-                  ${totalProfit > 0 ? '+' : ''}${totalProfit.toLocaleString()}
+                  ${totalProfit > 0 ? "+" : ""}${totalProfit.toLocaleString()}
                 </div>
                 <p className="text-xs text-muted-foreground">
                   {averageWinRate.toFixed(1)}% average win rate
@@ -341,19 +341,18 @@ export function FundedCareerBuilder() {
                         key={stage.id} 
                         className={`relative p-4 rounded-lg border ${
                           isCurrent 
-                            ? 'border-primary bg-primary/5' 
+                            ? "border-primary bg-primary/5" 
                             : isCompleted 
-                            ? 'border-green-200 bg-green-50 dark:bg-green-950/20' 
-                            : 'border-muted'
+                            ? "border-green-200 bg-green-50 dark:bg-green-950/20" 
+                            : "border-muted"
                         }`}
                       >
-                        <div className="flex items-start gap-4">
-                          <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                        <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
                             isCurrent 
-                              ? 'bg-primary text-primary-foreground' 
+                              ? "bg-primary text-primary-foreground" 
                               : isCompleted 
-                              ? 'bg-green-500 text-white' 
-                              : 'bg-muted text-muted-foreground'
+                              ? "bg-green-500 text-white" 
+                              : "bg-muted text-muted-foreground"
                           }`}>
                             {isCompleted ? <CheckCircle className="h-4 w-4" /> : index + 1}
                           </div>
@@ -366,5 +365,6 @@ export function FundedCareerBuilder() {
                               {isCompleted && <Badge variant="secondary">Completed</Badge>}
                             </div>
                             
-                            <p className="text-sm text-muted-foreground">{stage.descriptio
+                            <p className="text-sm text-muted-foreground">{stage.description}</p>
+                            <ul className="text-xs text-mut
 (Content truncated due to size limit. Use line ranges to read in chunks)
