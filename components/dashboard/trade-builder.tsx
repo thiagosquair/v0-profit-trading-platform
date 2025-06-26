@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -23,7 +23,15 @@ import {
   CheckCircle,
   X,
   Eye,
-  BarChart3
+  BarChart3,
+  Star,
+  Award,
+  Lightbulb,
+  Shield,
+  Activity,
+  Clock,
+  Save,
+  RefreshCw
 } from "lucide-react"
 import { t } from "@/lib/simple-translations"
 
@@ -67,13 +75,37 @@ interface TradeAnalysis {
   psychologyInsights: string
   probabilityEstimate: number
   aiCoachingFeedback: string
+  technicalAnalysis: {
+    patterns: string[]
+    supportResistance: string[]
+    trendAnalysis: string
+    entryQuality: string
+  }
+  riskManagement: {
+    positionSizing: string
+    riskRewardRatio: string
+    stopLossPlacement: string
+    takeProfitPlacement: string
+  }
+}
+
+// Saved Trade Interface
+interface SavedTrade {
+  id: string
+  timestamp: Date
+  tradeData: EnhancedTrade
+  analysis: TradeAnalysis
+  screenshotUrl?: string
 }
 
 export function TradeBuilder() {
   const [currentStep, setCurrentStep] = useState(1)
   const [isAnalyzing, setIsAnalyzing] = useState(false)
+  const [isSaving, setIsSaving] = useState(false)
   const [analysisResult, setAnalysisResult] = useState<TradeAnalysis | null>(null)
   const [validationErrors, setValidationErrors] = useState<string[]>([])
+  const [savedTrades, setSavedTrades] = useState<SavedTrade[]>([])
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const [tradeData, setTradeData] = useState<EnhancedTrade>({
@@ -95,6 +127,22 @@ export function TradeBuilder() {
     potentialProfit: null,
     potentialLoss: null
   })
+
+  // Load saved trades on component mount
+  useEffect(() => {
+    const saved = localStorage.getItem('tradeBuilderHistory')
+    if (saved) {
+      try {
+        const trades = JSON.parse(saved)
+        setSavedTrades(trades.map((trade: any) => ({
+          ...trade,
+          timestamp: new Date(trade.timestamp)
+        })))
+      } catch (error) {
+        console.error('Error loading saved trades:', error)
+      }
+    }
+  }, [])
 
   const steps = [
     { 
@@ -286,6 +334,81 @@ export function TradeBuilder() {
     }
   }
 
+  // Save trade analysis
+  const saveTrade = async () => {
+    if (!analysisResult) return
+    
+    setIsSaving(true)
+    
+    try {
+      const savedTrade: SavedTrade = {
+        id: Date.now().toString(),
+        timestamp: new Date(),
+        tradeData: { ...tradeData },
+        analysis: { ...analysisResult }
+      }
+      
+      const updatedTrades = [savedTrade, ...savedTrades]
+      setSavedTrades(updatedTrades)
+      
+      // Save to localStorage
+      localStorage.setItem('tradeBuilderHistory', JSON.stringify(updatedTrades))
+      
+      setShowSuccessMessage(true)
+      setTimeout(() => setShowSuccessMessage(false), 3000)
+      
+    } catch (error) {
+      console.error('Error saving trade:', error)
+      alert('Failed to save trade. Please try again.')
+    } finally {
+      setIsSaving(false)
+    }
+  }
+
+  // Start new analysis
+  const startNewAnalysis = () => {
+    setCurrentStep(1)
+    setAnalysisResult(null)
+    setValidationErrors([])
+    setTradeData({
+      tradingInstrument: '',
+      timeframe: '',
+      entryPrice: null,
+      stopLoss: null,
+      takeProfit: null,
+      tradeReason: '',
+      direction: null,
+      positionSize: null,
+      riskPercentage: 2,
+      screenshot: null,
+      screenshotPreview: null,
+      emotionalState: '',
+      confidenceLevel: 50,
+      marketConditions: '',
+      riskRewardRatio: null,
+      potentialProfit: null,
+      potentialLoss: null
+    })
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''
+    }
+  }
+
+  // Get score color
+  const getScoreColor = (score: number) => {
+    if (score >= 80) return 'text-green-600'
+    if (score >= 60) return 'text-blue-600'
+    if (score >= 40) return 'text-yellow-600'
+    return 'text-red-600'
+  }
+
+  // Get score badge variant
+  const getScoreBadgeVariant = (score: number) => {
+    if (score >= 80) return 'default'
+    if (score >= 60) return 'secondary'
+    return 'destructive'
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -293,23 +416,33 @@ export function TradeBuilder() {
           <h1 className="text-3xl font-bold">Trade Builder</h1>
           <p className="text-muted-foreground mt-2">Build the perfect trade with AI-powered analysis</p>
         </div>
-        <Button>
+        <Button onClick={startNewAnalysis}>
           <Plus className="h-4 w-4 mr-2" />
           New Trade
         </Button>
       </div>
 
+      {/* Success Message */}
+      {showSuccessMessage && (
+        <Alert className="border-green-200 bg-green-50">
+          <CheckCircle className="h-4 w-4 text-green-600" />
+          <AlertDescription className="text-green-800">
+            Trade analysis saved successfully! You can view it in your trade history.
+          </AlertDescription>
+        </Alert>
+      )}
+
       <Tabs defaultValue="builder" className="space-y-4">
         <TabsList>
           <TabsTrigger value="builder">Trade Plan</TabsTrigger>
-          <TabsTrigger value="history">Trade History</TabsTrigger>
+          <TabsTrigger value="history">Trade History ({savedTrades.length})</TabsTrigger>
           <TabsTrigger value="analytics">Analytics</TabsTrigger>
         </TabsList>
 
         <TabsContent value="builder" className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle>New Trade Analysis</CardTitle>
+              <CardTitle>AI-Powered Trade Analysis</CardTitle>
               <CardDescription>
                 Step {currentStep} of {steps.length}: {steps[currentStep - 1]?.title}
               </CardDescription>
@@ -322,16 +455,16 @@ export function TradeBuilder() {
                   return (
                     <div key={step.id} className="flex items-center">
                       <div
-                        className={`flex items-center justify-center w-10 h-10 rounded-full border-2 ${
+                        className={`flex items-center justify-center w-10 h-10 rounded-full border-2 transition-all ${
                           currentStep >= step.id
-                            ? "bg-blue-500 border-blue-500 text-white"
-                            : "border-gray-300 text-gray-500"
+                            ? "bg-blue-500 border-blue-500 text-white shadow-lg"
+                            : "border-gray-300 text-gray-500 hover:border-blue-300"
                         }`}
                       >
                         <StepIcon className="h-4 w-4" />
                       </div>
                       {index < steps.length - 1 && (
-                        <div className={`w-16 h-0.5 mx-2 ${currentStep > step.id ? "bg-blue-500" : "bg-gray-300"}`} />
+                        <div className={`w-16 h-0.5 mx-2 transition-all ${currentStep > step.id ? "bg-blue-500" : "bg-gray-300"}`} />
                       )}
                     </div>
                   )
@@ -354,7 +487,7 @@ export function TradeBuilder() {
 
               {/* Step 1: Trade Setup */}
               {currentStep === 1 && (
-                <div className="space-y-4">
+                <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
                       <Label className="text-sm font-medium">Trading Instrument *</Label>
@@ -452,17 +585,20 @@ export function TradeBuilder() {
 
                   {/* Risk-Reward Display */}
                   {tradeData.riskRewardRatio && (
-                    <div className="bg-blue-50 p-4 rounded-lg">
+                    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border border-blue-200">
                       <div className="flex items-center justify-between">
                         <div>
                           <p className="text-sm font-medium text-blue-900">Risk:Reward Ratio</p>
-                          <p className="text-2xl font-bold text-blue-600">1:{tradeData.riskRewardRatio}</p>
+                          <p className="text-3xl font-bold text-blue-600">1:{tradeData.riskRewardRatio}</p>
                         </div>
                         <div className="text-right">
                           <p className="text-sm text-blue-700">
                             Risk: {tradeData.potentialLoss?.toFixed(5)} | 
                             Reward: {tradeData.potentialProfit?.toFixed(5)}
                           </p>
+                          <Badge variant={tradeData.riskRewardRatio >= 2 ? "default" : "secondary"} className="mt-1">
+                            {tradeData.riskRewardRatio >= 2 ? "Excellent" : tradeData.riskRewardRatio >= 1.5 ? "Good" : "Needs Improvement"}
+                          </Badge>
                         </div>
                       </div>
                     </div>
@@ -481,7 +617,7 @@ export function TradeBuilder() {
                     
                     {!tradeData.screenshotPreview ? (
                       <div 
-                        className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-blue-400 transition-colors"
+                        className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-blue-400 hover:bg-blue-50 transition-all duration-200"
                         onClick={() => fileInputRef.current?.click()}
                       >
                         <Upload className="h-12 w-12 mx-auto text-gray-400 mb-4" />
@@ -500,7 +636,7 @@ export function TradeBuilder() {
                         <img 
                           src={tradeData.screenshotPreview} 
                           alt="Trade setup screenshot" 
-                          className="w-full max-h-96 object-contain rounded-lg border"
+                          className="w-full max-h-96 object-contain rounded-lg border shadow-lg"
                         />
                         <Button
                           variant="destructive"
@@ -510,9 +646,9 @@ export function TradeBuilder() {
                         >
                           <X className="h-4 w-4" />
                         </Button>
-                        <div className="mt-2 flex items-center text-green-600">
+                        <div className="mt-3 flex items-center text-green-600 bg-green-50 p-2 rounded">
                           <CheckCircle className="h-4 w-4 mr-2" />
-                          <span className="text-sm">Screenshot uploaded successfully</span>
+                          <span className="text-sm font-medium">Screenshot uploaded successfully</span>
                         </div>
                       </div>
                     )}
@@ -522,7 +658,7 @@ export function TradeBuilder() {
 
               {/* Step 3: Trade Context */}
               {currentStep === 3 && (
-                <div className="space-y-4">
+                <div className="space-y-6">
                   <div>
                     <Label className="text-sm font-medium">Trade Reason *</Label>
                     <Textarea 
@@ -530,6 +666,7 @@ export function TradeBuilder() {
                       rows={4}
                       value={tradeData.tradeReason}
                       onChange={(e) => setTradeData(prev => ({...prev, tradeReason: e.target.value}))}
+                      className="resize-none"
                     />
                   </div>
 
@@ -544,12 +681,12 @@ export function TradeBuilder() {
                           <SelectValue placeholder="How are you feeling?" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="calm">Calm & Focused</SelectItem>
-                          <SelectItem value="confident">Confident</SelectItem>
-                          <SelectItem value="excited">Excited</SelectItem>
-                          <SelectItem value="anxious">Anxious</SelectItem>
-                          <SelectItem value="frustrated">Frustrated</SelectItem>
-                          <SelectItem value="neutral">Neutral</SelectItem>
+                          <SelectItem value="calm">😌 Calm & Focused</SelectItem>
+                          <SelectItem value="confident">😎 Confident</SelectItem>
+                          <SelectItem value="excited">🤩 Excited</SelectItem>
+                          <SelectItem value="anxious">😰 Anxious</SelectItem>
+                          <SelectItem value="frustrated">😤 Frustrated</SelectItem>
+                          <SelectItem value="neutral">😐 Neutral</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -563,12 +700,12 @@ export function TradeBuilder() {
                           <SelectValue placeholder="Current market state" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="trending">Strong Trend</SelectItem>
-                          <SelectItem value="ranging">Range-bound</SelectItem>
-                          <SelectItem value="volatile">High Volatility</SelectItem>
-                          <SelectItem value="quiet">Low Volatility</SelectItem>
-                          <SelectItem value="news">News Event</SelectItem>
-                          <SelectItem value="session">Session Change</SelectItem>
+                          <SelectItem value="trending">📈 Strong Trend</SelectItem>
+                          <SelectItem value="ranging">📊 Range-bound</SelectItem>
+                          <SelectItem value="volatile">⚡ High Volatility</SelectItem>
+                          <SelectItem value="quiet">😴 Low Volatility</SelectItem>
+                          <SelectItem value="news">📰 News Event</SelectItem>
+                          <SelectItem value="session">🌍 Session Change</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -576,18 +713,24 @@ export function TradeBuilder() {
 
                   <div>
                     <Label className="text-sm font-medium">Confidence Level: {tradeData.confidenceLevel}%</Label>
-                    <div className="mt-2">
+                    <div className="mt-3">
                       <input
                         type="range"
                         min="0"
                         max="100"
                         value={tradeData.confidenceLevel}
                         onChange={(e) => setTradeData(prev => ({...prev, confidenceLevel: parseInt(e.target.value)}))}
-                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
                       />
-                      <div className="flex justify-between text-sm text-muted-foreground mt-1">
-                        <span>Low</span>
-                        <span>High</span>
+                      <div className="flex justify-between text-sm text-muted-foreground mt-2">
+                        <span>Low Confidence</span>
+                        <span className={`font-medium ${
+                          tradeData.confidenceLevel >= 70 ? 'text-green-600' : 
+                          tradeData.confidenceLevel >= 40 ? 'text-yellow-600' : 'text-red-600'
+                        }`}>
+                          {tradeData.confidenceLevel}%
+                        </span>
+                        <span>High Confidence</span>
                       </div>
                     </div>
                   </div>
@@ -596,7 +739,7 @@ export function TradeBuilder() {
 
               {/* Step 4: Risk Management */}
               {currentStep === 4 && (
-                <div className="space-y-4">
+                <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <Label className="text-sm font-medium">Position Size (lots)</Label>
@@ -620,18 +763,29 @@ export function TradeBuilder() {
                     </div>
                   </div>
 
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <h4 className="font-medium mb-2">Trade Summary</h4>
-                    <div className="grid grid-cols-2 gap-4 text-sm">
-                      <div>
+                  <div className="bg-gradient-to-r from-gray-50 to-blue-50 p-6 rounded-lg border">
+                    <h4 className="font-semibold mb-4 flex items-center">
+                      <Shield className="h-5 w-5 mr-2 text-blue-600" />
+                      Trade Summary
+                    </h4>
+                    <div className="grid grid-cols-2 gap-6 text-sm">
+                      <div className="space-y-2">
                         <p><strong>Instrument:</strong> {tradeData.tradingInstrument}</p>
-                        <p><strong>Direction:</strong> {tradeData.direction?.toUpperCase()}</p>
+                        <p><strong>Direction:</strong> 
+                          <Badge variant="outline" className="ml-2">
+                            {tradeData.direction?.toUpperCase()}
+                          </Badge>
+                        </p>
                         <p><strong>Entry:</strong> {tradeData.entryPrice}</p>
                       </div>
-                      <div>
+                      <div className="space-y-2">
                         <p><strong>Stop Loss:</strong> {tradeData.stopLoss}</p>
                         <p><strong>Take Profit:</strong> {tradeData.takeProfit}</p>
-                        <p><strong>R:R Ratio:</strong> 1:{tradeData.riskRewardRatio}</p>
+                        <p><strong>R:R Ratio:</strong> 
+                          <Badge variant={tradeData.riskRewardRatio && tradeData.riskRewardRatio >= 2 ? "default" : "secondary"} className="ml-2">
+                            1:{tradeData.riskRewardRatio}
+                          </Badge>
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -640,28 +794,30 @@ export function TradeBuilder() {
 
               {/* Step 5: AI Analysis */}
               {currentStep === 5 && (
-                <div className="space-y-4">
+                <div className="space-y-6">
                   {!analysisResult ? (
-                    <div className="text-center py-8">
-                      <Brain className="h-16 w-16 mx-auto text-blue-500 mb-4" />
-                      <h3 className="text-xl font-semibold mb-2">Ready for AI Analysis</h3>
-                      <p className="text-muted-foreground mb-6">
-                        Our AI will analyze your trade setup, screenshot, and context to provide comprehensive feedback
+                    <div className="text-center py-12">
+                      <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-6">
+                        <Brain className="h-12 w-12 text-blue-600" />
+                      </div>
+                      <h3 className="text-2xl font-semibold mb-3">Ready for AI Analysis</h3>
+                      <p className="text-muted-foreground mb-8 max-w-md mx-auto">
+                        Our advanced AI will analyze your trade setup, screenshot, and context to provide comprehensive coaching feedback
                       </p>
                       <Button 
                         size="lg" 
                         onClick={handleAIAnalysis}
                         disabled={isAnalyzing}
-                        className="min-w-32"
+                        className="min-w-40 h-12"
                       >
                         {isAnalyzing ? (
                           <>
-                            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
                             Analyzing...
                           </>
                         ) : (
                           <>
-                            <Brain className="h-4 w-4 mr-2" />
+                            <Brain className="h-5 w-5 mr-3" />
                             Analyze Trade
                           </>
                         )}
@@ -670,51 +826,64 @@ export function TradeBuilder() {
                   ) : (
                     <div className="space-y-6">
                       {/* Overall Score */}
-                      <Card>
+                      <Card className="border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50">
                         <CardHeader>
-                          <CardTitle className="flex items-center">
-                            <Target className="h-5 w-5 mr-2" />
+                          <CardTitle className="flex items-center text-xl">
+                            <Award className="h-6 w-6 mr-3 text-blue-600" />
                             Overall Trade Score
                           </CardTitle>
                         </CardHeader>
                         <CardContent>
-                          <div className="flex items-center space-x-4">
-                            <div className="text-4xl font-bold text-blue-600">
+                          <div className="flex items-center space-x-6">
+                            <div className={`text-5xl font-bold ${getScoreColor(analysisResult.overallScore)}`}>
                               {analysisResult.overallScore}/100
                             </div>
-                            <Progress value={analysisResult.overallScore} className="flex-1" />
+                            <div className="flex-1">
+                              <Progress value={analysisResult.overallScore} className="h-3 mb-2" />
+                              <Badge variant={getScoreBadgeVariant(analysisResult.overallScore)} className="text-sm">
+                                {analysisResult.overallScore >= 80 ? 'Excellent' : 
+                                 analysisResult.overallScore >= 60 ? 'Good' : 
+                                 analysisResult.overallScore >= 40 ? 'Fair' : 'Needs Improvement'}
+                              </Badge>
+                            </div>
                           </div>
                         </CardContent>
                       </Card>
 
-                      {/* Analysis Results */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <Card>
+                      {/* Analysis Results Grid */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <Card className="border-green-200 bg-green-50">
                           <CardHeader>
-                            <CardTitle className="text-green-600">Strengths</CardTitle>
+                            <CardTitle className="text-green-700 flex items-center">
+                              <CheckCircle className="h-5 w-5 mr-2" />
+                              Strengths
+                            </CardTitle>
                           </CardHeader>
                           <CardContent>
-                            <ul className="space-y-2">
+                            <ul className="space-y-3">
                               {analysisResult.strengths.map((strength, index) => (
                                 <li key={index} className="flex items-start">
-                                  <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                                  <span className="text-sm">{strength}</span>
+                                  <Star className="h-4 w-4 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                                  <span className="text-sm text-green-800">{strength}</span>
                                 </li>
                               ))}
                             </ul>
                           </CardContent>
                         </Card>
 
-                        <Card>
+                        <Card className="border-orange-200 bg-orange-50">
                           <CardHeader>
-                            <CardTitle className="text-orange-600">Areas for Improvement</CardTitle>
+                            <CardTitle className="text-orange-700 flex items-center">
+                              <Lightbulb className="h-5 w-5 mr-2" />
+                              Areas for Improvement
+                            </CardTitle>
                           </CardHeader>
                           <CardContent>
-                            <ul className="space-y-2">
+                            <ul className="space-y-3">
                               {analysisResult.weaknesses.map((weakness, index) => (
                                 <li key={index} className="flex items-start">
-                                  <AlertTriangle className="h-4 w-4 text-orange-500 mr-2 mt-0.5 flex-shrink-0" />
-                                  <span className="text-sm">{weakness}</span>
+                                  <AlertTriangle className="h-4 w-4 text-orange-500 mr-3 mt-0.5 flex-shrink-0" />
+                                  <span className="text-sm text-orange-800">{weakness}</span>
                                 </li>
                               ))}
                             </ul>
@@ -723,28 +892,31 @@ export function TradeBuilder() {
                       </div>
 
                       {/* AI Coaching Feedback */}
-                      <Card>
+                      <Card className="border-purple-200 bg-purple-50">
                         <CardHeader>
-                          <CardTitle className="flex items-center">
+                          <CardTitle className="flex items-center text-purple-700">
                             <Brain className="h-5 w-5 mr-2" />
                             AI Coach Feedback
                           </CardTitle>
                         </CardHeader>
                         <CardContent>
-                          <p className="text-sm leading-relaxed">{analysisResult.aiCoachingFeedback}</p>
+                          <p className="text-sm leading-relaxed text-purple-800">{analysisResult.aiCoachingFeedback}</p>
                         </CardContent>
                       </Card>
 
                       {/* Recommendations */}
                       <Card>
                         <CardHeader>
-                          <CardTitle>Recommendations</CardTitle>
+                          <CardTitle className="flex items-center">
+                            <Target className="h-5 w-5 mr-2" />
+                            Action Recommendations
+                          </CardTitle>
                         </CardHeader>
                         <CardContent>
-                          <ul className="space-y-2">
+                          <ul className="space-y-3">
                             {analysisResult.recommendations.map((rec, index) => (
                               <li key={index} className="flex items-start">
-                                <div className="bg-blue-100 text-blue-600 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 mt-0.5 flex-shrink-0">
+                                <div className="bg-blue-100 text-blue-600 rounded-full w-7 h-7 flex items-center justify-center text-xs font-bold mr-4 mt-0.5 flex-shrink-0">
                                   {index + 1}
                                 </div>
                                 <span className="text-sm">{rec}</span>
@@ -753,32 +925,90 @@ export function TradeBuilder() {
                           </ul>
                         </CardContent>
                       </Card>
+
+                      {/* Technical & Risk Analysis */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <Card>
+                          <CardHeader>
+                            <CardTitle className="flex items-center">
+                              <Activity className="h-5 w-5 mr-2" />
+                              Technical Analysis
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent className="space-y-3">
+                            <div>
+                              <p className="text-sm font-medium">Entry Quality:</p>
+                              <p className="text-sm text-muted-foreground">{analysisResult.technicalAnalysis.entryQuality}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm font-medium">Trend Analysis:</p>
+                              <p className="text-sm text-muted-foreground">{analysisResult.technicalAnalysis.trendAnalysis}</p>
+                            </div>
+                          </CardContent>
+                        </Card>
+
+                        <Card>
+                          <CardHeader>
+                            <CardTitle className="flex items-center">
+                              <Shield className="h-5 w-5 mr-2" />
+                              Risk Management
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent className="space-y-3">
+                            <div>
+                              <p className="text-sm font-medium">Position Sizing:</p>
+                              <p className="text-sm text-muted-foreground">{analysisResult.riskManagement.positionSizing}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm font-medium">Stop Loss Placement:</p>
+                              <p className="text-sm text-muted-foreground">{analysisResult.riskManagement.stopLossPlacement}</p>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </div>
                     </div>
                   )}
                 </div>
               )}
 
               {/* Navigation */}
-              <div className="flex justify-between mt-6">
+              <div className="flex justify-between mt-8 pt-6 border-t">
                 <Button
                   variant="outline"
                   onClick={() => setCurrentStep(Math.max(1, currentStep - 1))}
                   disabled={currentStep === 1}
+                  className="min-w-24"
                 >
                   Previous
                 </Button>
                 
                 {currentStep < steps.length ? (
-                  <Button onClick={handleNext}>
+                  <Button onClick={handleNext} className="min-w-24">
                     Next
                   </Button>
                 ) : (
-                  <div className="space-x-2">
-                    <Button variant="outline">
-                      Save Trade
+                  <div className="space-x-3">
+                    <Button 
+                      variant="outline" 
+                      onClick={saveTrade}
+                      disabled={!analysisResult || isSaving}
+                      className="min-w-32"
+                    >
+                      {isSaving ? (
+                        <>
+                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-600 mr-2"></div>
+                          Saving...
+                        </>
+                      ) : (
+                        <>
+                          <Save className="h-4 w-4 mr-2" />
+                          Save Trade
+                        </>
+                      )}
                     </Button>
-                    <Button>
-                      Start New Analysis
+                    <Button onClick={startNewAnalysis} className="min-w-32">
+                      <RefreshCw className="h-4 w-4 mr-2" />
+                      New Analysis
                     </Button>
                   </div>
                 )}
@@ -790,15 +1020,59 @@ export function TradeBuilder() {
         <TabsContent value="history">
           <Card>
             <CardHeader>
-              <CardTitle>Trade History</CardTitle>
+              <CardTitle className="flex items-center">
+                <Clock className="h-5 w-5 mr-2" />
+                Trade History ({savedTrades.length})
+              </CardTitle>
               <CardDescription>
-                Your previous trade analyses and performance
+                Your previous trade analyses and performance tracking
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground">
-                Trade history coming soon...
-              </p>
+              {savedTrades.length === 0 ? (
+                <div className="text-center py-8">
+                  <BarChart3 className="h-12 w-12 mx-auto text-gray-400 mb-4" />
+                  <p className="text-muted-foreground">No trade analyses yet. Complete your first analysis to see it here.</p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {savedTrades.map((trade) => (
+                    <Card key={trade.id} className="border-l-4 border-l-blue-500">
+                      <CardContent className="pt-4">
+                        <div className="flex justify-between items-start mb-3">
+                          <div>
+                            <h4 className="font-semibold">{trade.tradeData.tradingInstrument} - {trade.tradeData.direction?.toUpperCase()}</h4>
+                            <p className="text-sm text-muted-foreground">
+                              {trade.timestamp.toLocaleDateString()} at {trade.timestamp.toLocaleTimeString()}
+                            </p>
+                          </div>
+                          <Badge variant={getScoreBadgeVariant(trade.analysis.overallScore)}>
+                            Score: {trade.analysis.overallScore}/100
+                          </Badge>
+                        </div>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                          <div>
+                            <p className="font-medium">Entry: {trade.tradeData.entryPrice}</p>
+                            <p className="text-muted-foreground">SL: {trade.tradeData.stopLoss}</p>
+                          </div>
+                          <div>
+                            <p className="font-medium">TP: {trade.tradeData.takeProfit}</p>
+                            <p className="text-muted-foreground">R:R: 1:{trade.tradeData.riskRewardRatio}</p>
+                          </div>
+                          <div>
+                            <p className="font-medium">Risk: {trade.tradeData.riskPercentage}%</p>
+                            <p className="text-muted-foreground">Size: {trade.tradeData.positionSize} lots</p>
+                          </div>
+                          <div>
+                            <p className="font-medium">Confidence: {trade.tradeData.confidenceLevel}%</p>
+                            <p className="text-muted-foreground">State: {trade.tradeData.emotionalState}</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              )}
             </CardContent>
           </Card>
         </TabsContent>
@@ -815,9 +1089,43 @@ export function TradeBuilder() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground">
-                Analytics dashboard coming soon...
-              </p>
+              {savedTrades.length === 0 ? (
+                <div className="text-center py-8">
+                  <BarChart3 className="h-12 w-12 mx-auto text-gray-400 mb-4" />
+                  <p className="text-muted-foreground">Complete more trade analyses to see performance insights.</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <Card>
+                    <CardContent className="pt-6">
+                      <div className="text-center">
+                        <p className="text-2xl font-bold">{savedTrades.length}</p>
+                        <p className="text-sm text-muted-foreground">Total Analyses</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardContent className="pt-6">
+                      <div className="text-center">
+                        <p className="text-2xl font-bold">
+                          {Math.round(savedTrades.reduce((sum, trade) => sum + trade.analysis.overallScore, 0) / savedTrades.length)}
+                        </p>
+                        <p className="text-sm text-muted-foreground">Average Score</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardContent className="pt-6">
+                      <div className="text-center">
+                        <p className="text-2xl font-bold">
+                          {Math.round(savedTrades.reduce((sum, trade) => sum + (trade.tradeData.riskRewardRatio || 0), 0) / savedTrades.length * 100) / 100}
+                        </p>
+                        <p className="text-sm text-muted-foreground">Avg R:R Ratio</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              )}
             </CardContent>
           </Card>
         </TabsContent>
