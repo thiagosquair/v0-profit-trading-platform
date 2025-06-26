@@ -1,40 +1,32 @@
-"use client"
-
-import { useState } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { LanguageSwitcher } from "@/components/language-switcher"
-import { t } from "@/lib/simple-translations"
 import {
   Brain,
   BarChart3,
   Camera,
-  Target,
-  TrendingUp,
   BookOpen,
+  TrendingUp,
+  Target,
+  Users,
+  Trophy,
   PenTool,
-  Settings,
-  Home,
-  ChevronLeft,
-  ChevronRight,
-  Lightbulb,
-  LineChart,
-  Zap,
+  MessageSquare,
+  Hammer
 } from "lucide-react"
+import { useTranslations } from "next-intl"
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 
-const navigationItems = [
+const navigation = [
   {
     name: "Overview",
     href: "/dashboard",
-    icon: Home,
+    icon: BarChart3,
     key: "nav.overview",
   },
   {
     name: "AI Coach",
-    href: "/dashboard/coach",
+    href: "/dashboard/ai-coach",
     icon: Brain,
     key: "nav.aiCoach",
   },
@@ -42,124 +34,93 @@ const navigationItems = [
     name: "Screenshot Analysis",
     href: "/dashboard/analysis",
     icon: Camera,
-    key: "nav.analysis",
+    key: "nav.screenshotAnalysis",
+  },
+  {
+    name: "Funded Career Builder",
+    href: "/dashboard/career-builder",
+    icon: Trophy,
+    key: "nav.careerBuilder",
   },
   {
     name: "Progress Tracking",
     href: "/dashboard/progress",
-    icon: BarChart3,
-    key: "nav.progress",
+    icon: TrendingUp,
+    key: "nav.progressTracking",
   },
   {
     name: "Interactive Exercises",
     href: "/dashboard/exercises",
     icon: Target,
-    key: "nav.exercises",
+    key: "nav.interactiveExercises",
   },
   {
     name: "Behavioral Patterns",
     href: "/dashboard/patterns",
-    icon: TrendingUp,
-    key: "nav.patterns",
+    icon: Users,
+    key: "nav.behavioralPatterns",
   },
   {
     name: "Psychology Courses",
     href: "/dashboard/courses",
     icon: BookOpen,
-    key: "nav.courses",
+    key: "nav.psychologyCourses",
   },
   {
     name: "Reflection Journal",
     href: "/dashboard/journal",
     icon: PenTool,
-    key: "nav.journal",
+    key: "nav.reflectionJournal",
   },
   {
     name: "Coaching Insights",
     href: "/dashboard/insights",
-    icon: Lightbulb,
-    key: "nav.insights",
+    icon: MessageSquare,
+    key: "nav.coachingInsights",
   },
   {
     name: "Trade Builder",
     href: "/dashboard/trade-builder",
-    icon: LineChart,
+    icon: Hammer,
     key: "nav.tradeBuilder",
   },
   {
     name: "Market Insights",
     href: "/dashboard/market-insights",
-    icon: Zap,
+    icon: TrendingUp,
     key: "nav.marketInsights",
   },
 ]
 
-interface DashboardSidebarProps {
-  className?: string
-}
-
-export function DashboardSidebar({ className }: DashboardSidebarProps) {
+export function DashboardSidebar() {
+  const t = useTranslations()
   const pathname = usePathname()
-  const [collapsed, setCollapsed] = useState(false)
 
   return (
-    <div className={cn("flex flex-col border-r bg-white/50 backdrop-blur-sm", collapsed ? "w-16" : "w-64", className)}>
-      {/* Header */}
-      <div className="flex h-16 items-center justify-between px-4 border-b">
-        {!collapsed && (
-          <div className="flex items-center space-x-2">
-            <Brain className="h-8 w-8 text-blue-600" />
-            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              ProFitz
-            </span>
-          </div>
-        )}
-        <Button variant="ghost" size="sm" onClick={() => setCollapsed(!collapsed)} className="h-8 w-8 p-0">
-          {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
-        </Button>
+    <div className="flex h-full w-64 flex-col bg-background border-r">
+      <div className="flex h-16 items-center border-b px-6">
+        <h2 className="text-lg font-semibold">Dashboard</h2>
       </div>
-
-      {/* Navigation */}
-      <ScrollArea className="flex-1 px-3 py-4">
-        <nav className="space-y-2">
-          {navigationItems.map((item) => {
-            const isActive = pathname === item.href
-            return (
-              <Link key={item.name} href={item.href}>
-                <Button
-                  variant={isActive ? "default" : "ghost"}
-                  className={cn(
-                    "w-full justify-start h-10",
-                    collapsed && "px-2",
-                    isActive && "bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg",
-                  )}
-                  title={collapsed ? t(item.key) : undefined}
-                >
-                  <item.icon className={cn("h-5 w-5", !collapsed && "mr-3")} />
-                  {!collapsed && <span className="font-medium">{t(item.key)}</span>}
-                </Button>
-              </Link>
-            )
-          })}
-        </nav>
-      </ScrollArea>
-
-      {/* Language Switcher - only when expanded */}
-      {!collapsed && <LanguageSwitcher variant="sidebar" />}
-
-      {/* Settings */}
-      <div className="border-t p-3">
-        <Link href="/dashboard/settings">
-          <Button
-            variant="ghost"
-            className={cn("w-full justify-start h-10", collapsed && "px-2")}
-            title={collapsed ? t("nav.settings") : undefined}
-          >
-            <Settings className={cn("h-5 w-5", !collapsed && "mr-3")} />
-            {!collapsed && <span className="font-medium">{t("nav.settings")}</span>}
-          </Button>
-        </Link>
-      </div>
+      <nav className="flex-1 space-y-1 p-4">
+        {navigation.map((item) => {
+          const isActive = pathname === item.href
+          return (
+            <Link key={item.name} href={item.href}>
+              <Button
+                variant={isActive ? "secondary" : "ghost"}
+                className={cn(
+                  "w-full justify-start",
+                  isActive && "bg-secondary"
+                )}
+              >
+                <item.icon className="mr-2 h-4 w-4" />
+                {t(item.key)}
+              </Button>
+            </Link>
+          )
+        })}
+      </nav>
     </div>
   )
 }
+
