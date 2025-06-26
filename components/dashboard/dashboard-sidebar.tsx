@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Brain,
   BarChart3,
@@ -123,4 +125,3 @@ export function DashboardSidebar() {
     </div>
   )
 }
-
