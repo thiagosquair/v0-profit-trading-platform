@@ -1,17 +1,11 @@
 "use client";
 
-import { Metadata } from "next";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { CheckCircle, XCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-
-export const metadata: Metadata = {
-  title: "Funded Career Builder | TradeLinx",
-  description: "Your path to becoming a professional funded trader.",
-};
 
 export default function FundedCareerBuilderPage() {
   const [activeTab, setActiveTab] = useState("overview");
