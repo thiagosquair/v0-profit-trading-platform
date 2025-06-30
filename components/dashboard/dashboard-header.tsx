@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Bell, Settings, User, LogOut } from "lucide-react"
 import { LanguageSwitcher } from "@/components/language-switcher"
-import { t } from "@/lib/simple-translations"
 
 interface DashboardHeaderProps {
   title?: string
@@ -63,14 +62,14 @@ export function DashboardHeader({ title }: DashboardHeaderProps) {
           <DropdownMenuContent className="w-56" align="end" forceMount>
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-1">
-                <p className="text-sm font-medium leading-none">{t("common.welcome")}</p>
+                <p className="text-sm font-medium leading-none">Welcome</p>
                 <p className="text-xs leading-none text-muted-foreground">john.doe@example.com</p>
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <User className="mr-2 h-4 w-4" />
-              <span>{t("common.profile")}</span>
+              <span>Profile</span>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Settings className="mr-2 h-4 w-4" />
@@ -79,7 +78,7 @@ export function DashboardHeader({ title }: DashboardHeaderProps) {
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleSignOut}>
               <LogOut className="mr-2 h-4 w-4" />
-              <span>{t("common.signOut")}</span>
+              <span>Sign Out</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -87,3 +86,4 @@ export function DashboardHeader({ title }: DashboardHeaderProps) {
     </header>
   )
 }
+
