@@ -2,7 +2,6 @@
 
 import type React from "react"
 import { useAuth } from "@/hooks/use-auth"
-import { useLanguage } from "@/hooks/use-language"
 import { LogOut, User } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
@@ -23,7 +22,18 @@ interface DashboardLayoutProps {
 
 export function DashboardLayout({ children }: DashboardLayoutProps) {
   const { user, signOut } = useAuth()
-  const { t } = useLanguage()
+
+  const handleSignOut = () => {
+    if (signOut) {
+      signOut()
+    } else {
+      // Fallback sign out method
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("demo-auth")
+        window.location.href = "/auth/signin"
+      }
+    }
+  }
 
   return (
     <div className="flex h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
@@ -36,7 +46,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
         <header className="h-16 border-b bg-white/80 backdrop-blur-sm px-6 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <h1 className="text-2xl font-semibold text-gray-900">
-              {t("common.welcome")}, {user?.user_metadata?.full_name || user?.email?.split("@")[0] || "Demo"}!
+              Welcome, {user?.user_metadata?.full_name || user?.email?.split("@")[0] || "Demo"}!
             </h1>
           </div>
 
@@ -69,12 +79,12 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                   <User className="mr-2 h-4 w-4" />
-                  {t("common.profile")}
+                  Profile
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={signOut} className="text-red-600">
+                <DropdownMenuItem onClick={handleSignOut} className="text-red-600">
                   <LogOut className="mr-2 h-4 w-4" />
-                  {t("common.signOut")}
+                  Sign Out
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -87,3 +97,4 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
     </div>
   )
 }
+
