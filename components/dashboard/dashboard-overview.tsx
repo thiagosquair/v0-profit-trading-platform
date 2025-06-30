@@ -1,89 +1,239 @@
 "use client"
 
-import { useState } from "react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Bell, Settings, User, LogOut } from "lucide-react"
-import { LanguageSwitcher } from "@/components/language-switcher"
+import { Progress } from "@/components/ui/progress"
+import { Brain, Target, Award, BarChart3, Camera, PenTool, ArrowRight, Clock } from "lucide-react"
 
-interface DashboardHeaderProps {
-  title?: string
-}
-
-export function DashboardHeader({ title }: DashboardHeaderProps) {
-  const [notifications] = useState(3)
-
-  const handleSignOut = () => {
-    // Clear any stored auth data
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("demo-auth")
-      window.location.href = "/auth/signin"
-    }
+export function DashboardOverview() {
+  // Mock data for demo
+  const stats = {
+    psychologyScore: 78,
+    exercisesCompleted: 12,
+    coachingSessions: 5,
+    achievements: 8,
   }
 
+  const quickActions = [
+    {
+      title: "AI Coach",
+      description: "Get personalized coaching",
+      icon: Brain,
+      href: "/dashboard/coach",
+      color: "bg-blue-500",
+    },
+    {
+      title: "Screenshot Analysis",
+      description: "Upload and analyze",
+      icon: Camera,
+      href: "/dashboard/analysis",
+      color: "bg-purple-500",
+    },
+    {
+      title: "Interactive Exercises",
+      description: "Complete psychology exercises",
+      icon: Target,
+      href: "/dashboard/exercises",
+      color: "bg-green-500",
+    },
+    {
+      title: "Reflection Journal",
+      description: "Reflect on trading",
+      icon: PenTool,
+      href: "/dashboard/journal",
+      color: "bg-orange-500",
+    },
+  ]
+
+  const recentActivities = [
+    {
+      type: "exercise",
+      title: "Completed Emotional Control",
+      time: "2 hours ago",
+      score: 85,
+    },
+    {
+      type: "coaching",
+      title: "AI Coaching Session",
+      time: "1 day ago",
+      duration: "15 minutes",
+    },
+    {
+      type: "analysis",
+      title: "Screenshot Analysis EUR/USD",
+      time: "3 days ago",
+      result: "Positive",
+    },
+  ]
+
+  const currentGoals = [
+    {
+      title: "Improve Emotional Control",
+      progress: 75,
+      target: "Score 85+",
+    },
+    {
+      title: "Complete 20 Exercises",
+      progress: 60,
+      target: "12/20 exercises",
+    },
+    {
+      title: "Weekly Coaching Sessions",
+      progress: 80,
+      target: "4/5 sessions",
+    },
+  ]
+
   return (
-    <header className="flex h-16 items-center justify-between border-b bg-white/50 backdrop-blur-sm px-6">
-      <div className="flex items-center space-x-4">
-        {title && <h1 className="text-2xl font-bold text-gray-900">{title}</h1>}
+    <div className="space-y-6 p-6">
+      {/* Header */}
+      <div>
+        <h1 className="text-3xl font-bold text-gray-900">Welcome to Your Trading Dashboard</h1>
+        <p className="text-gray-600 mt-2">Track your progress and improve your trading psychology</p>
       </div>
 
-      <div className="flex items-center space-x-4">
-        {/* Language Switcher */}
-        <LanguageSwitcher variant="header" />
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Psychology Score</CardTitle>
+            <Brain className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{stats.psychologyScore}</div>
+            <p className="text-xs text-muted-foreground">+5% from last week</p>
+          </CardContent>
+        </Card>
 
-        {/* Notifications */}
-        <Button variant="ghost" size="sm" className="relative">
-          <Bell className="h-5 w-5" />
-          {notifications > 0 && (
-            <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-red-500 text-xs text-white flex items-center justify-center">
-              {notifications}
-            </span>
-          )}
-        </Button>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Exercises Completed</CardTitle>
+            <Target className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{stats.exercisesCompleted}</div>
+            <p className="text-xs text-muted-foreground">This week</p>
+          </CardContent>
+        </Card>
 
-        {/* User Menu */}
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-              <Avatar className="h-8 w-8">
-                <AvatarImage src="/placeholder-user.jpg" alt="User" />
-                <AvatarFallback>JD</AvatarFallback>
-              </Avatar>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56" align="end" forceMount>
-            <DropdownMenuLabel className="font-normal">
-              <div className="flex flex-col space-y-1">
-                <p className="text-sm font-medium leading-none">Welcome</p>
-                <p className="text-xs leading-none text-muted-foreground">john.doe@example.com</p>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Coaching Sessions</CardTitle>
+            <BarChart3 className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{stats.coachingSessions}</div>
+            <p className="text-xs text-muted-foreground">This month</p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Achievements</CardTitle>
+            <Award className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{stats.achievements}</div>
+            <p className="text-xs text-muted-foreground">Badges earned</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Quick Actions */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Quick Actions</CardTitle>
+            <CardDescription>Jump into your training</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {quickActions.map((action, index) => (
+              <div
+                key={index}
+                className="flex items-center space-x-4 p-3 rounded-lg border hover:bg-gray-50 transition-colors"
+              >
+                <div className={`p-2 rounded-lg ${action.color}`}>
+                  <action.icon className="h-5 w-5 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-medium">{action.title}</h3>
+                  <p className="text-sm text-gray-600">{action.description}</p>
+                </div>
+                <Button variant="ghost" size="sm" asChild>
+                  <a href={action.href}>
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                </Button>
               </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <User className="mr-2 h-4 w-4" />
-              <span>Profile</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Settings className="mr-2 h-4 w-4" />
-              <span>Settings</span>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleSignOut}>
-              <LogOut className="mr-2 h-4 w-4" />
-              <span>Sign Out</span>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+            ))}
+          </CardContent>
+        </Card>
+
+        {/* Recent Activity */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Recent Activity</CardTitle>
+            <CardDescription>Your latest activities</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {recentActivities.map((activity, index) => (
+              <div key={index} className="flex items-start space-x-3">
+                <div className="flex-shrink-0">
+                  {activity.type === "exercise" && <Target className="h-5 w-5 text-green-500" />}
+                  {activity.type === "coaching" && <Brain className="h-5 w-5 text-blue-500" />}
+                  {activity.type === "analysis" && <Camera className="h-5 w-5 text-purple-500" />}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-gray-900">{activity.title}</p>
+                  <div className="flex items-center space-x-2 mt-1">
+                    <Clock className="h-3 w-3 text-gray-400" />
+                    <p className="text-xs text-gray-500">{activity.time}</p>
+                    {activity.score && (
+                      <Badge variant="secondary" className="text-xs">
+                        Score: {activity.score}
+                      </Badge>
+                    )}
+                    {activity.duration && (
+                      <Badge variant="outline" className="text-xs">
+                        {activity.duration}
+                      </Badge>
+                    )}
+                    {activity.result && (
+                      <Badge variant="default" className="text-xs">
+                        {activity.result}
+                      </Badge>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
       </div>
-    </header>
+
+      {/* Current Goals */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Current Goals</CardTitle>
+          <CardDescription>Your development objectives</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {currentGoals.map((goal, index) => (
+              <div key={index} className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <h3 className="font-medium">{goal.title}</h3>
+                  <span className="text-sm text-gray-500">{goal.progress}%</span>
+                </div>
+                <Progress value={goal.progress} className="h-2" />
+                <p className="text-xs text-gray-600">{goal.target}</p>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   )
 }
 
