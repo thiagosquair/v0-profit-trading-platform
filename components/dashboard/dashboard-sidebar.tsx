@@ -13,7 +13,6 @@ import {
   MessageSquare,
   Hammer
 } from "lucide-react"
-import { useTranslations } from "next-intl"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -24,78 +23,77 @@ const navigation = [
     name: "Overview",
     href: "/dashboard",
     icon: BarChart3,
-    key: "nav.overview",
+    displayName: "Overview",
   },
   {
     name: "AI Coach",
     href: "/dashboard/ai-coach",
     icon: Brain,
-    key: "nav.aiCoach",
+    displayName: "AI Coach",
   },
   {
     name: "Screenshot Analysis",
     href: "/dashboard/analysis",
     icon: Camera,
-    key: "nav.screenshotAnalysis",
+    displayName: "Screenshot Analysis",
   },
   {
     name: "Funded Career Builder",
     href: "/dashboard/career-builder",
     icon: Trophy,
-    key: "nav.careerBuilder",
+    displayName: "Funded Career Builder",
   },
   {
     name: "Progress Tracking",
     href: "/dashboard/progress",
     icon: TrendingUp,
-    key: "nav.progressTracking",
+    displayName: "Progress Tracking",
   },
   {
     name: "Interactive Exercises",
     href: "/dashboard/exercises",
     icon: Target,
-    key: "nav.interactiveExercises",
+    displayName: "Interactive Exercises",
   },
   {
     name: "Behavioral Patterns",
     href: "/dashboard/patterns",
     icon: Users,
-    key: "nav.behavioralPatterns",
+    displayName: "Behavioral Patterns",
   },
   {
     name: "Psychology Courses",
     href: "/dashboard/courses",
     icon: BookOpen,
-    key: "nav.psychologyCourses",
+    displayName: "Psychology Courses",
   },
   {
     name: "Reflection Journal",
     href: "/dashboard/journal",
     icon: PenTool,
-    key: "nav.reflectionJournal",
+    displayName: "Reflection Journal",
   },
   {
     name: "Coaching Insights",
     href: "/dashboard/insights",
     icon: MessageSquare,
-    key: "nav.coachingInsights",
+    displayName: "Coaching Insights",
   },
   {
     name: "Trade Builder",
     href: "/dashboard/trade-builder",
     icon: Hammer,
-    key: "nav.tradeBuilder",
+    displayName: "Trade Builder",
   },
   {
     name: "Market Insights",
     href: "/dashboard/market-insights",
     icon: TrendingUp,
-    key: "nav.marketInsights",
+    displayName: "Market Insights",
   },
 ]
 
 export function DashboardSidebar() {
-  const t = useTranslations()
   const pathname = usePathname()
 
   return (
@@ -116,7 +114,7 @@ export function DashboardSidebar() {
                 )}
               >
                 <item.icon className="mr-2 h-4 w-4" />
-                {t(item.key)}
+                {item.displayName}
               </Button>
             </Link>
           )
@@ -125,3 +123,4 @@ export function DashboardSidebar() {
     </div>
   )
 }
+
