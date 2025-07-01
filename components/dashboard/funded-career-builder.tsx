@@ -63,7 +63,7 @@ interface TradingAccount {
   id: string
   provider: string
   size: number
-  status: 'active' | 'challenge' | 'failed' | 'passed'
+  status: 'active' | 'Challenge' | 'Failed' | 'Passed'
   profit: number
   winRate: number
   riskScore: number
