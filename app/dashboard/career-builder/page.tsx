@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 export default function FundedCareerBuilderPage() {
-  const [activeTab, setActiveTab] = useState("overview");
   const [progress, setProgress] = useState(0);
   const [status, setStatus] = useState<"not_started" | "in_progress" | "completed" | "failed">("not_started");
 
@@ -69,7 +68,7 @@ export default function FundedCareerBuilderPage() {
 
   return (
     <div className="space-y-6">
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+      <Tabs defaultValue="overview" className="space-y-6">
         <TabsList className="grid w-full grid-cols-5">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="progress">My Progress</TabsTrigger>
