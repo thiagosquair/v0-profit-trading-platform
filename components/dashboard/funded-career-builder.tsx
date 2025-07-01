@@ -120,7 +120,7 @@ export function FundedCareerBuilder() {
       id: "foundation",
       name: "Foundation Builder",
       icon: "🎯",
-      description: "Master trading fundamentals and risk management",
+      description: "Master Trading Fundamentals and Risk Management",
       duration: "0-3 months",
       requirements: [
         "Complete risk management course",
