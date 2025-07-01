@@ -27,7 +27,7 @@ const navigation = [
   },
   {
     name: "AI Coach",
-    href: "/dashboard/ai-coach",
+    href: "/dashboard/coach",  // ✅ FIXED: Changed from "/dashboard/ai-coach" to "/dashboard/coach"
     icon: Brain,
     displayName: "AI Coach",
   },
