@@ -21,24 +21,24 @@ interface QuoteData {
 
 // All major forex pairs with OANDA prefix and underscore notation + USOIL + AAPL
 const instruments = [
-  { symbol: "OANDA:EUR_USD", label: "EUR/USD" },
-  { symbol: "OANDA:GBP_USD", label: "GBP/USD" },
-  { symbol: "OANDA:USD_JPY", label: "USD/JPY" },
-  { symbol: "OANDA:AUD_USD", label: "AUD/USD" },
-  { symbol: "OANDA:USD_CAD", label: "USD/CAD" },
-  { symbol: "OANDA:NZD_USD", label: "NZD/USD" },
-  { symbol: "OANDA:USD_CHF", label: "USD/CHF" },
+  { symbol: "EUR_USD", label: "EUR/USD" },
+  { symbol: "GBP_USD", label: "GBP/USD" },
+  { symbol: "USD_JPY", label: "USD/JPY" },
+  { symbol: "AUD_USD", label: "AUD/USD" },
+  { symbol: "USD_CAD", label: "USD/CAD" },
+  { symbol: "NZD_USD", label: "NZD/USD" },
+  { symbol: "USD_CHF", label: "USD/CHF" },
 
   // Cross pairs (some important ones)
-  { symbol: "OANDA:EUR_GBP", label: "EUR/GBP" },
-  { symbol: "OANDA:EUR_JPY", label: "EUR/JPY" },
-  { symbol: "OANDA:GBP_JPY", label: "GBP/JPY" },
-  { symbol: "OANDA:AUD_JPY", label: "AUD/JPY" },
-  { symbol: "OANDA:CHF_JPY", label: "CHF/JPY" },
+  { symbol: "EUR_GBP", label: "EUR/GBP" },
+  { symbol: "EUR_JPY", label: "EUR/JPY" },
+  { symbol: "GBP_JPY", label: "GBP/JPY" },
+  { symbol: "AUD_JPY", label: "AUD/JPY" },
+  { symbol: "CHF_JPY", label: "CHF/JPY" },
 
   // Commodities and stocks
-  { symbol: "OANDA:XAU_USD", label: "Gold (XAU/USD)" },
-  { symbol: "OANDA:USOIL", label: "WTI Crude Oil (USOIL)" },
+  { symbol: "XAU_USD", label: "Gold (XAU/USD)" },
+  { symbol: "USOIL", label: "WTI Crude Oil (USOIL)" },
   { symbol: "AAPL", label: "Apple (AAPL)" },
 ]
 
