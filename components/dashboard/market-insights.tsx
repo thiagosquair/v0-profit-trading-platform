@@ -19,16 +19,31 @@ interface QuoteData {
   t: number // timestamp
 }
 
+// All major forex pairs with OANDA prefix and underscore notation + USOIL + AAPL
 const instruments = [
-  { symbol: "XAUUSD", label: "Gold (XAU/USD)" },
+  { symbol: "OANDA:EUR_USD", label: "EUR/USD" },
+  { symbol: "OANDA:GBP_USD", label: "GBP/USD" },
+  { symbol: "OANDA:USD_JPY", label: "USD/JPY" },
+  { symbol: "OANDA:AUD_USD", label: "AUD/USD" },
+  { symbol: "OANDA:USD_CAD", label: "USD/CAD" },
+  { symbol: "OANDA:NZD_USD", label: "NZD/USD" },
+  { symbol: "OANDA:USD_CHF", label: "USD/CHF" },
+
+  // Cross pairs (some important ones)
+  { symbol: "OANDA:EUR_GBP", label: "EUR/GBP" },
+  { symbol: "OANDA:EUR_JPY", label: "EUR/JPY" },
+  { symbol: "OANDA:GBP_JPY", label: "GBP/JPY" },
+  { symbol: "OANDA:AUD_JPY", label: "AUD/JPY" },
+  { symbol: "OANDA:CHF_JPY", label: "CHF/JPY" },
+
+  // Commodities and stocks
+  { symbol: "OANDA:XAU_USD", label: "Gold (XAU/USD)" },
+  { symbol: "OANDA:USOIL", label: "WTI Crude Oil (USOIL)" },
   { symbol: "AAPL", label: "Apple (AAPL)" },
-  { symbol: "EURUSD", label: "EUR/USD" },
-  { symbol: "GBPUSD", label: "GBP/USD" },
-  { symbol: "USDJPY", label: "USD/JPY" },
 ]
 
 export function MarketInsights() {
-  const [selectedSymbol, setSelectedSymbol] = useState("XAUUSD")
+  const [selectedSymbol, setSelectedSymbol] = useState("OANDA:XAU_USD")
   const [quote, setQuote] = useState<QuoteData | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
@@ -52,7 +67,7 @@ export function MarketInsights() {
     fetchQuote(selectedSymbol)
   }, [selectedSymbol])
 
-  // fallback static data for major pairs
+  // fallback static data for major pairs (keep as is or update as needed)
   const marketData = {
     fearGreedIndex: 65,
     sentiment: t("bullish"),
@@ -196,89 +211,4 @@ export function MarketInsights() {
 
                 {/* Live quote data for selected instrument */}
                 <div className="mt-6 p-4 border rounded-lg">
-                  <h3 className="font-semibold text-lg">{instruments.find((i) => i.symbol === selectedSymbol)?.label} Live Quote</h3>
-                  {loading && <p>{t("loading")}...</p>}
-                  {error && <p className="text-red-600">Error: {error}</p>}
-                  {quote && (
-                    <div className="space-y-1 mt-2">
-                      <p>
-                        Current Price: <strong>${formatNumber(quote.c)}</strong>
-                      </p>
-                      <p>
-                        Change:{" "}
-                        <span className={quote.d >= 0 ? "text-green-600" : "text-red-600"}>
-                          {formatNumber(quote.d)} ({formatNumber(quote.dp)}%)
-                        </span>
-                      </p>
-                      <p>High: ${formatNumber(quote.h)}</p>
-                      <p>Low: ${formatNumber(quote.l)}</p>
-                      <p>Open: ${formatNumber(quote.o)}</p>
-                      <p>Previous Close: ${formatNumber(quote.pc)}</p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="sentiment">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <Users className="h-5 w-5" />
-                <span>{t("sentimentAnalysis")}</span>
-              </CardTitle>
-              <CardDescription>
-                {t("marketSentiment")} {t("analytics")}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">
-                {t("sentimentAnalysis")} {t("common.loading")}
-              </p>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="news">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <AlertTriangle className="h-5 w-5" />
-                <span>{t("marketNews")}</span>
-              </CardTitle>
-              <CardDescription>
-                {t("newsImpact")} {t("analytics")}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">
-                {t("marketNews")} {t("common.loading")}
-              </p>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="psychology">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <Brain className="h-5 w-5" />
-                <span>{t("psychologyIndicators")}</span>
-              </CardTitle>
-              <CardDescription>
-                {t("marketSentiment")} {t("psychologyIndicators")}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground">
-                {t("psychologyIndicators")} {t("common.loading")}
-              </p>
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
-    </div>
-  )
-}
+                  <h3 className="font-semibold text-lg">{instruments.find((i) =>
