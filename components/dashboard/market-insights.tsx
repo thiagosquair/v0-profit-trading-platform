@@ -64,6 +64,11 @@ export function MarketInsights() {
     ],
   }
 
+  // helper to safely format numbers or show dash
+  function formatNumber(value: number | null | undefined, decimals = 2) {
+    return typeof value === "number" ? value.toFixed(decimals) : "-"
+  }
+
   return (
     <div className="space-y-6">
       <div>
@@ -197,18 +202,18 @@ export function MarketInsights() {
                   {quote && (
                     <div className="space-y-1 mt-2">
                       <p>
-                        Current Price: <strong>${quote.c.toFixed(2)}</strong>
+                        Current Price: <strong>${formatNumber(quote.c)}</strong>
                       </p>
                       <p>
                         Change:{" "}
                         <span className={quote.d >= 0 ? "text-green-600" : "text-red-600"}>
-                          {quote.d.toFixed(2)} ({quote.dp.toFixed(2)}%)
+                          {formatNumber(quote.d)} ({formatNumber(quote.dp)}%)
                         </span>
                       </p>
-                      <p>High: ${quote.h.toFixed(2)}</p>
-                      <p>Low: ${quote.l.toFixed(2)}</p>
-                      <p>Open: ${quote.o.toFixed(2)}</p>
-                      <p>Previous Close: ${quote.pc.toFixed(2)}</p>
+                      <p>High: ${formatNumber(quote.h)}</p>
+                      <p>Low: ${formatNumber(quote.l)}</p>
+                      <p>Open: ${formatNumber(quote.o)}</p>
+                      <p>Previous Close: ${formatNumber(quote.pc)}</p>
                     </div>
                   )}
                 </div>
