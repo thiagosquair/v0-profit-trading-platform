@@ -211,4 +211,59 @@ export function MarketInsights() {
 
                 {/* Live quote data for selected instrument */}
                 <div className="mt-6 p-4 border rounded-lg">
-                  <h3 className="font-semibold text-lg">{instruments.find((i) =>
+                  <h3 className="font-semibold text-lg">{instruments.find((i) => i.symbol === selectedSymbol)?.label}</h3>
+
+                  {loading && <p>{t("loading")}...</p>}
+
+                  {error && (
+                    <p className="text-red-600 flex items-center space-x-2">
+                      <AlertTriangle size={16} />
+                      <span>{error}</span>
+                    </p>
+                  )}
+
+                  {quote && (
+                    <div className="grid grid-cols-2 gap-4 mt-3">
+                      <div>
+                        <strong>{t("currentPrice")}:</strong> {formatNumber(quote.c)}
+                      </div>
+                      <div>
+                        <strong>{t("change")}:</strong> {formatNumber(quote.d)}
+                      </div>
+                      <div>
+                        <strong>{t("percentChange")}:</strong> {formatNumber(quote.dp)}%
+                      </div>
+                      <div>
+                        <strong>{t("high")}:</strong> {formatNumber(quote.h)}
+                      </div>
+                      <div>
+                        <strong>{t("low")}:</strong> {formatNumber(quote.l)}
+                      </div>
+                      <div>
+                        <strong>{t("open")}:</strong> {formatNumber(quote.o)}
+                      </div>
+                      <div>
+                        <strong>{t("previousClose")}:</strong> {formatNumber(quote.pc)}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* Other tabs content placeholders */}
+        <TabsContent value="sentiment">
+          <p>{t("sentimentTabContent")}</p>
+        </TabsContent>
+        <TabsContent value="news">
+          <p>{t("newsTabContent")}</p>
+        </TabsContent>
+        <TabsContent value="psychology">
+          <p>{t("psychologyTabContent")}</p>
+        </TabsContent>
+      </Tabs>
+    </div>
+  )
+}
