@@ -1,5 +1,6 @@
 "use client"
 
+import React, { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
@@ -7,7 +8,51 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { AlertTriangle, Brain, Users } from "lucide-react"
 import { t } from "@/lib/simple-translations"
 
+interface QuoteData {
+  c: number // current price
+  d: number // change
+  dp: number // percent change
+  h: number // high price of day
+  l: number // low price of day
+  o: number // open price of day
+  pc: number // previous close price
+  t: number // timestamp
+}
+
+const instruments = [
+  { symbol: "XAUUSD", label: "Gold (XAU/USD)" },
+  { symbol: "AAPL", label: "Apple (AAPL)" },
+  { symbol: "EURUSD", label: "EUR/USD" },
+  { symbol: "GBPUSD", label: "GBP/USD" },
+  { symbol: "USDJPY", label: "USD/JPY" },
+]
+
 export function MarketInsights() {
+  const [selectedSymbol, setSelectedSymbol] = useState("XAUUSD")
+  const [quote, setQuote] = useState<QuoteData | null>(null)
+  const [loading, setLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    async function fetchQuote(symbol: string) {
+      setLoading(true)
+      setError(null)
+      setQuote(null)
+      try {
+        const res = await fetch(`/api/finnhub/quote?symbol=${symbol}`)
+        if (!res.ok) throw new Error(`Error fetching data: ${res.statusText}`)
+        const data: QuoteData = await res.json()
+        setQuote(data)
+      } catch (err: any) {
+        setError(err.message)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchQuote(selectedSymbol)
+  }, [selectedSymbol])
+
+  // fallback static data for major pairs
   const marketData = {
     fearGreedIndex: 65,
     sentiment: t("bullish"),
@@ -93,6 +138,7 @@ export function MarketInsights() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
+                {/* Major pairs list */}
                 {marketData.majorPairs.map((pair) => (
                   <div key={pair.pair} className="flex items-center justify-between p-3 border rounded-lg">
                     <div className="flex items-center space-x-4">
@@ -103,8 +149,8 @@ export function MarketInsights() {
                           pair.sentiment === t("bullish")
                             ? "text-green-600 border-green-600"
                             : pair.sentiment === t("bearish")
-                              ? "text-red-600 border-red-600"
-                              : "text-blue-600 border-blue-600"
+                            ? "text-red-600 border-red-600"
+                            : "text-blue-600 border-blue-600"
                         }
                       >
                         {pair.sentiment}
@@ -123,6 +169,49 @@ export function MarketInsights() {
                     </div>
                   </div>
                 ))}
+
+                {/* Instrument selector */}
+                <div className="mt-6">
+                  <label htmlFor="instrument-select" className="block mb-2 font-semibold">
+                    {t("selectInstrument")}
+                  </label>
+                  <select
+                    id="instrument-select"
+                    value={selectedSymbol}
+                    onChange={(e) => setSelectedSymbol(e.target.value)}
+                    className="border rounded-md px-3 py-2"
+                  >
+                    {instruments.map((inst) => (
+                      <option key={inst.symbol} value={inst.symbol}>
+                        {inst.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Live quote data for selected instrument */}
+                <div className="mt-6 p-4 border rounded-lg">
+                  <h3 className="font-semibold text-lg">{instruments.find((i) => i.symbol === selectedSymbol)?.label} Live Quote</h3>
+                  {loading && <p>{t("loading")}...</p>}
+                  {error && <p className="text-red-600">Error: {error}</p>}
+                  {quote && (
+                    <div className="space-y-1 mt-2">
+                      <p>
+                        Current Price: <strong>${quote.c.toFixed(2)}</strong>
+                      </p>
+                      <p>
+                        Change:{" "}
+                        <span className={quote.d >= 0 ? "text-green-600" : "text-red-600"}>
+                          {quote.d.toFixed(2)} ({quote.dp.toFixed(2)}%)
+                        </span>
+                      </p>
+                      <p>High: ${quote.h.toFixed(2)}</p>
+                      <p>Low: ${quote.l.toFixed(2)}</p>
+                      <p>Open: ${quote.o.toFixed(2)}</p>
+                      <p>Previous Close: ${quote.pc.toFixed(2)}</p>
+                    </div>
+                  )}
+                </div>
               </div>
             </CardContent>
           </Card>
