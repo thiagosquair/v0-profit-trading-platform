@@ -89,7 +89,7 @@ export function DashboardOverview() {
     <div className="space-y-6 p-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Welcome to Your Trading Dashboard</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Welcome to Your Trading Mastery Dashboard</h1>
         <p className="text-gray-600 mt-2">Track your progress and improve your trading psychology</p>
       </div>
 
