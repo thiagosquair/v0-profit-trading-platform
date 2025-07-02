@@ -1,3 +1,4 @@
+
 'use client';
 
 import {
@@ -11,7 +12,11 @@ import {
   Trophy,
   PenTool,
   MessageSquare,
-  Hammer
+  Hammer,
+  Activity,
+  GitPullRequest,
+  Lightbulb,
+  TrendingDown,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -26,10 +31,10 @@ const navigation = [
     displayName: "Overview",
   },
   {
-    name: "AI Coach",
-    href: "/dashboard/coach",  // ✅ FIXED: Changed from "/dashboard/ai-coach" to "/dashboard/coach"
+    name: "Ai Coach",
+    href: "/dashboard/coach",
     icon: Brain,
-    displayName: "AI Coach",
+    displayName: "Ai Coach",
   },
   {
     name: "Screenshot Analysis",
@@ -38,27 +43,21 @@ const navigation = [
     displayName: "Screenshot Analysis",
   },
   {
-    name: "Funded Career Builder",
-    href: "/dashboard/career-builder",
-    icon: Trophy,
-    displayName: "Funded Career Builder",
-  },
-  {
-    name: "Progress Tracking",
-    href: "/dashboard/progress",
-    icon: TrendingUp,
-    displayName: "Progress Tracking",
+    name: "Trade Builder",
+    href: "/dashboard/trade-builder",
+    icon: Hammer,
+    displayName: "Trade Builder",
   },
   {
     name: "Interactive Exercises",
     href: "/dashboard/exercises",
-    icon: Target,
+    icon: Activity,
     displayName: "Interactive Exercises",
   },
   {
     name: "Behavioral Patterns",
     href: "/dashboard/patterns",
-    icon: Users,
+    icon: GitPullRequest,
     displayName: "Behavioral Patterns",
   },
   {
@@ -80,16 +79,22 @@ const navigation = [
     displayName: "Coaching Insights",
   },
   {
-    name: "Trade Builder",
-    href: "/dashboard/trade-builder",
-    icon: Hammer,
-    displayName: "Trade Builder",
-  },
-  {
     name: "Market Insights",
     href: "/dashboard/market-insights",
     icon: TrendingUp,
     displayName: "Market Insights",
+  },
+  {
+    name: "Funded Career Builder",
+    href: "/dashboard/career-builder",
+    icon: Trophy,
+    displayName: "Funded Career Builder",
+  },
+  {
+    name: "Progress Tracking",
+    href: "/dashboard/progress",
+    icon: TrendingDown,
+    displayName: "Progress Tracking",
   },
 ]
 
@@ -123,4 +128,6 @@ export function DashboardSidebar() {
     </div>
   )
 }
+
+
 
