@@ -19,7 +19,6 @@ interface QuoteData {
   t: number // timestamp
 }
 
-// All major forex pairs with OANDA prefix and underscore notation + USOIL + AAPL
 const instruments = [
   { symbol: "EUR_USD", label: "EUR/USD" },
   { symbol: "GBP_USD", label: "GBP/USD" },
@@ -43,7 +42,7 @@ const instruments = [
 ]
 
 export function MarketInsights() {
-  const [selectedSymbol, setSelectedSymbol] = useState("OANDA:XAU_USD")
+  const [selectedSymbol, setSelectedSymbol] = useState("XAU_USD")
   const [quote, setQuote] = useState<QuoteData | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
