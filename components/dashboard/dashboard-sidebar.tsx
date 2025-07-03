@@ -79,12 +79,6 @@ const navigation = [
     displayName: "Coaching Insights",
   },
   {
-    name: "Market Insights",
-    href: "/dashboard/market-insights",
-    icon: TrendingUp,
-    displayName: "Market Insights",
-  },
-  {
     name: "Funded Career Builder",
     href: "/dashboard/career-builder",
     icon: Trophy,
