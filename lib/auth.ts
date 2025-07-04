@@ -1,5 +1,76 @@
 import { supabase } from "./supabase"
 import type { User } from "@supabase/supabase-js"
+import { supabase } from './supabase';
+import { getPlanFeatures } from './planConfig';
+
+export const auth = {
+  // ... existing methods
+
+  // Activate a new plan for the user
+  async activatePlan(plan: 'free' | 'pro' | 'premium' | 'elite', resetUsage: boolean = true) {
+    try {
+      const { user } = await this.getCurrentUser();
+      if (!user) {
+        return { success: false, error: 'User not authenticated' };
+      }
+
+      // Call the database function to activate the plan
+      const { data, error } = await supabase.rpc('activate_user_plan', {
+        user_id: user.id,
+        new_plan: plan,
+        reset_usage: resetUsage
+      });
+
+      if (error) {
+        console.error('Error activating plan:', error);
+        return { success: false, error: error.message };
+      }
+
+      return { success: true, data };
+    } catch (error) {
+      console.error('Error activating plan:', error);
+      return { success: false, error: 'Failed to activate plan' };
+    }
+  },
+
+  // Get user's current plan and features
+  async getUserPlanDetails() {
+    try {
+      const { user } = await this.getCurrentUser();
+      if (!user) {
+        return { success: false, error: 'User not authenticated' };
+      }
+
+      const { data: profile, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', user.id)
+        .single();
+
+      if (error) {
+        console.error('Error fetching profile:', error);
+        return { success: false, error: error.message };
+      }
+
+      const planFeatures = getPlanFeatures(profile.plan);
+
+      return {
+        success: true,
+        data: {
+          profile,
+          features: planFeatures,
+          remainingUsage: {
+            trade_analyses: getRemainingUsage(profile.plan, 'trade_analyses', profile.trade_analyses_count),
+            trade_builder: getRemainingUsage(profile.plan, 'trade_builder', profile.trade_builder_count),
+          }
+        }
+      };
+    } catch (error) {
+      console.error('Error getting plan details:', error);
+      return { success: false, error: 'Failed to get plan details' };
+    }
+  },
+};
 
 const DEMO_CREDENTIALS = {
   email: "demo@profitz.com",
