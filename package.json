@@ -69,4 +69,5 @@
   "vaul": "latest",
   "ws": "latest",
   "zod": "^3.24.1"
-},
+}
+}
