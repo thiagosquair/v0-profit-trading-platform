@@ -39,7 +39,7 @@
   "@radix-ui/react-toggle-group": "latest",
   "@radix-ui/react-tooltip": "latest",
   "@radix-ui/themes": "latest",
-  "@supabase/auth-helpers-nextjs": "^0.10.0", // Add this line
+  "@supabase/auth-helpers-nextjs": "^0.10.0",
   "@supabase/supabase-js": "latest",
   "@vercel/blob": "^0.23.0",
   "ai": "latest",
