@@ -6,8 +6,19 @@ export default function AuthLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-transparent">
-      <div className="max-w-md w-full space-y-8">{children}</div>
+    <div 
+      className="min-h-screen relative flex items-center justify-center bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: "url(\"/images/background2.png\")", // Use your correct image name here
+      }}
+    >
+      {/* Dark overlay for better form readability */}
+      <div className="absolute inset-0 bg-black/40" />
+      
+      {/* Content */}
+      <div className="relative z-10 w-full max-w-md mx-auto p-6">
+        {children}
+      </div>
     </div>
   )
 }
