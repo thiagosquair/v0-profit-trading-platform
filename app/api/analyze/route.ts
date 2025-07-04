@@ -1,76 +1,90 @@
+// app/api/analyze/route.ts (updated)
 import { NextRequest, NextResponse } from 'next/server';
+import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
+import { hasFeatureAccess, getRemainingUsage } from '@/lib/planConfig';
 import OpenAI from 'openai';
 import { put } from '@vercel/blob';
-import {
-  TradeContext,
-  AnalysisAPIResponse,
-  ANALYSIS_CONSTRAINTS
-} from '@/lib/types'; // Corrected path using @/ alias
-import {
-  validateFormData,
-  extractContextFromFormData,
-  buildAnalysisPrompt,
-  handleOpenAIError,
-  validateImageUrl,
-  formatAnalysisResponse,
-  formatErrorResponse
-} from '@/lib/analysisUtils'; // Corrected path using @/ alias
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! });
 
-export async function POST(req: NextRequest): Promise<NextResponse<AnalysisAPIResponse>> {
+export async function POST(req: NextRequest) {
+  const supabase = createRouteHandlerClient({ cookies });
+  
   try {
-    // Parse form data
-    const formData = await req.formData();
+    // Check authentication
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
     
-    // Validate form data
-    const validation = validateFormData(formData);
-    if (!validation.isValid) {
-      return NextResponse.json(
-        formatErrorResponse(validation.errors.join(', ')),
-        { status: 400 }
-      );
+    if (authError || !user) {
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Extract file and context
+    // Get user profile
+    const { data: profile, error: profileError } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', user.id)
+      .single();
+
+    if (profileError || !profile) {
+      return NextResponse.json({ success: false, error: 'Profile not found' }, { status: 500 });
+    }
+
+    // Check feature access
+    if (!hasFeatureAccess(profile.plan, 'trade_analyses')) {
+      return NextResponse.json({ 
+        success: false, 
+        error: 'Trade analysis not available on your current plan',
+        upgradeRequired: true
+      }, { status: 403 });
+    }
+
+    // Check usage limits
+    const remaining = getRemainingUsage(profile.plan, 'trade_analyses', profile.trade_analyses_count);
+    
+    if (remaining !== 'unlimited' && remaining <= 0) {
+      return NextResponse.json({ 
+        success: false, 
+        error: `Trade analysis limit reached for ${profile.plan} plan. Upgrade to continue.`,
+        upgradeRequired: true,
+        currentUsage: profile.trade_analyses_count
+      }, { status: 403 });
+    }
+
+    // Process the image upload and analysis
+    const formData = await req.formData();
     const file = formData.get('image') as File;
-    const context = extractContextFromFormData(formData);
+
+    if (!file) {
+      return NextResponse.json({ success: false, error: 'No file uploaded' }, { status: 400 });
+    }
 
     // Upload image to Vercel Blob Storage
-    let imageUrl: string;
-    try {
-      const blob = await put(file.name, file.stream(), {
-        access: 'public',
-      });
-      imageUrl = blob.url;
-    } catch (error) {
-      console.error('Blob upload error:', error);
-      return NextResponse.json(
-        formatErrorResponse('Failed to upload image'),
-        { status: 500 }
-      );
-    }
+    const blob = await put(file.name, file.stream(), {
+      access: 'public',
+    });
 
-    // Verify image URL is accessible
-    const isImageAccessible = await validateImageUrl(imageUrl);
-    if (!isImageAccessible) {
-      return NextResponse.json(
-        formatErrorResponse('Uploaded image is not accessible'),
-        { status: 500 }
-      );
-    }
+    const imageUrl = blob.url;
 
-    // Build dynamic prompt based on user context
-    const prompt = buildAnalysisPrompt(context);
+    const prompt = `
+You are a professional trading coach and mentor. Analyze the attached screenshot of a completed trade, which includes a projection with entry, stop loss, and take profit levels marked on a charts.
 
-    // Call OpenAI Vision API
+Your role is to provide constructive feedback to help the trader improve.
+
+1. Identify the trade direction (long/short), entry, SL, and TP from the chart.
+2. Determine if this was a win or a loss based on price action.
+3. Estimate the Risk-to-Reward ratio and comment if it was worth taking.
+4. Assess the logic of the setup, market structure, and alignment.
+5. Reflect on discipline and execution.
+6. Give 2–3 helpful, actionable suggestions.
+
+Keep your tone helpful and coach-like. Mention if anything is unclear in the image.
+`;
+
     const chatResponse = await openai.chat.completions.create({
-      model: ANALYSIS_CONSTRAINTS.MODEL,
+      model: 'gpt-4o',
       messages: [
-        { 
-          role: 'system', 
-          content: 'You are ProFitz AI, an expert trading coach and technical analyst. Provide detailed, actionable feedback based on the trading screenshot and user context provided.' 
-        },
+        { role: 'system', content: 'You are a helpful trading mentor AI.' },
         {
           role: 'user',
           content: [
@@ -79,51 +93,51 @@ export async function POST(req: NextRequest): Promise<NextResponse<AnalysisAPIRe
               type: 'image_url',
               image_url: {
                 url: imageUrl,
-                detail: 'high'
               },
             },
           ],
         },
       ],
-      max_tokens: ANALYSIS_CONSTRAINTS.MAX_TOKENS,
-      temperature: ANALYSIS_CONSTRAINTS.TEMPERATURE,
+      max_tokens: 1000,
     });
 
-    // Extract and validate response
-    const analysis = chatResponse.choices[0]?.message?.content;
-    if (!analysis) {
-      return NextResponse.json(
-        formatErrorResponse('No analysis generated from AI'),
-        { status: 500 }
-      );
-    }
+    const result = chatResponse.choices[0]?.message?.content;
 
-    // Format successful response
-    const response = formatAnalysisResponse(
-      analysis,
-      context,
-      imageUrl,
-      chatResponse.usage?.total_tokens || 0
-    );
+    // Increment usage count
+    await supabase
+      .from('profiles')
+      .update({ 
+        trade_analyses_count: profile.trade_analyses_count + 1,
+        updated_at: new Date().toISOString()
+      })
+      .eq('id', user.id);
 
-    return NextResponse.json(response);
+    // Log the usage event
+    await supabase.from('usage_events').insert({
+      user_id: user.id,
+      feature: 'trade_analyses',
+      action: 'analysis_completed',
+      metadata: {
+        new_count: profile.trade_analyses_count + 1,
+        plan: profile.plan,
+        image_url: imageUrl
+      }
+    });
+
+    const newRemaining = remaining === 'unlimited' ? 'unlimited' : remaining - 1;
+
+    return NextResponse.json({ 
+      success: true, 
+      result,
+      usage: {
+        current: profile.trade_analyses_count + 1,
+        remaining: newRemaining,
+        plan: profile.plan
+      }
+    });
 
   } catch (error: any) {
-    // Handle OpenAI-specific errors
-    const errorResponse = handleOpenAIError(error);
-    return NextResponse.json(
-      formatErrorResponse(errorResponse.message),
-      { status: errorResponse.status }
-    );
+    console.error('Trade analysis error:', error);
+    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
-
-// Optional: Add GET method for health check
-export async function GET() {
-  return NextResponse.json({
-    status: 'healthy',
-    service: 'screenshot-analysis',
-    timestamp: new Date().toISOString()
-  });
-}
-
