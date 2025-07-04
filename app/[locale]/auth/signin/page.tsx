@@ -7,7 +7,7 @@ export default function SignInPage() {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/images/signinbackground2.png')",
+          backgroundImage: "url('/images/background2.png')",
         }}
       >
         {/* Dark overlay for better form readability */}
