@@ -521,7 +521,7 @@ export function LandingPage() {
       description: "For Elite Traders",
       popular: false,
       features: [
-       "Everything in Pro",
+       "Everything in Premium",
         "Advanced Ai Psychology Coach",
         "Unlimited Trade Analyses",
         "Advanced Progress Tracking",
