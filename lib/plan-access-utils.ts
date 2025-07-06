@@ -1,37 +1,92 @@
 /* ------------------------------------------------------------------
-   PLAN / FEATURE ACCESS HELPERS
-   – 100 % self‑contained (no external PlanConfig required)
-   – API identical to your previous PlanAccessManager + usePlanAccess hook
+   PLAN / FEATURE ACCESS – 2025‑07 update
 ------------------------------------------------------------------- */
 
 export type PlanType = 'free' | 'pro' | 'premium' | 'elite';
 
-/* ------------------------------------------------------------------
-   Basic plan metadata
-------------------------------------------------------------------- */
-const planPrices: Record<PlanType, number> = {
-  free: 0,
-  pro: 19,
-  premium: 49,
-  elite: 99,
-};
-
-const planNames: Record<PlanType, string> = {
-  free: 'Free',
-  pro: 'Pro',
-  premium: 'Premium',
-  elite: 'Elite',
-};
-
-const planColors: Record<
+/* ---------- per‑plan configuration (single source of truth) ---------- */
+const PlanConfig: Record<
   PlanType,
-  { bg: string; text: string; border: string }
+  {
+    name: string;
+    price: number;
+    /* list of headline features to show in the sidebar footer */
+    features: string[];
+    /* monthly quotas (number | 'unlimited') */
+    screenshotAnalysis: number | 'unlimited';
+    tradeBuilder: number | 'unlimited';
+  }
 > = {
   free: {
-    bg: 'bg-gray-100',
-    text: 'text-gray-700',
-    border: 'border-gray-300',
+    name: 'Free',
+    price: 0,
+    features: [
+      'AI Coach',
+      '5 Screenshot Analyses / mo',
+      'Progress Tracking',
+      'Interactive Exercises',
+      'Psychology Courses',
+    ],
+    screenshotAnalysis: 5,
+    tradeBuilder: 0,
   },
+  pro: {
+    name: 'Pro',
+    price: 19,
+    features: [
+      'AI Coach',
+      '25 Screenshot Analyses / mo',
+      'Progress Tracking',
+      'Interactive Exercises',
+      'Psychology Courses',
+      'Reflection Journal',
+      '10 Trade Builder runs / mo',
+      'Behavioral Patterns',
+      'Coaching Insights',
+    ],
+    screenshotAnalysis: 25,
+    tradeBuilder: 10,
+  },
+  premium: {
+    name: 'Premium',
+    price: 49,
+    features: [
+      'AI Coach',
+      'Unlimited Screenshot Analysis',
+      'Progress Tracking',
+      'Interactive Exercises',
+      'Psychology Courses',
+      'Reflection Journal',
+      '30 Trade Builder runs / mo',
+      'Behavioral Patterns',
+      'Coaching Insights',
+    ],
+    screenshotAnalysis: 'unlimited',
+    tradeBuilder: 30,
+  },
+  elite: {
+    name: 'Elite',
+    price: 99,
+    features: [
+      'AI Coach',
+      'Unlimited Screenshot Analysis',
+      'Progress Tracking',
+      'Interactive Exercises',
+      'Psychology Courses',
+      'Reflection Journal',
+      'Unlimited Trade Builder',
+      'Behavioral Patterns',
+      'Coaching Insights',
+      'Funded Career Builder',
+    ],
+    screenshotAnalysis: 'unlimited',
+    tradeBuilder: 'unlimited',
+  },
+};
+
+/* ---------- visual colour tokens ---------- */
+const planColors = {
+  free: { bg: 'bg-gray-100', text: 'text-gray-700', border: 'border-gray-300' },
   pro: {
     bg: 'bg-blue-100',
     text: 'text-blue-700',
@@ -47,55 +102,28 @@ const planColors: Record<
     text: 'text-yellow-700',
     border: 'border-yellow-300',
   },
-};
+} as const;
 
-/* Each plan’s marquee features (for the sidebar footer) */
-const planHeadlineFeatures: Record<PlanType, string[]> = {
-  free: ['Dashboard overview', 'Reflection journal'],
-  pro: [
-    'AI psychology coach',
-    'Trade analysis (50/mo)',
-    'Psychology courses',
-    'Interactive exercises',
-  ],
-  premium: ['Screenshot analysis', 'Behavioural patterns'],
-  elite: ['Funded career builder', 'Priority support'],
-};
-
-/* ------------------------------------------------------------------
-   Feature‑to‑plan matrix
-------------------------------------------------------------------- */
-const featureRequirements: Record<
-  string,
-  { plan: PlanType; monthlyLimit?: number }
-> = {
+/* ---------- minimum‑plan matrix ---------- */
+const featureRequirements: Record<string, PlanType> = {
   // Free
-  'ai-psychology-coach': { plan: 'free' },
-  'trade-analysis': { plan: 'free', monthlyLimit: 50 },
-  'progress-tracking': { plan: 'free' },
-  'interactive-exercises': { plan: 'free' },
-  'psychology-courses': { plan: 'free' },
-  'dashboard-overview': { plan: 'free' },
+  'ai-psychology-coach': 'free',
+  'screenshot-analysis': 'free',
+  'progress-tracking': 'free',
+  'interactive-exercises': 'free',
+  'psychology-courses': 'free',
+  'dashboard-overview': 'free',
 
   // Pro
-  'advanced-ai-coach': { plan: 'pro' },
-  'reflection-journal': { plan: 'pro' },
-  'screenshot-analysis': { plan: 'pro', monthlyLimit: 50 },
-  'trade-builder': { plan: 'pro', monthlyLimit: 20 },
-
-  // Premium
-  'coaching-insights': { plan: 'premium' },
-  'behavioral-patterns': { plan: 'premium' },
-  'unlimited-trade-analysis': { plan: 'premium' },
-  'advanced-trade-builder': { plan: 'premium' },
+  'reflection-journal': 'pro',
+  'trade-builder': 'pro',
+  'behavioral-patterns': 'pro',
+  'coaching-insights': 'pro',
 
   // Elite
-  'funded-career-builder': { plan: 'elite' },
-  'unlimited-trade-builder': { plan: 'elite' },
-  'priority-support': { plan: 'elite' },
+  'funded-career-builder': 'elite',
 };
 
-/* Numeric ranking so we can compare tiers quickly */
 const planRank: Record<PlanType, number> = {
   free: 0,
   pro: 1,
@@ -104,102 +132,90 @@ const planRank: Record<PlanType, number> = {
 };
 
 /* ------------------------------------------------------------------
-   PLAN‑ACCESS MANAGER
+   PLAN ACCESS MANAGER
 ------------------------------------------------------------------- */
 export class PlanAccessManager {
   private static hierarchy: PlanType[] = ['free', 'pro', 'premium', 'elite'];
 
-  /* ---------- feature checks ---------- */
-
-  static hasFeatureAccess(userPlan: PlanType, feature: string): boolean {
+  static hasFeatureAccess(plan: PlanType, feature: string) {
     const req = featureRequirements[feature];
-    if (!req) return false; // unknown feature
-    return planRank[userPlan] >= planRank[req.plan];
+    return planRank[plan] >= planRank[req];
   }
 
   static getRequiredPlan(feature: string): PlanType | null {
-    return featureRequirements[feature]?.plan ?? null;
+    return featureRequirements[feature] ?? null;
   }
 
+  /* feature‑specific quota helpers */
   static hasReachedLimit(
-    userPlan: PlanType,
+    plan: PlanType,
     feature: string,
-    currentUsage: number,
+    current: number,
   ): boolean {
-    const req = featureRequirements[feature];
-    if (!req?.monthlyLimit) return false; // unlimited feature
-    if (planRank[userPlan] > planRank[req.plan]) return false; // higher plans ignore limit
-    return currentUsage >= req.monthlyLimit;
+    const cfg = PlanConfig[plan];
+    switch (feature) {
+      case 'screenshot-analysis':
+        return cfg.screenshotAnalysis !== 'unlimited' &&
+          current >= cfg.screenshotAnalysis;
+      case 'trade-builder':
+        return cfg.tradeBuilder !== 'unlimited' && current >= cfg.tradeBuilder;
+      default:
+        return false;
+    }
   }
 
   static getRemainingUsage(
-    userPlan: PlanType,
+    plan: PlanType,
     feature: string,
-    currentUsage: number,
+    current: number,
   ): number | 'unlimited' {
-    const req = featureRequirements[feature];
-    if (!req?.monthlyLimit) return 'unlimited';
-    if (planRank[userPlan] > planRank[req.plan]) return 'unlimited';
-    return Math.max(0, req.monthlyLimit - currentUsage);
+    const cfg = PlanConfig[plan];
+    switch (feature) {
+      case 'screenshot-analysis':
+        return cfg.screenshotAnalysis === 'unlimited'
+          ? 'unlimited'
+          : Math.max(0, cfg.screenshotAnalysis - current);
+      case 'trade-builder':
+        return cfg.tradeBuilder === 'unlimited'
+          ? 'unlimited'
+          : Math.max(0, cfg.tradeBuilder - current);
+      default:
+        return 'unlimited';
+    }
   }
 
-  /* ---------- convenience lists ---------- */
-
-  static getAvailableFeatures(userPlan: PlanType): string[] {
-    return Object.entries(featureRequirements)
-      .filter(([, { plan }]) => planRank[userPlan] >= planRank[plan])
-      .map(([feature]) => feature);
+  /* upgrade helpers */
+  static canUpgrade(plan: PlanType) {
+    return plan !== 'elite';
   }
 
-  static getLockedFeatures(userPlan: PlanType) {
-    return Object.entries(featureRequirements)
-      .filter(([, { plan }]) => planRank[userPlan] < planRank[plan])
-      .map(([feature, { plan }]) => ({ feature, requiredPlan: plan }));
+  static getNextPlan(plan: PlanType): PlanType | null {
+    const idx = planRank[plan];
+    return idx < this.hierarchy.length - 1 ? this.hierarchy[idx + 1] : null;
   }
 
-  /* ---------- upgrades ---------- */
-
-  static getNextPlanForFeature(
-    userPlan: PlanType,
-    feature: string,
-  ): PlanType | null {
-    const required = this.getRequiredPlan(feature);
-    if (!required) return null;
-    return planRank[userPlan] >= planRank[required] ? null : required;
+  static getNextPlanForFeature(plan: PlanType, feature: string) {
+    const min = this.getRequiredPlan(feature);
+    if (!min) return null;
+    return planRank[plan] >= planRank[min] ? null : min;
   }
 
-  static canUpgrade(userPlan: PlanType) {
-    return planRank[userPlan] < this.hierarchy.length - 1;
-  }
-
-  static getNextPlan(userPlan: PlanType): PlanType | null {
-    const idx = planRank[userPlan];
-    return idx < this.hierarchy.length - 1
-      ? this.hierarchy[idx + 1]
-      : null;
-  }
-
-  /* ---------- display helpers ---------- */
-
+  /* sidebar footer helper */
   static getPlanDisplayInfo(plan: PlanType | undefined) {
-    const safePlan: PlanType = plan ?? 'free';
+    const p: PlanType = plan ?? 'free';
+    const cfg = PlanConfig[p];
     return {
-      name: planNames[safePlan],
-      price: planPrices[safePlan],
-      colors: planColors[safePlan],
-      /* Free features are always included, then we layer on
-         each subsequent tier up to the user’s plan            */
-      features: this.hierarchy
-        .filter((p) => planRank[p] <= planRank[safePlan])
-        .flatMap((p) => planHeadlineFeatures[p]),
+      name: cfg.name,
+      price: cfg.price,
+      colors: planColors[p],
+      features: cfg.features,
     };
   }
 }
 
 /* ------------------------------------------------------------------
-   REACT HOOK WRAPPER
+   REACT HOOK FACADE
 ------------------------------------------------------------------- */
-
 import { useCallback } from 'react';
 
 export function usePlanAccess() {
@@ -219,24 +235,16 @@ export function usePlanAccess() {
     PlanAccessManager.getRemainingUsage.bind(PlanAccessManager),
     [],
   );
-  const getAvailableFeatures = useCallback(
-    PlanAccessManager.getAvailableFeatures.bind(PlanAccessManager),
-    [],
-  );
-  const getLockedFeatures = useCallback(
-    PlanAccessManager.getLockedFeatures.bind(PlanAccessManager),
-    [],
-  );
-  const getNextPlanForFeature = useCallback(
-    PlanAccessManager.getNextPlanForFeature.bind(PlanAccessManager),
-    [],
-  );
   const canUpgrade = useCallback(
     PlanAccessManager.canUpgrade.bind(PlanAccessManager),
     [],
   );
   const getNextPlan = useCallback(
     PlanAccessManager.getNextPlan.bind(PlanAccessManager),
+    [],
+  );
+  const getNextPlanForFeature = useCallback(
+    PlanAccessManager.getNextPlanForFeature.bind(PlanAccessManager),
     [],
   );
   const getPlanDisplayInfo = useCallback(
@@ -249,60 +257,36 @@ export function usePlanAccess() {
     getRequiredPlan,
     hasReachedLimit,
     getRemainingUsage,
-    getAvailableFeatures,
-    getLockedFeatures,
-    getNextPlanForFeature,
     canUpgrade,
     getNextPlan,
+    getNextPlanForFeature,
     getPlanDisplayInfo,
   };
 }
 
 /* ------------------------------------------------------------------
-   USAGE TRACKER (localStorage)
+   LOCAL‑STORAGE USAGE COUNTER (unchanged)
 ------------------------------------------------------------------- */
-
 export class UsageTracker {
-  private static keyRoot = 'user_usage_tracking';
+  private static root = 'user_usage_tracking';
 
-  /* Read current usage counter */
-  static getCurrentUsage(userId: string, feature: string) {
+  static getCurrentUsage(id: string, feature: string) {
     if (typeof window === 'undefined') return 0;
-    const raw = localStorage.getItem(
-      `${this.keyRoot}_${userId}_${feature}`,
+    return parseInt(
+      localStorage.getItem(`${this.root}_${id}_${feature}`) || '0',
+      10,
     );
-    return raw ? parseInt(raw, 10) : 0;
   }
 
-  /* Increment and return new value */
-  static incrementUsage(userId: string, feature: string) {
+  static incrementUsage(id: string, feature: string) {
     if (typeof window === 'undefined') return 0;
-    const next = this.getCurrentUsage(userId, feature) + 1;
-    localStorage.setItem(
-      `${this.keyRoot}_${userId}_${feature}`,
-      String(next),
-    );
+    const next = this.getCurrentUsage(id, feature) + 1;
+    localStorage.setItem(`${this.root}_${id}_${feature}`, String(next));
     return next;
   }
 
-  /* Clear a single counter (e.g. monthly reset) */
-  static resetUsage(userId: string, feature: string) {
+  static resetUsage(id: string, feature: string) {
     if (typeof window === 'undefined') return;
-    localStorage.removeItem(`${this.keyRoot}_${userId}_${feature}`);
-  }
-
-  /* Get all usage for a user (debugging/admin) */
-  static getAllUsage(userId: string) {
-    if (typeof window === 'undefined') return {};
-    const out: Record<string, number> = {};
-    const prefix = `${this.keyRoot}_${userId}_`;
-    for (let i = 0; i < localStorage.length; i++) {
-      const k = localStorage.key(i);
-      if (k?.startsWith(prefix)) {
-        const feature = k.replace(prefix, '');
-        out[feature] = parseInt(localStorage.getItem(k) ?? '0', 10);
-      }
-    }
-    return out;
+    localStorage.removeItem(`${this.root}_${id}_${feature}`);
   }
 }
