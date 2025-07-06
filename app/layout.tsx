@@ -5,8 +5,9 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
 
-// Import your UserProvider
+// Import your UserProvider and AuthProvider
 import { UserProvider } from "@/contexts/UserContext"
+import { AuthProvider } from "@/hooks/use-auth"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -25,11 +26,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
-          {/* Wrap children with UserProvider */}
-          <UserProvider>
-            {children}
-            <Toaster />
-          </UserProvider>
+          {/* Wrap children with AuthProvider and UserProvider */}
+          <AuthProvider>
+            <UserProvider>
+              {children}
+              <Toaster />
+            </UserProvider>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>
