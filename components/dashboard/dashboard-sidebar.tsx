@@ -219,12 +219,6 @@ export function DashboardSidebar() {
     const remainingUsage = getRemainingUsage(userPlan, item.feature, 0);
     const showUsageInfo =
       item.feature === 'trade-analysis' && typeof remainingUsage === 'number';
-- const showUsageInfo = item.feature === 'trade-analysis' && typeof remainingUsage === 'number';
-+ const showUsageInfo =
-+   (item.feature === 'screenshot-analysis' ||
-+    item.feature === 'trade-builder') &&
-+   typeof remainingUsage === 'number';
-    
     if (hasAccess) {
       return (
         <Link
