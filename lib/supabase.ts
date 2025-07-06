@@ -16,6 +16,7 @@ const createMockClient = () => ({
     signInWithOAuth: async () => ({ data: null, error: { message: "Demo mode - Supabase not configured" } }),
     signOut: async () => ({ error: null }),
     getUser: async () => ({ data: { user: null }, error: null }),
+    getSession: async () => ({ data: { session: null }, error: null }),
     onAuthStateChange: () => ({ data: { subscription: null } }),
   },
   from: () => ({
