@@ -37,7 +37,86 @@ function useAuthInternal() {
     }
   }, [])
 
-  return { session, user }
+  // Sign up function
+  const signUp = async (email: string, password: string, metadata?: any) => {
+    if (!isSupabaseConfigured()) {
+      throw new Error("Demo mode: Authentication requires Supabase configuration")
+    }
+
+    const { data, error } = await baseSupabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: metadata
+      }
+    })
+
+    if (error) {
+      throw error
+    }
+
+    return data
+  }
+
+  // Sign in with Google function
+  const signInWithGoogle = async () => {
+    if (!isSupabaseConfigured()) {
+      throw new Error("Demo mode: Authentication requires Supabase configuration")
+    }
+
+    const { data, error } = await baseSupabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`
+      }
+    })
+
+    if (error) {
+      throw error
+    }
+
+    return data
+  }
+
+  // Sign in function
+  const signIn = async (email: string, password: string) => {
+    if (!isSupabaseConfigured()) {
+      throw new Error("Demo mode: Authentication requires Supabase configuration")
+    }
+
+    const { data, error } = await baseSupabase.auth.signInWithPassword({
+      email,
+      password
+    })
+
+    if (error) {
+      throw error
+    }
+
+    return data
+  }
+
+  // Sign out function
+  const signOut = async () => {
+    if (!isSupabaseConfigured()) {
+      return
+    }
+
+    const { error } = await baseSupabase.auth.signOut()
+    
+    if (error) {
+      throw error
+    }
+  }
+
+  return { 
+    session, 
+    user, 
+    signUp, 
+    signInWithGoogle, 
+    signIn, 
+    signOut 
+  }
 }
 
 /* -------------------------------------------------------------------------- */
@@ -59,8 +138,12 @@ export function useAuth() {
     return {
       session: null,
       user: null,
-      // expose the same shape so callers don't break
+      signUp: async () => { throw new Error("useAuth must be used within AuthProvider") },
+      signInWithGoogle: async () => { throw new Error("useAuth must be used within AuthProvider") },
+      signIn: async () => { throw new Error("useAuth must be used within AuthProvider") },
+      signOut: async () => { throw new Error("useAuth must be used within AuthProvider") },
     } as ReturnType<typeof useAuthInternal>
   }
   return ctx
 }
+
