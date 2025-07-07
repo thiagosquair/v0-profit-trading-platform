@@ -1,10 +1,9 @@
-// contexts/UserContext.tsx - CORRECTED VERSION
+// contexts/UserContext.tsx - TEMPORARY TESTING VERSION
 'use client';
 
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import { auth, AuthUser } from '@/lib/auth';
 import { supabase } from '@/lib/supabase';
-import { getPlanFeatures, hasFeatureAccess, getRemainingUsage } from '@/lib/planConfig';
 
 interface UserProfile {
   id: string;
@@ -68,7 +67,6 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       const result = await auth.activatePlan(plan, true);
       
       if (result.success) {
-        // Immediately refresh the profile to reflect changes
         await refreshProfile();
         return true;
       } else {
@@ -81,40 +79,20 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     }
   }, [refreshProfile]);
 
-  // Feature access checking
+  // TEMPORARY: Give access to all features for testing
   const hasFeature = useCallback((feature: string): boolean => {
-    if (!profile) return false;
-    return hasFeatureAccess(profile.plan, feature as any);
-  }, [profile]);
+    return true; // All features enabled for testing
+  }, []);
 
-  // Get remaining usage for limited features
+  // TEMPORARY: Show unlimited usage for all features
   const getRemainingUsageCount = useCallback((feature: 'screenshot_analysis' | 'trade_builder'): number | 'unlimited' => {
-    if (!profile) return 0;
-    
-    const currentUsage = feature === 'screenshot_analysis' 
-      ? profile.screenshot_analysis_count 
-      : profile.trade_builder_count;
-    
-    return getRemainingUsage(profile.plan, feature, currentUsage);
-  }, [profile]);
+    return 'unlimited'; // Unlimited for testing
+  }, []);
 
-  // Check if feature is enabled (combines access + usage limits)
+  // TEMPORARY: All features enabled for testing
   const isFeatureEnabled = useCallback((feature: string): boolean => {
-    if (!hasFeature(feature)) return false;
-    
-    // For limited features, check if they have remaining usage
-    if (feature === 'screenshot_analysis') {
-      const remaining = getRemainingUsageCount('screenshot_analysis');
-      return remaining === 'unlimited' || remaining > 0;
-    }
-    
-    if (feature === 'trade_builder') {
-      const remaining = getRemainingUsageCount('trade_builder');
-      return remaining === 'unlimited' || remaining > 0;
-    }
-    
-    return true;
-  }, [hasFeature, getRemainingUsageCount]);
+    return true; // All features enabled for testing
+  }, []);
 
   // Initialize user and profile on mount
   useEffect(() => {
