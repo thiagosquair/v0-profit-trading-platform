@@ -1,4 +1,4 @@
-// contexts/UserContext.tsx
+// contexts/UserContext.tsx - CORRECTED VERSION
 'use client';
 
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
@@ -9,7 +9,7 @@ import { getPlanFeatures, hasFeatureAccess, getRemainingUsage } from '@/lib/plan
 interface UserProfile {
   id: string;
   plan: 'free' | 'pro' | 'premium' | 'elite';
-  trade_analyses_count: number;
+  screenshot_analysis_count: number;
   trade_builder_count: number;
   last_reset_date: string;
   plan_activated_at: string;
@@ -24,7 +24,7 @@ interface UserContextType {
   refreshProfile: () => Promise<void>;
   activatePlan: (plan: 'free' | 'pro' | 'premium' | 'elite') => Promise<boolean>;
   hasFeature: (feature: string) => boolean;
-  getRemainingUsage: (feature: 'trade_analyses' | 'trade_builder') => number | 'unlimited';
+  getRemainingUsage: (feature: 'screenshot_analysis' | 'trade_builder') => number | 'unlimited';
   isFeatureEnabled: (feature: string) => boolean;
 }
 
@@ -88,11 +88,11 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   }, [profile]);
 
   // Get remaining usage for limited features
-  const getRemainingUsageCount = useCallback((feature: 'trade_analyses' | 'trade_builder'): number | 'unlimited' => {
+  const getRemainingUsageCount = useCallback((feature: 'screenshot_analysis' | 'trade_builder'): number | 'unlimited' => {
     if (!profile) return 0;
     
-    const currentUsage = feature === 'trade_analyses' 
-      ? profile.trade_analyses_count 
+    const currentUsage = feature === 'screenshot_analysis' 
+      ? profile.screenshot_analysis_count 
       : profile.trade_builder_count;
     
     return getRemainingUsage(profile.plan, feature, currentUsage);
@@ -103,8 +103,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     if (!hasFeature(feature)) return false;
     
     // For limited features, check if they have remaining usage
-    if (feature === 'trade_analyses') {
-      const remaining = getRemainingUsageCount('trade_analyses');
+    if (feature === 'screenshot_analysis') {
+      const remaining = getRemainingUsageCount('screenshot_analysis');
       return remaining === 'unlimited' || remaining > 0;
     }
     
