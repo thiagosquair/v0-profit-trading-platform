@@ -17,6 +17,7 @@ import {
   GitPullRequest,
   Trophy,
   TrendingUp,
+  ClipboardList,
 } from 'lucide-react';
 
 export function DashboardSidebar() {
@@ -33,6 +34,13 @@ export function DashboardSidebar() {
       name: "AI Coach",
       href: "/dashboard/coach",
       icon: Brain,
+    },
+    {
+      name: "Trader Assessment",
+      href: "/dashboard/assessment",
+      icon: ClipboardList,
+      isNew: true,
+      description: "Discover your trading psychology"
     },
     {
       name: "Screenshot Analysis",
@@ -104,7 +112,7 @@ export function DashboardSidebar() {
               <div key={item.name}>
                 <Link
                   href={item.href}
-                  className={`group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-colors ${
+                  className={`group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-colors relative ${
                     isActive
                       ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-700'
                       : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900'
@@ -113,7 +121,22 @@ export function DashboardSidebar() {
                   <IconComponent className={`mr-3 h-5 w-5 flex-shrink-0 ${
                     isActive ? 'text-blue-500' : 'text-gray-400 group-hover:text-gray-500'
                   }`} />
-                  {item.name}
+                  
+                  <div className="flex-1">
+                    <div className="flex items-center">
+                      {item.name}
+                      {item.isNew && (
+                        <Badge className="ml-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs">
+                          NEW
+                        </Badge>
+                      )}
+                    </div>
+                    {item.description && (
+                      <div className="text-xs text-gray-500 mt-0.5">
+                        {item.description}
+                      </div>
+                    )}
+                  </div>
 
                   {/* Show unlimited badge for testing */}
                   {remaining === 'unlimited' && (
@@ -145,6 +168,10 @@ export function DashboardSidebar() {
               <div className="flex justify-between">
                 <span>Trade Builder:</span>
                 <span>Unlimited</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Assessment:</span>
+                <span className="text-green-600">Available</span>
               </div>
             </div>
           </div>
