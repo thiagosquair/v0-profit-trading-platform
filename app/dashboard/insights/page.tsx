@@ -1,5 +1,9 @@
-import { CoachingInsights } from "@/components/dashboard/coaching-insights"
+import { EnhancedCoachingInsights } from '@/components/dashboard/enhanced-coaching-insights'
 
-export default function InsightsPage() {
-  return <CoachingInsights />
+export default function CoachingInsightsPage() {
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <EnhancedCoachingInsights />
+    </div>
+  )
 }
