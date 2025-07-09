@@ -46,7 +46,7 @@ export function LandingPage() {
   const content = {
     en: {
       title: "ProFitz",
-      subtitle: "Trading Psychology Lab",
+      subtitle: "Trading Psychology Labbbb",
       description:
         "Master your trading psychology with AI-powered coaching, behavioral analysis, and interactive exercises designed to build mental resilience and better decision-making.",
       getStarted: "Start Your Journey",
