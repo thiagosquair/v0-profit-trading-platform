@@ -347,7 +347,7 @@ export function EnhancedAssessmentWelcome({ onStartAssessment }: EnhancedAssessm
           <p className="text-blue-800 mb-6">
             {eligibility.isFirstAssessment 
               ? 'Start your journey toward trading psychology mastery'
-              : 'Continue your psychological development journey'
+              : 'Continue your Psychological development journey'
             }
           </p>
           <Button 
