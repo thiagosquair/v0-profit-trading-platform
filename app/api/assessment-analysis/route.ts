@@ -1,51 +1,41 @@
-// pages/api/assessment-analysis.ts
-import { NextApiRequest, NextApiResponse } from 'next';
-import { AssessmentResult } from '@/types/assessment';
+import { NextRequest, NextResponse } from 'next/server';
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+export async function POST(req: NextRequest) {
+  try {
+    console.log("✅ Received POST request to /api/assessment-analysis");
+
+    const body = await req.json();
+    const { responses } = body;
+    console.log("🧠 Received responses:", responses?.length);
+
+    // Simulated personality profile generation logic
+    const personalityProfile = generatePersonalityProfile(responses);
+
+    const assessmentResult = {
+      personality_profile: personalityProfile,
+      completion_time_minutes: Math.round(
+        (Date.now() - new Date(responses[0].timestamp).getTime()) / 60000
+      ),
+      retake_number: 1,
+    };
+
+    console.log("✅ Returning assessment result:", assessmentResult);
+    return NextResponse.json(assessmentResult, { status: 200 });
+  } catch (error) {
+    console.error("❌ Error in assessment analysis:", error);
+    return NextResponse.json(
+      { error: "Failed to process assessment analysis" },
+      { status: 500 }
+    );
   }
+}
 
-  const { responses, userId } = req.body;
-
-  if (!responses || !userId) {
-    return res.status(400).json({ error: 'Missing required fields' });
-  }
-
-  // Placeholder analysis result
-  const result: AssessmentResult = {
-    assessmentDate: new Date().toISOString(),
-    retakeNumber: 1,
-    scores: {
-      overall: 72,
-      discipline: 65,
-      confidence: 80,
-      emotionalControl: 70,
-      riskTolerance: 60,
-      strategyAdherence: 75,
-    },
-    personalityProfile: {
-      riskProfile: 'moderate',
-      tradingStyle: 'swing',
-      tradingStyleDescription: 'You prefer trades that last days to weeks.',
-      emotionalControl: 'balanced',
-      emotionalControlDescription: 'You manage emotions well under pressure.',
-      motivation: 'growth',
-      motivationDescription: 'Driven by long-term improvement.',
-    },
-    aiAnalysis: `## Strengths
-- Strong confidence
-- Good discipline
-
-## Growth Areas
-- Risk tolerance needs improvement
-
-## Recommendations
-1. Use stop-loss strategies
-2. Keep a trading journal
-3. Simulate high-risk scenarios`,
+function generatePersonalityProfile(responses: any[]) {
+  return {
+    openness: 0.7,
+    conscientiousness: 0.8,
+    extraversion: 0.6,
+    agreeableness: 0.75,
+    neuroticism: 0.3
   };
-
-  return res.status(200).json(result);
 }
