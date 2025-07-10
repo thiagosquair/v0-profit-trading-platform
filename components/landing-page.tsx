@@ -52,7 +52,7 @@ export function LandingPage() {
       getStarted: "Start Your Journey",
       learnMore: "Watch Demo",
       signIn: "Sign In",
-      badge: "AI-Powered Trading Psychology",
+      badge: "Ai-Powered Trading Psychology",
       heroTitle: "Master Your Mindset. Master Your Trading.",
       featuresTitle: "Developed for Trading Psychology Mastery and High Performance",
       featuresSubtitle:
