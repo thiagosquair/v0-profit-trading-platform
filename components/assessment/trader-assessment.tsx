@@ -43,7 +43,6 @@ export function TraderAssessment() {
   const [showCoachingMessage, setShowCoachingMessage] = useState(false)
   const [currentCoachingMessage, setCurrentCoachingMessage] = useState('')
 
-  // Load saved progress on component mount
   useEffect(() => {
     const savedProgress = localStorage.getItem('trader-assessment-progress')
     if (savedProgress) {
@@ -63,7 +62,6 @@ export function TraderAssessment() {
     }
   }, [])
 
-  // Save progress whenever it changes
   useEffect(() => {
     if (assessmentState === 'in_progress' || assessmentState === 'paused') {
       localStorage.setItem('trader-assessment-progress', JSON.stringify({
@@ -116,22 +114,19 @@ export function TraderAssessment() {
       const nextIndex = prev.currentQuestionIndex + 1
       const currentQuestion = assessmentQuestions[prev.currentQuestionIndex]
       const nextQuestion = assessmentQuestions[nextIndex]
-      
-      // Check if we're moving to a new category
+
       const isNewCategory = nextQuestion && nextQuestion.category !== currentQuestion?.category
-      
+
       if (isNewCategory && nextQuestion) {
-        // Show coaching message for category transition
         const message = coachingMessages.category_transitions[nextQuestion.category]
         setCurrentCoachingMessage(message)
         setShowCoachingMessage(true)
-        
+
         setTimeout(() => {
           setShowCoachingMessage(false)
         }, 3000)
       }
 
-      // Check if assessment is complete
       if (nextIndex >= assessmentQuestions.length) {
         setAssessmentState('completed')
         localStorage.removeItem('trader-assessment-progress')
@@ -160,12 +155,6 @@ export function TraderAssessment() {
 
   if (assessmentState === 'welcome') {
     return <EnhancedAssessmentWelcome onStartAssessment={startAssessment} />
-  }
-        hasProgress={progress.currentQuestionIndex > 0}
-        onResume={resumeAssessment}
-        progressPercentage={progressPercentage}
-      />
-    )
   }
 
   if (assessmentState === 'paused') {
@@ -198,7 +187,8 @@ export function TraderAssessment() {
                 <Badge variant="outline" className="text-blue-700 border-blue-300">
                   Current: {currentCategoryInfo.name}
                 </Badge>
-              }
+              </div>
+            )}
 
             <div className="flex gap-3 justify-center">
               <Button onClick={resumeAssessment} className="bg-blue-600 hover:bg-blue-700">
@@ -296,10 +286,8 @@ export function TraderAssessment() {
     return <EnhancedAssessmentResults responses={progress.responses} />
   }
 
-  // In progress state
   return (
     <div className="max-w-4xl mx-auto p-6">
-      {/* Coaching Message Overlay */}
       {showCoachingMessage && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <Card className="max-w-md mx-4 border-2 border-blue-200 bg-blue-50">
@@ -313,7 +301,6 @@ export function TraderAssessment() {
         </div>
       )}
 
-      {/* Progress Header */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
@@ -354,7 +341,6 @@ export function TraderAssessment() {
         )}
       </div>
 
-      {/* Current Question */}
       {currentQuestion && (
         <QuestionComponent
           question={currentQuestion}
@@ -363,7 +349,6 @@ export function TraderAssessment() {
         />
       )}
 
-      {/* Encouragement Messages */}
       {progress.currentQuestionIndex > 0 && progress.currentQuestionIndex % 5 === 0 && (
         <Card className="mt-6 border-green-200 bg-green-50">
           <CardContent className="p-4">
@@ -379,4 +364,3 @@ export function TraderAssessment() {
     </div>
   )
 }
-
