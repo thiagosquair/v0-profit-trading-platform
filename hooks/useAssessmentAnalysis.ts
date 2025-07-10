@@ -3,7 +3,10 @@ import { useState } from 'react';
 import { AssessmentResponse, AssessmentResult } from '@/types/assessment';
 
 interface UseAssessmentAnalysisReturn {
-  analyzeAssessment: (responses: AssessmentResponse[], userId: string) => Promise<AssessmentResult | null>;
+  analyzeAssessment: (
+    responses: AssessmentResponse[],
+    userId: string
+  ) => Promise<AssessmentResult | null>;
   isAnalyzing: boolean;
   error: string | null;
 }
@@ -13,7 +16,7 @@ export function useAssessmentAnalysis(): UseAssessmentAnalysisReturn {
   const [error, setError] = useState<string | null>(null);
 
   const analyzeAssessment = async (
-    responses: AssessmentResponse[], 
+    responses: AssessmentResponse[],
     userId: string
   ): Promise<AssessmentResult | null> => {
     setIsAnalyzing(true);
@@ -25,22 +28,21 @@ export function useAssessmentAnalysis(): UseAssessmentAnalysisReturn {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          responses,
-          userId
-        }),
+        body: JSON.stringify({ responses, userId }),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
+        console.error('[API ERROR]', errorData);
         throw new Error(errorData.error || 'Failed to analyze assessment');
       }
 
       const result: AssessmentResult = await response.json();
+      console.log('[AI RESULT]', result);
       return result;
-
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
+      const errorMessage =
+        err instanceof Error ? err.message : 'Unknown error occurred';
       setError(errorMessage);
       console.error('Assessment analysis error:', err);
       return null;
@@ -52,6 +54,6 @@ export function useAssessmentAnalysis(): UseAssessmentAnalysisReturn {
   return {
     analyzeAssessment,
     isAnalyzing,
-    error
+    error,
   };
 }
