@@ -28,6 +28,30 @@ export async function POST(request: NextRequest) {
     const overallScore = Math.round(
       (scores.tradingPsychology + scores.behavioralPatterns + scores.marketMindset + 
        scores.tradingHabits + scores.goalOrientation) / 5
+      const analyzeAssessment = async (responses: AssessmentResponse[], userId: string) => {
+  console.log("📤 Sending responses:", responses);
+  const response = await fetch('/api/assessment-analysis', {
+    method: 'POST',
+    body: JSON.stringify({ responses, userId }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+
+  console.log("📥 Got response:", response.status);
+
+  if (!response.ok) {
+    const err = await response.text();
+    console.error("❌ API error:", err);
+    throw new Error(err);
+  }
+
+  const data = await response.json();
+  console.log("✅ Final analysis result:", data);
+
+  return data;
+};
+
     );
 
     // Generate AI analysis
