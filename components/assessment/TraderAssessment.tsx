@@ -26,7 +26,7 @@ import { EnhancedAssessmentResults } from './enhanced-assessment-results';
 type AssessmentState = 'welcome' | 'in_progress' | 'paused' | 'completed' | 'results';
 
 export function TraderAssessment() {
-  const [assessmentState, setAssessmentState] = useState<AssessmentState>('welcome');
+  const [assessmentState, setAssessmentState] = useState<AssessmentState>('notStarted'); // just for testing
   const [progress, setProgress] = useState<AssessmentProgress>(() => ({
     currentQuestionIndex: 0,
     totalQuestions: assessmentQuestions.length,
