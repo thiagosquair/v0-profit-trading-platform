@@ -1,11 +1,6 @@
-import { TraderAssessment } from '@/components/assessment/trader-assessment'
-
-// app/dashboard/assessment/page.tsx
+'use client';
+import { TraderAssessment } from '@/components/TraderAssessment';
 
 export default function AssessmentPage() {
-  return (
-    <div>
-      <p>Test: If you see this, the page is rendering!</p>
-    </div>
-  );
+  return <TraderAssessment />;
 }
