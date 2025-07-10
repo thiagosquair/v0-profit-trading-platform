@@ -14,7 +14,7 @@ export const assessmentQuestions: AssessmentQuestion[] = [
       '1-2% - Conservative but reasonable',
       '3-5% - Moderate risk for good opportunities',
       '5-10% - Higher risk for higher rewards',
-      'More than 10% - I go big when I\'m confident'
+      "More than 10% - I go big when I'm confident"
     ],
     orderIndex: 1
   },
@@ -35,7 +35,7 @@ export const assessmentQuestions: AssessmentQuestion[] = [
     id: 'tp_003',
     category: 'trading_psychology',
     subcategory: 'decision_making',
-    questionText: 'You\'ve planned a trade, but just before executing, you see conflicting news. What do you do?',
+    questionText: "You've planned a trade, but just before executing, you see conflicting news. What do you do?",
     questionType: 'scenario',
     options: [
       'Execute the trade as planned - stick to the strategy',
@@ -66,7 +66,7 @@ export const assessmentQuestions: AssessmentQuestion[] = [
     questionText: 'After a series of winning trades, how do you typically feel about your next trade?',
     questionType: 'multiple_choice',
     options: [
-      'Overconfident - I feel like I can\'t lose',
+      "Overconfident - I feel like I can't lose",
       'Cautiously optimistic - good streak but stay humble',
       'Nervous - worried the streak will end',
       'Analytical - each trade is independent',
@@ -80,7 +80,7 @@ export const assessmentQuestions: AssessmentQuestion[] = [
     id: 'bp_001',
     category: 'behavioral_patterns',
     subcategory: 'impulse_control',
-    questionText: 'How often do you find yourself taking trades that weren\'t part of your original plan?',
+    questionText: "How often do you find yourself taking trades that weren't part of your original plan?",
     questionType: 'multiple_choice',
     options: [
       'Never - I stick strictly to my plan',
@@ -108,7 +108,7 @@ export const assessmentQuestions: AssessmentQuestion[] = [
     id: 'bp_003',
     category: 'behavioral_patterns',
     subcategory: 'learning',
-    questionText: 'When you make a trading mistake, what\'s your typical response?',
+    questionText: "When you make a trading mistake, what's your typical response?",
     questionType: 'scenario',
     options: [
       'Analyze what went wrong and document it',
@@ -185,7 +185,7 @@ export const assessmentQuestions: AssessmentQuestion[] = [
     id: 'go_001',
     category: 'goal_orientation',
     subcategory: 'career_aspirations',
-    questionText: 'What\'s your primary goal in trading?',
+    questionText: "What's your primary goal in trading?",
     questionType: 'multiple_choice',
     options: [
       'Supplement my income with extra money',
