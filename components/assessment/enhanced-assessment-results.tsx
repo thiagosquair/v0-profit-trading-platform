@@ -36,26 +36,26 @@ export function EnhancedAssessmentResults({ responses }: EnhancedAssessmentResul
 
   useEffect(() => {
     const performAnalysis = async () => {
-      if (!user?.id) return
+      if (!user?.id) return;
 
       try {
-        setAnalysisStage('analyzing')
-        const result = await analyzeAssessment(responses, user.id)
+        setAnalysisStage('analyzing');
+        const result = await analyzeAssessment(responses, user.id);
         
         if (result) {
-          setAnalysisResult(result)
-          setAnalysisStage('complete')
+          setAnalysisResult(result);
+          setAnalysisStage('complete');
         } else {
-          setAnalysisStage('error')
+          setAnalysisStage('error');
         }
       } catch (err) {
-        console.error('Analysis failed:', err)
-        setAnalysisStage('error')
+        console.error('Analysis failed:', err);
+        setAnalysisStage('error');
       }
     }
 
-    performAnalysis()
-  }, [responses, user?.id, analyzeAssessment])
+    performAnalysis();
+  }, [responses, user?.id, analyzeAssessment]);
 
   if (analysisStage === 'analyzing') {
     return (
