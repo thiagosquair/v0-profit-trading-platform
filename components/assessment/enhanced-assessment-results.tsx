@@ -36,26 +36,34 @@ export function EnhancedAssessmentResults({ responses }: EnhancedAssessmentResul
 
   useEffect(() => {
     const performAnalysis = async () => {
-      if (!user?.id) return;
+      console.log('Starting performAnalysis')
+      if (!user?.id) {
+        console.warn('No user ID, skipping analysis')
+        return
+      }
+
+      console.log('User ID:', user.id)
+      console.log('Responses:', responses)
 
       try {
-        setAnalysisStage('analyzing');
-        const result = await analyzeAssessment(responses, user.id);
-        
+        setAnalysisStage('analyzing')
+        const result = await analyzeAssessment(responses, user.id)
+        console.log('Analysis result:', result)
+
         if (result) {
-          setAnalysisResult(result);
-          setAnalysisStage('complete');
+          setAnalysisResult(result)
+          setAnalysisStage('complete')
         } else {
-          setAnalysisStage('error');
+          setAnalysisStage('error')
         }
       } catch (err) {
-        console.error('Analysis failed:', err);
-        setAnalysisStage('error');
+        console.error('Analysis failed:', err)
+        setAnalysisStage('error')
       }
     }
 
-    performAnalysis();
-  }, [responses, user?.id, analyzeAssessment]);
+    performAnalysis()
+  }, [responses, user?.id, analyzeAssessment])
 
   if (analysisStage === 'analyzing') {
     return (
@@ -259,87 +267,78 @@ export function EnhancedAssessmentResults({ responses }: EnhancedAssessmentResul
               <Badge className="bg-green-100 text-green-800 capitalize text-sm px-3 py-1">
                 {analysisResult.personalityProfile.tradingStyle}
               </Badge>
-              <p className="text-xs text-green-700 mt-2">
-                {analysisResult.personalityProfile.tradingStyle === 'analytical' ? 'Data-driven decisions' :
-                 analysisResult.personalityProfile.tradingStyle === 'intuitive' ? 'Instinct-based approach' :
-                 'Balanced methodology'}
-              </p>
+              <p className="text-xs text-green-700 mt-2">{analysisResult.personalityProfile.tradingStyleDescription}</p>
             </div>
             <div className="text-center p-4 bg-purple-50 rounded-lg border border-purple-200">
-              <h4 className="font-medium text-purple-900 mb-2">Emotional Type</h4>
+              <h4 className="font-medium text-purple-900 mb-2">Emotional Control</h4>
               <Badge className="bg-purple-100 text-purple-800 capitalize text-sm px-3 py-1">
-                {analysisResult.personalityProfile.emotionalType}
+                {analysisResult.personalityProfile.emotionalControl}
               </Badge>
-              <p className="text-xs text-purple-700 mt-2">
-                {analysisResult.personalityProfile.emotionalType === 'calm' ? 'Steady under pressure' :
-                 analysisResult.personalityProfile.emotionalType === 'reactive' ? 'Emotionally responsive' :
-                 'Flexible emotional response'}
-              </p>
+              <p className="text-xs text-purple-700 mt-2">{analysisResult.personalityProfile.emotionalControlDescription}</p>
             </div>
-            <div className="text-center p-4 bg-orange-50 rounded-lg border border-orange-200">
-              <h4 className="font-medium text-orange-900 mb-2">Learning Style</h4>
-              <Badge className="bg-orange-100 text-orange-800 capitalize text-sm px-3 py-1">
-                {analysisResult.personalityProfile.learningStyle}
+            <div className="text-center p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+              <h4 className="font-medium text-yellow-900 mb-2">Motivation</h4>
+              <Badge className="bg-yellow-100 text-yellow-800 capitalize text-sm px-3 py-1">
+                {analysisResult.personalityProfile.motivation}
               </Badge>
-              <p className="text-xs text-orange-700 mt-2">
-                {analysisResult.personalityProfile.learningStyle === 'visual' ? 'Charts and visuals' :
-                 analysisResult.personalityProfile.learningStyle === 'practical' ? 'Hands-on experience' :
-                 'Concepts and theory'}
-              </p>
+              <p className="text-xs text-yellow-700 mt-2">{analysisResult.personalityProfile.motivationDescription}</p>
             </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* AI Analysis Summary */}
-      <Card>
+      {/* Strengths & Growth Areas */}
+      <div className="grid md:grid-cols-2 gap-6">
+        <Card className="border-green-200">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-green-700">
+              <Star className="h-5 w-5" /> Strengths
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            {strengths.length > 0 ? (
+              <ul className="list-disc list-inside space-y-2 text-gray-800">
+                {strengths.map((strength, i) => <li key={i}>{strength}</li>)}
+              </ul>
+            ) : (
+              <p className="text-gray-600 italic">No strengths detected in AI analysis.</p>
+            )}
+          </CardContent>
+        </Card>
+
+        <Card className="border-yellow-200">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-yellow-700">
+              <TrendingUp className="h-5 w-5" /> Growth Areas
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            {growthAreas.length > 0 ? (
+              <ul className="list-disc list-inside space-y-2 text-gray-800">
+                {growthAreas.map((growth, i) => <li key={i}>{growth}</li>)}
+              </ul>
+            ) : (
+              <p className="text-gray-600 italic">No growth areas detected in AI analysis.</p>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Recommendations */}
+      <Card className="border-blue-200">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Brain className="h-5 w-5 text-blue-600" />
-            AI Psychological Analysis
+          <CardTitle className="flex items-center gap-2 text-blue-700">
+            <Lightbulb className="h-5 w-5" /> Personalized Recommendations
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="prose max-w-none">
-            <div className="whitespace-pre-wrap text-gray-700 leading-relaxed">
-              {analysisResult.aiAnalysis}
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Next Steps */}
-      <Card className="border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-purple-50">
-        <CardContent className="p-6 text-center">
-          <h3 className="text-xl font-bold text-blue-900 mb-4 flex items-center justify-center gap-2">
-            <Sparkles className="h-5 w-5" />
-            Your Journey Continues
-          </h3>
-          <p className="text-blue-800 mb-6">
-            Your detailed insights and personalized recommendations have been added to your Coaching Insights. 
-            Continue developing your trading psychology with targeted exercises and progress tracking.
-          </p>
-          <div className="flex gap-3 justify-center flex-wrap">
-            <Button className="bg-blue-600 hover:bg-blue-700">
-              <MessageSquare className="mr-2 h-4 w-4" />
-              View Coaching Insights
-            </Button>
-            <Button variant="outline">
-              <BookOpen className="mr-2 h-4 w-4" />
-              Start Exercises
-            </Button>
-            <Button variant="outline">
-              <TrendingUp className="mr-2 h-4 w-4" />
-              Track Progress
-            </Button>
-          </div>
-          
-          <div className="mt-6 text-sm text-blue-600">
-            <p className="flex items-center justify-center gap-2">
-              <Target className="h-4 w-4" />
-              Next assessment available in 30 days for progress comparison
-            </p>
-          </div>
+          {recommendations.length > 0 ? (
+            <ol className="list-decimal list-inside space-y-2 text-gray-800">
+              {recommendations.map((rec, i) => <li key={i}>{rec}</li>)}
+            </ol>
+          ) : (
+            <p className="text-gray-600 italic">No recommendations found.</p>
+          )}
         </CardContent>
       </Card>
     </div>
