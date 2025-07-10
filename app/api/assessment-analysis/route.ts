@@ -82,4 +82,4 @@ export async function POST(request: NextRequest) {
       ai_analysis: aiAnalysis,
       personality_profile: personalityProfile,
       completion_time_minutes: Math.round((Date.now() - new Date(responses[0].timestamp).getTime()) / 60000),
-      retake_number: 1 // This would be calculated based on previous assessment_
+      retake_number: 1, // This would be calculated based on previous assessment_
