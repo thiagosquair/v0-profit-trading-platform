@@ -198,8 +198,7 @@ export function TraderAssessment() {
                 <Badge variant="outline" className="text-blue-700 border-blue-300">
                   Current: {currentCategoryInfo.name}
                 </Badge>
-              </div>
-            )}
+              }
 
             <div className="flex gap-3 justify-center">
               <Button onClick={resumeAssessment} className="bg-blue-600 hover:bg-blue-700">
@@ -380,3 +379,4 @@ export function TraderAssessment() {
     </div>
   )
 }
+
