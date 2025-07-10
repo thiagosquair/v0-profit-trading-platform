@@ -273,7 +273,7 @@ export function TraderAssessment() {
                   </div>
                   <div className="flex items-center gap-2">
                     <Heart className="h-4 w-4" />
-                    <span>Results appear in Coaching Insights</span>
+                    <span>Results appear in coaching insights</span>
                   </div>
                 </div>
               </div>
