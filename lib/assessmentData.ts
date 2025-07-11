@@ -1,274 +1,292 @@
-// lib/assessmentData.ts
-import { AssessmentQuestion } from '@/types/assessment';
+import { AssessmentQuestion, CoachingMessage, AssessmentCategory } from '@/types/assessment';
 
+// Sample Assessment Questions (14 questions for testing)
 export const assessmentQuestions: AssessmentQuestion[] = [
-  // Trading Psychology (25 questions)
+  // Trading Psychology (5 questions)
   {
     id: 'tp_001',
     category: 'trading_psychology',
-    subcategory: 'risk_tolerance',
-    questionText: 'When entering a trade, what percentage of your account are you typically comfortable risking?',
-    questionType: 'multiple_choice',
+    type: 'multiple_choice',
+    question: 'When you experience a significant trading loss, what is your typical emotional response?',
     options: [
-      'Less than 1% - I prefer very small risks',
-      '1-2% - Conservative but reasonable',
-      '3-5% - Moderate risk for good opportunities',
-      '5-10% - Higher risk for higher rewards',
-      "More than 10% - I go big when I'm confident"
+      'I remain calm and analyze what went wrong',
+      'I feel frustrated but quickly refocus',
+      'I become anxious and doubt my strategy',
+      'I feel angry and want to trade immediately to recover',
+      'I take a break to process the emotions'
     ],
-    orderIndex: 1
+    weight: 1.2
   },
   {
     id: 'tp_002',
     category: 'trading_psychology',
-    subcategory: 'emotional_control',
-    questionText: 'How confident do you feel in your ability to stay calm during volatile market conditions?',
-    questionType: 'likert',
-    likertLabels: {
-      min: 'Not confident at all',
-      max: 'Extremely confident',
-      scale: 5
-    },
-    orderIndex: 2
+    type: 'likert_scale',
+    question: 'How confident are you in your ability to stick to your trading plan during volatile market conditions?',
+    weight: 1.0
   },
   {
     id: 'tp_003',
     category: 'trading_psychology',
-    subcategory: 'decision_making',
-    questionText: "You've planned a trade, but just before executing, you see conflicting news. What do you do?",
-    questionType: 'scenario',
+    type: 'scenario',
+    question: 'You\'re in a winning trade that has reached your profit target, but the market continues to move in your favor. What do you do?',
+    scenario: 'Your EUR/USD long position has hit your 50-pip profit target, but strong bullish momentum suggests it could go higher.',
     options: [
-      'Execute the trade as planned - stick to the strategy',
-      'Cancel the trade - better safe than sorry',
-      'Reduce position size - compromise approach',
-      'Wait for more clarity - patience is key',
-      'Analyze the news impact first - informed decisions'
+      'Close the entire position as planned',
+      'Close half and let the rest run with a trailing stop',
+      'Move stop to breakeven and hold the full position',
+      'Cancel the profit target and hold for bigger gains',
+      'Add to the position to maximize profits'
     ],
-    orderIndex: 3
+    weight: 1.1
   },
   {
     id: 'tp_004',
     category: 'trading_psychology',
-    subcategory: 'stress_response',
-    questionText: 'Rate how well you handle the stress of having multiple open positions',
-    questionType: 'likert',
-    likertLabels: {
-      min: 'Very poorly - it overwhelms me',
-      max: 'Very well - I thrive under pressure',
-      scale: 5
-    },
-    orderIndex: 4
+    type: 'multiple_choice',
+    question: 'How do you typically handle fear of missing out (FOMO) in trading?',
+    options: [
+      'I stick to my plan and wait for proper setups',
+      'I sometimes enter trades impulsively',
+      'I increase my position size to compensate',
+      'I analyze why I feel FOMO and address it',
+      'I take a break from trading when FOMO is strong'
+    ],
+    weight: 1.0
   },
   {
     id: 'tp_005',
     category: 'trading_psychology',
-    subcategory: 'confidence',
-    questionText: 'After a series of winning trades, how do you typically feel about your next trade?',
-    questionType: 'multiple_choice',
-    options: [
-      "Overconfident - I feel like I can't lose",
-      'Cautiously optimistic - good streak but stay humble',
-      'Nervous - worried the streak will end',
-      'Analytical - each trade is independent',
-      'Motivated - building on momentum'
-    ],
-    orderIndex: 5
+    type: 'likert_scale',
+    question: 'How well do you manage stress during high-pressure trading situations?',
+    weight: 1.1
   },
 
-  // Behavioral Patterns (20 questions)
+  // Behavioral Patterns (3 questions)
   {
     id: 'bp_001',
     category: 'behavioral_patterns',
-    subcategory: 'impulse_control',
-    questionText: "How often do you find yourself taking trades that weren't part of your original plan?",
-    questionType: 'multiple_choice',
+    type: 'multiple_choice',
+    question: 'When you make a trading mistake, how do you typically respond?',
     options: [
-      'Never - I stick strictly to my plan',
-      'Rarely - only in exceptional circumstances',
-      'Sometimes - when I see good opportunities',
-      'Often - I adapt to market conditions',
-      'Very often - I trade on instinct'
+      'I immediately analyze what went wrong and learn from it',
+      'I feel disappointed but move on quickly',
+      'I dwell on it and it affects my next trades',
+      'I try to make up for it with the next trade',
+      'I take a break to clear my head'
     ],
-    orderIndex: 6
+    weight: 1.2
   },
   {
     id: 'bp_002',
     category: 'behavioral_patterns',
-    subcategory: 'patience',
-    questionText: 'Rate your patience when waiting for the perfect trade setup',
-    questionType: 'likert',
-    likertLabels: {
-      min: 'Very impatient - I need action',
-      max: 'Very patient - I can wait for days',
-      scale: 5
-    },
-    orderIndex: 7
+    type: 'scenario',
+    question: 'You notice you\'ve been overtrading lately. How do you address this pattern?',
+    scenario: 'You realize you\'ve been taking more trades than usual, often without proper analysis.',
+    options: [
+      'Immediately reduce trading frequency and stick to best setups only',
+      'Set daily trade limits and use alerts to enforce them',
+      'Take a complete break from trading for a few days',
+      'Analyze what\'s driving the overtrading behavior',
+      'Continue but with smaller position sizes'
+    ],
+    weight: 1.1
   },
   {
     id: 'bp_003',
     category: 'behavioral_patterns',
-    subcategory: 'learning',
-    questionText: "When you make a trading mistake, what's your typical response?",
-    questionType: 'scenario',
-    options: [
-      'Analyze what went wrong and document it',
-      'Feel frustrated but move on quickly',
-      'Blame external factors (news, market makers, etc.)',
-      'Take a break from trading to clear my head',
-      'Immediately try to make back the loss'
-    ],
-    orderIndex: 8
+    type: 'likert_scale',
+    question: 'How consistent are you in following your pre-defined trading rules?',
+    weight: 1.3
   },
 
-  // Market Mindset (20 questions)
+  // Market Mindset (3 questions)
   {
     id: 'mm_001',
     category: 'market_mindset',
-    subcategory: 'market_perception',
-    questionText: 'How do you primarily view the financial markets?',
-    questionType: 'multiple_choice',
+    type: 'multiple_choice',
+    question: 'How do you view market volatility?',
     options: [
-      'A logical system that can be analyzed and predicted',
-      'A chaotic environment requiring adaptability',
-      'A psychological battlefield of emotions',
-      'An opportunity machine for those who understand it',
-      'A rigged game favoring institutions'
+      'As an opportunity to profit from price movements',
+      'As a risk to be carefully managed',
+      'As an unpredictable force to avoid',
+      'As a natural part of market cycles',
+      'As a challenge that tests my skills'
     ],
-    orderIndex: 9
+    weight: 1.0
   },
   {
     id: 'mm_002',
     category: 'market_mindset',
-    subcategory: 'analytical_approach',
-    questionText: 'Rate how much you rely on technical analysis versus fundamental analysis',
-    questionType: 'likert',
-    likertLabels: {
-      min: 'Pure fundamental analysis',
-      max: 'Pure technical analysis',
-      scale: 5
-    },
-    orderIndex: 10
+    type: 'scenario',
+    question: 'The market moves against your analysis and hits your stop loss. How do you interpret this?',
+    scenario: 'Your technical analysis suggested a bullish breakout, but the market reversed and stopped you out.',
+    options: [
+      'My analysis was wrong, I need to improve my skills',
+      'The market was unpredictable, it happens sometimes',
+      'I should have used a wider stop loss',
+      'External factors influenced the market that I couldn\'t predict',
+      'I need to review my analysis methodology'
+    ],
+    weight: 1.1
+  },
+  {
+    id: 'mm_003',
+    category: 'market_mindset',
+    type: 'likert_scale',
+    question: 'How much do you believe that consistent profits in trading are achievable with the right approach?',
+    weight: 1.2
   },
 
-  // Trading Habits (15 questions)
+  // Trading Habits (2 questions)
   {
     id: 'th_001',
     category: 'trading_habits',
-    subcategory: 'preparation',
-    questionText: 'How much time do you typically spend preparing for each trading session?',
-    questionType: 'multiple_choice',
+    type: 'multiple_choice',
+    question: 'How do you typically prepare for a trading session?',
     options: [
-      'Less than 15 minutes - I jump right in',
-      '15-30 minutes - Quick market overview',
-      '30-60 minutes - Thorough preparation',
-      '1-2 hours - Comprehensive analysis',
-      'More than 2 hours - Extensive research'
+      'I review market news, check economic calendar, and analyze charts',
+      'I quickly scan the markets and look for obvious opportunities',
+      'I follow my watchlist and wait for setups',
+      'I check what other traders are saying and follow their ideas',
+      'I don\'t have a specific preparation routine'
     ],
-    orderIndex: 11
+    weight: 1.2
   },
   {
     id: 'th_002',
     category: 'trading_habits',
-    subcategory: 'execution',
-    questionText: 'Rate how consistently you follow your predetermined stop-loss levels',
-    questionType: 'likert',
-    likertLabels: {
-      min: 'Never follow them',
-      max: 'Always follow them religiously',
-      scale: 5
-    },
-    orderIndex: 12
+    type: 'likert_scale',
+    question: 'How disciplined are you about keeping a trading journal?',
+    weight: 1.1
   },
 
-  // Goal Orientation (10 questions)
+  // Goal Orientation (1 question)
   {
     id: 'go_001',
     category: 'goal_orientation',
-    subcategory: 'career_aspirations',
-    questionText: "What's your primary goal in trading?",
-    questionType: 'multiple_choice',
+    type: 'ranking',
+    question: 'Rank these trading goals in order of importance to you (1 = most important):',
     options: [
-      'Supplement my income with extra money',
-      'Replace my job and trade full-time',
-      'Build long-term wealth for retirement',
-      'Achieve financial freedom and independence',
-      'Master the craft and become an expert trader'
+      'Consistent monthly profits',
+      'Learning and skill development',
+      'Building long-term wealth',
+      'Achieving financial independence',
+      'Proving my trading abilities'
     ],
-    orderIndex: 13
-  },
-  {
-    id: 'go_002',
-    category: 'goal_orientation',
-    subcategory: 'success_definition',
-    questionText: 'How do you define success in trading?',
-    questionType: 'ranking',
-    options: [
-      'Consistent profitability',
-      'Large winning trades',
-      'Low drawdowns',
-      'Emotional control',
-      'Continuous learning and improvement'
-    ],
-    orderIndex: 14
+    weight: 1.0
   }
 ];
 
+// Coaching Messages for each category
+export const coachingMessages: CoachingMessage[] = [
+  {
+    category: 'trading_psychology',
+    message: 'Now let\'s explore your trading psychology - the mental game that separates successful traders from the rest.',
+    encouragement: 'Your mindset is your most powerful trading tool. Let\'s understand how you think and feel about trading.',
+    tip: 'Remember, there are no right or wrong answers - just honest insights into your trading personality.'
+  },
+  {
+    category: 'behavioral_patterns',
+    message: 'Time to examine your behavioral patterns - the habits and reactions that shape your trading decisions.',
+    encouragement: 'Understanding your patterns is the first step to optimizing your trading performance.',
+    tip: 'Think about your recent trading experiences as you answer these questions.'
+  },
+  {
+    category: 'market_mindset',
+    message: 'Let\'s dive into your market mindset - how you perceive and interpret market movements.',
+    encouragement: 'Your beliefs about the market directly influence your trading decisions and outcomes.',
+    tip: 'Consider how you typically react to different market conditions.'
+  },
+  {
+    category: 'trading_habits',
+    message: 'Now we\'ll assess your trading habits - the routines and practices that support your trading.',
+    encouragement: 'Great habits are the foundation of consistent trading success.',
+    tip: 'Think about your typical trading day and the processes you follow.'
+  },
+  {
+    category: 'goal_orientation',
+    message: 'Finally, let\'s understand your goals and motivations - what drives you as a trader.',
+    encouragement: 'Clear goals provide direction and purpose to your trading journey.',
+    tip: 'Be honest about what you truly want to achieve through trading.'
+  }
+];
+
+// Progress celebration messages
+export const progressMessages = [
+  "Great progress! You're building valuable self-awareness.",
+  "Excellent! Keep this momentum going.",
+  "You're doing fantastic! These insights will be powerful.",
+  "Amazing work! You're almost there.",
+  "Outstanding! Your dedication to growth shows.",
+  "Brilliant! You're unlocking important insights about yourself.",
+  "Superb progress! Your trading psychology profile is taking shape.",
+  "Incredible! You're investing in your trading success.",
+  "Fantastic! These insights will transform your trading.",
+  "Exceptional! You're on the path to trading mastery."
+];
+
+// Category information
 export const categoryInfo = {
   trading_psychology: {
     name: 'Trading Psychology',
-    description: 'Understanding your mental approach to risk, emotions, and decision-making',
+    description: 'Your emotional responses and mental approach to trading',
     icon: '🧠',
     color: 'blue'
   },
   behavioral_patterns: {
     name: 'Behavioral Patterns',
-    description: 'Identifying your habits, impulses, and learning patterns',
+    description: 'Your habits, reactions, and behavioral tendencies',
     icon: '🔄',
     color: 'green'
   },
   market_mindset: {
     name: 'Market Mindset',
-    description: 'Your beliefs and approach to market analysis and opportunities',
+    description: 'Your beliefs and perceptions about market behavior',
     icon: '📈',
     color: 'purple'
   },
   trading_habits: {
     name: 'Trading Habits',
-    description: 'Your preparation, execution, and post-trade analysis routines',
+    description: 'Your routines, preparation, and execution practices',
     icon: '⚡',
     color: 'orange'
   },
   goal_orientation: {
     name: 'Goal Orientation',
-    description: 'Your aspirations, motivations, and definition of success',
+    description: 'Your motivations, aspirations, and success definitions',
     icon: '🎯',
     color: 'red'
   }
 };
 
-export const coachingMessages = {
-  welcome: {
-    title: "Welcome to Your Trading Psychology Assessment! ☕",
-    message: "Take a moment to get comfortable. Grab a coffee, find a quiet space, and let's embark on a journey of self-discovery together. This isn't a test - it's a conversation about your trading mindset.",
-    timeEstimate: "15-20 minutes"
-  },
-  category_transitions: {
-    trading_psychology: "Great start! Now let's dive deeper into how your mind works when you're in the markets...",
-    behavioral_patterns: "Excellent! Next, we'll explore your natural trading behaviors and patterns...",
-    market_mindset: "Wonderful progress! Let's understand how you view and approach the markets...",
-    trading_habits: "You're doing amazing! Now let's look at your trading routines and habits...",
-    goal_orientation: "Almost there! Finally, let's explore your goals and what drives you..."
-  },
-  encouragement: [
-    "You're doing great! Your honest answers are helping us understand your unique trading personality.",
-    "Excellent self-awareness! These insights will be valuable for your trading journey.",
-    "Keep going! Each answer brings us closer to unlocking your trading potential.",
-    "Fantastic! Your thoughtful responses show real commitment to improvement.",
-    "You're almost there! These final questions will complete your psychological profile."
-  ],
-  completion: {
-    title: "Congratulations! 🎉",
-    message: "You've completed your Trading Psychology Assessment! Our AI is now analyzing your responses to create personalized insights and recommendations just for you.",
-    nextSteps: "Your results will appear in your Coaching Insights within the next few minutes."
-  }
-};
+// Helper functions
+export function getQuestionsByCategory(category: AssessmentCategory): AssessmentQuestion[] {
+  return assessmentQuestions.filter(q => q.category === category);
+}
+
+export function getCategoryMessage(category: AssessmentCategory): CoachingMessage | undefined {
+  return coachingMessages.find(m => m.category === category);
+}
+
+export function getRandomProgressMessage(): string {
+  return progressMessages[Math.floor(Math.random() * progressMessages.length)];
+}
+
+export function getTotalQuestions(): number {
+  return assessmentQuestions.length;
+}
+
+export function getQuestionsByCategories(): Record<AssessmentCategory, AssessmentQuestion[]> {
+  const categories: AssessmentCategory[] = [
+    'trading_psychology',
+    'behavioral_patterns', 
+    'market_mindset',
+    'trading_habits',
+    'goal_orientation'
+  ];
+  
+  return categories.reduce((acc, category) => {
+    acc[category] = getQuestionsByCategory(category);
+    return acc;
+  }, {} as Record<AssessmentCategory, AssessmentQuestion[]>);
+}
