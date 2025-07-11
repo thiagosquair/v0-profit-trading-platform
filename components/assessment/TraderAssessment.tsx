@@ -26,7 +26,8 @@ import { EnhancedAssessmentResults } from './enhanced-assessment-results';
 type AssessmentState = 'welcome' | 'in_progress' | 'paused' | 'completed' | 'results';
 
 export function TraderAssessment() {
-  const [assessmentState, setAssessmentState] = useState<AssessmentState>('notStarted'); // just for testing
+  // FIXED: Changed from 'notStarted' to 'welcome'
+  const [assessmentState, setAssessmentState] = useState<AssessmentState>('welcome');
   const [progress, setProgress] = useState<AssessmentProgress>(() => ({
     currentQuestionIndex: 0,
     totalQuestions: assessmentQuestions.length,
@@ -50,16 +51,18 @@ export function TraderAssessment() {
           startedAt: new Date(parsed.startedAt),
           lastSavedAt: new Date(parsed.lastSavedAt)
         });
+        
+        // If there's saved progress, resume from where they left off
         if (parsed.currentQuestionIndex > 0) {
-          setAssessmentState('paused');
+          setAssessmentState('in_progress');
         }
       }
-    } catch (err) {
-      console.error('Failed to load saved progress:', err);
+    } catch (error) {
+      console.error('Error loading saved progress:', error);
     }
   }, []);
 
-  // Save progress on update
+  // Save progress whenever it changes
   useEffect(() => {
     if (assessmentState === 'in_progress' || assessmentState === 'paused') {
       localStorage.setItem('trader-assessment-progress', JSON.stringify({
@@ -78,9 +81,13 @@ export function TraderAssessment() {
     }));
   };
 
-  const resumeAssessment = () => setAssessmentState('in_progress');
+  const pauseAssessment = () => {
+    setAssessmentState('paused');
+  };
 
-  const pauseAssessment = () => setAssessmentState('paused');
+  const resumeAssessment = () => {
+    setAssessmentState('in_progress');
+  };
 
   const restartAssessment = () => {
     localStorage.removeItem('trader-assessment-progress');
@@ -96,57 +103,58 @@ export function TraderAssessment() {
     setAssessmentState('welcome');
   };
 
-  const handleQuestionAnswer = (questionId: string, answer: string | number | string[]) => {
-    const newResponse: AssessmentResponse = {
-      questionId,
-      answer,
-      timestamp: new Date()
-    };
+  const handleQuestionResponse = (response: AssessmentResponse) => {
+    const newResponses = [...progress.responses, response];
+    const nextQuestionIndex = progress.currentQuestionIndex + 1;
+    
+    // Check if we've completed all questions
+    if (nextQuestionIndex >= assessmentQuestions.length) {
+      setProgress(prev => ({
+        ...prev,
+        responses: newResponses,
+        currentQuestionIndex: nextQuestionIndex
+      }));
+      setAssessmentState('results');
+      localStorage.removeItem('trader-assessment-progress'); // Clear saved progress
+      return;
+    }
 
-    setProgress(prev => {
-      const updatedResponses = [
-        ...prev.responses.filter(r => r.questionId !== questionId),
-        newResponse
-      ];
-      const nextIndex = prev.currentQuestionIndex + 1;
-      const currentQuestion = assessmentQuestions[prev.currentQuestionIndex];
-      const nextQuestion = assessmentQuestions[nextIndex];
+    const nextQuestion = assessmentQuestions[nextQuestionIndex];
+    const currentCategory = progress.currentCategory;
+    const nextCategory = nextQuestion.category;
 
-      const isNewCategory = nextQuestion && nextQuestion.category !== currentQuestion?.category;
+    // Update progress
+    setProgress(prev => ({
+      ...prev,
+      responses: newResponses,
+      currentQuestionIndex: nextQuestionIndex,
+      currentCategory: nextCategory,
+      completedCategories: currentCategory !== nextCategory && !prev.completedCategories.includes(currentCategory)
+        ? [...prev.completedCategories, currentCategory]
+        : prev.completedCategories,
+      lastSavedAt: new Date()
+    }));
 
-      if (isNewCategory && nextQuestion) {
-        const message = coachingMessages.category_transitions[nextQuestion.category] || 'New Category!';
-        setCurrentCoachingMessage(message);
+    // Show coaching message for category transitions or milestones
+    if (currentCategory !== nextCategory) {
+      const categoryMessage = coachingMessages.categoryTransitions[nextCategory];
+      if (categoryMessage) {
+        setCurrentCoachingMessage(categoryMessage);
         setShowCoachingMessage(true);
         setTimeout(() => setShowCoachingMessage(false), 3000);
       }
-
-      if (nextIndex >= assessmentQuestions.length) {
-        setAssessmentState('completed');
-        localStorage.removeItem('trader-assessment-progress');
-        return {
-          ...prev,
-          responses: updatedResponses,
-          currentQuestionIndex: nextIndex
-        };
-      }
-
-      return {
-        ...prev,
-        responses: updatedResponses,
-        currentQuestionIndex: nextIndex,
-        currentCategory: nextQuestion?.category || prev.currentCategory,
-        completedCategories: isNewCategory && currentQuestion
-          ? [...new Set([...prev.completedCategories, currentQuestion.category])]
-          : prev.completedCategories
-      };
-    });
+    } else if ((nextQuestionIndex) % 5 === 0) {
+      // Show milestone message every 5 questions
+      const milestoneMessages = coachingMessages.milestones;
+      const messageIndex = Math.floor(Math.random() * milestoneMessages.length);
+      setCurrentCoachingMessage(milestoneMessages[messageIndex]);
+      setShowCoachingMessage(true);
+      setTimeout(() => setShowCoachingMessage(false), 2500);
+    }
   };
 
-  const progressPercentage = progress.totalQuestions
-    ? (progress.currentQuestionIndex / progress.totalQuestions) * 100
-    : 0;
-
+  // Calculate progress percentage
+  const progressPercentage = (progress.currentQuestionIndex / progress.totalQuestions) * 100;
   const currentQuestion = assessmentQuestions[progress.currentQuestionIndex];
   const currentCategoryInfo = currentQuestion ? categoryInfo[currentQuestion.category] : null;
 
@@ -199,47 +207,11 @@ export function TraderAssessment() {
             <div className="flex gap-3 justify-center">
               <Button onClick={resumeAssessment} className="bg-blue-600 hover:bg-blue-700">
                 <Play className="mr-2 h-4 w-4" />
-                Continue
+                Resume Assessment
               </Button>
-              <Button variant="outline" onClick={restartAssessment}>
+              <Button variant="outline" onClick={restartAssessment} className="border-blue-300 text-blue-700 hover:bg-blue-50">
                 <RotateCcw className="mr-2 h-4 w-4" />
                 Start Over
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
-
-  if (assessmentState === 'completed') {
-    return (
-      <div className="max-w-4xl mx-auto p-6">
-        <Card className="border-2 border-green-200 bg-green-50">
-          <CardHeader className="text-center">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
-              <CheckCircle className="h-8 w-8 text-green-600" />
-            </div>
-            <CardTitle className="text-2xl text-green-900">
-              {coachingMessages.completion?.title || 'Assessment Complete'}
-            </CardTitle>
-            <CardDescription className="text-green-700">
-              {coachingMessages.completion?.message || 'Thank you for completing the assessment.'}
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="text-center space-y-4">
-              <div className="flex items-center justify-center gap-2">
-                <Sparkles className="h-5 w-5 text-green-600" />
-                <span className="text-green-800 font-medium">Assessment Complete!</span>
-                <Sparkles className="h-5 w-5 text-green-600" />
-              </div>
-              <Button 
-                onClick={() => setAssessmentState('results')}
-                className="bg-green-600 hover:bg-green-700"
-              >
-                <Zap className="mr-2 h-4 w-4" />
-                View My Results
               </Button>
             </div>
           </CardContent>
@@ -298,12 +270,14 @@ export function TraderAssessment() {
 
         {currentCategoryInfo && (
           <div className="mt-4 flex items-center gap-2">
-            <span className="text-2xl">{currentCategoryInfo.icon}</span>
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-purple-600">
+              <currentCategoryInfo.icon className="h-4 w-4 text-white" />
+            </div>
             <div>
-              <Badge variant="outline" className="mb-1">
+              <Badge variant="outline" className="text-blue-700 border-blue-300">
                 {currentCategoryInfo.name}
               </Badge>
-              <p className="text-sm text-gray-600">{currentCategoryInfo.description}</p>
+              <p className="text-xs text-gray-500 mt-1">{currentCategoryInfo.description}</p>
             </div>
           </div>
         )}
@@ -312,8 +286,9 @@ export function TraderAssessment() {
       {currentQuestion && (
         <QuestionComponent
           question={currentQuestion}
-          onAnswer={handleQuestionAnswer}
-          currentAnswer={progress.responses.find(r => r.questionId === currentQuestion.id)?.answer}
+          onResponse={handleQuestionResponse}
+          questionNumber={progress.currentQuestionIndex + 1}
+          totalQuestions={progress.totalQuestions}
         />
       )}
     </div>
