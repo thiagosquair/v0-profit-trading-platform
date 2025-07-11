@@ -1,247 +1,256 @@
-"use client"
+'use client';
 
-import { useState } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { Label } from '@/components/ui/label'
-import { Badge } from '@/components/ui/badge'
-import { 
-  ArrowRight, 
-  Star, 
-  Circle,
-  CheckCircle,
-  GripVertical
-} from 'lucide-react'
-import { AssessmentQuestion } from '@/types/assessment'
+import React, { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
+import { Badge } from '@/components/ui/badge';
+import { AssessmentQuestion, QuestionType } from '@/types/assessment';
+import { categoryInfo } from '@/lib/assessmentData';
 
 interface AssessmentQuestionProps {
-  question: AssessmentQuestion
-  onAnswer: (questionId: string, answer: string | number | string[]) => void
-  currentAnswer?: string | number | string[]
+  question: AssessmentQuestion;
+  questionNumber: number;
+  totalQuestions: number;
+  onAnswer: (answer: string | number | string[]) => void;
+  currentAnswer?: string | number | string[];
 }
 
-export function AssessmentQuestion({ question, onAnswer, currentAnswer }: AssessmentQuestionProps) {
-  const [selectedAnswer, setSelectedAnswer] = useState<string | number | string[]>(currentAnswer || '')
-  const [rankingOrder, setRankingOrder] = useState<string[]>(
-    Array.isArray(currentAnswer) ? currentAnswer : question.options || []
-  )
+export function AssessmentQuestionComponent({ 
+  question, 
+  questionNumber, 
+  totalQuestions, 
+  onAnswer,
+  currentAnswer 
+}: AssessmentQuestionProps) {
+  const [selectedAnswer, setSelectedAnswer] = useState<string | number | string[]>(
+    currentAnswer || (question.type === 'ranking' ? [] : '')
+  );
+  const [draggedItems, setDraggedItems] = useState<string[]>(
+    question.type === 'ranking' ? (question.options || []) : []
+  );
 
-  const handleSubmit = () => {
-    if (question.questionType === 'ranking') {
-      onAnswer(question.id, rankingOrder)
-    } else {
-      onAnswer(question.id, selectedAnswer)
-    }
-  }
+  const categoryData = categoryInfo[question.category];
 
-  const isAnswered = () => {
-    if (question.questionType === 'ranking') {
-      return rankingOrder.length === question.options?.length
-    }
-    return selectedAnswer !== '' && selectedAnswer !== undefined
-  }
+  const handleAnswerChange = (answer: string | number | string[]) => {
+    setSelectedAnswer(answer);
+    onAnswer(answer);
+  };
 
-  const moveRankingItem = (fromIndex: number, toIndex: number) => {
-    const newOrder = [...rankingOrder]
-    const [movedItem] = newOrder.splice(fromIndex, 1)
-    newOrder.splice(toIndex, 0, movedItem)
-    setRankingOrder(newOrder)
-  }
+  const handleLikertChange = (value: string) => {
+    const numValue = parseInt(value);
+    handleAnswerChange(numValue);
+  };
+
+  const handleRankingDrop = (draggedIndex: number, targetIndex: number) => {
+    const newItems = [...draggedItems];
+    const [draggedItem] = newItems.splice(draggedIndex, 1);
+    newItems.splice(targetIndex, 0, draggedItem);
+    setDraggedItems(newItems);
+    handleAnswerChange(newItems);
+  };
 
   const renderMultipleChoice = () => (
     <RadioGroup 
       value={selectedAnswer as string} 
-      onValueChange={(value) => setSelectedAnswer(value)}
+      onValueChange={handleAnswerChange}
       className="space-y-3"
     >
       {question.options?.map((option, index) => (
-        <div key={index} className="flex items-start space-x-3 p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-colors">
-          <RadioGroupItem value={option} id={`option-${index}`} className="mt-1" />
+        <div key={index} className="flex items-center space-x-2 p-3 rounded-lg hover:bg-gray-50 transition-colors">
+          <RadioGroupItem value={option} id={`option-${index}`} />
           <Label 
             htmlFor={`option-${index}`} 
-            className="flex-1 cursor-pointer text-gray-700 leading-relaxed"
+            className="flex-1 cursor-pointer text-sm leading-relaxed"
           >
             {option}
           </Label>
         </div>
       ))}
     </RadioGroup>
-  )
+  );
 
   const renderLikertScale = () => {
-    const scale = question.likertLabels?.scale || 5
-    const scaleValues = Array.from({ length: scale }, (_, i) => i + 1)
+    const scale = [1, 2, 3, 4, 5];
+    const labels = ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'];
     
     return (
-      <div className="space-y-6">
-        <div className="flex justify-between text-sm text-gray-600 px-2">
-          <span>{question.likertLabels?.min}</span>
-          <span>{question.likertLabels?.max}</span>
-        </div>
-        
-        <div className="flex justify-between items-center px-2">
-          {scaleValues.map((value) => (
-            <button
-              key={value}
-              onClick={() => setSelectedAnswer(value)}
-              className={`flex flex-col items-center p-3 rounded-lg transition-all ${
-                selectedAnswer === value
-                  ? 'bg-blue-500 text-white shadow-lg scale-110'
-                  : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
-              }`}
-            >
-              <div className="w-8 h-8 rounded-full border-2 border-current flex items-center justify-center mb-2">
-                {selectedAnswer === value ? (
-                  <CheckCircle className="w-5 h-5" />
-                ) : (
-                  <Circle className="w-5 h-5" />
-                )}
+      <div className="space-y-4">
+        <RadioGroup 
+          value={selectedAnswer?.toString()} 
+          onValueChange={handleLikertChange}
+          className="flex justify-between items-center"
+        >
+          {scale.map((value, index) => (
+            <div key={value} className="flex flex-col items-center space-y-2">
+              <div className="flex flex-col items-center">
+                <RadioGroupItem value={value.toString()} id={`scale-${value}`} />
+                <Label 
+                  htmlFor={`scale-${value}`} 
+                  className="text-xs text-center cursor-pointer mt-1"
+                >
+                  {value}
+                </Label>
               </div>
-              <span className="text-sm font-medium">{value}</span>
-            </button>
+            </div>
           ))}
-        </div>
+        </RadioGroup>
         
-        <div className="flex justify-center">
-          <Badge variant="outline" className="text-xs">
-            {selectedAnswer ? `Selected: ${selectedAnswer}` : 'Select a rating'}
-          </Badge>
+        <div className="flex justify-between text-xs text-gray-500 mt-2">
+          <span>Strongly Disagree</span>
+          <span>Strongly Agree</span>
         </div>
       </div>
-    )
-  }
+    );
+  };
 
   const renderScenario = () => (
     <div className="space-y-4">
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-        <h4 className="font-medium text-blue-900 mb-2">Scenario</h4>
-        <p className="text-blue-800 leading-relaxed">{question.questionText}</p>
-      </div>
+      {question.scenario && (
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <h4 className="font-medium text-blue-800 mb-2">Scenario:</h4>
+          <p className="text-blue-700 text-sm">{question.scenario}</p>
+        </div>
+      )}
       
       <RadioGroup 
         value={selectedAnswer as string} 
-        onValueChange={(value) => setSelectedAnswer(value)}
+        onValueChange={handleAnswerChange}
         className="space-y-3"
       >
         {question.options?.map((option, index) => (
-          <div key={index} className="flex items-start space-x-3 p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-colors">
-            <RadioGroupItem value={option} id={`scenario-${index}`} className="mt-1" />
+          <div key={index} className="flex items-center space-x-2 p-3 rounded-lg hover:bg-gray-50 transition-colors">
+            <RadioGroupItem value={option} id={`scenario-${index}`} />
             <Label 
               htmlFor={`scenario-${index}`} 
-              className="flex-1 cursor-pointer text-gray-700 leading-relaxed"
+              className="flex-1 cursor-pointer text-sm leading-relaxed"
             >
-              <span className="font-medium text-blue-700">Option {String.fromCharCode(65 + index)}:</span> {option}
+              {option}
             </Label>
           </div>
         ))}
       </RadioGroup>
     </div>
-  )
+  );
 
   const renderRanking = () => (
     <div className="space-y-4">
-      <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-6">
-        <h4 className="font-medium text-purple-900 mb-2">Instructions</h4>
-        <p className="text-purple-800">Drag and drop to rank these items in order of importance (most important at the top):</p>
-      </div>
+      <p className="text-sm text-gray-600 mb-4">
+        Drag and drop to rank these items in order of importance (1 = most important):
+      </p>
       
       <div className="space-y-2">
-        {rankingOrder.map((item, index) => (
+        {draggedItems.map((item, index) => (
           <div
             key={item}
-            className="flex items-center space-x-3 p-4 bg-white border border-gray-200 rounded-lg shadow-sm"
+            draggable
+            onDragStart={(e) => e.dataTransfer.setData('text/plain', index.toString())}
+            onDragOver={(e) => e.preventDefault()}
+            onDrop={(e) => {
+              e.preventDefault();
+              const draggedIndex = parseInt(e.dataTransfer.getData('text/plain'));
+              handleRankingDrop(draggedIndex, index);
+            }}
+            className="flex items-center gap-3 p-3 bg-white border rounded-lg cursor-move hover:shadow-md transition-shadow"
           >
-            <div className="flex items-center space-x-2">
-              <GripVertical className="w-4 h-4 text-gray-400 cursor-move" />
-              <Badge variant="outline" className="w-8 h-8 rounded-full flex items-center justify-center">
-                {index + 1}
-              </Badge>
+            <div className="flex items-center justify-center w-8 h-8 bg-blue-100 text-blue-600 rounded-full text-sm font-medium">
+              {index + 1}
             </div>
-            <span className="flex-1 text-gray-700">{item}</span>
-            <div className="flex space-x-1">
-              {index > 0 && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => moveRankingItem(index, index - 1)}
-                >
-                  ↑
-                </Button>
-              )}
-              {index < rankingOrder.length - 1 && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => moveRankingItem(index, index + 1)}
-                >
-                  ↓
-                </Button>
-              )}
-            </div>
+            <span className="flex-1 text-sm">{item}</span>
+            <div className="text-gray-400">⋮⋮</div>
           </div>
         ))}
       </div>
     </div>
-  )
+  );
 
   const renderQuestionContent = () => {
-    switch (question.questionType) {
+    switch (question.type) {
       case 'multiple_choice':
-        return renderMultipleChoice()
-      case 'likert':
-        return renderLikertScale()
+        return renderMultipleChoice();
+      case 'likert_scale':
+        return renderLikertScale();
       case 'scenario':
-        return renderScenario()
+        return renderScenario();
       case 'ranking':
-        return renderRanking()
+        return renderRanking();
       default:
-        return renderMultipleChoice()
+        return renderMultipleChoice();
     }
-  }
+  };
+
+  const isAnswered = () => {
+    if (question.type === 'ranking') {
+      return Array.isArray(selectedAnswer) && selectedAnswer.length > 0;
+    }
+    return selectedAnswer !== '' && selectedAnswer !== undefined && selectedAnswer !== null;
+  };
 
   return (
-    <Card className="border-2 border-gray-200 hover:border-blue-300 transition-colors">
-      <CardHeader>
-        <div className="flex items-start justify-between">
-          <div className="flex-1">
-            <CardTitle className="text-xl text-gray-900 leading-relaxed mb-3">
-              {question.questionType !== 'scenario' && question.questionText}
-            </CardTitle>
-            {question.subcategory && (
-              <Badge variant="outline" className="text-xs">
-                {question.subcategory.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
-              </Badge>
-            )}
-          </div>
-          <div className="flex items-center space-x-2 ml-4">
-            <Star className={`w-5 h-5 ${isAnswered() ? 'text-yellow-500 fill-current' : 'text-gray-300'}`} />
-          </div>
+    <div className="max-w-4xl mx-auto p-6">
+      {/* Progress Header */}
+      <div className="mb-6">
+        <div className="flex items-center justify-between mb-2">
+          <Badge variant="outline" className="text-sm">
+            {categoryData.icon} {categoryData.name}
+          </Badge>
+          <span className="text-sm text-gray-500">
+            Question {questionNumber} of {totalQuestions}
+          </span>
         </div>
-      </CardHeader>
-      
-      <CardContent className="space-y-6">
-        {renderQuestionContent()}
         
-        <div className="flex justify-between items-center pt-4 border-t border-gray-200">
-          <div className="text-sm text-gray-500">
-            {isAnswered() ? (
-              <span className="text-green-600 font-medium">✓ Answer recorded</span>
-            ) : (
-              <span>Please select an answer to continue</span>
-            )}
-          </div>
-          
-          <Button 
-            onClick={handleSubmit}
-            disabled={!isAnswered()}
-            className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50"
-          >
-            Continue
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
+        <div className="w-full bg-gray-200 rounded-full h-2">
+          <div 
+            className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+            style={{ width: `${(questionNumber / totalQuestions) * 100}%` }}
+          />
         </div>
-      </CardContent>
-    </Card>
-  )
+      </div>
+
+      {/* Question Card */}
+      <Card className="border-2 border-gray-200">
+        <CardHeader>
+          <CardTitle className="text-xl leading-relaxed">
+            {question.question}
+          </CardTitle>
+          {question.context && (
+            <p className="text-gray-600 text-sm mt-2">{question.context}</p>
+          )}
+        </CardHeader>
+        
+        <CardContent className="space-y-6">
+          {renderQuestionContent()}
+          
+          {/* Answer Status */}
+          <div className="flex items-center justify-between pt-4 border-t">
+            <div className="flex items-center gap-2">
+              {isAnswered() ? (
+                <div className="flex items-center gap-2 text-green-600">
+                  <div className="w-2 h-2 bg-green-500 rounded-full" />
+                  <span className="text-sm">Answer recorded</span>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2 text-gray-400">
+                  <div className="w-2 h-2 bg-gray-300 rounded-full" />
+                  <span className="text-sm">Please select an answer</span>
+                </div>
+              )}
+            </div>
+            
+            <div className="text-sm text-gray-500">
+              {Math.round((questionNumber / totalQuestions) * 100)}% complete
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Navigation Hint */}
+      <div className="mt-4 text-center">
+        <p className="text-sm text-gray-500">
+          💡 Take your time to think about each question. Your honest responses lead to better insights.
+        </p>
+      </div>
+    </div>
+  );
 }
