@@ -1,7 +1,7 @@
-// Simple Working Course Page - app/dashboard/courses/page.tsx
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -77,11 +77,19 @@ const simpleCourses = [
 ];
 
 export default function CoursesPage() {
+  const router = useRouter();
   const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
 
   const handleStartCourse = (courseId: string) => {
-    // Simple navigation - will work immediately
-    window.location.href = `/dashboard/courses/${courseId}`;
+    console.log('Starting course:', courseId); // Debug log
+    try {
+      // Use Next.js router instead of window.location.href
+      router.push(`/dashboard/courses/${courseId}`);
+    } catch (error) {
+      console.error('Navigation error:', error);
+      // Fallback to window.location if router fails
+      window.location.href = `/dashboard/courses/${courseId}`;
+    }
   };
 
   const getLevelColor = (level: string) => {
