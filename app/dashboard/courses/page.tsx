@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -77,20 +77,7 @@ const simpleCourses = [
 ];
 
 export default function CoursesPage() {
-  const router = useRouter();
   const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
-
-  const handleStartCourse = (courseId: string) => {
-    console.log('Starting course:', courseId); // Debug log
-    try {
-      // Use Next.js router instead of window.location.href
-      router.push(`/dashboard/courses/${courseId}`);
-    } catch (error) {
-      console.error('Navigation error:', error);
-      // Fallback to window.location if router fails
-      window.location.href = `/dashboard/courses/${courseId}`;
-    }
-  };
 
   const getLevelColor = (level: string) => {
     switch (level) {
@@ -114,6 +101,28 @@ export default function CoursesPage() {
           Master trading psychology with our comprehensive course library
         </p>
       </div>
+
+      {/* Debug Section - Remove after testing */}
+      <Card className="bg-yellow-50 border-yellow-200">
+        <CardContent className="p-4">
+          <h3 className="font-medium text-yellow-800 mb-2">🔧 Debug: Test Course Links</h3>
+          <div className="space-y-2">
+            <div>
+              <Link href="/dashboard/courses/TPF-001" className="text-blue-600 hover:underline">
+                Direct Link Test: /dashboard/courses/TPF-001
+              </Link>
+            </div>
+            <div>
+              <Link href="/dashboard/courses/RMP-001" className="text-blue-600 hover:underline">
+                Direct Link Test: /dashboard/courses/RMP-001
+              </Link>
+            </div>
+          </div>
+          <p className="text-sm text-yellow-700 mt-2">
+            Try clicking these direct links first to test if the route works
+          </p>
+        </CardContent>
+      </Card>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -222,13 +231,13 @@ export default function CoursesPage() {
                     <strong>Instructor:</strong> {course.instructor}
                   </div>
 
-                  <Button 
-                    className="w-full" 
-                    onClick={() => handleStartCourse(course.id)}
-                  >
-                    <Play className="h-4 w-4 mr-2" />
-                    Start Course
-                  </Button>
+                  {/* Using Link component instead of Button with onClick */}
+                  <Link href={`/dashboard/courses/${course.id}`} className="block">
+                    <Button className="w-full">
+                      <Play className="h-4 w-4 mr-2" />
+                      Start Course
+                    </Button>
+                  </Link>
                 </div>
               </CardContent>
             </Card>
