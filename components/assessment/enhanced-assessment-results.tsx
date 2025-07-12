@@ -472,7 +472,7 @@ export function EnhancedAssessmentResults({ responses }: EnhancedAssessmentResul
         </CardContent>
       </Card>
 
-      {/* Next Steps */}
+      {/* Next Steps - FIXED WITH NAVIGATION */}
       <Card className="bg-gradient-to-r from-blue-50 to-purple-50">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -482,14 +482,22 @@ export function EnhancedAssessmentResults({ responses }: EnhancedAssessmentResul
         </CardHeader>
         <CardContent>
           <div className="grid md:grid-cols-2 gap-4">
-            <Button className="h-auto p-4 justify-start" variant="outline">
+            <Button 
+              className="h-auto p-4 justify-start" 
+              variant="outline"
+              onClick={() => window.location.href = '/dashboard/psychology-courses'}
+            >
               <BookOpen className="h-5 w-5 mr-3" />
               <div className="text-left">
                 <div className="font-medium">Explore Psychology Courses</div>
                 <div className="text-sm text-gray-600">Deepen your understanding</div>
               </div>
             </Button>
-            <Button className="h-auto p-4 justify-start" variant="outline">
+            <Button 
+              className="h-auto p-4 justify-start" 
+              variant="outline"
+              onClick={() => window.location.href = '/dashboard/reflection-journal'}
+            >
               <MessageSquare className="h-5 w-5 mr-3" />
               <div className="text-left">
                 <div className="font-medium">Start Reflection Journal</div>
