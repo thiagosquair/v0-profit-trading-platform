@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
@@ -27,9 +27,19 @@ export function AssessmentQuestionComponent({
   const [selectedAnswer, setSelectedAnswer] = useState<string | number | string[]>(
     currentAnswer || (question.type === 'ranking' ? [] : '')
   );
-  const [draggedItems, setDraggedItems] = useState<string[]>(
-    question.type === 'ranking' ? (question.options || []) : []
-  );
+  const [draggedItems, setDraggedItems] = useState<string[]>([]);
+
+  // Initialize draggedItems when question changes or component mounts
+  useEffect(() => {
+    if (question.type === 'ranking' && question.options) {
+      setDraggedItems([...question.options]);
+      // If there's no current answer, set the initial order as the answer
+      if (!currentAnswer || (Array.isArray(currentAnswer) && currentAnswer.length === 0)) {
+        setSelectedAnswer([...question.options]);
+        onAnswer([...question.options]);
+      }
+    }
+  }, [question.id, question.options, question.type]);
 
   const categoryData = categoryInfo[question.category];
 
@@ -44,6 +54,8 @@ export function AssessmentQuestionComponent({
   };
 
   const handleRankingDrop = (draggedIndex: number, targetIndex: number) => {
+    if (draggedIndex === targetIndex) return;
+    
     const newItems = [...draggedItems];
     const [draggedItem] = newItems.splice(draggedIndex, 1);
     newItems.splice(targetIndex, 0, draggedItem);
@@ -73,7 +85,6 @@ export function AssessmentQuestionComponent({
 
   const renderLikertScale = () => {
     const scale = [1, 2, 3, 4, 5];
-    const labels = ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'];
     
     return (
       <div className="space-y-4">
@@ -134,36 +145,64 @@ export function AssessmentQuestionComponent({
     </div>
   );
 
-  const renderRanking = () => (
-    <div className="space-y-4">
-      <p className="text-sm text-gray-600 mb-4">
-        Drag and drop to rank these items in order of importance (1 = most important):
-      </p>
-      
-      <div className="space-y-2">
-        {draggedItems.map((item, index) => (
-          <div
-            key={item}
-            draggable
-            onDragStart={(e) => e.dataTransfer.setData('text/plain', index.toString())}
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={(e) => {
-              e.preventDefault();
-              const draggedIndex = parseInt(e.dataTransfer.getData('text/plain'));
-              handleRankingDrop(draggedIndex, index);
-            }}
-            className="flex items-center gap-3 p-3 bg-white border rounded-lg cursor-move hover:shadow-md transition-shadow"
-          >
-            <div className="flex items-center justify-center w-8 h-8 bg-blue-100 text-blue-600 rounded-full text-sm font-medium">
-              {index + 1}
+  const renderRanking = () => {
+    if (!draggedItems.length) {
+      return (
+        <div className="text-center py-8">
+          <p className="text-gray-500">Loading ranking options...</p>
+        </div>
+      );
+    }
+
+    return (
+      <div className="space-y-4">
+        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+          <p className="text-yellow-800 text-sm font-medium mb-1">
+            📝 Instructions:
+          </p>
+          <p className="text-yellow-700 text-sm">
+            Drag and drop the items below to rank them in order of importance. 
+            The item at the top (#1) is most important to you.
+          </p>
+        </div>
+        
+        <div className="space-y-2">
+          {draggedItems.map((item, index) => (
+            <div
+              key={`${item}-${index}`}
+              draggable
+              onDragStart={(e) => {
+                e.dataTransfer.setData('text/plain', index.toString());
+                e.currentTarget.style.opacity = '0.5';
+              }}
+              onDragEnd={(e) => {
+                e.currentTarget.style.opacity = '1';
+              }}
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={(e) => {
+                e.preventDefault();
+                const draggedIndex = parseInt(e.dataTransfer.getData('text/plain'));
+                handleRankingDrop(draggedIndex, index);
+              }}
+              className="flex items-center gap-3 p-4 bg-white border-2 border-gray-200 rounded-lg cursor-move hover:border-blue-300 hover:shadow-md transition-all duration-200"
+            >
+              <div className="flex items-center justify-center w-10 h-10 bg-blue-100 text-blue-600 rounded-full text-sm font-bold">
+                {index + 1}
+              </div>
+              <span className="flex-1 text-sm font-medium">{item}</span>
+              <div className="text-gray-400 text-lg">⋮⋮</div>
             </div>
-            <span className="flex-1 text-sm">{item}</span>
-            <div className="text-gray-400">⋮⋮</div>
-          </div>
-        ))}
+          ))}
+        </div>
+        
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+          <p className="text-blue-700 text-xs">
+            💡 Tip: Click and drag the items to reorder them. Your most important goal should be at position #1.
+          </p>
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   const renderQuestionContent = () => {
     switch (question.type) {
@@ -251,6 +290,21 @@ export function AssessmentQuestionComponent({
           💡 Take your time to think about each question. Your honest responses lead to better insights.
         </p>
       </div>
+      
+      {/* Next Question Button for Ranking */}
+      {question.type === 'ranking' && isAnswered() && (
+        <div className="mt-6 text-center">
+          <Button 
+            onClick={() => {
+              // This will trigger the next question automatically
+              // The parent component handles the progression
+            }}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2"
+          >
+            Complete Assessment →
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
