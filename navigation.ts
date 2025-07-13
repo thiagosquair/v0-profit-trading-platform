@@ -1,7 +1,7 @@
 import {createLocalizedPathnamesNavigation} from 'next-intl/navigation';
 
 export const locales = ['en', 'pt', 'es', 'fr'] as const;
-export const localePrefix = 'always'; // Default
+export const localePrefix = 'as-needed'; // Fixed: Changed from 'always'
 
 // The `pathnames` object holds pairs of internal
 // and external paths for each locale.
