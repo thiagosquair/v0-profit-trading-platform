@@ -5,12 +5,12 @@ import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { 
-  BookOpen, 
-  Play, 
-  Star, 
-  Users, 
-  Clock, 
+import {
+  BookOpen,
+  Play,
+  Star,
+  Users,
+  Clock,
   Trophy,
   Brain,
   Shield,
@@ -102,28 +102,6 @@ export default function CoursesPage() {
         </p>
       </div>
 
-      {/* Debug Section - Remove after testing */}
-      <Card className="bg-yellow-50 border-yellow-200">
-        <CardContent className="p-4">
-          <h3 className="font-medium text-yellow-800 mb-2">🔧 Debug: Test Course Links</h3>
-          <div className="space-y-2">
-            <div>
-              <Link href="/dashboard/courses/TPF-001" className="text-blue-600 hover:underline">
-                Direct Link Test: /dashboard/courses/TPF-001
-              </Link>
-            </div>
-            <div>
-              <Link href="/dashboard/courses/RMP-001" className="text-blue-600 hover:underline">
-                Direct Link Test: /dashboard/courses/RMP-001
-              </Link>
-            </div>
-          </div>
-          <p className="text-sm text-yellow-700 mt-2">
-            Try clicking these direct links first to test if the route works
-          </p>
-        </CardContent>
-      </Card>
-
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <Card>
@@ -137,7 +115,7 @@ export default function CoursesPage() {
             </div>
           </CardContent>
         </Card>
-        
+
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center space-x-2">
@@ -149,7 +127,7 @@ export default function CoursesPage() {
             </div>
           </CardContent>
         </Card>
-        
+
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center space-x-2">
@@ -161,7 +139,7 @@ export default function CoursesPage() {
             </div>
           </CardContent>
         </Card>
-        
+
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center space-x-2">
@@ -182,36 +160,35 @@ export default function CoursesPage() {
           
           return (
             <Card key={course.id} className="hover:shadow-lg transition-shadow">
-              <div className="relative">
-                <div className="w-full h-48 bg-gradient-to-br from-blue-100 to-purple-100 rounded-t-lg flex items-center justify-center">
-                  <Icon className="h-16 w-16 text-blue-600" />
-                </div>
-                
-                {course.isPremium && (
-                  <Badge className="absolute top-2 right-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-yellow-900">
-                    Premium
-                  </Badge>
-                )}
-              </div>
-
-              <CardHeader>
-                <div className="flex items-center justify-between mb-2">
-                  <Badge className={getLevelColor(course.level)}>
-                    {course.level}
-                  </Badge>
-                  <div className="flex items-center space-x-1">
-                    <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                    <span className="text-sm font-medium">{course.rating}</span>
+              <CardContent className="p-4">
+                <div className="relative">
+                  <div className="w-full h-48 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg flex items-center justify-center mb-4">
+                    <Icon className="h-16 w-16 text-blue-600" />
                   </div>
+                  
+                  {course.isPremium && (
+                    <Badge className="absolute top-2 right-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-yellow-900">
+                      Premium
+                    </Badge>
+                  )}
                 </div>
-                <CardTitle className="text-lg">{course.title}</CardTitle>
-                <CardDescription className="line-clamp-2">
-                  {course.description}
-                </CardDescription>
-              </CardHeader>
 
-              <CardContent>
-                <div className="space-y-4">
+                <div className="space-y-3">
+                  <div>
+                    <h3 className="font-semibold text-lg">{course.title}</h3>
+                    <p className="text-sm text-muted-foreground">{course.description}</p>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <Badge className={getLevelColor(course.level)}>
+                      {course.level}
+                    </Badge>
+                    <div className="flex items-center space-x-1">
+                      <Star className="h-4 w-4 text-yellow-500 fill-current" />
+                      <span className="text-sm">{course.rating}</span>
+                    </div>
+                  </div>
+
                   <div className="flex items-center justify-between text-sm text-muted-foreground">
                     <div className="flex items-center space-x-1">
                       <Clock className="h-4 w-4" />
@@ -223,52 +200,20 @@ export default function CoursesPage() {
                     </div>
                   </div>
 
-                  <div className="text-sm text-muted-foreground">
-                    <strong>Subject:</strong> {course.subject}
+                  <div className="pt-2">
+                    <Link href={`/dashboard/courses/${course.id}`}>
+                      <Button className="w-full">
+                        <Play className="h-4 w-4 mr-2" />
+                        Start Course
+                      </Button>
+                    </Link>
                   </div>
-
-                  <div className="text-sm text-muted-foreground">
-                    <strong>Instructor:</strong> {course.instructor}
-                  </div>
-
-                  {/* Using Link component instead of Button with onClick */}
-                  <Link href={`/dashboard/courses/${course.id}`} className="block">
-                    <Button className="w-full">
-                      <Play className="h-4 w-4 mr-2" />
-                      Start Course
-                    </Button>
-                  </Link>
                 </div>
               </CardContent>
             </Card>
           );
         })}
       </div>
-
-      {/* Coming Soon Section */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <TrendingUp className="h-5 w-5" />
-            More Courses Coming Soon
-          </CardTitle>
-          <CardDescription>
-            We're continuously adding new courses to help you master trading psychology
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-4 border rounded-lg bg-gray-50">
-              <h4 className="font-medium mb-2">Advanced Risk Management</h4>
-              <p className="text-sm text-muted-foreground">Master advanced psychological aspects of risk management</p>
-            </div>
-            <div className="p-4 border rounded-lg bg-gray-50">
-              <h4 className="font-medium mb-2">Market Sentiment Analysis</h4>
-              <p className="text-sm text-muted-foreground">Learn to read and interpret market psychology</p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
     </div>
   );
 }
