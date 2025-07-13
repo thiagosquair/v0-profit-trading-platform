@@ -476,6 +476,7 @@ export function LandingPage() {
         "Progress Tracking",
         "Interactive Exercices",
         "Psychology Courses",
+        "Trader Assessment",
       ],
     },
     {
@@ -493,6 +494,7 @@ export function LandingPage() {
         "Screenshot Analysis",
         "10 Trade Builder",
         "Interactive Exercices",
+        "Trader Assessment",
       ],
     },
     {
@@ -503,6 +505,7 @@ export function LandingPage() {
       popular: true,
       features: [
         "Everything in Pro",
+        "Trader Assessment",
         "Advanced Ai Psychology Coach",
         "Unlimited Trade Analyses",
         "Advanced Progress Tracking",
@@ -522,6 +525,7 @@ export function LandingPage() {
       popular: false,
       features: [
        "Everything in Premium",
+        "Trader Assessment",
         "Advanced Ai Psychology Coach",
         "Unlimited Trade Analyses",
         "Advanced Progress Tracking",
