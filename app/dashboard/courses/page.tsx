@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useRouter } from 'next/navigation'; // Use regular Next.js router
+import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -16,11 +16,10 @@ import {
   Shield,
   Heart,
   RotateCcw,
-  TrendingUp,
   Target
 } from 'lucide-react';
 
-// Simple course data - no external imports
+// Simple course data
 const simpleCourses = [
   {
     id: 'TPF-001',
@@ -77,7 +76,7 @@ const simpleCourses = [
 ];
 
 export default function CoursesPage() {
-  const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
+  const router = useRouter();
 
   const getLevelColor = (level: string) => {
     switch (level) {
@@ -90,6 +89,11 @@ export default function CoursesPage() {
       default:
         return 'bg-gray-100 text-gray-800';
     }
+  };
+
+  const handleStartCourse = (courseId: string) => {
+    console.log('Navigating to:', `/dashboard/courses/${courseId}`);
+    router.push(`/dashboard/courses/${courseId}`);
   };
 
   return (
@@ -201,18 +205,35 @@ export default function CoursesPage() {
                   </div>
 
                   <div className="pt-2">
-                    <Link href={`/dashboard/courses/${course.id}`}>
-                      <Button className="w-full">
-                        <Play className="h-4 w-4 mr-2" />
-                        Start Course
-                      </Button>
-                    </Link>
+                    <Button 
+                      className="w-full" 
+                      onClick={() => handleStartCourse(course.id)}
+                    >
+                      <Play className="h-4 w-4 mr-2" />
+                      Start Course
+                    </Button>
                   </div>
                 </div>
               </CardContent>
             </Card>
           );
         })}
+      </div>
+
+      {/* Debug Section */}
+      <div className="mt-8 p-4 bg-gray-100 rounded-lg">
+        <h3 className="font-bold mb-2">Debug: Direct Navigation Test</h3>
+        <div className="space-y-2">
+          {simpleCourses.map((course) => (
+            <button
+              key={course.id}
+              onClick={() => handleStartCourse(course.id)}
+              className="block w-full text-left p-2 bg-white rounded border hover:bg-gray-50"
+            >
+              Test: {course.title} → /dashboard/courses/{course.id}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
