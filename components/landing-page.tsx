@@ -82,6 +82,28 @@ export default function LandingPage() {
         "The Ultimate Platform for Mental Edge — Combining AI-Powered Insights, Personalized Coaching, and a Deeply Immersive Environment Where You Continuously Grow, Review Past Trades with Purpose, and Build Each New Trade with Clarity and Confidence.",
       howItWorksTitle: "How ProFitz Works",
       howItWorksSubtitle: "Your Path to Trading Mastery in 4 Simple Steps",
+      howItWorksSteps: [
+        {
+          step: "1",
+          title: "Take Assessment",
+          description: "Complete our comprehensive trading psychology assessment"
+        },
+        {
+          step: "2", 
+          title: "Get AI Coach",
+          description: "Receive your personalized AI psychology coach"
+        },
+        {
+          step: "3",
+          title: "Build Trades", 
+          description: "Structure trades with psychological checkpoints"
+        },
+        {
+          step: "4",
+          title: "Track Progress",
+          description: "Monitor your psychological development and trading improvement"
+        }
+      ],
       testimonialsTitle: "Join Thousands of Successful Traders",
       testimonialsSubtitle: "Join thousands of traders who have transformed their mindset",
       ctaTitle: "Ready to Unlock Your Full Trading Potential??",
@@ -146,8 +168,7 @@ export default function LandingPage() {
           period: "/month",
           description: "Perfect for Getting Started",
           features: [
-            "Ai Psychology Coach",
-            "Trader Assessment",
+            "AI Psychology Coach",
             "5 Trade Analyses per month",
             "Progress Tracking",
             "Interactive Exercises",
@@ -161,7 +182,6 @@ export default function LandingPage() {
           description: "For Serious Traders",
           features: [
             "Advanced AI Psychology Coach",
-            "Trader Assessment",
             "25 Trade Analyses per month",
             "Advanced Progress Tracking",
             "Reflection Journal",
@@ -180,7 +200,6 @@ export default function LandingPage() {
           features: [
             "Everything in Pro",
             "Advanced AI Psychology Coach",
-            "Trader Assessment",
             "Unlimited Trade Analyses",
             "Advanced Progress Tracking",
             "Reflection Journal",
@@ -199,7 +218,6 @@ export default function LandingPage() {
           features: [
             "Everything in Premium",
             "Advanced AI Psychology Coach",
-            "Trader Assessment",
             "Unlimited Trade Analyses",
             "Advanced Progress Tracking",
             "Reflection Journal",
@@ -248,6 +266,28 @@ export default function LandingPage() {
         "A Plataforma Definitiva para Vantagem Mental — Combinando Insights Alimentados por IA, Coaching Personalizado e um Ambiente Profundamente Imersivo Onde Você Cresce Continuamente, Revisa Trades Passados com Propósito e Constrói Cada Novo Trade com Clareza e Confiança.",
       howItWorksTitle: "Como o ProFitz Funciona",
       howItWorksSubtitle: "Seu Caminho para Maestria no Trading em 4 Passos Simples",
+      howItWorksSteps: [
+        {
+          step: "1",
+          title: "Fazer Avaliação",
+          description: "Complete nossa avaliação abrangente de psicologia de trading"
+        },
+        {
+          step: "2", 
+          title: "Obter Coach IA",
+          description: "Receba seu coach de psicologia IA personalizado"
+        },
+        {
+          step: "3",
+          title: "Construir Trades", 
+          description: "Estruture trades com checkpoints psicológicos"
+        },
+        {
+          step: "4",
+          title: "Acompanhar Progresso",
+          description: "Monitore seu desenvolvimento psicológico e melhoria no trading"
+        }
+      ],
       testimonialsTitle: "Junte-se a Milhares de Traders Bem-Sucedidos",
       testimonialsSubtitle: "Junte-se a milhares de traders que transformaram sua mentalidade",
       ctaTitle: "Pronto Para Desbloquear Seu Potencial Completo no Trading??",
@@ -409,6 +449,28 @@ export default function LandingPage() {
         "La Plataforma Definitiva para Ventaja Mental — Combinando Insights Impulsados por IA, Coaching Personalizado y un Entorno Profundamente Inmersivo Donde Creces Continuamente, Revisas Trades Pasados con Propósito y Construyes Cada Nuevo Trade con Claridad y Confianza.",
       howItWorksTitle: "Cómo Funciona ProFitz",
       howItWorksSubtitle: "Tu Camino hacia la Maestría en Trading en 4 Pasos Simples",
+      howItWorksSteps: [
+        {
+          step: "1",
+          title: "Hacer Evaluación",
+          description: "Completa nuestra evaluación integral de psicología de trading"
+        },
+        {
+          step: "2", 
+          title: "Obtener Coach IA",
+          description: "Recibe tu coach de psicología IA personalizado"
+        },
+        {
+          step: "3",
+          title: "Construir Trades", 
+          description: "Estructura trades con checkpoints psicológicos"
+        },
+        {
+          step: "4",
+          title: "Seguir Progreso",
+          description: "Monitorea tu desarrollo psicológico y mejora en el trading"
+        }
+      ],
       testimonialsTitle: "Únete a Miles de Traders Exitosos",
       testimonialsSubtitle: "Únete a miles de traders que han transformado su mentalidad",
       ctaTitle: "¿Listo Para Desbloquear Tu Potencial Completo en Trading??",
@@ -570,6 +632,28 @@ export default function LandingPage() {
         "La Plateforme Ultime pour l'Avantage Mental — Combinant des Insights Alimentés par l'IA, un Coaching Personnalisé et un Environnement Profondément Immersif Où Vous Grandissez Continuellement, Révisez les Trades Passés avec un Objectif et Construisez Chaque Nouveau Trade avec Clarté et Confiance.",
       howItWorksTitle: "Comment ProFitz Fonctionne",
       howItWorksSubtitle: "Votre Chemin vers la Maîtrise du Trading en 4 Étapes Simples",
+      howItWorksSteps: [
+        {
+          step: "1",
+          title: "Faire l'Évaluation",
+          description: "Complétez notre évaluation complète de psychologie du trading"
+        },
+        {
+          step: "2", 
+          title: "Obtenir Coach IA",
+          description: "Recevez votre coach de psychologie IA personnalisé"
+        },
+        {
+          step: "3",
+          title: "Construire Trades", 
+          description: "Structurez les trades avec des checkpoints psychologiques"
+        },
+        {
+          step: "4",
+          title: "Suivre Progrès",
+          description: "Surveillez votre développement psychologique et amélioration du trading"
+        }
+      ],
       testimonialsTitle: "Rejoignez des Milliers de Traders Prospères",
       testimonialsSubtitle: "Rejoignez des milliers de traders qui ont transformé leur mentalité",
       ctaTitle: "Prêt à Débloquer Votre Plein Potentiel de Trading ??",
@@ -1056,33 +1140,9 @@ export default function LandingPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                step: "1",
-                title: "Take Assessment",
-                description: "Complete our comprehensive trading psychology assessment",
-                icon: Target,
-              },
-              {
-                step: "2",
-                title: "Get AI Coach",
-                description: "Receive your personalized AI psychology coach",
-                icon: Brain,
-              },
-              {
-                step: "3",
-                title: "Build Trades",
-                description: "Structure trades with psychological checkpoints",
-                icon: Settings,
-              },
-              {
-                step: "4",
-                title: "Track Progress",
-                description: "Monitor your psychological development and trading improvement",
-                icon: TrendingUp,
-              },
-            ].map((step, index) => {
-              const IconComponent = step.icon
+            {t.howItWorksSteps.map((step, index) => {
+              const icons = [Target, Brain, Settings, TrendingUp]
+              const IconComponent = icons[index]
               return (
                 <div key={index} className="text-center">
                   <div className="relative mb-6">
