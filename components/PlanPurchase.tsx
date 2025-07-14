@@ -1,12 +1,13 @@
-// components/PlanPurchase.tsx
+/ components/PlanPurchase.tsx
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useUser } from '@/contexts/UserContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Check, Loader2 } from 'lucide-react';
+import { translateText } from '@/utils/translation';
 
 interface PlanPurchaseProps {
   planId: 'free' | 'pro' | 'premium' | 'elite';
@@ -14,12 +15,93 @@ interface PlanPurchaseProps {
   price: string;
   features: string[];
   onSuccess?: () => void;
+  language?: 'en' | 'pt' | 'es' | 'fr';
 }
 
-export function PlanPurchase({ planId, planName, price, features, onSuccess }: PlanPurchaseProps) {
+export function PlanPurchase({ 
+  planId, 
+  planName, 
+  price, 
+  features, 
+  onSuccess,
+  language = 'en' 
+}: PlanPurchaseProps) {
   const { profile, activatePlan } = useUser();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [translatedContent, setTranslatedContent] = useState({
+    planName,
+    features,
+    currentPlan: 'Current Plan',
+    upgrading: 'Upgrading...',
+    activating: 'Activating...',
+    upgradeNow: 'Upgrade Now',
+    selectPlan: 'Select Plan',
+    planActivated: 'Plan Activated!',
+    planActiveDesc: 'plan is now active. All features are immediately available.'
+  });
+
+  useEffect(() => {
+    const translateContent = async () => {
+      if (language === 'en') {
+        setTranslatedContent({
+          planName,
+          features,
+          currentPlan: 'Current Plan',
+          upgrading: 'Upgrading...',
+          activating: 'Activating...',
+          upgradeNow: 'Upgrade Now',
+          selectPlan: 'Select Plan',
+          planActivated: 'Plan Activated!',
+          planActiveDesc: 'plan is now active. All features are immediately available.'
+        });
+        return;
+      }
+
+      try {
+        const [
+          translatedPlanName,
+          translatedFeatures,
+          translatedCurrentPlan,
+          translatedUpgrading,
+          translatedActivating,
+          translatedUpgradeNow,
+          translatedSelectPlan,
+          translatedPlanActivated,
+          translatedPlanActiveDesc
+        ] = await Promise.all([
+          translateText(planName, language, { domain: 'trading' }),
+          Promise.all(features.map(feature => 
+            translateText(feature, language, { domain: 'trading' })
+          )),
+          translateText('Current Plan', language),
+          translateText('Upgrading...', language),
+          translateText('Activating...', language),
+          translateText('Upgrade Now', language),
+          translateText('Select Plan', language),
+          translateText('Plan Activated!', language),
+          translateText('plan is now active. All features are immediately available.', language)
+        ]);
+
+        setTranslatedContent({
+          planName: translatedPlanName,
+          features: translatedFeatures,
+          currentPlan: translatedCurrentPlan,
+          upgrading: translatedUpgrading,
+          activating: translatedActivating,
+          upgradeNow: translatedUpgradeNow,
+          selectPlan: translatedSelectPlan,
+          planActivated: translatedPlanActivated,
+          planActiveDesc: translatedPlanActiveDesc
+        });
+      } catch (error) {
+        console.error('Translation error:', error);
+        // Keep original content if translation fails
+      }
+    };
+
+    translateContent();
+  }, [language, planName, features]);
 
   const handlePurchase = async () => {
     setLoading(true);
@@ -59,9 +141,9 @@ export function PlanPurchase({ planId, planName, price, features, onSuccess }: P
           <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
             <Check className="h-8 w-8 text-white" />
           </div>
-          <CardTitle className="text-green-800">Plan Activated!</CardTitle>
+          <CardTitle className="text-green-800">{translatedContent.planActivated}</CardTitle>
           <CardDescription className="text-green-600">
-            Your {planName} plan is now active. All features are immediately available.
+            {translatedContent.planName} {translatedContent.planActiveDesc}
           </CardDescription>
         </CardHeader>
       </Card>
@@ -72,16 +154,16 @@ export function PlanPurchase({ planId, planName, price, features, onSuccess }: P
     <Card className={`${isCurrentPlan ? 'ring-2 ring-blue-500' : ''}`}>
       {isCurrentPlan && (
         <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white">
-          Current Plan
+          {translatedContent.currentPlan}
         </Badge>
       )}
       <CardHeader className="text-center">
-        <CardTitle className="text-2xl">{planName}</CardTitle>
+        <CardTitle className="text-2xl">{translatedContent.planName}</CardTitle>
         <div className="text-3xl font-bold text-blue-600">{price}</div>
       </CardHeader>
       <CardContent>
         <ul className="space-y-2 mb-6">
-          {features.map((feature, index) => (
+          {translatedContent.features.map((feature, index) => (
             <li key={index} className="flex items-center">
               <Check className="h-4 w-4 text-green-500 mr-2" />
               <span className="text-sm">{feature}</span>
@@ -97,14 +179,14 @@ export function PlanPurchase({ planId, planName, price, features, onSuccess }: P
           {loading ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              {isUpgrade ? 'Upgrading...' : 'Activating...'}
+              {isUpgrade ? translatedContent.upgrading : translatedContent.activating}
             </>
           ) : isCurrentPlan ? (
-            'Current Plan'
+            translatedContent.currentPlan
           ) : isUpgrade ? (
-            'Upgrade Now'
+            translatedContent.upgradeNow
           ) : (
-            'Select Plan'
+            translatedContent.selectPlan
           )}
         </Button>
       </CardContent>
