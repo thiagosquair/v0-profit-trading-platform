@@ -144,44 +144,67 @@ export default function LandingPage() {
           name: "Free",
           price: "$0",
           period: "/month",
-          description: "Perfect for getting started with trading psychology",
+          description: "Perfect for Getting Started",
           features: [
-            "Basic AI Psychology Coach",
+            "AI Psychology Coach",
             "5 Trade Analyses per month",
-            "Basic behavioral patterns",
-            "Community access",
-            "Mobile app access"
+            "Progress Tracking",
+            "Interactive Exercises",
+            "Psychology Courses"
           ]
         },
         {
           name: "Pro",
-          price: "$29",
+          price: "$14",
           period: "/month",
-          description: "For serious traders ready to transform their mindset",
-          popular: true,
+          description: "For Serious Traders",
           features: [
             "Advanced AI Psychology Coach",
-            "Unlimited trade analyses",
-            "Complete behavioral patterns",
-            "Trade Builder with checkpoints",
-            "Screenshot analysis",
-            "Progress tracking",
-            "Priority support"
+            "25 Trade Analyses per month",
+            "Advanced Progress Tracking",
+            "Reflection Journal",
+            "Psychology Courses",
+            "Screenshot Analysis",
+            "10 Trade Builder",
+            "Interactive Exercises"
+          ]
+        },
+        {
+          name: "Premium",
+          price: "$28",
+          period: "/month",
+          description: "For Professional Traders",
+          popular: true,
+          features: [
+            "Everything in Pro",
+            "Advanced AI Psychology Coach",
+            "Unlimited Trade Analyses",
+            "Advanced Progress Tracking",
+            "Reflection Journal",
+            "Psychology Courses",
+            "Coaching Insights",
+            "30 Trade Builder",
+            "Interactive Exercises",
+            "Behavioral Patterns"
           ]
         },
         {
           name: "Elite",
-          price: "$99",
+          price: "$55",
           period: "/month",
-          description: "For professional traders and funded account seekers",
+          description: "For Elite Traders",
           features: [
-            "Everything in Pro",
-            "Funded Career Builder",
-            "1-on-1 coaching sessions",
-            "Advanced market psychology",
-            "Custom trading plans",
-            "White-glove onboarding",
-            "Direct expert access"
+            "Everything in Premium",
+            "Advanced AI Psychology Coach",
+            "Unlimited Trade Analyses",
+            "Advanced Progress Tracking",
+            "Reflection Journal",
+            "Psychology Courses",
+            "Coaching Insights",
+            "Unlimited Trade Builder",
+            "Interactive Exercises",
+            "Behavioral Patterns",
+            "Funded Career Builder"
           ]
         }
       ],
@@ -282,44 +305,67 @@ export default function LandingPage() {
           name: "Gratuito",
           price: "$0",
           period: "/mês",
-          description: "Perfeito para começar com psicologia de trading",
+          description: "Perfeito para Começar",
           features: [
-            "Coach de Psicologia IA Básico",
+            "Coach de Psicologia IA",
             "5 Análises de Trade por mês",
-            "Padrões comportamentais básicos",
-            "Acesso à comunidade",
-            "Acesso ao app móvel"
+            "Acompanhamento de Progresso",
+            "Exercícios Interativos",
+            "Cursos de Psicologia"
           ]
         },
         {
           name: "Pro",
-          price: "$29",
+          price: "$14",
           period: "/mês",
-          description: "Para traders sérios prontos para transformar sua mentalidade",
-          popular: true,
+          description: "Para Traders Sérios",
           features: [
             "Coach de Psicologia IA Avançado",
-            "Análises de trade ilimitadas",
-            "Padrões comportamentais completos",
-            "Construtor de Trade com checkpoints",
-            "Análise de screenshots",
-            "Rastreamento de progresso",
-            "Suporte prioritário"
+            "25 Análises de Trade por mês",
+            "Acompanhamento de Progresso Avançado",
+            "Diário de Reflexão",
+            "Cursos de Psicologia",
+            "Análise de Screenshots",
+            "10 Construtor de Trade",
+            "Exercícios Interativos"
+          ]
+        },
+        {
+          name: "Premium",
+          price: "$28",
+          period: "/mês",
+          description: "Para Traders Profissionais",
+          popular: true,
+          features: [
+            "Tudo do Pro",
+            "Coach de Psicologia IA Avançado",
+            "Análises de Trade Ilimitadas",
+            "Acompanhamento de Progresso Avançado",
+            "Diário de Reflexão",
+            "Cursos de Psicologia",
+            "Insights de Coaching",
+            "30 Construtor de Trade",
+            "Exercícios Interativos",
+            "Padrões Comportamentais"
           ]
         },
         {
           name: "Elite",
-          price: "$99",
+          price: "$55",
           period: "/mês",
-          description: "Para traders profissionais e candidatos a contas financiadas",
+          description: "Para Traders Elite",
           features: [
-            "Tudo do Pro",
-            "Construtor de Carreira Financiada",
-            "Sessões de coaching 1-a-1",
-            "Psicologia de mercado avançada",
-            "Planos de trading personalizados",
-            "Onboarding premium",
-            "Acesso direto a especialistas"
+            "Tudo do Premium",
+            "Coach de Psicologia IA Avançado",
+            "Análises de Trade Ilimitadas",
+            "Acompanhamento de Progresso Avançado",
+            "Diário de Reflexão",
+            "Cursos de Psicologia",
+            "Insights de Coaching",
+            "Construtor de Trade Ilimitado",
+            "Exercícios Interativos",
+            "Padrões Comportamentais",
+            "Construtor de Carreira Financiada"
           ]
         }
       ],
@@ -420,44 +466,67 @@ export default function LandingPage() {
           name: "Gratuito",
           price: "$0",
           period: "/mes",
-          description: "Perfecto para comenzar con psicología de trading",
+          description: "Perfecto para Empezar",
           features: [
-            "Coach de Psicología IA Básico",
+            "Coach de Psicología IA",
             "5 Análisis de Trade por mes",
-            "Patrones conductuales básicos",
-            "Acceso a la comunidad",
-            "Acceso a app móvil"
+            "Seguimiento de Progreso",
+            "Ejercicios Interactivos",
+            "Cursos de Psicología"
           ]
         },
         {
           name: "Pro",
-          price: "$29",
+          price: "$14",
           period: "/mes",
-          description: "Para traders serios listos para transformar su mentalidad",
-          popular: true,
+          description: "Para Traders Serios",
           features: [
             "Coach de Psicología IA Avanzado",
-            "Análisis de trade ilimitados",
-            "Patrones conductuales completos",
-            "Constructor de Trade con checkpoints",
-            "Análisis de capturas de pantalla",
-            "Seguimiento de progreso",
-            "Soporte prioritario"
+            "25 Análisis de Trade por mes",
+            "Seguimiento de Progreso Avanzado",
+            "Diario de Reflexión",
+            "Cursos de Psicología",
+            "Análisis de Capturas de Pantalla",
+            "10 Constructor de Trade",
+            "Ejercicios Interactivos"
+          ]
+        },
+        {
+          name: "Premium",
+          price: "$28",
+          period: "/mes",
+          description: "Para Traders Profesionales",
+          popular: true,
+          features: [
+            "Todo de Pro",
+            "Coach de Psicología IA Avanzado",
+            "Análisis de Trade Ilimitados",
+            "Seguimiento de Progreso Avanzado",
+            "Diario de Reflexión",
+            "Cursos de Psicología",
+            "Insights de Coaching",
+            "30 Constructor de Trade",
+            "Ejercicios Interactivos",
+            "Patrones Conductuales"
           ]
         },
         {
           name: "Elite",
-          price: "$99",
+          price: "$55",
           period: "/mes",
-          description: "Para traders profesionales y aspirantes a cuentas financiadas",
+          description: "Para Traders Elite",
           features: [
-            "Todo de Pro",
-            "Constructor de Carrera Financiada",
-            "Sesiones de coaching 1-a-1",
-            "Psicología de mercado avanzada",
-            "Planes de trading personalizados",
-            "Onboarding premium",
-            "Acceso directo a expertos"
+            "Todo de Premium",
+            "Coach de Psicología IA Avanzado",
+            "Análisis de Trade Ilimitados",
+            "Seguimiento de Progreso Avanzado",
+            "Diario de Reflexión",
+            "Cursos de Psicología",
+            "Insights de Coaching",
+            "Constructor de Trade Ilimitado",
+            "Ejercicios Interactivos",
+            "Patrones Conductuales",
+            "Constructor de Carrera Financiada"
           ]
         }
       ],
@@ -558,44 +627,67 @@ export default function LandingPage() {
           name: "Gratuit",
           price: "$0",
           period: "/mois",
-          description: "Parfait pour commencer avec la psychologie du trading",
+          description: "Parfait pour Commencer",
           features: [
-            "Coach de Psychologie IA de Base",
+            "Coach de Psychologie IA",
             "5 Analyses de Trade par mois",
-            "Modèles comportementaux de base",
-            "Accès à la communauté",
-            "Accès à l'app mobile"
+            "Suivi des Progrès",
+            "Exercices Interactifs",
+            "Cours de Psychologie"
           ]
         },
         {
           name: "Pro",
-          price: "$29",
+          price: "$14",
           period: "/mois",
-          description: "Pour les traders sérieux prêts à transformer leur mentalité",
-          popular: true,
+          description: "Pour les Traders Sérieux",
           features: [
             "Coach de Psychologie IA Avancé",
-            "Analyses de trade illimitées",
-            "Modèles comportementaux complets",
-            "Constructeur de Trade avec checkpoints",
-            "Analyse de captures d'écran",
-            "Suivi des progrès",
-            "Support prioritaire"
+            "25 Analyses de Trade par mois",
+            "Suivi des Progrès Avancé",
+            "Journal de Réflexion",
+            "Cours de Psychologie",
+            "Analyse de Captures d'Écran",
+            "10 Constructeur de Trade",
+            "Exercices Interactifs"
+          ]
+        },
+        {
+          name: "Premium",
+          price: "$28",
+          period: "/mois",
+          description: "Pour les Traders Professionnels",
+          popular: true,
+          features: [
+            "Tout de Pro",
+            "Coach de Psychologie IA Avancé",
+            "Analyses de Trade Illimitées",
+            "Suivi des Progrès Avancé",
+            "Journal de Réflexion",
+            "Cours de Psychologie",
+            "Insights de Coaching",
+            "30 Constructeur de Trade",
+            "Exercices Interactifs",
+            "Modèles Comportementaux"
           ]
         },
         {
           name: "Elite",
-          price: "$99",
+          price: "$55",
           period: "/mois",
-          description: "Pour les traders professionnels et candidats aux comptes financés",
+          description: "Pour les Traders Elite",
           features: [
-            "Tout de Pro",
-            "Constructeur de Carrière Financée",
-            "Sessions de coaching 1-à-1",
-            "Psychologie de marché avancée",
-            "Plans de trading personnalisés",
-            "Onboarding premium",
-            "Accès direct aux experts"
+            "Tout de Premium",
+            "Coach de Psychologie IA Avancé",
+            "Analyses de Trade Illimitées",
+            "Suivi des Progrès Avancé",
+            "Journal de Réflexion",
+            "Cours de Psychologie",
+            "Insights de Coaching",
+            "Constructeur de Trade Illimité",
+            "Exercices Interactifs",
+            "Modèles Comportementaux",
+            "Constructeur de Carrière Financée"
           ]
         }
       ],
@@ -1014,7 +1106,7 @@ export default function LandingPage() {
             <p className="text-xl text-navy-600">{t.pricingSubtitle}</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             {t.pricingPlans.map((plan, index) => (
               <Card
                 key={index}
