@@ -898,7 +898,7 @@ export function LandingPage() {
             </Button>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             {[
               {
                 title: "AI Psychology Coach",
@@ -917,6 +917,12 @@ export function LandingPage() {
                 description:
                   "Transform Every Trade into a Learning Opportunity: Our AI analyzes your trades through a psychological lens, providing actionable insights to improve your decision-making and boost your profitability.",
                 icon: TrendingUp,
+              },
+              {
+                title: "Funded Career Builder",
+                description:
+                  "Your Path to Professional Trading: Get comprehensive guidance and tools to qualify for funded trading programs, build your track record, and launch your professional trading career with confidence.",
+                icon: Award,
               },
             ].map((feature, index) => {
               const IconComponent = feature.icon
