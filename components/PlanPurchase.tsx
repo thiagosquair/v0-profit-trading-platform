@@ -1,4 +1,4 @@
-/ components/PlanPurchase.tsx
+// components/PlanPurchase.tsx
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Check, Loader2 } from 'lucide-react';
-import { translateText } from '@/utils/translation';
+import { t, useDynamicTranslation } from '@/lib/enhanced-translation';
 
 interface PlanPurchaseProps {
   planId: 'free' | 'pro' | 'premium' | 'elite';
@@ -15,45 +15,39 @@ interface PlanPurchaseProps {
   price: string;
   features: string[];
   onSuccess?: () => void;
-  language?: 'en' | 'pt' | 'es' | 'fr';
 }
 
-export function PlanPurchase({ 
-  planId, 
-  planName, 
-  price, 
-  features, 
-  onSuccess,
-  language = 'en' 
-}: PlanPurchaseProps) {
+export function PlanPurchase({ planId, planName, price, features, onSuccess }: PlanPurchaseProps) {
   const { profile, activatePlan } = useUser();
+  const { translateDynamic, currentLanguage } = useDynamicTranslation();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [translatedContent, setTranslatedContent] = useState({
-    planName,
-    features,
+    planName: planName,
+    features: features,
     currentPlan: 'Current Plan',
+    planActivated: 'Plan Activated!',
+    planActiveDesc: 'plan is now active. All features are immediately available.',
     upgrading: 'Upgrading...',
     activating: 'Activating...',
     upgradeNow: 'Upgrade Now',
-    selectPlan: 'Select Plan',
-    planActivated: 'Plan Activated!',
-    planActiveDesc: 'plan is now active. All features are immediately available.'
+    selectPlan: 'Select Plan'
   });
 
+  // Translate content when language changes
   useEffect(() => {
     const translateContent = async () => {
-      if (language === 'en') {
+      if (currentLanguage === 'en') {
         setTranslatedContent({
-          planName,
-          features,
+          planName: planName,
+          features: features,
           currentPlan: 'Current Plan',
+          planActivated: 'Plan Activated!',
+          planActiveDesc: 'plan is now active. All features are immediately available.',
           upgrading: 'Upgrading...',
           activating: 'Activating...',
           upgradeNow: 'Upgrade Now',
-          selectPlan: 'Select Plan',
-          planActivated: 'Plan Activated!',
-          planActiveDesc: 'plan is now active. All features are immediately available.'
+          selectPlan: 'Select Plan'
         });
         return;
       }
@@ -63,36 +57,34 @@ export function PlanPurchase({
           translatedPlanName,
           translatedFeatures,
           translatedCurrentPlan,
+          translatedPlanActivated,
+          translatedPlanActiveDesc,
           translatedUpgrading,
           translatedActivating,
           translatedUpgradeNow,
-          translatedSelectPlan,
-          translatedPlanActivated,
-          translatedPlanActiveDesc
+          translatedSelectPlan
         ] = await Promise.all([
-          translateText(planName, language, { domain: 'trading' }),
-          Promise.all(features.map(feature => 
-            translateText(feature, language, { domain: 'trading' })
-          )),
-          translateText('Current Plan', language),
-          translateText('Upgrading...', language),
-          translateText('Activating...', language),
-          translateText('Upgrade Now', language),
-          translateText('Select Plan', language),
-          translateText('Plan Activated!', language),
-          translateText('plan is now active. All features are immediately available.', language)
+          translateDynamic(planName, { domain: 'trading' }),
+          Promise.all(features.map(feature => translateDynamic(feature, { domain: 'trading' }))),
+          translateDynamic('Current Plan'),
+          translateDynamic('Plan Activated!'),
+          translateDynamic('plan is now active. All features are immediately available.'),
+          translateDynamic('Upgrading...'),
+          translateDynamic('Activating...'),
+          translateDynamic('Upgrade Now'),
+          translateDynamic('Select Plan')
         ]);
 
         setTranslatedContent({
           planName: translatedPlanName,
           features: translatedFeatures,
           currentPlan: translatedCurrentPlan,
+          planActivated: translatedPlanActivated,
+          planActiveDesc: translatedPlanActiveDesc,
           upgrading: translatedUpgrading,
           activating: translatedActivating,
           upgradeNow: translatedUpgradeNow,
-          selectPlan: translatedSelectPlan,
-          planActivated: translatedPlanActivated,
-          planActiveDesc: translatedPlanActiveDesc
+          selectPlan: translatedSelectPlan
         });
       } catch (error) {
         console.error('Translation error:', error);
@@ -101,7 +93,7 @@ export function PlanPurchase({
     };
 
     translateContent();
-  }, [language, planName, features]);
+  }, [currentLanguage, planName, features, translateDynamic]);
 
   const handlePurchase = async () => {
     setLoading(true);
