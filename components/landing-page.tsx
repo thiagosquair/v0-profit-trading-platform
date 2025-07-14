@@ -886,7 +886,7 @@ export function LandingPage() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-navy-900 mb-4">Our Ultimate Trading Features</h2>
             <p className="text-xl text-navy-600 max-w-2xl mx-auto mb-6">
-              The core tools that set ProFitz apart from every other trading platform
+              The core tools that set ProFitz apart from every other trading psychology platform
             </p>
             <Button
               variant="outline"
