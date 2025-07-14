@@ -27,7 +27,7 @@ import {
   ChevronUp
 } from 'lucide-react';
 import Link from 'next/link';
-import { t, useDynamicTranslation, getLanguageInfo, Language } from '@/lib/enhanced-translation';
+import { t, useDynamicTranslation, getLanguageInfo, Language } from '@/lib/enhanced-translations';
 
 export default function LandingPage() {
   const { translateDynamic, currentLanguage, setLanguage, languageConfig } = useDynamicTranslation();
