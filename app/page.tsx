@@ -1,4 +1,4 @@
-import { LandingPage } from '@/components/landing-page';
+import LandingPage from '@/components/landing-page';
 import TradeAnalyzer from '@/components/TradeAnalyzer';
 
 export default function HomePage() {
