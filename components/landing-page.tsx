@@ -699,7 +699,7 @@ export function LandingPage() {
         </div>
       </header>
 
-      {/* Enhanced Hero Section with Media Space */}
+      {/* Enhanced Hero Section with Video */}
       <section className="py-20 px-4">
         <div className="container mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -755,16 +755,17 @@ export function LandingPage() {
               </div>
             </div>
 
-            {/* Right Column - Media Space */}
+            {/* Right Column - Video */}
             <div className="flex justify-center lg:justify-end">
               <div className="w-full max-w-2xl aspect-video bg-gradient-to-br from-navy-100 to-royal-blue-100 rounded-2xl shadow-2xl flex items-center justify-center border border-navy-200 overflow-hidden">
                 <video
-                  src="/images/Untitled design (14).mp4"
-                  className="w-full h-full object-cover"
+                  src="/images/herovid.mp4"
+                  className="w-full h-full object-cover rounded-2xl"
                   autoPlay
                   muted
                   loop
                   playsInline
+                  controls={false}
                 >
                   Your browser does not support the video tag.
                 </video>
@@ -1201,3 +1202,4 @@ export function LandingPage() {
     </div>
   )
 }
+
