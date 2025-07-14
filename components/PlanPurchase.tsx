@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Check, Loader2 } from 'lucide-react';
-import { t, useDynamicTranslation } from '@/lib/enhanced-translation';
+import { t, useDynamicTranslation } from '@/lib/enhanced-translations';
 
 interface PlanPurchaseProps {
   planId: 'free' | 'pro' | 'premium' | 'elite';
