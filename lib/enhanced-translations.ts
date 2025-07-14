@@ -475,4 +475,3 @@ export function useEnhancedTranslation(locale: string = 'en') {
 }
 
 export default staticTranslations;
-
