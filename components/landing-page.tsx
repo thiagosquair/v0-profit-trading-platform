@@ -165,6 +165,7 @@ export default function LandingPage() {
           description: "Perfect for Getting Started",
           features: [
             "AI Psychology Coach",
+            "Trader Assessment",
             "5 Trade Analyses per month",
             "Progress Tracking",
             "Interactive Exercises",
@@ -178,6 +179,7 @@ export default function LandingPage() {
           description: "For Serious Traders",
           features: [
             "Advanced AI Psychology Coach",
+            "Trader Assessment",
             "25 Trade Analyses per month",
             "Advanced Progress Tracking",
             "Reflection Journal",
@@ -196,6 +198,7 @@ export default function LandingPage() {
           features: [
             "Everything in Pro",
             "Advanced AI Psychology Coach",
+            "Trader Assessment",
             "Unlimited Trade Analyses",
             "Advanced Progress Tracking",
             "Reflection Journal",
@@ -214,6 +217,7 @@ export default function LandingPage() {
           features: [
             "Everything in Premium",
             "Advanced AI Psychology Coach",
+            "Trader Assessment",
             "Unlimited Trade Analyses",
             "Advanced Progress Tracking",
             "Reflection Journal",
