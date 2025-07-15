@@ -173,7 +173,7 @@ export default function LandingPage() {
         },
         {
           name: "Pro",
-          price: "$14",
+          price: "$15",
           period: "/month",
           description: "For Serious Traders",
           features: [
@@ -189,7 +189,7 @@ export default function LandingPage() {
         },
         {
           name: "Premium",
-          price: "$28",
+          price: "$25",
           period: "/month",
           description: "For Professional Traders",
           popular: true,
@@ -208,7 +208,7 @@ export default function LandingPage() {
         },
         {
           name: "Elite",
-          price: "$55",
+          price: "$35",
           period: "/month",
           description: "For Elite Traders",
           features: [
