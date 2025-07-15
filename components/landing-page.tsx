@@ -52,9 +52,9 @@ export default function LandingPage() {
 
   const content = {
     en: {
-      title: "ProFitz",
-      subtitle: "Trading Psychology Labbbb",
-      badge: "AI-Powered Trading Psychology",
+      title: "MaXTrades",
+      subtitle: "Trading Psychology Lab",
+      badge: "Ai-Powered Trading Psychology",
       heroTitle: "Master Your Mindset. Master Your Trading.",
       description:
         "Master your trading psychology with AI-powered coaching, behavioral analysis, and interactive exercises designed to build mental resilience and better decision-making.",
@@ -67,7 +67,7 @@ export default function LandingPage() {
       featuresTitle: "Developed for Trading Psychology Mastery and High Performance",
       featuresSubtitle:
         "The Ultimate Platform for Mental Edge — Combining AI-Powered Insights, Personalized Coaching, and a Deeply Immersive Environment Where You Continuously Grow, Review Past Trades with Purpose, and Build Each New Trade with Clarity and Confidence.",
-      howItWorksTitle: "How ProFitz Works",
+      howItWorksTitle: "How MaXTrades Works",
       howItWorksSubtitle: "Your Path to Trading Mastery in 4 Simple Steps",
       howItWorksSteps: [
         {
@@ -237,7 +237,7 @@ export default function LandingPage() {
         {
           name: "Sarah Chen",
           role: "Day Trader",
-          content: "ProFitz helped me overcome my fear of taking profits. My consistency improved dramatically in just 3 months.",
+          content: "MaXTrades helped me overcome my fear of taking profits. My consistency improved dramatically in just 3 months.",
           rating: 5
         },
         {
@@ -255,8 +255,8 @@ export default function LandingPage() {
       ]
     },
     pt: {
-      title: "ProFitz",
-      subtitle: "Trading Psychology Labbbb",
+      title: "MaXTrades",
+      subtitle: "Trading Psychology Lab",
       badge: "Psicologia de Trading Alimentada por IA",
       heroTitle: "Domine Sua Mentalidade. Domine Seu Trading.",
       description:
@@ -270,7 +270,7 @@ export default function LandingPage() {
       featuresTitle: "Desenvolvido para Maestria em Psicologia de Trading e Alto Desempenho",
       featuresSubtitle:
         "A Plataforma Definitiva para Vantagem Mental — Combinando Insights Alimentados por IA, Coaching Personalizado e um Ambiente Profundamente Imersivo Onde Você Cresce Continuamente, Revisa Trades Passados com Propósito e Constrói Cada Novo Trade com Clareza e Confiança.",
-      howItWorksTitle: "Como o ProFitz Funciona",
+      howItWorksTitle: "Como o MaXTrades Funciona",
       howItWorksSubtitle: "Seu Caminho para Maestria no Trading em 4 Passos Simples",
       howItWorksSteps: [
         {
@@ -440,7 +440,7 @@ export default function LandingPage() {
         {
           name: "Sarah Chen",
           role: "Day Trader",
-          content: "ProFitz me ajudou a superar meu medo de realizar lucros. Minha consistência melhorou drasticamente em apenas 3 meses.",
+          content: "MaXTrades me ajudou a superar meu medo de realizar lucros. Minha consistência melhorou drasticamente em apenas 3 meses.",
           rating: 5
         },
         {
@@ -458,7 +458,7 @@ export default function LandingPage() {
       ]
     },
     es: {
-      title: "ProFitz",
+      title: "MaXTrades",
       subtitle: "Trading Psychology Labbbb",
       badge: "Psicología de Trading Impulsada por IA",
       heroTitle: "Domina Tu Mentalidad. Domina Tu Trading.",
@@ -473,7 +473,7 @@ export default function LandingPage() {
       featuresTitle: "Desarrollado para Maestría en Psicología de Trading y Alto Rendimiento",
       featuresSubtitle:
         "La Plataforma Definitiva para Ventaja Mental — Combinando Insights Impulsados por IA, Coaching Personalizado y un Entorno Profundamente Inmersivo Donde Creces Continuamente, Revisas Trades Pasados con Propósito y Construyes Cada Nuevo Trade con Claridad y Confianza.",
-      howItWorksTitle: "Cómo Funciona ProFitz",
+      howItWorksTitle: "Cómo Funciona MaXTrades",
       howItWorksSubtitle: "Tu Camino hacia la Maestría en Trading en 4 Pasos Simples",
       howItWorksSteps: [
         {
@@ -643,7 +643,7 @@ export default function LandingPage() {
         {
           name: "Sarah Chen",
           role: "Day Trader",
-          content: "ProFitz me ayudó a superar mi miedo a tomar ganancias. Mi consistencia mejoró dramáticamente en solo 3 meses.",
+          content: "MaXTrades me ayudó a superar mi miedo a tomar ganancias. Mi consistencia mejoró dramáticamente en solo 3 meses.",
           rating: 5
         },
         {
@@ -661,7 +661,7 @@ export default function LandingPage() {
       ]
     },
     fr: {
-      title: "ProFitz",
+      title: "MaXTrades",
       subtitle: "Trading Psychology Labbbb",
       badge: "Psychologie de Trading Alimentée par l'IA",
       heroTitle: "Maîtrisez Votre Mentalité. Maîtrisez Votre Trading.",
@@ -676,7 +676,7 @@ export default function LandingPage() {
       featuresTitle: "Développé pour la Maîtrise de la Psychologie du Trading et la Haute Performance",
       featuresSubtitle:
         "La Plateforme Ultime pour l'Avantage Mental — Combinant des Insights Alimentés par l'IA, un Coaching Personnalisé et un Environnement Profondément Immersif Où Vous Grandissez Continuellement, Révisez les Trades Passés avec un Objectif et Construisez Chaque Nouveau Trade avec Clarté et Confiance.",
-      howItWorksTitle: "Comment ProFitz Fonctionne",
+      howItWorksTitle: "Comment MaXTrades Fonctionne",
       howItWorksSubtitle: "Votre Chemin vers la Maîtrise du Trading en 4 Étapes Simples",
       howItWorksSteps: [
         {
@@ -846,7 +846,7 @@ export default function LandingPage() {
         {
           name: "Sarah Chen",
           role: "Day Trader",
-          content: "ProFitz m'a aidé à surmonter ma peur de prendre des bénéfices. Ma cohérence s'est considérablement améliorée en seulement 3 mois.",
+          content: "MaXTrades m'a aidé à surmonter ma peur de prendre des bénéfices. Ma cohérence s'est considérablement améliorée en seulement 3 mois.",
           rating: 5
         },
         {
@@ -1083,7 +1083,7 @@ export default function LandingPage() {
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-navy-900 mb-4">Our Ultimate Trading Features</h2>
-            <p className="text-xl text-navy-600">The core tools that set ProFitz apart from every other trading platform</p>
+            <p className="text-xl text-navy-600">The core tools that set MaXTrades apart from every other trading platform</p>
             <Button
               variant="outline"
               onClick={toggleAllFeatures}
@@ -1322,7 +1322,7 @@ export default function LandingPage() {
           </div>
 
           <div className="border-t border-navy-700 mt-12 pt-8 text-center text-blue-200">
-            <p>&copy; 2024 ProFitz. All rights reserved.</p>
+            <p>&copy; 2024 MaXTrades. All rights reserved.</p>
           </div>
         </div>
       </footer>
