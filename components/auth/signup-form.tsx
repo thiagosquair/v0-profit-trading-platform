@@ -83,7 +83,7 @@ export function SignUpForm() {
               alt="MAXTRADES"
               width={200}
               height={60}
-              className="h-30 w-auto"
+              className="h-28 w-auto"
               priority
             />
           </div>
