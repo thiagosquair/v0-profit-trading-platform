@@ -153,7 +153,7 @@ export default function LandingPage() {
         {
           title: "Market Live Insights",
           description: "Real-time market psychology indicators and sentiment analysis to help you make informed decisions.",
-          detailedContent: "Get real-time insights into market psychology and sentiment with our advanced analytics dashboard. This feature provides live market sentiment analysis, fear and greed indicators, volatility stress levels, and crowd psychology metrics."
+          detailedContent: "Our advanced behavioral pattern analysis uses machine learning to identify recurring patterns in your trading behavior. We analyze your decision-making processes, emotional triggers, and psychological biases that may be affecting your trading performance."
         },
         {
           title: "Screenshot Analysis",
@@ -163,7 +163,7 @@ export default function LandingPage() {
         {
           title: "Progress Tracking",
           description: "Monitor your psychological development with detailed metrics and performance reports.",
-          detailedContent: "Track your psychological development and trading improvement with our comprehensive progress tracking system. This feature monitors your emotional control, discipline levels, consistency metrics, and psychological growth over time."
+          detailedContent: "Track your psychological development and improvement with our comprehensive progress tracking system. This feature monitors your emotional control, discipline levels, consistency metrics, and psychological growth over time."
         },
         {
           title: "Gamification",
@@ -438,7 +438,7 @@ export default function LandingPage() {
         {
           title: "Construtor de Trade",
           description:
-            "Planejamento de Trade Focado em Psicologia: Planeje cada trade com análise psicológica, checkpoints emocionais e salvaguardas comportamentais projetadas para ajudá-lo a tomar decisões informadas.",
+            "Planejamento de Trade Focado em Psicologia: Planeje cada trade com checkpoints psicológicos e salvaguardas comportamentais projetadas para ajudá-lo a tomar decisões informadas.",
         },
         {
           title: "Análise de Trade IA",
@@ -762,7 +762,7 @@ export default function LandingPage() {
             "Constructor de Trade Ilimitado",
             "Ejercicios Interactivos",
             "Patrones Conductuales",
-            "Constructor de Carrera Financiada"
+            "Constructor de Carreira Financiada"
           ]
         }
       ],
@@ -1374,10 +1374,9 @@ export default function LandingPage() {
                       <Button
                         variant="ghost"
                         onClick={() => toggleBenefit(index)}
-                        className={`text-white px-6 py-2 rounded-full bg-gradient-to-r ${benefit.gradient} hover:opacity-90 transition-all duration-300`}
+                        className={`text-white w-10 h-10 p-0 rounded-full bg-gradient-to-r ${benefit.gradient} hover:opacity-90 transition-all duration-300 flex items-center justify-center`}
                       >
-                        {isExpanded ? "Collapse" : "Expand"}
-                        <ChevronDown className={`ml-2 h-4 w-4 transition-transform ${isExpanded ? "rotate-180" : ""}`} />
+                        <ChevronDown className={`h-5 w-5 transition-transform ${isExpanded ? "rotate-180" : ""}`} />
                       </Button>
                     </div>
                     {isExpanded && (
@@ -1565,4 +1564,6 @@ export default function LandingPage() {
     </div>
   )
 }
+
+
 
