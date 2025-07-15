@@ -191,7 +191,6 @@ export function FundedCareerBuilder() {
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="accounts">Accounts</TabsTrigger>
           <TabsTrigger value="progression">Progression</TabsTrigger>
-          <TabsTrigger value="assessments">Assessments</TabsTrigger>
           <TabsTrigger value="projections">Projections</TabsTrigger>
         </TabsList>
 
