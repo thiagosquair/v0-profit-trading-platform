@@ -255,7 +255,7 @@ export function ScreenshotAnalysis() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Screenshot Analysis</h1>
-          <p className="text-gray-600 mt-1">Upload your trading screenshots for AI-powered analysis</p>
+          <p className="text-gray-600 mt-1">Upload your completed trading screenshot for Ai-powered analysis</p>
         </div>
         {remainingAnalyses !== 'unlimited' && (
           <Badge variant="outline" className="text-sm">
