@@ -151,8 +151,8 @@ export default function LandingPage() {
           detailedContent: "Our comprehensive library of interactive exercises is specifically designed for traders to build mental resilience and emotional control. These include Cognitive Behavioral Therapy (CBT) exercises that help you identify and change negative thought patterns."
         },
         {
-          title: "Market Live Insights",
-          description: "Real-time market psychology indicators and sentiment analysis to help you make informed decisions.",
+          title: "Trader Assessment",
+          description: "Our platform guides you through an in-depth assessment to identify your trading traits and build a personalized profile that supports smarter strategies.",
           detailedContent: "Our advanced behavioral pattern analysis uses machine learning to identify recurring patterns in your trading behavior. We analyze your decision-making processes, emotional triggers, and psychological biases that may be affecting your trading performance."
         },
         {
