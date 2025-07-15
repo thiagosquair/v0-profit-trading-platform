@@ -11,6 +11,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Loader2, Mail, Lock, Chrome } from "lucide-react"
 import { demoAuth } from "@/lib/demo-auth"
 import Link from "next/link"
+import Image from "next/image"
 
 export function SignInForm() {
   const [email, setEmail] = useState("")
@@ -95,9 +96,21 @@ export function SignInForm() {
       }}
     >
       <Card className="w-full max-w-md shadow-2xl">
-        <CardHeader className="space-y-1">
+        <CardHeader className="space-y-4">
+          {/* Logo */}
+          <div className="flex justify-center">
+            <Image
+              src="/images/3.png"
+              alt="MAXTRADES"
+              width={200}
+              height={60}
+              className="h-12 w-auto"
+              priority
+            />
+          </div>
+          
           <CardTitle className="text-2xl font-bold text-center">Welcome back</CardTitle>
-          <CardDescription className="text-center">Sign in to your MaxTrades account</CardDescription>
+          <CardDescription className="text-center">Sign in to your MAXTRADES account</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <Alert>
@@ -202,4 +215,3 @@ export function SignInForm() {
     </div>
   )
 }
-
