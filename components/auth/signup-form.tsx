@@ -12,6 +12,7 @@ import { Loader2, Mail, Lock, User, Chrome } from "lucide-react"
 import { useAuth } from "@/hooks/use-auth"
 import { isSupabaseConfigured } from "@/lib/supabase"
 import Link from "next/link"
+import Image from "next/image"
 
 export function SignUpForm() {
   const [email, setEmail] = useState("")
@@ -74,7 +75,19 @@ export function SignUpForm() {
       }}
     >
       <Card className="w-full max-w-md shadow-2xl">
-        <CardHeader className="space-y-1">
+        <CardHeader className="space-y-4">
+          {/* Logo */}
+          <div className="flex justify-center">
+            <Image
+              src="/images/3.png"
+              alt="MAXTRADES"
+              width={200}
+              height={60}
+              className="h-12 w-auto"
+              priority
+            />
+          </div>
+          
           <CardTitle className="text-2xl font-bold text-center">Create account</CardTitle>
           <CardDescription className="text-center">Start your trading psychology journey</CardDescription>
         </CardHeader>
@@ -204,4 +217,3 @@ export function SignUpForm() {
 }
 
 export default SignUpForm
-
