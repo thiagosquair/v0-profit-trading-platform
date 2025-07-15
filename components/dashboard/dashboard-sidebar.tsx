@@ -97,7 +97,7 @@ export function DashboardSidebar() {
     <div className="flex h-full w-64 flex-col fixed inset-y-0 z-50 lg:flex">
       <div className="flex flex-col flex-grow bg-white border-r border-gray-200 pt-5 pb-4 overflow-y-auto">
         <div className="flex items-center flex-shrink-0 px-4">
-          <h1 className="text-xl font-bold text-gray-900">ProFitz Dashboard</h1>
+          <h1 className="text-xl font-bold text-gray-900">MaxTrades Dashboard</h1>
         </div>
 
         <nav className="mt-5 flex-1 px-2 space-y-1">
