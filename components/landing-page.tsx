@@ -84,7 +84,7 @@ export default function LandingPage() {
         },
         {
           step: "2", 
-          title: "Get AI Coach",
+          title: "Get Ai Coach",
           description: "Receive your personalized AI psychology coach"
         },
         {
@@ -183,7 +183,7 @@ export default function LandingPage() {
       ],
       features: [
         {
-          title: "AI Psychology Coach",
+          title: "Ai Psychology Coach",
           description:
             "Your Personal Trading Psychology Mentor: Get real-time emotional coaching, behavioral pattern analysis, and personalized strategies to overcome psychological barriers and develop unshakeable trading discipline.",
         },
@@ -193,7 +193,7 @@ export default function LandingPage() {
             "Psychology-Focused Trade Planning: Plan every trade with psychological analysis, emotion checkpoints, and behavioral safeguards designed to help you make informed decisions.",
         },
         {
-          title: "AI Trade Analysis",
+          title: "Ai Trade Analysis",
           description:
             "Transform Every Trade into Learning Opportunity: Our AI analyzes your trades through a psychological lens, providing actionable insights to improve your decision-making and increase your profitability.",
         },
