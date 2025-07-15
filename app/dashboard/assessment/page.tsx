@@ -1,11 +1,11 @@
 // app/dashboard/assessment/page.tsx
 
-import { TraderAssessment } from '@/components/assessment/trader-assessment'
+import { AssessmentTools } from '@/components/dashboard/assessment-tools'
 
 export default function AssessmentPage() {
   return (
     <div className="container mx-auto">
-      <TraderAssessment />
+      <AssessmentTools />
     </div>
   )
 }
