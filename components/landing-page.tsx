@@ -395,7 +395,7 @@ export default function LandingPage() {
         },
         {
           title: "Exercícios Interativos", 
-          description: "Participe de exercícios de TCC, meditações e simulações projetadas para traders.",
+          description: "Participe de exercícios de TCC, meditações e simulaciones projetadas para traders.",
           detailedContent: "Nossa biblioteca abrangente de exercícios interativos é especificamente projetada para traders construírem resistência mental e controle emocional. Estes incluem exercícios de Terapia Cognitivo-Comportamental (TCC) que ajudam você a identificar e mudar padrões de pensamento negativos."
         },
         {
@@ -760,7 +760,7 @@ export default function LandingPage() {
             "Cursos de Psicología",
             "Insights de Coaching",
             "Constructor de Trade Ilimitado",
-            "Ejercicios Interactivos",
+            "Ejercicios Interativos",
             "Patrones Conductuales",
             "Constructor de Carreira Financiada"
           ]
@@ -889,7 +889,7 @@ export default function LandingPage() {
         {
           title: "Insights de Marché en Direct",
           description: "Indicateurs de psychologie de marché en temps réel et analyse de sentiment pour vous aider à prendre des décisions éclairées.",
-          detailedContent: "Obtenez des insights en temps réel sur la psychologie et le sentiment du marché avec notre tableau de bord d'analyse avancée. Cette fonctionnalité fournit une analyse de sentiment de marché en direct, des indicateurs de peur et de cupidité, des niveaux de stress de volatilité et des métriques de psychologie de foule."
+          detailedContent: "Obtenez des insights en temps réel sur la psychologie et le sentiment du marché avec notre tableau de bord d'analyse avancée. Cette fonctionnalité fournit une analyse de sentiment de marché en direct, des indicateurs de peur et de cupidité, des niveaux de stress de volatilité et des métriques de psychologie de multitudes."
         },
         {
           title: "Analyse de Captures d'Écran",
@@ -965,7 +965,7 @@ export default function LandingPage() {
             "25 Analyses de Trade par mois",
             "Suivi des Progrès Avancé",
             "Journal de Réflexion",
-            "Cours de Psychologie",
+            "Cursos de Psicología",
             "Analyse de Captures d'Écran",
             "10 Constructeur de Trade",
             "Exercices Interactifs"
@@ -983,7 +983,7 @@ export default function LandingPage() {
             "Analyses de Trade Illimitées",
             "Suivi des Progrès Avancé",
             "Journal de Réflexion",
-            "Cours de Psychologie",
+            "Cursos de Psicología",
             "Insights de Coaching",
             "30 Constructeur de Trade",
             "Exercices Interactifs",
@@ -1001,7 +1001,7 @@ export default function LandingPage() {
             "Analyses de Trade Illimitées",
             "Suivi des Progrès Avancé",
             "Journal de Réflexion",
-            "Cours de Psychologie",
+            "Cursos de Psicología",
             "Insights de Coaching",
             "Constructeur de Trade Illimité",
             "Exercices Interactifs",
@@ -1071,15 +1071,9 @@ export default function LandingPage() {
       {/* Header */}
       <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-navy-600 to-royal-blue-500 rounded-lg flex items-center justify-center">
-              <Brain className="h-5 w-5 text-white" />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-navy-900">{t.title}</h1>
-              <p className="text-xs text-navy-600">{t.subtitle}</p>
-            </div>
-          </div>
+          <Link href="/" className="flex items-center space-x-2">
+            <img src="/images/maxtradeslogo.png" alt="MaXTrades Logo" className="h-8 w-auto" />
+          </Link>
 
           <nav className="hidden md:flex items-center space-x-8">
             <Link href="#features" className="text-navy-700 hover:text-royal-blue-600 transition-colors">
@@ -1516,15 +1510,9 @@ export default function LandingPage() {
         <div className="container mx-auto">
           <div className="grid md:grid-cols-4 gap-8">
             <div className="space-y-4">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-r from-navy-600 to-royal-blue-500 rounded-lg flex items-center justify-center">
-                  <Brain className="h-5 w-5 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold">{t.title}</h3>
-                  <p className="text-xs text-blue-200">{t.subtitle}</p>
-                </div>
-              </div>
+              <Link href="/" className="flex items-center space-x-2">
+                <img src="/images/maxtradeslogo.png" alt="MaXTrades Logo" className="h-8 w-auto" />
+              </Link>
               <p className="text-blue-200">Master your trading psychology with AI-powered coaching and behavioral analysis.</p>
             </div>
 
@@ -1564,6 +1552,8 @@ export default function LandingPage() {
     </div>
   )
 }
+
+
 
 
 
