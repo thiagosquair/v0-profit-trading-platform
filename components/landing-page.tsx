@@ -24,12 +24,19 @@ import {
   ChevronDown,
   Globe,
   Star,
+  Shield,
+  Heart,
+  Zap,
+  CheckCircle,
+  TrendingDown,
+  DollarSign,
 } from "lucide-react"
 
 export default function LandingPage() {
   const [selectedLanguage, setSelectedLanguage] = useState("en")
   const [expandedFeatures, setExpandedFeatures] = useState<{ [key: number]: boolean }>({})
   const [allExpanded, setAllExpanded] = useState(false)
+  const [expandedBenefits, setExpandedBenefits] = useState<{ [key: number]: boolean }>({})
 
   useEffect(() => {
     const savedLanguage = localStorage.getItem("selectedLanguage")
@@ -89,6 +96,47 @@ export default function LandingPage() {
           step: "4",
           title: "Track Progress",
           description: "Monitor your psychological development and trading improvement"
+        }
+      ],
+      // New Benefits Section
+      benefitsTitle: "Transform Your Trading Psychology",
+      benefitsSubtitle: "Unlock your full potential and achieve consistent profitability with our comprehensive trading psychology platform",
+      benefits: [
+        {
+          title: "Overcome Hesitation with a Well-Developed Trading Plan",
+          description: "Build confidence by creating a structured, actionable trading plan tailored to your strategy and goals. Eliminate second-guessing and execute trades decisively with a clear roadmap that defines entry, exit, and risk management rules.",
+          icon: Target,
+          gradient: "from-blue-500 to-cyan-500"
+        },
+        {
+          title: "Manage Emotional Decision-Making",
+          description: "Learn proven techniques to recognize, control, and channel emotions while trading. Reduce impulsive reactions and cultivate a disciplined mindset that supports sound, objective decisions—even in volatile markets.",
+          icon: Heart,
+          gradient: "from-purple-500 to-pink-500"
+        },
+        {
+          title: "Stop Poor Risk Management Decisions",
+          description: "Master the principles of effective risk management. Define your risk limits, position sizes, and loss mitigation strategies to protect capital and stay in the game long-term, avoiding catastrophic errors that sabotage your progress.",
+          icon: Shield,
+          gradient: "from-green-500 to-emerald-500"
+        },
+        {
+          title: "Eliminate Bad Trades and Poor Decisions",
+          description: "Analyze your trading behavior to identify patterns of mistakes and self-sabotage. Use guided reflection and structured feedback to break the cycle of repeated errors, helping you make consistently better trading choices.",
+          icon: TrendingDown,
+          gradient: "from-red-500 to-orange-500"
+        },
+        {
+          title: "Maximize Trading Opportunities with Confident Position Sizing",
+          description: "Learn to size positions strategically based on your plan and risk tolerance. Optimize potential returns while managing downside risk, empowering you to take advantage of opportunities without fear or hesitation.",
+          icon: Zap,
+          gradient: "from-yellow-500 to-amber-500"
+        },
+        {
+          title: "Aim for Consistent Profitability",
+          description: "Shift from sporadic wins to sustainable success. Develop the habits, processes, and psychological resilience required to deliver reliable results over time, turning disciplined trading into a consistently profitable career.",
+          icon: DollarSign,
+          gradient: "from-indigo-500 to-purple-500"
         }
       ],
       detailedFeatures: [
@@ -298,6 +346,47 @@ export default function LandingPage() {
           description: "Monitore seu desenvolvimento psicológico e melhoria no trading"
         }
       ],
+      // New Benefits Section
+      benefitsTitle: "Transforme Sua Psicologia de Trading",
+      benefitsSubtitle: "Desbloqueie seu potencial completo e alcance rentabilidade consistente com nossa plataforma abrangente de psicologia de trading",
+      benefits: [
+        {
+          title: "Supere a Hesitação com um Plano de Trading Bem Desenvolvido",
+          description: "Construa confiança criando um plano de trading estruturado e acionável, adaptado à sua estratégia e objetivos. Elimine dúvidas e execute trades decisivamente com um roteiro claro que define regras de entrada, saída e gestão de risco.",
+          icon: Target,
+          gradient: "from-blue-500 to-cyan-500"
+        },
+        {
+          title: "Gerencie a Tomada de Decisão Emocional",
+          description: "Aprenda técnicas comprovadas para reconhecer, controlar e canalizar emoções durante o trading. Reduza reações impulsivas e cultive uma mentalidade disciplinada que suporte decisões sólidas e objetivas—mesmo em mercados voláteis.",
+          icon: Heart,
+          gradient: "from-purple-500 to-pink-500"
+        },
+        {
+          title: "Pare Decisões Ruins de Gestão de Risco",
+          description: "Domine os princípios de gestão de risco eficaz. Defina seus limites de risco, tamanhos de posição e estratégias de mitigação de perdas para proteger capital e permanecer no jogo a longo prazo, evitando erros catastróficos que sabotam seu progresso.",
+          icon: Shield,
+          gradient: "from-green-500 to-emerald-500"
+        },
+        {
+          title: "Elimine Trades Ruins e Decisões Pobres",
+          description: "Analise seu comportamento de trading para identificar padrões de erros e autossabotagem. Use reflexão guiada e feedback estruturado para quebrar o ciclo de erros repetidos, ajudando você a fazer escolhas de trading consistentemente melhores.",
+          icon: TrendingDown,
+          gradient: "from-red-500 to-orange-500"
+        },
+        {
+          title: "Maximize Oportunidades de Trading com Dimensionamento de Posição Confiante",
+          description: "Aprenda a dimensionar posições estrategicamente baseado em seu plano e tolerância ao risco. Otimize retornos potenciais enquanto gerencia risco de queda, capacitando você a aproveitar oportunidades sem medo ou hesitação.",
+          icon: Zap,
+          gradient: "from-yellow-500 to-amber-500"
+        },
+        {
+          title: "Mire na Rentabilidade Consistente",
+          description: "Mude de vitórias esporádicas para sucesso sustentável. Desenvolva os hábitos, processos e resistência psicológica necessários para entregar resultados confiáveis ao longo do tempo, transformando trading disciplinado em uma carreira consistentemente lucrativa.",
+          icon: DollarSign,
+          gradient: "from-indigo-500 to-purple-500"
+        }
+      ],
       detailedFeatures: [
         {
           title: "Padrões Comportamentais",
@@ -499,6 +588,47 @@ export default function LandingPage() {
           step: "4",
           title: "Seguir Progreso",
           description: "Monitorea tu desarrollo psicológico y mejora en el trading"
+        }
+      ],
+      // New Benefits Section
+      benefitsTitle: "Transforma Tu Psicología de Trading",
+      benefitsSubtitle: "Desbloquea tu potencial completo y logra rentabilidad consistente con nuestra plataforma integral de psicología de trading",
+      benefits: [
+        {
+          title: "Supera la Vacilación con un Plan de Trading Bien Desarrollado",
+          description: "Construye confianza creando un plan de trading estructurado y accionable, adaptado a tu estrategia y objetivos. Elimina las dudas y ejecuta trades decisivamente con una hoja de ruta clara que define reglas de entrada, salida y gestión de riesgos.",
+          icon: Target,
+          gradient: "from-blue-500 to-cyan-500"
+        },
+        {
+          title: "Gestiona la Toma de Decisiones Emocional",
+          description: "Aprende técnicas probadas para reconocer, controlar y canalizar emociones mientras operas. Reduce reacciones impulsivas y cultiva una mentalidad disciplinada que apoye decisiones sólidas y objetivas—incluso en mercados volátiles.",
+          icon: Heart,
+          gradient: "from-purple-500 to-pink-500"
+        },
+        {
+          title: "Detén las Malas Decisiones de Gestión de Riesgos",
+          description: "Domina los principios de gestión de riesgos efectiva. Define tus límites de riesgo, tamaños de posición y estrategias de mitigación de pérdidas para proteger capital y mantenerte en el juego a largo plazo, evitando errores catastróficos que sabotean tu progreso.",
+          icon: Shield,
+          gradient: "from-green-500 to-emerald-500"
+        },
+        {
+          title: "Elimina Malos Trades y Decisiones Pobres",
+          description: "Analiza tu comportamiento de trading para identificar patrones de errores y autosabotaje. Usa reflexión guiada y retroalimentación estructurada para romper el ciclo de errores repetidos, ayudándote a hacer elecciones de trading consistentemente mejores.",
+          icon: TrendingDown,
+          gradient: "from-red-500 to-orange-500"
+        },
+        {
+          title: "Maximiza Oportunidades de Trading con Dimensionamiento de Posición Confiado",
+          description: "Aprende a dimensionar posiciones estratégicamente basado en tu plan y tolerancia al riesgo. Optimiza retornos potenciales mientras gestionas riesgo a la baja, empoderándote para aprovechar oportunidades sin miedo o vacilación.",
+          icon: Zap,
+          gradient: "from-yellow-500 to-amber-500"
+        },
+        {
+          title: "Apunta a la Rentabilidad Consistente",
+          description: "Cambia de victorias esporádicas a éxito sostenible. Desarrolla los hábitos, procesos y resistencia psicológica requeridos para entregar resultados confiables a lo largo del tiempo, convirtiendo el trading disciplinado en una carrera consistentemente rentable.",
+          icon: DollarSign,
+          gradient: "from-indigo-500 to-purple-500"
         }
       ],
       detailedFeatures: [
@@ -704,6 +834,47 @@ export default function LandingPage() {
           description: "Surveillez votre développement psychologique et amélioration du trading"
         }
       ],
+      // New Benefits Section
+      benefitsTitle: "Transformez Votre Psychologie de Trading",
+      benefitsSubtitle: "Débloquez votre plein potentiel et atteignez une rentabilité constante avec notre plateforme complète de psychologie de trading",
+      benefits: [
+        {
+          title: "Surmontez l'Hésitation avec un Plan de Trading Bien Développé",
+          description: "Construisez la confiance en créant un plan de trading structuré et actionnable, adapté à votre stratégie et vos objectifs. Éliminez les doutes et exécutez les trades de manière décisive avec une feuille de route claire qui définit les règles d'entrée, de sortie et de gestion des risques.",
+          icon: Target,
+          gradient: "from-blue-500 to-cyan-500"
+        },
+        {
+          title: "Gérez la Prise de Décision Émotionnelle",
+          description: "Apprenez des techniques éprouvées pour reconnaître, contrôler et canaliser les émotions pendant le trading. Réduisez les réactions impulsives et cultivez un état d'esprit discipliné qui soutient des décisions solides et objectives—même dans des marchés volatils.",
+          icon: Heart,
+          gradient: "from-purple-500 to-pink-500"
+        },
+        {
+          title: "Arrêtez les Mauvaises Décisions de Gestion des Risques",
+          description: "Maîtrisez les principes de gestion des risques efficace. Définissez vos limites de risque, tailles de position et stratégies d'atténuation des pertes pour protéger le capital et rester dans le jeu à long terme, évitant les erreurs catastrophiques qui sabotent votre progrès.",
+          icon: Shield,
+          gradient: "from-green-500 to-emerald-500"
+        },
+        {
+          title: "Éliminez les Mauvais Trades et les Décisions Pauvres",
+          description: "Analysez votre comportement de trading pour identifier les modèles d'erreurs et d'auto-sabotage. Utilisez la réflexion guidée et les commentaires structurés pour briser le cycle d'erreurs répétées, vous aidant à faire des choix de trading constamment meilleurs.",
+          icon: TrendingDown,
+          gradient: "from-red-500 to-orange-500"
+        },
+        {
+          title: "Maximisez les Opportunités de Trading avec un Dimensionnement de Position Confiant",
+          description: "Apprenez à dimensionner les positions stratégiquement basé sur votre plan et tolérance au risque. Optimisez les retours potentiels tout en gérant le risque de baisse, vous permettant de profiter des opportunités sans peur ou hésitation.",
+          icon: Zap,
+          gradient: "from-yellow-500 to-amber-500"
+        },
+        {
+          title: "Visez la Rentabilité Constante",
+          description: "Passez de victoires sporadiques au succès durable. Développez les habitudes, processus et résilience psychologique requis pour livrer des résultats fiables au fil du temps, transformant le trading discipliné en une carrière constamment rentable.",
+          icon: DollarSign,
+          gradient: "from-indigo-500 to-purple-500"
+        }
+      ],
       detailedFeatures: [
         {
           title: "Modèles Comportementaux",
@@ -886,6 +1057,13 @@ export default function LandingPage() {
       newExpandedFeatures[i] = newState
     }
     setExpandedFeatures(newExpandedFeatures)
+  }
+
+  const toggleBenefit = (index: number) => {
+    setExpandedBenefits((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }))
   }
 
   return (
@@ -1166,8 +1344,62 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* NEW BENEFITS SECTION */}
+      <section className="py-20 px-4 bg-white">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-navy-900 mb-4">{t.benefitsTitle}</h2>
+            <p className="text-xl text-navy-600 max-w-4xl mx-auto">{t.benefitsSubtitle}</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {t.benefits.map((benefit, index) => {
+              const IconComponent = benefit.icon
+              const isExpanded = expandedBenefits[index] || false
+              return (
+                <Card
+                  key={index}
+                  className="border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 bg-gradient-to-br from-white to-gray-50 overflow-hidden group"
+                >
+                  <CardHeader className="pb-4">
+                    <div className={`w-16 h-16 bg-gradient-to-r ${benefit.gradient} rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                      <IconComponent className="h-8 w-8 text-white" />
+                    </div>
+                    <CardTitle className="text-xl text-navy-800 text-center leading-tight">
+                      {benefit.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <div className="flex justify-center mb-4">
+                      <Button
+                        variant="ghost"
+                        onClick={() => toggleBenefit(index)}
+                        className={`text-white px-6 py-2 rounded-full bg-gradient-to-r ${benefit.gradient} hover:opacity-90 transition-all duration-300`}
+                      >
+                        {isExpanded ? "Collapse" : "Expand"}
+                        <ChevronDown className={`ml-2 h-4 w-4 transition-transform ${isExpanded ? "rotate-180" : ""}`} />
+                      </Button>
+                    </div>
+                    {isExpanded && (
+                      <div className="mt-4 p-4 bg-gray-50 rounded-lg border-l-4 border-gradient-to-b from-navy-500 to-royal-blue-500">
+                        <div className="flex items-start mb-2">
+                          <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                          <p className="text-navy-600 leading-relaxed text-sm">
+                            {benefit.description}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* Pricing Section */}
-      <section id="pricing" className="py-20 px-4 bg-white">
+      <section id="pricing" className="py-20 px-4 bg-gradient-to-br from-blue-50 to-sky-50">
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-navy-900 mb-4">{t.pricingTitle}</h2>
@@ -1234,7 +1466,7 @@ export default function LandingPage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-sky-50">
+      <section className="py-20 px-4 bg-white">
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-navy-900 mb-4">{t.testimonialsTitle}</h2>
