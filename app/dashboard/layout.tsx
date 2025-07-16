@@ -1,4 +1,5 @@
 // app/dashboard/layout.tsx - FIXED VERSION
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { DashboardSidebar } from '@/components/dashboard/dashboard-sidebar'
 import { UserProvider } from '@/contexts/UserContext'
 
