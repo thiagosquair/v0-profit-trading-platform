@@ -91,16 +91,18 @@ const DashboardCarousel = () => {
               {images.map((image, index) => (
                 <div
                   key={`first-${index}`}
-                  className="flex-shrink-0 w-[50%] h-64 relative bg-white rounded-xl mx-2 shadow-lg overflow-hidden"
+                  className="flex-shrink-0 w-[50%] h-full relative bg-white rounded-xl mx-2 shadow-lg overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    className="object-cover object-center"
-                    priority={index === 0}
-                  />
+                  <div className="relative h-full w-full">
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      className="object-cover object-center"
+                      priority={index === 0}
+                    />
+                  </div>
                   <div className="absolute bottom-6 left-6 z-20">
                     <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-lg">
                       {image.title}
@@ -116,15 +118,17 @@ const DashboardCarousel = () => {
               {images.map((image, index) => (
                 <div
                   key={`second-${index}`}
-                  className="flex-shrink-0 w-[50%] h-64 relative bg-white rounded-xl mx-2 shadow-lg overflow-hidden"
+                  className="flex-shrink-0 w-[50%] h-full relative bg-white rounded-xl mx-2 shadow-lg overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    className="object-cover object-center"
-                  />
+                  <div className="relative h-full w-full">
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      className="object-cover object-center"
+                    />
+                  </div>
                   <div className="absolute bottom-6 left-6 z-20">
                     <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-lg">
                       {image.title}
@@ -752,7 +756,7 @@ export default function LandingPage() {
         },
         {
           title: "Detén las Malas Decisiones de Gestión de Riesgos",
-          description: "Domina los principios de gestión de riesgo efectiva. Define tus límites de riesgo, tamaños de posición y estrategias de mitigación de pérdidas para proteger capital y mantenerte en el juego a largo plazo, evitando errores catastróficos que sabotean tu progreso.",
+          description: "Domina los principios de gestión de riesgos efectiva. Define tus límites de riesgo, tamaños de posición y estrategias de mitigación de pérdidas para proteger capital y mantenerte en el juego a largo plazo, evitando errores catastróficos que sabotan tu progreso.",
           icon: Shield,
           gradient: "from-green-500 to-emerald-500"
         },
@@ -897,14 +901,14 @@ export default function LandingPage() {
           description: "Para Traders Elite",
           features: [
             "Todo de Premium",
-            "Coach de Psicología IA Avançado",
+            "Coach de Psicología IA Avanzado",
             "Análisis de Trade Ilimitados",
-            "Seguimiento de Progreso Avançado",
+            "Seguimiento de Progreso Avanzado",
             "Diário de Reflexão",
             "Cursos de Psicología",
             "Insights de Coaching",
             "Constructor de Trade Ilimitado",
-            "Ejercicios Interativos",
+            "Ejercicios Interactivos",
             "Patrones Conductuales",
             "Constructor de Carreira Financiada"
           ]
@@ -932,7 +936,7 @@ export default function LandingPage() {
         },
         {
           name: "Emily Johnson",
-          role: "Options Trader",
+          role: "Trader de Opciones",
           content: "Finalmente, una plataforma que aborda el juego mental. Mi control emocional nunca ha estado mejor.",
           rating: 5
         }
@@ -1095,7 +1099,7 @@ export default function LandingPage() {
             "Coach de Psychologie IA",
             "5 Analyses de Trade par mois",
             "Suivi des Progrès",
-            "Exercices Interactifs",
+            "Exercices Interactivos",
             "Cours de Psychologie"
           ]
         },
