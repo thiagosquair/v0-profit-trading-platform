@@ -1567,7 +1567,7 @@ export default function LandingPage() {
       <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-sky-50">
         <div className="container mx-auto text-center">
           <Image
-            src="/images/assessbox.png"
+            src="/images/sec1.png"
             alt="How MaXTrades Works"
             width={1200} // Adjust width as needed to match section size
             height={600} // Adjust height as needed to match section size
@@ -1635,7 +1635,7 @@ export default function LandingPage() {
       <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-sky-50">
         <div className="container mx-auto text-center">
           <Image
-            src="/images/careerbox.png"
+            src="/images/sec2.png"
             alt="Funded Career Builder"
             width={1200} // Adjust width as needed to match section size
             height={600} // Adjust height as needed to match section size
