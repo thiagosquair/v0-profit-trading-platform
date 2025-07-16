@@ -77,155 +77,24 @@ export default function LandingPage() {
       howItWorksSubtitle: "It's a Purpose-Built Space to Master Consistency, Shape the Right Trading Mindset to achieve Long-Term Success",
       howItWorksSteps: [
         {
-          // Dashboard Carousel Component
-// Add this component to your landing page
-
-'use client';
-
-import Image from 'next/image';
-
-const DashboardCarousel = () => {
-  const images = [
-    {
-      src: '/images/dashboardbox1.png',
-      alt: 'Trading Dashboard',
-      title: 'Trading Dashboard'
-    },
-    {
-      src: '/images/progressbox.png',
-      alt: 'Progress Analytics',
-      title: 'Progress Analytics'
-    }
-  ];
-
-  // Duplicate images for seamless loop
-  const duplicatedImages = [...images, ...images];
-
-  return (
-    <section className="py-16 bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-blue-900 mb-4">
-            How MaxTrades Works
-          </h2>
-          <p className="text-xl text-gray-600 max-w-4xl mx-auto">
-            It's a Purpose-Built Space to Master Consistency, Shape the Right Trading Mindset to achieve Long-Term Success
-          </p>
-        </div>
-
-        {/* Carousel Container */}
-        <div className="relative overflow-hidden rounded-2xl shadow-2xl mb-16" style={{ height: '400px' }}>
-          <div className="flex animate-scroll-right">
-            {duplicatedImages.map((image, index) => (
-              <div
-                key={index}
-                className="flex-shrink-0 relative group"
-                style={{ width: '600px', height: '400px' }}
-              >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <h3 className="text-xl font-semibold">{image.title}</h3>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* 4-Step Process (Keep Original) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div className="text-center group">
-            <div className="relative mb-6">
-              <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-700 transition-colors">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                1
-              </div>
-            </div>
-            <h3 className="text-xl font-semibold text-blue-900 mb-3">Take Assessment</h3>
-            <p className="text-gray-600">Complete our comprehensive trading psychology assessment</p>
-          </div>
-
-          <div className="text-center group">
-            <div className="relative mb-6">
-              <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-700 transition-colors">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                </svg>
-              </div>
-              <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                2
-              </div>
-            </div>
-            <h3 className="text-xl font-semibold text-blue-900 mb-3">Get Ai Coach</h3>
-            <p className="text-gray-600">Receive your personalized AI psychology coach</p>
-          </div>
-
-          <div className="text-center group">
-            <div className="relative mb-6">
-              <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-700 transition-colors">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-              </div>
-              <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                3
-              </div>
-            </div>
-            <h3 className="text-xl font-semibold text-blue-900 mb-3">Build Trades</h3>
-            <p className="text-gray-600">Structure trades with psychological checkpoints</p>
-          </div>
-
-          <div className="text-center group">
-            <div className="relative mb-6">
-              <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-700 transition-colors">
-                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-              </div>
-              <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                4
-              </div>
-            </div>
-            <h3 className="text-xl font-semibold text-blue-900 mb-3">Track Progress</h3>
-            <p className="text-gray-600">Monitor your psychological development and trading improvement</p>
-          </div>
-        </div>
-      </div>
-
-      <style jsx>{`
-        @keyframes scroll-right {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-        
-        .animate-scroll-right {
-          animation: scroll-right 20s linear infinite;
-        }
-        
-        .animate-scroll-right:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
-    </section>
-  );
-};
-
-export default DashboardCarousel;
-
+          step: "1", 
+          title: "Take Assessment",
+          description: "Complete our comprehensive trading psychology assessment"
+        },
+        {
+          step: "2", 
+          title: "Get Ai Coach",
+          description: "Receive your personalized AI psychology coach"
+        },
+        {
+          step: "3",
+          title: "Build Trades", 
+          description: "Structure trades with psychological checkpoints"
+        },
+        {
+          step: "4",
+          title: "Track Progress",
+          description: "Monitor your psychological development and trading improvement"
         }
       ],
       // New Benefits Section
