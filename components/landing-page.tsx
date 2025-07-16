@@ -34,8 +34,6 @@ import {
 
 export default function LandingPage() {
   const [selectedLanguage, setSelectedLanguage] = useState("en")
-  const [expandedFeatures, setExpandedFeatures] = useState<{ [key: number]: boolean }>({})
-  const [allExpanded, setAllExpanded] = useState(false)
   const [expandedBenefits, setExpandedBenefits] = useState<{ [key: number]: boolean }>({})
 
   useEffect(() => {
@@ -756,7 +754,7 @@ export default function LandingPage() {
             "Coach de Psicología IA Avanzado",
             "Análisis de Trade Ilimitados",
             "Seguimiento de Progreso Avanzado",
-            "Diario de Reflexión",
+            "Diário de Reflexão",
             "Cursos de Psicología",
             "Insights de Coaching",
             "Constructor de Trade Ilimitado",
@@ -921,7 +919,7 @@ export default function LandingPage() {
         {
           title: "Coach de Psychologie IA",
           description:
-            "Votre Mentor Personnel de Psychologie de Trading : Obtenez un coaching émotionnel en temps réel, une analyse des modèles comportementaux et des stratégies personnalisées pour surmonter les barrières psychologiques et développer une discipline de trading inébranlable.",
+            "Votre Mentor Personnel de Psychologie de Trading : Obtenez un coaching émotionnel en temps réel, une analyse des modèles comportementaux et des stratégies personalisées pour surmonter les barrières psychologiques et développer une discipline de trading inébranlable.",
         },
         {
           title: "Constructeur de Trade",
@@ -1041,23 +1039,6 @@ export default function LandingPage() {
   }
 
   const t = content[selectedLanguage as keyof typeof content]
-
-  const toggleFeature = (index: number) => {
-    setExpandedFeatures((prev) => ({
-      ...prev,
-      [index]: !prev[index],
-    }))
-  }
-
-  const toggleAllFeatures = () => {
-    const newState = !allExpanded
-    setAllExpanded(newState)
-    const newExpandedFeatures: { [key: number]: boolean } = {}
-    for (let i = 0; i < 4; i++) {
-      newExpandedFeatures[i] = newState
-    }
-    setExpandedFeatures(newExpandedFeatures)
-  }
 
   const toggleBenefit = (index: number) => {
     setExpandedBenefits((prev) => ({
@@ -1260,21 +1241,12 @@ export default function LandingPage() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-navy-900 mb-4">Our Ultimate Trading Features</h2>
             <p className="text-xl text-navy-600">The core tools that set MaXTrades apart from every other trading platform</p>
-            <Button
-              variant="outline"
-              onClick={toggleAllFeatures}
-              className="border-navy-300 text-navy-700 hover:bg-navy-50"
-            >
-              {allExpanded ? t.collapseAll : t.expandAll}
-              <ChevronDown className={`ml-2 h-4 w-4 transition-transform ${allExpanded ? "rotate-180" : ""}`} />
-            </Button>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             {t.features.map((feature, index) => {
               const icons = [Brain, Settings, TrendingUp, Award]
               const IconComponent = icons[index]
-              const isExpanded = expandedFeatures[index] || false
               return (
                 <Card
                   key={index}
@@ -1285,21 +1257,12 @@ export default function LandingPage() {
                       <IconComponent className="h-10 w-10 text-white" />
                     </div>
                     <CardTitle className="text-2xl text-navy-800 mb-4">{feature.title}</CardTitle>
-                    <Button
-                      variant="ghost"
-                      onClick={() => toggleFeature(index)}
-                      className="text-navy-600 hover:text-navy-800 hover:bg-navy-50 p-2"
-                    >
-                      <ChevronDown className={`h-5 w-5 transition-transform ${isExpanded ? "rotate-180" : ""}`} />
-                    </Button>
                   </CardHeader>
-                  {isExpanded && (
-                    <CardContent className="text-center">
-                      <CardDescription className="text-navy-600 text-lg leading-relaxed">
-                        {feature.description}
-                      </CardDescription>
-                    </CardContent>
-                  )}
+                  <CardContent className="text-center">
+                    <CardDescription className="text-navy-600 text-lg leading-relaxed">
+                      {feature.description}
+                    </CardDescription>
+                  </CardContent>
                 </Card>
               )
             })}
@@ -1552,8 +1515,3 @@ export default function LandingPage() {
     </div>
   )
 }
-
-
-
-
-
