@@ -12,9 +12,9 @@ import { AuthProvider } from "@/hooks/use-auth"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "ProFitz - Trading Psychology Lab",
-  description: "Advanced trading psychology platform with AI coaching",
-  generator: "v0.dev",
+  title: "MaXTrades - Trading Psychology Lab",
+  description: "Advanced trading psychology platform with Ai coaching",
+  generator: "MaXTrades",
 }
 
 export default function RootLayout({
