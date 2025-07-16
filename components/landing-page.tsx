@@ -77,6 +77,7 @@ export default function LandingPage() {
       howItWorksSubtitle: "It's a Purpose-Built Space to Master Consistency, Shape the Right Trading Mindset to achieve Long-Term Success",
       howItWorksSteps: [
         {
+          step: "1", 
           title: "Take Assessment",
           description: "Complete our comprehensive trading psychology assessment"
         },
