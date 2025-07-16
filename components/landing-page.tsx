@@ -5,7 +5,7 @@
 import React from "react"
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import Image from "next/image"
+import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -40,12 +40,12 @@ const DashboardCarousel = () => {
   // Images to display in the carousel
   const images = [
     {
-      src: 
+      src: '/images/dashboardbox1.png',
       alt: 'Dashboard Overview',
       title: 'Trading Dashboard'
     },
     {
-      src: 
+      src: '/images/progressbox.png', 
       alt: 'Progress Tracking',
       title: 'Progress Analytics'
     }
@@ -94,15 +94,13 @@ const DashboardCarousel = () => {
                   className="flex-shrink-0 w-[50%] h-full relative bg-white rounded-xl mx-2 shadow-lg overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
-                  <div className="relative h-full w-full">
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      className="object-cover object-center"
-                      priority={index === 0}
-                    />
-                  </div>
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover object-center"
+                    priority={index === 0}
+                  />
                   <div className="absolute bottom-6 left-6 z-20">
                     <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-lg">
                       {image.title}
@@ -121,14 +119,12 @@ const DashboardCarousel = () => {
                   className="flex-shrink-0 w-[50%] h-full relative bg-white rounded-xl mx-2 shadow-lg overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
-                  <div className="relative h-full w-full">
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      className="object-cover object-center"
-                    />
-                  </div>
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover object-center"
+                  />
                   <div className="absolute bottom-6 left-6 z-20">
                     <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-lg">
                       {image.title}
@@ -756,7 +752,7 @@ export default function LandingPage() {
         },
         {
           title: "Detén las Malas Decisiones de Gestión de Riesgos",
-          description: "Domina los principios de gestión de riesgos efectiva. Define tus límites de riesgo, tamaños de posición y estrategias de mitigación de pérdidas para proteger capital y mantenerte en el juego a largo plazo, evitando errores catastróficos que sabotan tu progreso.",
+          description: "Domina los principios de gestión de riesgos efectiva. Define tus límites de riesgo, tamaños de posición y estrategias de mitigación de pérdidas para proteger capital y mantenerte en el juego a largo plazo, evitando errores catastróficos que sabotean tu progreso.",
           icon: Shield,
           gradient: "from-green-500 to-emerald-500"
         },
@@ -908,7 +904,7 @@ export default function LandingPage() {
             "Cursos de Psicología",
             "Insights de Coaching",
             "Constructor de Trade Ilimitado",
-            "Ejercicios Interactivos",
+            "Ejercicios Interativos",
             "Patrones Conductuales",
             "Constructor de Carreira Financiada"
           ]
@@ -1099,7 +1095,7 @@ export default function LandingPage() {
             "Coach de Psychologie IA",
             "5 Analyses de Trade par mois",
             "Suivi des Progrès",
-            "Exercices Interactivos",
+            "Exercices Interactifs",
             "Cours de Psychologie"
           ]
         },
@@ -1648,8 +1644,6 @@ export default function LandingPage() {
     </div>
   )
 }
-
-
 
 
 
