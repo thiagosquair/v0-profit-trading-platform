@@ -3,7 +3,12 @@
 import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -28,7 +33,7 @@ export function LanguageSwitcher({ variant = "header", className }: LanguageSwit
 
   useEffect(() => {
     const savedLanguage = localStorage.getItem("preferred-language") as Language;
-    if (savedLanguage && languages.find(lang => lang.code === savedLanguage)) {
+    if (savedLanguage && languages.find((lang) => lang.code === savedLanguage)) {
       setCurrentLanguage(savedLanguage);
     }
   }, []);
@@ -37,15 +42,19 @@ export function LanguageSwitcher({ variant = "header", className }: LanguageSwit
     setCurrentLanguage(language);
     localStorage.setItem("preferred-language", language);
 
-    // ✅ For next-intl: Navigate to localized route
-   const currentPath = pathname.replace(/^\/(en|pt-BR|es|fr)/, "");
-   const targetPath = currentPath === "" ? "/dashboard" : currentPath;
-   const newPath = `/${language}${targetPath}`;
-   console.log("Switching to:", newPath);
-   router.push(newPath);
+    const pathParts = pathname.split("/").filter(Boolean);
+    const currentLocale = pathParts[0];
 
-    // ✅ If using react-i18next: uncomment this
-    // i18n.changeLanguage(language);
+    const knownLocales = ["en", "pt-BR", "es", "fr"];
+    let basePath = pathname;
+
+    if (knownLocales.includes(currentLocale)) {
+      basePath = `/${pathParts.slice(1).join("/")}`;
+    }
+
+    const newPath = `/${language}${basePath || "/dashboard"}`;
+    console.log("Redirecting to:", newPath);
+    router.push(newPath);
   };
 
   const currentLang = languages.find((lang) => lang.code === currentLanguage);
