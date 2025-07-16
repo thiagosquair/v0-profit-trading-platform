@@ -1394,7 +1394,7 @@ export default function LandingPage() {
               <Badge className="bg-gradient-to-r from-navy-100 to-royal-blue-100 text-navy-700 border-navy-200 px-4 py-2 text-sm font-medium">
                 {t.badge}
               </Badge>
-              <h1 className="text-5xl md:text-6xl font-bold text-navy-900 leading-tight">
+              <h1 className="text-5xl md:text-6xl font-bold text-navy-900 leading-tight gradient-text">
                 {t.heroTitle}
               </h1>
               <p className="text-xl text-navy-600 leading-relaxed max-w-lg">
@@ -1465,7 +1465,7 @@ export default function LandingPage() {
       <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-sky-50">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-navy-900 mb-4">{t.featuresTitle}</h2>
+            <h2 className="text-4xl font-bold text-navy-900 mb-4 gradient-text">{t.featuresTitle}</h2>
             <p className="text-xl text-navy-600 max-w-4xl mx-auto">{t.featuresSubtitle}</p>
           </div>
 
@@ -1514,16 +1514,8 @@ export default function LandingPage() {
       <section className="py-20 px-4 bg-white">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-navy-900 mb-4">Our Ultimate Trading Features</h2>
+            <h2 className="text-4xl font-bold text-navy-900 mb-4 gradient-text">Our Ultimate Trading Features</h2>
             <p className="text-xl text-navy-600">The core tools that set MaXTrades apart from every other trading platform</p>
-            <Button
-              variant="outline"
-              onClick={toggleAllFeatures}
-              className="border-navy-300 text-navy-700 hover:bg-navy-50"
-            >
-              {allExpanded ? t.collapseAll : t.expandAll}
-              <ChevronDown className={`ml-2 h-4 w-4 transition-transform ${allExpanded ? "rotate-180" : ""}`} />
-            </Button>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
@@ -1541,21 +1533,12 @@ export default function LandingPage() {
                       <IconComponent className="h-10 w-10 text-white" />
                     </div>
                     <CardTitle className="text-2xl text-navy-800 mb-4">{feature.title}</CardTitle>
-                    <Button
-                      variant="ghost"
-                      onClick={() => toggleFeature(index)}
-                      className="text-navy-600 hover:text-navy-800 hover:bg-navy-50 p-2"
-                    >
-                      <ChevronDown className={`h-5 w-5 transition-transform ${isExpanded ? "rotate-180" : ""}`} />
-                    </Button>
                   </CardHeader>
-                  {isExpanded && (
-                    <CardContent className="text-center">
-                      <CardDescription className="text-navy-600 text-lg leading-relaxed">
-                        {feature.description}
-                      </CardDescription>
-                    </CardContent>
-                  )}
+                  <CardContent className="text-center">
+                    <CardDescription className="text-navy-600 text-lg leading-relaxed">
+                      {feature.description}
+                    </CardDescription>
+                  </CardContent>
                 </Card>
               )
             })}
@@ -1566,6 +1549,7 @@ export default function LandingPage() {
       {/* How It Works - REPLACED WITH IMAGE */}
       <section className="py-20 px-4 bg-white">
         <div className="container mx-auto text-center">
+          <h2 className="text-4xl font-bold text-navy-900 mb-8 gradient-text">The Ultimate Toolkit to Accelerate Your Trading Success</h2>
           <Image
             src="/images/sec1.png"
             alt="How MaXTrades Works"
@@ -1582,7 +1566,7 @@ export default function LandingPage() {
       <section className="py-20 px-4 bg-white">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-navy-900 mb-4">{t.benefitsTitle}</h2>
+            <h2 className="text-4xl font-bold text-navy-900 mb-4 gradient-text">{t.benefitsTitle}</h2>
             <p className="text-xl text-navy-600 max-w-4xl mx-auto">{t.benefitsSubtitle}</p>
           </div>
 
@@ -1634,6 +1618,7 @@ export default function LandingPage() {
       {/* Career Box Image Section */}
       <section className="py-20 px-4 bg-white">
         <div className="container mx-auto text-center">
+          <h2 className="text-4xl font-bold text-navy-900 mb-8 gradient-text">Master Your Mindset, Unlock Career Growth.</h2>
           <Image
             src="/images/sec2.png"
             alt="Funded Career Builder"
@@ -1650,7 +1635,7 @@ export default function LandingPage() {
       <section id="pricing" className="py-20 px-4 bg-gradient-to-br from-blue-50 to-sky-50">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-navy-900 mb-4">{t.pricingTitle}</h2>
+            <h2 className="text-4xl font-bold text-navy-900 mb-4 gradient-text">{t.pricingTitle}</h2>
             <p className="text-xl text-navy-600">{t.pricingSubtitle}</p>
           </div>
 
@@ -1717,7 +1702,7 @@ export default function LandingPage() {
       <section className="py-20 px-4 bg-white">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-navy-900 mb-4">{t.testimonialsTitle}</h2>
+            <h2 className="text-4xl font-bold text-navy-900 mb-4 gradient-text">{t.testimonialsTitle}</h2>
             <p className="text-xl text-navy-600">{t.testimonialsSubtitle}</p>
           </div>
 
@@ -1745,7 +1730,7 @@ export default function LandingPage() {
       {/* CTA Section */}
       <section className="py-20 px-4 bg-gradient-to-r from-navy-600 to-royal-blue-500">
         <div className="container mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">{t.ctaTitle}</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 gradient-text">{t.ctaTitle}</h2>
           <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">{t.ctaSubtitle}</p>
           <Button
             size="lg"
