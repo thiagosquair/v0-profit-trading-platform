@@ -1,11 +1,9 @@
-/* eslint-disable */
-// @ts-nocheck
+
 "use client"
 
 import React from "react"
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -34,131 +32,6 @@ import {
   TrendingDown,
   DollarSign,
 } from "lucide-react"
-
-/* eslint-disable */
-// @ts-nocheck
-"use client"
-
-import React, { useState, useEffect } from "react"
-import Link from "next/link"
-import Image from 'next/image'
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import {
-  Brain, ChevronRight, Play, Target, Settings, TrendingUp, Award, BarChart3,
-  Activity, Camera, BookOpen, MessageSquare, ChevronDown, Globe, Star,
-  Shield, Heart, Zap, CheckCircle, TrendingDown, DollarSign
-} from "lucide-react"
-
-// DashboardCarousel removed
-
-import { content } from './content'
-
-export default function LandingPage() {
-  const [selectedLanguage, setSelectedLanguage] = useState("en")
-  const [expandedBenefits, setExpandedBenefits] = useState({})
-
-  useEffect(() => {
-    const savedLanguage = localStorage.getItem("selectedLanguage")
-    if (savedLanguage) {
-      setSelectedLanguage(savedLanguage)
-    }
-  }, [])
-
-  const handleLanguageChange = (language: string) => {
-    setSelectedLanguage(language)
-    localStorage.setItem("selectedLanguage", language)
-  }
-
-  const t = content[selectedLanguage as keyof typeof content]
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-sky-50">
-      {/* Header, Hero, Stats, Features, Ultimate Features remain unchanged */}
-
-      {/* Replacing Carousel Section with Image */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <Image
-            src="/images/sec2.png"
-            alt="Dashboard Overview"
-            width={1920}
-            height={1080}
-            className="rounded-2xl shadow-xl w-full h-auto object-cover"
-          />
-        </div>
-      </section>
-
-      {/* NEW image-only section above pricing */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <Image
-            src="/images/sec1.png"
-            alt="Trading Transformation"
-            width={1920}
-            height={1080}
-            className="rounded-2xl shadow-xl w-full h-auto object-cover"
-          />
-        </div>
-      </section>
-
-      {/* Pricing Section */}
-      <section id="pricing" className="py-20 px-4 bg-gradient-to-br from-blue-50 to-sky-50">
-        <div className="container mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-navy-900 mb-4">{t.pricingTitle}</h2>
-            <p className="text-xl text-navy-600">{t.pricingSubtitle}</p>
-          </div>
-          {/* Pricing plans follow as before */}
-        </div>
-      </section>
-
-      {/* Rest of the original page content remains unchanged */}
-    </div>
-  )
-}
-          {/* Steps below carousel */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-12">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-white">1</span>
-              </div>
-              <h3 className="text-lg font-semibold text-blue-900 mb-2">Take Assessment</h3>
-              <p className="text-gray-600 text-sm">Complete our comprehensive trading psychology assessment</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-white">2</span>
-              </div>
-              <h3 className="text-lg font-semibold text-blue-900 mb-2">Get AI Coach</h3>
-              <p className="text-gray-600 text-sm">Receive your personalized AI psychology coach</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-white">3</span>
-              </div>
-              <h3 className="text-lg font-semibold text-blue-900 mb-2">Build Trades</h3>
-              <p className="text-gray-600 text-sm">Structure trades with psychological checkpoints</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-white">4</span>
-              </div>
-              <h3 className="text-lg font-semibold text-blue-900 mb-2">Track Progress</h3>
-              <p className="text-gray-600 text-sm">Monitor your psychological development and trading improvement</p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
-  );
-};
 
 export default function LandingPage() {
   const [selectedLanguage, setSelectedLanguage] = useState("en")
@@ -1409,8 +1282,36 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* REPLACED: How It Works Section with Dashboard Carousel */}
-      <DashboardCarousel />
+      {/* How It Works */}
+      <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-sky-50">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-navy-900 mb-4">{t.howItWorksTitle}</h2>
+            <p className="text-xl text-navy-600">{t.howItWorksSubtitle}</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {t.howItWorksSteps.map((step, index) => {
+              const icons = [Target, Brain, Settings, TrendingUp]
+              const IconComponent = icons[index]
+              return (
+                <div key={index} className="text-center">
+                  <div className="relative mb-6">
+                    <div className="w-20 h-20 bg-gradient-to-r from-navy-600 to-royal-blue-500 rounded-full flex items-center justify-center mx-auto shadow-lg">
+                      <IconComponent className="h-10 w-10 text-white" />
+                    </div>
+                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-royal-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                      {step.step}
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-bold text-navy-900 mb-3">{step.title}</h3>
+                  <p className="text-navy-600">{step.description}</p>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
 
       {/* NEW BENEFITS SECTION */}
       <section className="py-20 px-4 bg-white">
@@ -1626,6 +1527,3 @@ export default function LandingPage() {
     </div>
   )
 }
-
-
-
