@@ -1,3 +1,4 @@
+
 "use client"
 
 import React from "react"
@@ -1187,8 +1188,19 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-sky-50">
-        <div className="container mx-auto">
+      <section className="relative py-20 px-4 overflow-hidden">
+        <video
+          src="/images/sectionvid.mp4"
+          className="absolute inset-0 w-full h-full object-cover z-0 opacity-20"
+          autoPlay
+          muted
+          loop
+          playsInline
+          controls={false}
+        >
+          Your browser does not support the video tag.
+        </video>
+        <div className="relative z-10 container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-navy-900 mb-4">{t.featuresTitle}</h2>
             <p className="text-xl text-navy-600 max-w-4xl mx-auto">{t.featuresSubtitle}</p>
