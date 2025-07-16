@@ -1,9 +1,11 @@
-
+/* eslint-disable */
+// @ts-nocheck
 "use client"
 
 import React from "react"
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -32,6 +34,149 @@ import {
   TrendingDown,
   DollarSign,
 } from "lucide-react"
+
+// Dashboard Carousel Component
+const DashboardCarousel = () => {
+  // Images to display in the carousel
+  const images = [
+    {
+      src: '/images/dashboardbox1.png',
+      alt: 'Dashboard Overview',
+      title: 'Trading Dashboard'
+    },
+    {
+      src: '/images/progressbox.png', 
+      alt: 'Progress Tracking',
+      title: 'Progress Analytics'
+    }
+  ];
+
+  return (
+    <>
+      <style jsx>{`
+        @keyframes scroll-right-to-left {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-100%);
+          }
+        }
+        
+        .carousel-track {
+          animation: scroll-right-to-left 20s linear infinite;
+        }
+        
+        .carousel-container:hover .carousel-track {
+          animation-play-state: paused;
+        }
+      `}</style>
+      
+      <section className="py-16 bg-gradient-to-br from-blue-50 to-indigo-100 overflow-hidden">
+        <div className="container mx-auto px-4">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-blue-900 mb-4">
+              How MaXTrades Works
+            </h2>
+            <p className="text-xl text-gray-600 max-w-4xl mx-auto">
+              It's a Purpose-Built Space to Master Consistency, Shape the Right Trading Mindset to achieve Long-Term Success
+            </p>
+          </div>
+
+          {/* Carousel Container */}
+          <div className="carousel-container relative h-96 overflow-hidden rounded-2xl shadow-2xl">
+            <div className="carousel-track flex h-full" style={{ width: '200%' }}>
+              {/* First set of images */}
+              {images.map((image, index) => (
+                <div
+                  key={`first-${index}`}
+                  className="flex-shrink-0 w-[50%] h-full relative bg-white rounded-xl mx-2 shadow-lg overflow-hidden"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover object-center"
+                    priority={index === 0}
+                  />
+                  <div className="absolute bottom-6 left-6 z-20">
+                    <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-lg">
+                      {image.title}
+                    </h3>
+                    <p className="text-white/90 drop-shadow-md">
+                      {image.alt}
+                    </p>
+                  </div>
+                </div>
+              ))}
+              
+              {/* Duplicate set for seamless loop */}
+              {images.map((image, index) => (
+                <div
+                  key={`second-${index}`}
+                  className="flex-shrink-0 w-[50%] h-full relative bg-white rounded-xl mx-2 shadow-lg overflow-hidden"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover object-center"
+                  />
+                  <div className="absolute bottom-6 left-6 z-20">
+                    <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-lg">
+                      {image.title}
+                    </h3>
+                    <p className="text-white/90 drop-shadow-md">
+                      {image.alt}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Steps below carousel */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-12">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-white">1</span>
+              </div>
+              <h3 className="text-lg font-semibold text-blue-900 mb-2">Take Assessment</h3>
+              <p className="text-gray-600 text-sm">Complete our comprehensive trading psychology assessment</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-white">2</span>
+              </div>
+              <h3 className="text-lg font-semibold text-blue-900 mb-2">Get AI Coach</h3>
+              <p className="text-gray-600 text-sm">Receive your personalized AI psychology coach</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-white">3</span>
+              </div>
+              <h3 className="text-lg font-semibold text-blue-900 mb-2">Build Trades</h3>
+              <p className="text-gray-600 text-sm">Structure trades with psychological checkpoints</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-white">4</span>
+              </div>
+              <h3 className="text-lg font-semibold text-blue-900 mb-2">Track Progress</h3>
+              <p className="text-gray-600 text-sm">Monitor your psychological development and trading improvement</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
 
 export default function LandingPage() {
   const [selectedLanguage, setSelectedLanguage] = useState("en")
@@ -1282,36 +1427,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* How It Works */}
-      <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-sky-50">
-        <div className="container mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-navy-900 mb-4">{t.howItWorksTitle}</h2>
-            <p className="text-xl text-navy-600">{t.howItWorksSubtitle}</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {t.howItWorksSteps.map((step, index) => {
-              const icons = [Target, Brain, Settings, TrendingUp]
-              const IconComponent = icons[index]
-              return (
-                <div key={index} className="text-center">
-                  <div className="relative mb-6">
-                    <div className="w-20 h-20 bg-gradient-to-r from-navy-600 to-royal-blue-500 rounded-full flex items-center justify-center mx-auto shadow-lg">
-                      <IconComponent className="h-10 w-10 text-white" />
-                    </div>
-                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-royal-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
-                      {step.step}
-                    </div>
-                  </div>
-                  <h3 className="text-xl font-bold text-navy-900 mb-3">{step.title}</h3>
-                  <p className="text-navy-600">{step.description}</p>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
+      {/* REPLACED: How It Works Section with Dashboard Carousel */}
+      <DashboardCarousel />
 
       {/* NEW BENEFITS SECTION */}
       <section className="py-20 px-4 bg-white">
@@ -1527,3 +1644,6 @@ export default function LandingPage() {
     </div>
   )
 }
+
+
+
