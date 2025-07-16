@@ -5,7 +5,7 @@
 import React from "react"
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import Image from 'next/image'
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -40,12 +40,12 @@ const DashboardCarousel = () => {
   // Images to display in the carousel
   const images = [
     {
-      src: '/images/dashboardbox1.png',
+      src: 
       alt: 'Dashboard Overview',
       title: 'Trading Dashboard'
     },
     {
-      src: '/images/progressbox.png', 
+      src: 
       alt: 'Progress Tracking',
       title: 'Progress Analytics'
     }
@@ -91,7 +91,7 @@ const DashboardCarousel = () => {
               {images.map((image, index) => (
                 <div
                   key={`first-${index}`}
-                  className="flex-shrink-0 w-[50%] h-full relative bg-white rounded-xl mx-2 shadow-lg overflow-hidden"
+                  className="flex-shrink-0 w-[50%] h-64 relative bg-white rounded-xl mx-2 shadow-lg overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
                   <Image
@@ -116,7 +116,7 @@ const DashboardCarousel = () => {
               {images.map((image, index) => (
                 <div
                   key={`second-${index}`}
-                  className="flex-shrink-0 w-[50%] h-full relative bg-white rounded-xl mx-2 shadow-lg overflow-hidden"
+                  className="flex-shrink-0 w-[50%] h-64 relative bg-white rounded-xl mx-2 shadow-lg overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
                   <Image
@@ -752,7 +752,7 @@ export default function LandingPage() {
         },
         {
           title: "Detén las Malas Decisiones de Gestión de Riesgos",
-          description: "Domina los principios de gestión de riesgos efectiva. Define tus límites de riesgo, tamaños de posición y estrategias de mitigación de pérdidas para proteger capital y mantenerte en el juego a largo plazo, evitando errores catastróficos que sabotean tu progreso.",
+          description: "Domina los principios de gestión de riesgo efectiva. Define tus límites de riesgo, tamaños de posición y estrategias de mitigación de pérdidas para proteger capital y mantenerte en el juego a largo plazo, evitando errores catastróficos que sabotean tu progreso.",
           icon: Shield,
           gradient: "from-green-500 to-emerald-500"
         },
@@ -897,9 +897,9 @@ export default function LandingPage() {
           description: "Para Traders Elite",
           features: [
             "Todo de Premium",
-            "Coach de Psicología IA Avanzado",
+            "Coach de Psicología IA Avançado",
             "Análisis de Trade Ilimitados",
-            "Seguimiento de Progreso Avanzado",
+            "Seguimiento de Progreso Avançado",
             "Diário de Reflexão",
             "Cursos de Psicología",
             "Insights de Coaching",
@@ -932,7 +932,7 @@ export default function LandingPage() {
         },
         {
           name: "Emily Johnson",
-          role: "Trader de Opciones",
+          role: "Options Trader",
           content: "Finalmente, una plataforma que aborda el juego mental. Mi control emocional nunca ha estado mejor.",
           rating: 5
         }
@@ -1644,6 +1644,8 @@ export default function LandingPage() {
     </div>
   )
 }
+
+
 
 
 
