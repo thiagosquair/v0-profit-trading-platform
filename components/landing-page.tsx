@@ -1733,7 +1733,7 @@ export default function LandingPage() {
   style={{ backgroundImage: "url('/images/img5.png')" }}
 >
   <div className="container mx-auto text-center">
-    <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 gradient-text">{t.ctaTitle}</h2>
+    <h2 className="text-4xl md:text-5xl font-bold text-white">{t.ctaTitle}</h2>
     <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">{t.ctaSubtitle}</p>
     <Button
       size="lg"
