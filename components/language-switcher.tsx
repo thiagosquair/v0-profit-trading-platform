@@ -41,7 +41,8 @@ export function LanguageSwitcher({ variant = "header", className }: LanguageSwit
    const currentPath = pathname.replace(/^\/(en|pt-BR|es|fr)/, "");
    const targetPath = currentPath === "" ? "/dashboard" : currentPath;
    const newPath = `/${language}${targetPath}`;
-router.push(newPath);
+   console.log("Switching to:", newPath);
+   router.push(newPath);
 
     // ✅ If using react-i18next: uncomment this
     // i18n.changeLanguage(language);
