@@ -91,7 +91,7 @@ const DashboardCarousel = () => {
               {images.map((image, index) => (
                 <div
                   key={`first-${index}`}
-                  className="flex-shrink-0 w-[50%] h-full relative bg-white rounded-xl mx-2 shadow-lg overflow-hidden"
+                  className="flex-shrink-0 aspect-[16/9] w-[50%] relative bg-white rounded-xl mx-2 shadow-lg overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
                   <Image
