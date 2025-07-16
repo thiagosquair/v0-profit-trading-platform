@@ -1569,8 +1569,8 @@ export default function LandingPage() {
           <Image
             src="/images/sec1.png"
             alt="How MaXTrades Works"
-            width={1200} // Adjust width as needed to match section size
-            height={600} // Adjust height as needed to match section size
+            width={1000} // Adjust width as needed to match section size
+            height={400} // Adjust height as needed to match section size
             layout="responsive"
             objectFit="contain"
             className="rounded-lg shadow-lg mx-auto"
@@ -1637,8 +1637,8 @@ export default function LandingPage() {
           <Image
             src="/images/sec2.png"
             alt="Funded Career Builder"
-            width={1200} // Adjust width as needed to match section size
-            height={600} // Adjust height as needed to match section size
+            width={1000} // Adjust width as needed to match section size
+            height={400} // Adjust height as needed to match section size
             layout="responsive"
             objectFit="contain"
             className="rounded-lg shadow-lg mx-auto"
