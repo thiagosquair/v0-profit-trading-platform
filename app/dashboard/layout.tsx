@@ -1,4 +1,4 @@
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { LanguageSwitcher } from "@/components/language-switcher";
 import { DashboardSidebar } from '@/components/dashboard/dashboard-sidebar'
 import { UserProvider } from '@/contexts/UserContext'
 
