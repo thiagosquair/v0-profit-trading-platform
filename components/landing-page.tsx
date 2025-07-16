@@ -280,8 +280,8 @@ export default function LandingPage() {
           ]
         }
       ],
-      testimonialsTitle: "Join Thousands of Successful Traders",
-      testimonialsSubtitle: "Join thousands of traders who have transformed their mindset",
+      testimonialsTitle: "Join the Community of Successful Traders",
+      testimonialsSubtitle: "Join thousands of traders who are transforming their mindset",
       ctaTitle: "Ready to Unlock Your Full Trading Potential??",
       ctaSubtitle: "Join thousands of traders who have transformed their psychology and achieved consistent profitability.",
       ctaButton: "Start Your Free Trial",
