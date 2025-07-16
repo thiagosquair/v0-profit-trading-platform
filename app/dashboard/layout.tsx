@@ -13,13 +13,17 @@ export default function DashboardLayout({
       <div className="flex h-screen bg-gray-50">
         {/* Sidebar */}
         <DashboardSidebar />
-        
         {/* Main content area */}
         <div className="flex-1 flex flex-col ml-64">
           {/* Header */}
-          <header className="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
-            <div className="flex items-center justify-between">
-              <h1 className="text-2xl font-semibold text-gray-900">
+         <header className="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
+  <div className="flex items-center justify-between">
+    <h1 className="text-2xl font-semibold text-gray-900">
+      Trading Psychology Dashboard
+    </h1>
+    <LanguageSwitcher variant="compact" />
+  </div>
+</header>
                 Trading Psychology Dashboard
               </h1>
             </div>
