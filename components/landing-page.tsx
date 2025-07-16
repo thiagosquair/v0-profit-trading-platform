@@ -1632,7 +1632,7 @@ export default function LandingPage() {
       </section>
 
       {/* Career Box Image Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-sky-50">
+      <section className="py-20 px-4 bg-white">
         <div className="container mx-auto text-center">
           <Image
             src="/images/sec2.png"
