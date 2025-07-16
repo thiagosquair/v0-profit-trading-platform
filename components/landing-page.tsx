@@ -74,7 +74,7 @@ export default function LandingPage() {
       featuresSubtitle:
         "The Ultimate Platform for Mental Edge — Combining AI-Powered Insights, Personalized Coaching, and a Deeply Immersive Environment Where You Continuously Grow, Review Past Trades with Purpose, and Build Each New Trade with Clarity and Confidence.",
       howItWorksTitle: "How MaXTrades Works",
-      howItWorksSubtitle: "Your Path to Trading Mastery in 4 Simple Steps",
+      howItWorksSubtitle: "It's a Purpose-Built Space to Master Consistency, Shape the Right Trading Mindset, and Build the Resilience You Need for Long-Term Success",
       howItWorksSteps: [
         {
           step: "1",
