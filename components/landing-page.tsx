@@ -120,8 +120,6 @@ export default function LandingPage() {
     </div>
   )
 }
-          </div>
-
           {/* Steps below carousel */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-12">
             <div className="text-center">
