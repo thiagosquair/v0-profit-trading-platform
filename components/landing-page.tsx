@@ -1,4 +1,4 @@
-/* eslint-disable */
+* eslint-disable */
 // @ts-nocheck
 "use client"
 
@@ -98,7 +98,7 @@ const DashboardCarousel = () => {
                     src={image.src}
                     alt={image.alt}
                     fill
-                    className="object-cover object-center"
+                    className="object-contain object-center"
                     priority={index === 0}
                   />
                   <div className="absolute bottom-6 left-6 z-20">
@@ -123,7 +123,7 @@ const DashboardCarousel = () => {
                     src={image.src}
                     alt={image.alt}
                     fill
-                    className="object-cover object-center"
+                    className="object-contain object-center"
                   />
                   <div className="absolute bottom-6 left-6 z-20">
                     <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-lg">
@@ -1644,6 +1644,3 @@ export default function LandingPage() {
     </div>
   )
 }
-
-
-
