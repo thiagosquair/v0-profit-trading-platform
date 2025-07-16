@@ -38,7 +38,7 @@ export function LanguageSwitcher({ variant = "header", className }: LanguageSwit
     localStorage.setItem("preferred-language", language);
 
     // ✅ For next-intl: Navigate to localized route
-    const newPath = `/${language}${pathname.replace(/^\/[a-z-]{2,5}/, "")}`;
+    const newPath = `/${language}${pathname.replace(/^\/(en|pt-BR|es|fr)/, "")}`;
     router.push(newPath);
 
     // ✅ If using react-i18next: uncomment this
