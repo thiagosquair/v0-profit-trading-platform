@@ -1728,22 +1728,22 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-navy-600 to-royal-blue-500">
-        <div className="container mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 gradient-text">{t.ctaTitle}</h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">{t.ctaSubtitle}</p>
-          <Button
-            size="lg"
-            className="bg-white text-navy-600 hover:bg-blue-50 px-8 py-4 text-lg font-semibold"
-            asChild
-          >
-            <Link href="/auth/signup">
-              {t.ctaButton}
-              <ChevronRight className="ml-2 h-6 w-6" />
-            </Link>
-          </Button>
-        </div>
-      </section>
+<section
+  className="py-20 px-4 bg-cover bg-center bg-no-repeat"
+  style={{ backgroundImage: "url('/images/img5.png')" }}
+>
+  <div className="container mx-auto text-center">
+    <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 gradient-text">{t.ctaTitle}</h2>
+    <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">{t.ctaSubtitle}</p>
+    <Button
+      size="lg"
+      className="bg-white text-navy-600 hover:bg-blue-50 px-8 py-4 text-lg font-semibold"
+      asChild
+    >
+      <Link href="/auth/signup">{t.ctaButton}</Link>
+    </Button>
+  </div>
+</section>
 
       {/* Footer */}
       <footer className="bg-navy-900 text-white py-16 px-4">
