@@ -1491,15 +1491,26 @@ export default function LandingPage() {
 </section>
 
       {/* Footer */}
-     return (
-  <div
-    className="relative bg-cover bg-center min-h-screen"
-    style={{ backgroundImage: "url('/img4.png')" }}
-  >
-    {/* content */}
-  </div>
-                <img src="/images/maxtradeslogo.png" alt="MaXTrades Logo" className="h-auto w-48" />
-              </Link>
+   const FooterSection = () => {
+  return (
+    <div
+      className="relative bg-cover bg-center min-h-screen"
+      style={{ backgroundImage: "url('/img4.png')" }}
+    >
+      <Link href="/">
+        <img
+          src="/images/maxtradeslogo.png"
+          alt="MaXTrades Logo"
+          className="h-auto w-48"
+        />
+      </Link>
+      <p className="text-blue-200">
+        Master your trading psychology with AI-powered coaching and behavioral analysis.
+      </p>
+    </div>
+  );
+};
+
               <p className="text-blue-200">Master your trading psychology with AI-powered coaching and behavioral analysis.</p>
             </div>
 
