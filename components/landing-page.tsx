@@ -1073,7 +1073,7 @@ export default function LandingPage() {
       <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto flex items-center justify-between h-16 px-4">
           <Link href="/" className="flex items-center space-x-2">
-            <img src="/images/maxtradeslogo.png" alt="MaXTrades Logo" className="h-8 w-auto" />
+            <img src="/images/maxtradeslogo.png" alt="MaXTrades Logo" className="h-10 w-30" />
           </Link>
 
           <nav className="hidden md:flex items-center space-x-8">
