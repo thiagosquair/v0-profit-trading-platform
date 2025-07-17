@@ -1496,7 +1496,7 @@ export default function LandingPage() {
           <div className="grid md:grid-cols-4 gap-8">
             <div className="space-y-4">
               <Link href="/" className="flex items-center space-x-2">
-                <img src="/images/maxtradeslogo.png" alt="MaXTrades Logo" className="h-8 w-auto" />
+                <img src="/images/maxtradeslogo.png" alt="MaXTrades Logo" className="h-auto w-48" />
               </Link>
               <p className="text-blue-200">Master your trading psychology with AI-powered coaching and behavioral analysis.</p>
             </div>
