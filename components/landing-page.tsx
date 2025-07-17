@@ -1491,11 +1491,13 @@ export default function LandingPage() {
 </section>
 
       {/* Footer */}
-     style={{ backgroundImage: "url('/images/img4.png')" }}
-        <div className="container mx-auto">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="space-y-4">
-              <Link href="/" className="flex items-center space-x-2">
+     return (
+  <div
+    className="relative bg-cover bg-center min-h-screen"
+    style={{ backgroundImage: "url('/img4.png')" }}
+  >
+    {/* content */}
+  </div>
                 <img src="/images/maxtradeslogo.png" alt="MaXTrades Logo" className="h-auto w-48" />
               </Link>
               <p className="text-blue-200">Master your trading psychology with AI-powered coaching and behavioral analysis.</p>
