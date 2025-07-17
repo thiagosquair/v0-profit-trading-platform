@@ -1320,10 +1320,9 @@ export default function LandingPage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-sky-50">
       {/* Header */}
       <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-navy-600 to-royal-blue-500 rounded-lg flex items-center justify-center">
-              <Brain className="h-5 w-5 text-white" />
+                  <Link href="/" className="flex items-center space-x-2">
+            <img src="/images/maxtradeslogo.png" alt="MaXTrades Logo" className="h-8 w-auto" />
+          </Link>
             </div>
             <div>
               <h1 className="text-xl font-bold text-navy-900">{t.title}</h1>
@@ -1749,19 +1748,12 @@ export default function LandingPage() {
       <footer className="bg-navy-900 text-white py-16 px-4">
         <div className="container mx-auto">
           <div className="grid md:grid-cols-4 gap-8">
-            <div className="space-y-4">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-r from-navy-600 to-royal-blue-500 rounded-lg flex items-center justify-center">
-                  <Brain className="h-5 w-5 text-white" />
-                </div>
-                <div>
-                  <h1 className="text-xl font-bold">{t.title}</h1>
-                  <p className="text-xs text-blue-200">{t.subtitle}</p>
-                </div>
-              </div>
+                       <div className="space-y-4">
+              <Link href="/" className="flex items-center space-x-2">
+                <img src="/images/maxtradeslogo.png" alt="MaXTrades Logo" className="h-8 w-auto" />
+              </Link>
               <p className="text-blue-200">Master your trading psychology with AI-powered coaching and behavioral analysis.</p>
-            </div>
-
+            
             <div>
               <h4 className="font-bold mb-4">Product</h4>
               <ul className="space-y-2 text-blue-200">
