@@ -1491,7 +1491,7 @@ export default function LandingPage() {
 </section>
 
       {/* Footer */}
-      <footer className="bg-navy-900 text-white py-16 px-4">
+     style={{ backgroundImage: "url('/images/img4.png')" }}
         <div className="container mx-auto">
           <div className="grid md:grid-cols-4 gap-8">
             <div className="space-y-4">
