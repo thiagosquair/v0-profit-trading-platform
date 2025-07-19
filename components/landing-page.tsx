@@ -1185,7 +1185,7 @@ export default function LandingPage() {
    {/* Stats Section with Image Background */}
 <section
   className="py-16 px-4 bg-cover bg-center"
-  style={{ backgroundImage: `url("/images/dis4.png")` }}
+  style={{ backgroundImage: `url("/images/dis5.png")` }}
 >
   <div className="container mx-auto">
     <div className="grid md:grid-cols-4 gap-8 text-center">
