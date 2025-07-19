@@ -32,13 +32,24 @@ import {
   DollarSign,
 } from "lucide-react"
 import Image from "next/image"
-import { useEnhancedLanguage } from "@/hooks/use-enhanced-language"
 
 export default function LandingPage() {
-  const { currentLanguage, setLanguage, t, translateText, isLoading } = useEnhancedLanguage()
+  const [selectedLanguage, setSelectedLanguage] = useState("en")
   const [expandedFeatures, setExpandedFeatures] = useState<{ [key: number]: boolean }>({})
   const [allExpanded, setAllExpanded] = useState(false)
   const [expandedBenefits, setExpandedBenefits] = useState<{ [key: number]: boolean }>({})
+
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem("selectedLanguage")
+    if (savedLanguage) {
+      setSelectedLanguage(savedLanguage)
+    }
+  }, [])
+
+  const handleLanguageChange = (language: string) => {
+    setSelectedLanguage(language)
+    localStorage.setItem("selectedLanguage", language)
+  }
 
   const languages = [
     { code: "en", name: "English", flag: "🇺🇸" },
@@ -47,293 +58,990 @@ export default function LandingPage() {
     { code: "fr", name: "Français", flag: "🇫🇷" },
   ]
 
-  const handleLanguageChange = (language: string) => {
-    setLanguage(language)
-  }
-
-  // Static translations for UI elements
-  const staticTranslations = {
+  const content = {
     en: {
       title: "MaXTrades",
-      subtitle: "Trading Psychology Lab",
-      badge: "AI-Powered Trading Psychology",
+      subtitle: "Trading Psychology Labbbb",
+      badge: "Ai-Powered Trading Psychology",
       heroTitle: "Master Your Mindset. Master Your Trading.",
-      description: "Master your trading psychology with AI-powered coaching, behavioral analysis, and interactive exercises designed to build mental resilience and better decision-making.",
+      description:
+        "Master your trading psychology with AI-powered coaching, behavioral analysis, and interactive exercises designed to build mental resilience and better decision-making.",
       getStarted: "Start Your Journey",
       learnMore: "Watch Demo",
       signIn: "Sign In",
       footerFeatures: "Features",
       footerPricing: "Pricing",
       footerDemo: "Demo",
+      featuresTitle: "Developed for Trading Psychology Mastery and High Performance",
+      featuresSubtitle:
+        "The Ultimate Platform for Mental Edge — Combining AI-Powered Insights, Personalized Coaching, and a Deeply Immersive Environment Where You Continuously Grow, Review Past Trades with Purpose, and Build Each New Trade with Clarity and Confidence.",
+      howItWorksTitle: "How MaXTrades Works",
+      howItWorksSubtitle: "Your Path to Trading Mastery in 4 Simple Steps",
+      howItWorksSteps: [
+        {
+          step: "1",
+          title: "Take Assessment",
+          description: "Complete our comprehensive trading psychology assessment"
+        },
+        {
+          step: "2", 
+          title: "Get AI Coach",
+          description: "Receive your personalized AI psychology coach"
+        },
+        {
+          step: "3",
+          title: "Build Trades", 
+          description: "Structure trades with psychological checkpoints"
+        },
+        {
+          step: "4",
+          title: "Track Progress",
+          description: "Monitor your psychological development and trading improvement"
+        }
+      ],
+      // New Benefits Section
+      benefitsTitle: "Transform Your Trading Psychology",
+      benefitsSubtitle: "Unlock your full potential and achieve consistent profitability with our comprehensive trading psychology platform",
+      benefits: [
+        {
+          title: "Overcome Hesitation with a Well-Developed Trading Plan",
+          description: "Build confidence by creating a structured, actionable trading plan tailored to your strategy and goals. Eliminate second-guessing and execute trades decisively with a clear roadmap that defines entry, exit, and risk management rules.",
+          icon: Target,
+          gradient: "from-blue-500 to-cyan-500"
+        },
+        {
+          title: "Manage Emotional Decision-Making",
+          description: "Learn proven techniques to recognize, control, and channel emotions while trading. Reduce impulsive reactions and cultivate a disciplined mindset that supports sound, objective decisions—even in volatile markets.",
+          icon: Heart,
+          gradient: "from-purple-500 to-pink-500"
+        },
+        {
+          title: "Stop Poor Risk Management Decisions",
+          description: "Master the principles of effective risk management. Define your risk limits, position sizes, and loss mitigation strategies to protect capital and stay in the game long-term, avoiding catastrophic errors that sabotage your progress.",
+          icon: Shield,
+          gradient: "from-green-500 to-emerald-500"
+        },
+        {
+          title: "Eliminate Bad Trades and Poor Decisions",
+          description: "Analyze your trading behavior to identify patterns of mistakes and self-sabotage. Use guided reflection and structured feedback to break the cycle of repeated errors, helping you make consistently better trading choices.",
+          icon: TrendingDown,
+          gradient: "from-red-500 to-orange-500"
+        },
+        {
+          title: "Maximize Trading Opportunities with Confident Position Sizing",
+          description: "Learn to size positions strategically based on your plan and risk tolerance. Optimize potential returns while managing downside risk, empowering you to take advantage of opportunities without fear or hesitation.",
+          icon: Zap,
+          gradient: "from-yellow-500 to-amber-500"
+        },
+        {
+          title: "Aim for Consistent Profitability",
+          description: "Shift from sporadic wins to sustainable success. Develop the habits, processes, and psychological resilience required to deliver reliable results over time, turning disciplined trading into a consistently profitable career.",
+          icon: DollarSign,
+          gradient: "from-indigo-500 to-purple-500"
+        }
+      ],
+      detailedFeatures: [
+        {
+          title: "Behavioral Patterns",
+          description: "Identify and understand your recurring trading behaviors and psychological biases.",
+          detailedContent: "Our advanced behavioral pattern analysis uses machine learning to identify recurring patterns in your trading behavior. We analyze your decision-making processes, emotional triggers, and psychological biases that may be affecting your trading performance."
+        },
+        {
+          title: "Interactive Exercises", 
+          description: "Engage with CBT exercises, meditations, and simulations designed for traders.",
+          detailedContent: "Our comprehensive library of interactive exercises is specifically designed for traders to build mental resilience and emotional control. These include Cognitive Behavioral Therapy (CBT) exercises that help you identify and change negative thought patterns."
+        },
+        {
+          title: "Market Live Insights",
+          description: "Real-time market psychology indicators and sentiment analysis to help you make informed decisions.",
+          detailedContent: "Our advanced behavioral pattern analysis uses machine learning to identify recurring patterns in your trading behavior. We analyze your decision-making processes, emotional triggers and psychological biases that may be affecting your trading performance."
+        },
+        {
+          title: "Screenshot Analysis",
+          description: "Upload trading screenshots for AI-powered analysis of your decision-making and emotional state.", 
+          detailedContent: "Our revolutionary screenshot analysis feature uses advanced AI to analyze your trading platform screenshots and provide deep insights into your decision-making process."
+        },
+        {
+          title: "Progress Tracking",
+          description: "Monitor your psychological development with detailed metrics and performance reports.",
+          detailedContent: "Track your psychological development and improvement with our comprehensive progress tracking system. This feature monitors your emotional control, discipline levels, consistency metrics, and psychological growth over time."
+        },
+        {
+          title: "Gamification",
+          description: "Earn badges and rewards as you develop better trading psychology and discipline.",
+          detailedContent: "Make your psychological development engaging and motivating with our comprehensive gamification system. Earn badges for achieving milestones like 'Discipline Master' for following your trading plan for 30 days consecutive."
+        },
+        {
+          title: "Psychology Courses",
+          description: "Access structured learning paths covering all aspects of trading psychology.",
+          detailedContent: "Access our comprehensive library of structured psychology courses designed specifically for traders. These courses cover essential topics like emotional regulation, risk management psychology, and developing a winning trader mindset."
+        },
+        {
+          title: "Reflection Tools",
+          description: "Journal your trades and emotions with guided prompts for deeper self-analysis.",
+          detailedContent: "Our reflection tools help you develop deeper self-awareness through guided journaling and self-analysis exercises. These tools include trade reflection prompts, emotional awareness exercises, and goal-setting frameworks."
+        }
+      ],
+      features: [
+        {
+          title: "AI Psychology Coach",
+          description:
+            "Your Personal Trading Psychology Mentor: Get real-time emotional coaching, behavioral pattern analysis, and personalized strategies to overcome psychological barriers and develop unshakeable trading discipline.",
+        },
+        {
+          title: "Trade Builder",
+          description:
+            "Psychology-Focused Trade Planning: Plan every trade with psychological analysis, emotion checkpoints, and behavioral safeguards designed to help you make informed decisions.",
+        },
+        {
+          title: "AI Trade Analysis",
+          description:
+            "Transform Every Trade into Learning Opportunity: Our AI analyzes your trades through a psychological lens, providing actionable insights to improve your decision-making and increase your profitability.",
+        },
+        {
+          title: "Funded Career Builder",
+          description:
+            "Your Path to Professional Trading: Get comprehensive guidance and tools to qualify for funded trading programs, build your track record, and launch your professional trading career with confidence.",
+        },
+      ],
+      pricingTitle: "Your Trading Transformation Journey Starts Here",
+      pricingSubtitle: "Start free, upgrade when you're ready",
+      pricingPlans: [
+        {
+          name: "Free",
+          price: "$0",
+          period: "/month",
+          description: "Perfect for Getting Started",
+          features: [
+            "AI Psychology Coach",
+            "Trader Assessment",
+            "5 Trade Analyses per month",
+            "Progress Tracking",
+            "Interactive Exercises",
+            "Psychology Courses"
+          ]
+        },
+        {
+          name: "Pro",
+          price: "$15",
+          period: "/month",
+          description: "For Serious Traders",
+          features: [
+            "Advanced AI Psychology Coach",
+            "Trader Assessment",
+            "25 Trade Analyses per month",
+            "Advanced Progress Tracking",
+            "Reflection Journal",
+            "Psychology Courses",
+            "Screenshot Analysis",
+            "10 Trade Builder",
+            "Interactive Exercises"
+          ]
+        },
+        {
+          name: "Premium",
+          price: "$25",
+          period: "/month",
+          description: "For Professional Traders",
+          popular: true,
+          features: [
+            "Everything in Pro",
+            "Advanced AI Psychology Coach",
+            "Trader Assessment",
+            "Unlimited Trade Analyses",
+            "Advanced Progress Tracking",
+            "Reflection Journal",
+            "Psychology Courses",
+            "Coaching Insights",
+            "30 Trade Builder",
+            "Interactive Exercises",
+            "Behavioral Patterns"
+          ]
+        },
+        {
+          name: "Elite",
+          price: "$35",
+          period: "/month",
+          description: "For Elite Traders",
+          features: [
+            "Everything in Premium",
+            "Advanced AI Psychology Coach",
+            "Trader Assessment",
+            "Unlimited Trade Analyses",
+            "Advanced Progress Tracking",
+            "Reflection Journal",
+            "Psychology Courses",
+            "Coaching Insights",
+            "Unlimited Trade Builder",
+            "Interactive Exercises",
+            "Behavioral Patterns",
+            "Funded Career Builder"
+          ]
+        }
+      ],
+      testimonialsTitle: "Join the Community of Successful Traders",
+      testimonialsSubtitle: "Join thousands of traders who are transforming their mindset",
+      ctaTitle: "Ready to Unlock Your Full Trading Potential??",
+      ctaSubtitle: "Join thousands of traders who have transformed their psychology and achieved consistent profitability.",
+      ctaButton: "Start Your Free Trial",
       expandAll: "Expand All",
       collapseAll: "Collapse All",
+      testimonials: [
+        {
+          name: "Sarah Chen",
+          role: "Day Trader",
+          content: "MaXTrades helped me overcome my fear of taking profits. My consistency improved dramatically in just 3 months.",
+          rating: 5
+        },
+        {
+          name: "Marcus Rodriguez",
+          role: "Swing Trader",
+          content: "The AI coach is like having a trading psychologist available 24/7. It's transformed how I approach the markets.",
+          rating: 5
+        },
+        {
+          name: "Emily Johnson",
+          role: "Options Trader",
+          content: "Finally, a platform that addresses the mental game. My emotional control has never been better.",
+          rating: 5
+        }
+      ]
     },
     pt: {
       title: "MaXTrades",
-      subtitle: "Laboratório de Psicologia de Trading",
+      subtitle: "Trading Psychology Lab",
       badge: "Psicologia de Trading Alimentada por IA",
       heroTitle: "Domine Sua Mentalidade. Domine Seu Trading.",
-      description: "Domine sua psicologia de trading com coaching alimentado por IA, análise comportamental e exercícios interativos projetados para construir resistência mental e melhor tomada de decisão.",
+      description:
+        "Domine sua psicologia de trading com coaching alimentado por IA, análise comportamental e exercícios interativos projetados para construir resistência mental e melhor tomada de decisão.",
       getStarted: "Comece Sua Jornada",
       learnMore: "Assistir Demo",
       signIn: "Entrar",
       footerFeatures: "Recursos",
       footerPricing: "Preços",
       footerDemo: "Demo",
+      featuresTitle: "Desenvolvido para Maestria em Psicologia de Trading e Alto Desempenho",
+      featuresSubtitle:
+        "A Plataforma Definitiva para Vantagem Mental — Combinando Insights Alimentados por IA, Coaching Personalizado e um Ambiente Profundamente Imersivo Onde Você Cresce Continuamente, Revisa Trades Passados com Propósito e Constrói Cada Novo Trade com Clareza e Confiança.",
+      howItWorksTitle: "Como o MaXTrades Funciona",
+      howItWorksSubtitle: "Seu Caminho para Maestria no Trading em 4 Passos Simples",
+      howItWorksSteps: [
+        {
+          step: "1",
+          title: "Fazer Avaliação",
+          description: "Complete nossa avaliação abrangente de psicologia de trading"
+        },
+        {
+          step: "2", 
+          title: "Obter Coach IA",
+          description: "Receba seu coach de psicologia IA personalizado"
+        },
+        {
+          step: "3",
+          title: "Construir Trades", 
+          description: "Estruture trades com checkpoints psicológicos"
+        },
+        {
+          step: "4",
+          title: "Acompanhar Progresso",
+          description: "Monitore seu desenvolvimento psicológico e melhoria no trading"
+        }
+      ],
+      // New Benefits Section
+      benefitsTitle: "Transforme Sua Psicologia de Trading",
+      benefitsSubtitle: "Desbloqueie seu potencial completo e alcance rentabilidade consistente com nossa plataforma abrangente de psicologia de trading",
+      benefits: [
+        {
+          title: "Supere a Hesitação com um Plano de Trading Bem Desenvolvido",
+          description: "Construa confiança criando um plano de trading estruturado e acionável, adaptado à sua estratégia e objetivos. Elimine dúvidas e execute trades decisivamente com um roteiro claro que define regras de entrada, saída e gestão de risco.",
+          icon: Target,
+          gradient: "from-blue-500 to-cyan-500"
+        },
+        {
+          title: "Gerencie a Tomada de Decisão Emocional",
+          description: "Aprenda técnicas comprovadas para reconhecer, controlar e canalizar emoções durante o trading. Reduza reações impulsivas e cultive uma mentalidade disciplinada que suporte decisões sólidas e objetivas—mesmo em mercados voláteis.",
+          icon: Heart,
+          gradient: "from-purple-500 to-pink-500"
+        },
+        {
+          title: "Pare Decisões Ruins de Gestão de Risco",
+          description: "Domine os princípios de gestão de risco eficaz. Defina seus limites de risco, tamanhos de posição e estratégias de mitigação de perdas para proteger capital e permanecer no jogo a longo prazo, evitando erros catastróficos que sabotam seu progresso.",
+          icon: Shield,
+          gradient: "from-green-500 to-emerald-500"
+        },
+        {
+          title: "Elimine Trades Ruins e Decisões Pobres",
+          description: "Analise seu comportamento de trading para identificar padrões de erros e autossabotagem. Use reflexão guiada e feedback estruturado para quebrar o ciclo de erros repetidos, ajudando você a fazer escolhas de trading consistentemente melhores.",
+          icon: TrendingDown,
+          gradient: "from-red-500 to-orange-500"
+        },
+        {
+          title: "Maximize Oportunidades de Trading com Dimensionamento de Posição Confiante",
+          description: "Aprenda a dimensionar posições estrategicamente baseado em seu plano e tolerância ao risco. Otimize retornos potenciais enquanto gerencia risco de queda, capacitando você a aproveitar oportunidades sem medo ou hesitação.",
+          icon: Zap,
+          gradient: "from-yellow-500 to-amber-500"
+        },
+        {
+          title: "Mire na Rentabilidade Consistente",
+          description: "Mude de vitórias esporádicas para sucesso sustentável. Desenvolva os hábitos, processos e resistência psicológica necessários para entregar resultados confiáveis ao longo do tempo, transformando trading disciplinado em uma carreira consistentemente lucrativa.",
+          icon: DollarSign,
+          gradient: "from-indigo-500 to-purple-500"
+        }
+      ],
+      detailedFeatures: [
+        {
+          title: "Padrões Comportamentais",
+          description: "Identifique e compreenda seus comportamentos de trading recorrentes e vieses psicológicos.",
+          detailedContent: "Nossa análise avançada de padrões comportamentais usa aprendizado de máquina para identificar padrões recorrentes em seu comportamento de trading. Analisamos seus processos de tomada de decisão, gatilhos emocionais e vieses psicológicos que podem estar afetando sua performance de trading."
+        },
+        {
+          title: "Exercícios Interativos", 
+          description: "Participe de exercícios de TCC, meditações e simulações projetadas para traders.",
+          detailedContent: "Nossa biblioteca abrangente de exercícios interativos é especificamente projetada para traders construírem resistência mental e controle emocional. Estes incluem exercícios de Terapia Cognitivo-Comportamental (TCC) que ajudam você a identificar e mudar padrões de pensamento negativos."
+        },
+        {
+          title: "Insights de Mercado ao Vivo",
+          description: "Indicadores de psicologia de mercado em tempo real e análise de sentimento para ajudá-lo a tomar decisões informadas.",
+          detailedContent: "Obtenha insights em tempo real sobre psicologia e sentimento do mercado com nosso painel de análise avançada. Este recurso fornece análise de sentimento de mercado ao vivo, indicadores de medo e ganância, níveis de estresse de volatilidade e métricas de psicologia de multidão."
+        },
+        {
+          title: "Análise de Screenshots",
+          description: "Carregue screenshots de trading para análise alimentada por IA de sua tomada de decisão e estado emocional.", 
+          detailedContent: "Nosso recurso revolucionário de análise de screenshots usa IA avançada para analisar seus screenshots da plataforma de trading e fornecer insights profundos sobre seu processo de tomada de decisão."
+        },
+        {
+          title: "Acompanhamento de Progresso",
+          description: "Monitore seu desenvolvimento psicológico com métricas detalhadas e relatórios de performance.",
+          detailedContent: "Acompanhe seu desenvolvimento psicológico e melhoria no trading com nosso sistema abrangente de acompanhamento de progresso. Este recurso monitora seu controle emocional, níveis de disciplina, métricas de consistência e crescimento psicológico ao longo do tempo."
+        },
+        {
+          title: "Gamificação",
+          description: "Ganhe distintivos e recompensas conforme desenvolve melhor psicologia e disciplina de trading.",
+          detailedContent: "Torne seu desenvolvimento psicológico envolvente e motivador com nosso sistema abrangente de gamificação. Ganhe distintivos por alcançar marcos como 'Mestre da Disciplina' por seguir seu plano de trading por 30 dias consecutivos."
+        },
+        {
+          title: "Cursos de Psicologia",
+          description: "Acesse caminhos de aprendizado estruturados cobrindo todos os aspectos da psicologia de trading.",
+          detailedContent: "Acesse nossa biblioteca abrangente de cursos de psicologia estruturados projetados especificamente para traders. Estes cursos cobrem tópicos essenciais como regulação emocional, risco management psychology, and developing a winning trader mindset."
+        },
+        {
+          title: "Ferramentas de Reflexão",
+          description: "Registre seus trades e emoções com prompts guiados para auto-análise mais profunda.",
+          detailedContent: "Nossas ferramentas de reflexão ajudam você a desenvolver maior autoconsciência através de exercícios guiados de registro e auto-análise. Essas ferramentas incluem prompts de reflexão de trade, exercícios de consciência emocional e estruturas de definição de objetivos."
+        }
+      ],
+      features: [
+        {
+          title: "Coach de Psicologia IA",
+          description:
+            "Seu Mentor Pessoal de Psicologia de Trading: Obtenha coaching emocional em tempo real, análise de padrões comportamentais e estratégias personalizadas para superar barreiras psicológicas e desenvolver disciplina de trading inabalável.",
+        },
+        {
+          title: "Construtor de Trade",
+          description:
+            "Planejamento de Trade Focado em Psicologia: Planeje cada trade com checkpoints psicológicos e salvaguardas comportamentais projetadas para ajudá-lo a tomar decisões informadas.",
+        },
+        {
+          title: "Análise de Trade IA",
+          description:
+            "Transforme Cada Trade em Oportunidade de Aprendizado: Nossa IA analisa seus trades através de uma lente psicológica, fornecendo insights acionáveis para melhorar sua tomada de decisão e aumentar sua rentabilidade.",
+        },
+        {
+          title: "Construtor de Carreira Financiada",
+          description:
+            "Seu Caminho para Trading Profissional: Obtenha orientação abrangente e ferramentas para se qualificar para programas de trading financiado, construir seu histórico e lançar sua carreira de trading profissional com confiança.",
+        },
+      ],
+      pricingTitle: "Sua Transformação na Jornada de Trading Começa Aqui",
+      pricingSubtitle: "Comece grátis, faça upgrade quando estiver pronto",
+      pricingPlans: [
+        {
+          name: "Gratuito",
+          price: "$0",
+          period: "/mês",
+          description: "Perfeito para Começar",
+          features: [
+            "Coach de Psicologia IA",
+            "5 Análises de Trade por mês",
+            "Acompanhamento de Progresso",
+            "Exercícios Interativos",
+            "Cursos de Psicologia"
+          ]
+        },
+        {
+          name: "Pro",
+          price: "$15",
+          period: "/mês",
+          description: "Para Traders Sérios",
+          features: [
+            "Coach de Psicologia IA Avançado",
+            "25 Análises de Trade por mês",
+            "Acompanhamento de Progresso Avançado",
+            "Diário de Reflexão",
+            "Cursos de Psicologia",
+            "Análise de Screenshots",
+            "10 Construtor de Trade",
+            "Exercícios Interativos"
+          ]
+        },
+        {
+          name: "Premium",
+          price: "$25",
+          period: "/mês",
+          description: "Para Traders Profissionais",
+          popular: true,
+          features: [
+            "Tudo do Pro",
+            "Coach de Psicologia IA Avançado",
+            "Análises de Trade Ilimitadas",
+            "Acompanhamento de Progresso Avançado",
+            "Diário de Reflexão",
+            "Cursos de Psicologia",
+            "Insights de Coaching",
+            "30 Construtor de Trade",
+            "Exercícios Interativos",
+            "Padrões Comportamentais"
+          ]
+        },
+        {
+          name: "Elite",
+          price: "$35",
+          period: "/mês",
+          description: "Para Traders Elite",
+          features: [
+            "Tudo do Premium",
+            "Coach de Psicologia IA Avançado",
+            "Análises de Trade Ilimitadas",
+            "Acompanhamento de Progresso Avançado",
+            "Diário de Reflexão",
+            "Cursos de Psicologia",
+            "Insights de Coaching",
+            "Construtor de Trade Ilimitado",
+            "Exercícios Interativos",
+            "Padrões Comportamentais",
+            "Construtor de Carreira Financiada"
+          ]
+        }
+      ],
+      testimonialsTitle: "Junte-se a Milhares de Traders Bem-Sucedidos",
+      testimonialsSubtitle: "Junte-se a milhares de traders que transformaram sua mentalidade",
+      ctaTitle: "Pronto Para Desbloquear Seu Potencial Completo no Trading??",
+      ctaSubtitle: "Junte-se a milhares de traders que transformaram sua psicologia e alcançaram rentabilidade consistente.",
+      ctaButton: "Comece Seu Teste Gratuito",
       expandAll: "Expandir Tudo",
       collapseAll: "Recolher Tudo",
+      testimonials: [
+        {
+          name: "Sarah Chen",
+          role: "Day Trader",
+          content: "MaXTrades me ajudou a superar meu medo de realizar lucros. Minha consistência melhorou drasticamente em apenas 3 meses.",
+          rating: 5
+        },
+        {
+          name: "Marcus Rodriguez",
+          role: "Swing Trader",
+          content: "O coach IA é como ter um psicólogo de trading disponível 24/7. Transformou como abordo os mercados.",
+          rating: 5
+        },
+        {
+          name: "Emily Johnson",
+          role: "Trader de Opções",
+          content: "Finalmente, uma plataforma que aborda o jogo mental. Meu controle emocional nunca esteve melhor.",
+          rating: 5
+        }
+      ]
     },
     es: {
       title: "MaXTrades",
-      subtitle: "Laboratorio de Psicología de Trading",
+      subtitle: "Trading Psychology Labbbb",
       badge: "Psicología de Trading Impulsada por IA",
       heroTitle: "Domina Tu Mentalidad. Domina Tu Trading.",
-      description: "Domina tu psicología de trading con coaching impulsado por IA, análisis conductual y ejercicios interactivos diseñados para construir resistencia mental y mejor toma de decisiones.",
+      description:
+        "Domina tu psicología de trading con coaching impulsado por IA, análisis conductual y ejercicios interactivos diseñados para construir resistencia mental y mejor toma de decisiones.",
       getStarted: "Comienza Tu Viaje",
       learnMore: "Ver Demo",
       signIn: "Iniciar Sesión",
       footerFeatures: "Características",
       footerPricing: "Precios",
       footerDemo: "Demo",
+      featuresTitle: "Desarrollado para Maestría en Psicología de Trading y Alto Rendimiento",
+      featuresSubtitle:
+        "La Plataforma Definitiva para Ventaja Mental — Combinando Insights Impulsados por IA, Coaching Personalizado y un Entorno Profundamente Inmersivo Donde Creces Continuamente, Revisas Trades Pasados con Propósito y Construyes Cada Nuevo Trade con Claridad y Confianza.",
+      howItWorksTitle: "Cómo Funciona MaXTrades",
+      howItWorksSubtitle: "Tu Camino hacia la Maestría en Trading en 4 Pasos Simples",
+      howItWorksSteps: [
+        {
+          step: "1",
+          title: "Hacer Evaluación",
+          description: "Completa nuestra evaluación integral de psicología de trading"
+        },
+        {
+          step: "2", 
+          title: "Obtener Coach IA",
+          description: "Recibe tu coach de psicología IA personalizado"
+        },
+        {
+          step: "3",
+          title: "Construir Trades", 
+          description: "Estructura trades con checkpoints psicológicos"
+        },
+        {
+          step: "4",
+          title: "Seguir Progreso",
+          description: "Monitorea tu desarrollo psicológico y mejora en el trading"
+        }
+      ],
+      // New Benefits Section
+      benefitsTitle: "Transforma Tu Psicología de Trading",
+      benefitsSubtitle: "Desbloquea tu potencial completo y logra rentabilidad consistente con nuestra plataforma integral de psicología de trading",
+      benefits: [
+        {
+          title: "Supera la Vacilación con un Plan de Trading Bien Desarrollado",
+          description: "Construye confianza creando un plan de trading estructurado y accionable, adaptado a tu estrategia y objetivos. Elimina las dudas y ejecuta trades decisivamente con una hoja de ruta clara que define reglas de entrada, salida y gestión de riesgos.",
+          icon: Target,
+          gradient: "from-blue-500 to-cyan-500"
+        },
+        {
+          title: "Gestiona la Toma de Decisiones Emocional",
+          description: "Aprende técnicas probadas para reconocer, controlar y canalizar emociones mientras operas. Reduce reacciones impulsivas y cultiva una mentalidad disciplinada que apoye decisiones sólidas y objetivas—incluso en mercados volátiles.",
+          icon: Heart,
+          gradient: "from-purple-500 to-pink-500"
+        },
+        {
+          title: "Detén las Malas Decisiones de Gestión de Riesgos",
+          description: "Domina los principios de gestión de riesgos efectiva. Define tus límites de riesgo, tamaños de posición y estrategias de mitigación de pérdidas para proteger capital y mantenerte en el juego a largo plazo, evitando errores catastróficos que sabotean tu progreso.",
+          icon: Shield,
+          gradient: "from-green-500 to-emerald-500"
+        },
+        {
+          title: "Elimina Malos Trades y Decisiones Pobres",
+          description: "Analiza tu comportamiento de trading para identificar patrones de errores y autosabotaje. Usa reflexión guiada y retroalimentación estructurada para romper el ciclo de errores repetidos, ayudándote a hacer elecciones de trading consistentemente mejores.",
+          icon: TrendingDown,
+          gradient: "from-red-500 to-orange-500"
+        },
+        {
+          title: "Maximiza Oportunidades de Trading con Dimensionamiento de Posición Confiado",
+          description: "Aprende a dimensionar posiciones estratégicamente basado en tu plan y tolerancia al riesgo. Optimiza retornos potenciales mientras gestionas riesgo a la baja, empoderándote para aprovechar oportunidades sin miedo o vacilación.",
+          icon: Zap,
+          gradient: "from-yellow-500 to-amber-500"
+        },
+        {
+          title: "Apunta a la Rentabilidad Consistente",
+          description: "Cambia de victorias esporádicas a éxito sostenible. Desarrolla los hábitos, procesos y resistencia psicológica requeridos para entregar resultados confiables a lo largo del tiempo, convirtiendo el trading disciplinado en una carrera consistentemente rentable.",
+          icon: DollarSign,
+          gradient: "from-indigo-500 to-purple-500"
+        }
+      ],
+      detailedFeatures: [
+        {
+          title: "Patrones Conductuales",
+          description: "Identifica y comprende tus comportamientos de trading recurrentes y sesgos psicológicos.",
+          detailedContent: "Nuestro análisis avanzado de patrones conductuales usa aprendizaje automático para identificar patrones recurrentes en tu comportamiento de trading. Analizamos tus procesos de toma de decisiones, disparadores emocionales y sesgos psicológicos que pueden estar afectando tu rendimiento de trading."
+        },
+        {
+          title: "Ejercicios Interactivos", 
+          description: "Participa en ejercicios de TCC, meditaciones y simulaciones diseñadas para traders.",
+          detailedContent: "Nuestra biblioteca integral de ejercicios interactivos está específicamente diseñada para que los traders construyan resistencia mental y control emocional. Estos incluyen ejercicios de Terapia Cognitivo-Comportamental (TCC) que te ayudan a identificar y cambiar patrones de pensamiento negativos."
+        },
+        {
+          title: "Insights de Mercado en Vivo",
+          description: "Indicadores de psicología de mercado en tiempo real y análisis de sentimiento para ayudarte a tomar decisiones informadas.",
+          detailedContent: "Obtén insights en tiempo real sobre psicología y sentimiento del mercado con nuestro panel de análisis avanzado. Esta función proporciona análisis de sentimiento de mercado en vivo, indicadores de miedo y codicia, niveles de estrés de volatilidad y métricas de psicología de multitudes."
+        },
+        {
+          title: "Análisis de Capturas de Pantalla",
+          description: "Sube capturas de pantalla de trading para análisis impulsado por IA de tu toma de decisiones y estado emocional.", 
+          detailedContent: "Nuestra función revolucionaria de análisis de capturas de pantalla usa IA avanzada para analizar tus capturas de pantalla de la plataforma de trading y proporcionar insights profundos sobre tu proceso de toma de decisiones."
+        },
+        {
+          title: "Seguimiento de Progreso",
+          description: "Monitorea tu desarrollo psicológico con métricas detalladas y reportes de rendimiento.",
+          detailedContent: "Rastrea tu desarrollo psicológico y mejora en el trading con nuestro sistema integral de seguimiento de progreso. Esta función monitorea tu control emocional, niveles de disciplina, métricas de consistencia y crecimiento psicológico a lo largo del tiempo."
+        },
+        {
+          title: "Gamificación",
+          description: "Gana insignias y recompensas mientras desarrollas mejor psicología y disciplina de trading.",
+          detailedContent: "Haz que tu desarrollo psicológico sea atractivo y motivador con nuestro sistema integral de gamificación. Gana insignias por lograr hitos como 'Maestro de la Disciplina' por seguir tu plan de trading durante 30 días consecutivos."
+        },
+        {
+          title: "Cursos de Psicología",
+          description: "Accede a rutas de aprendizaje estructuradas que cubren todos los aspectos de la psicología del trading.",
+          detailedContent: "Accede a nuestra biblioteca integral de cursos de psicología estructurados diseñados específicamente para traders. Estos cursos cubren temas esenciales como regulación emocional, psicología de gestión de riesgos y desarrollo de una mentalidad ganadora de trader."
+        },
+        {
+          title: "Herramientas de Reflexión",
+          description: "Registra tus trades y emociones con prompts guiados para un auto-análisis más profundo.",
+          detailedContent: "Nuestras herramientas de reflexión te ayudan a desarrollar mayor autoconciencia a través de ejercicios guiados de registro y auto-análisis. Estas herramientas incluyen prompts de reflexión de trades, ejercicios de conciencia emocional y marcos de establecimiento de objetivos."
+        }
+      ],
+      features: [
+        {
+          title: "Coach de Psicología IA",
+          description:
+            "Tu Mentor Personal de Psicología de Trading: Obtén coaching emocional en tiempo real, análisis de patrones conductuales y estrategias personalizadas para superar barreras psicológicas y desarrollar disciplina de trading inquebrantable.",
+        },
+        {
+          title: "Constructor de Trade",
+          description:
+            "Planificación de Trade Enfocada en Psicología: Planifica cada trade con análisis psicológico, checkpoints emocionales y salvaguardas conductuales diseñadas para ayudarte a tomar decisiones informadas.",
+        },
+        {
+          title: "Análisis de Trade IA",
+          description:
+            "Transforma Cada Trade en Oportunidad de Aprendizaje: Nuestra IA analiza tus trades a través de una lente psicológica, proporcionando insights accionables para mejorar tu toma de decisiones y aumentar tu rentabilidad.",
+        },
+        {
+          title: "Constructor de Carrera Financiada",
+          description:
+            "Tu Camino hacia Trading Profesional: Obtén orientación integral y herramientas para calificar para programas de trading financiado, construir tu historial y lanzar tu carrera de trading profesional con confianza.",
+        },
+      ],
+      pricingTitle: "Tu Transformación en el Viaje de Trading Comienza Aquí",
+      pricingSubtitle: "Comienza gratis, actualiza cuando estés listo",
+      pricingPlans: [
+        {
+          name: "Gratuito",
+          price: "$0",
+          period: "/mes",
+          description: "Perfecto para Empezar",
+          features: [
+            "Coach de Psicología IA",
+            "5 Análisis de Trade por mes",
+            "Seguimiento de Progreso",
+            "Ejercicios Interactivos",
+            "Cursos de Psicología"
+          ]
+        },
+        {
+          name: "Pro",
+          price: "$14",
+          period: "/mes",
+          description: "Para Traders Serios",
+          features: [
+            "Coach de Psicología IA Avanzado",
+            "25 Análisis de Trade por mes",
+            "Seguimiento de Progreso Avanzado",
+            "Diario de Reflexión",
+            "Cursos de Psicología",
+            "Análisis de Capturas de Pantalla",
+            "10 Constructor de Trade",
+            "Ejercicios Interactivos"
+          ]
+        },
+        {
+          name: "Premium",
+          price: "$28",
+          period: "/mes",
+          description: "Para Traders Profesionales",
+          popular: true,
+          features: [
+            "Todo de Pro",
+            "Coach de Psicología IA Avanzado",
+            "Análisis de Trade Ilimitados",
+            "Seguimiento de Progreso Avanzado",
+            "Diario de Reflexión",
+            "Cursos de Psicología",
+            "Insights de Coaching",
+            "30 Constructor de Trade",
+            "Ejercicios Interactivos",
+            "Patrones Conductuales"
+          ]
+        },
+        {
+          name: "Elite",
+          price: "$55",
+          period: "/mes",
+          description: "Para Traders Elite",
+          features: [
+            "Todo de Premium",
+            "Coach de Psicología IA Avanzado",
+            "Análisis de Trade Ilimitados",
+            "Seguimiento de Progreso Avanzado",
+            "Diario de Reflexión",
+            "Cursos de Psicología",
+            "Insights de Coaching",
+            "Constructor de Trade Ilimitado",
+            "Exercícios Interactivos",
+            "Patrones Conductuales",
+            "Constructor de Carreira Financiada"
+          ]
+        }
+      ],
+      testimonialsTitle: "Únete a Miles de Traders Exitosos",
+      testimonialsSubtitle: "Únete a miles de traders que han transformado su mentalidad",
+      ctaTitle: "¿Listo Para Desbloquear Tu Potencial Completo en Trading??",
+      ctaSubtitle: "Únete a miles de traders que han transformado su psicología y logrado rentabilidad consistente.",
+      ctaButton: "Comienza Tu Prueba Gratuita",
       expandAll: "Expandir Todo",
       collapseAll: "Contraer Todo",
+      testimonials: [
+        {
+          name: "Sarah Chen",
+          role: "Day Trader",
+          content: "MaXTrades me ayudó a superar mi miedo a tomar ganancias. Mi consistencia mejoró dramáticamente en solo 3 meses.",
+          rating: 5
+        },
+        {
+          name: "Marcus Rodriguez",
+          role: "Swing Trader",
+          content: "El coach IA es como tener un psicólogo de trading disponible 24/7. Ha transformado cómo abordo los mercados.",
+          rating: 5
+        },
+        {
+          name: "Emily Johnson",
+          role: "Trader de Opciones",
+          content: "Finalmente, una plataforma que aborda el juego mental. Mi control emocional nunca ha estado mejor.",
+          rating: 5
+        }
+      ]
     },
     fr: {
       title: "MaXTrades",
-      subtitle: "Laboratoire de Psychologie de Trading",
+      subtitle: "Trading Psychology Labbbb",
       badge: "Psychologie de Trading Alimentée par l'IA",
       heroTitle: "Maîtrisez Votre Mentalité. Maîtrisez Votre Trading.",
-      description: "Maîtrisez votre psychologie de trading avec un coaching alimenté par l'IA, une analyse comportementale et des exercices interactifs conçus pour construire la résilience mentale et une meilleure prise de décision.",
+      description:
+        "Maîtrisez votre psychologie de trading avec un coaching alimenté par l'IA, une analyse comportementale et des exercices interactifs conçus pour construire la résilience mentale et une meilleure prise de décision.",
       getStarted: "Commencez Votre Voyage",
       learnMore: "Voir la Démo",
       signIn: "Se Connecter",
       footerFeatures: "Fonctionnalités",
       footerPricing: "Tarifs",
       footerDemo: "Démo",
+      featuresTitle: "Développé pour la Maîtrise de la Psychologie du Trading et la Haute Performance",
+      featuresSubtitle:
+        "La Plateforme Ultime pour l'Avantage Mental — Combinant des Insights Alimentés par l'IA, un Coaching Personnalisé et un Environnement Profondément Immersif Où Vous Grandissez Continuellement, Révisez les Trades Passés avec un Objectif et Construisez Chaque Nouveau Trade avec Clarté et Confiance.",
+      howItWorksTitle: "Comment MaXTrades Fonctionne",
+      howItWorksSubtitle: "Votre Chemin vers la Maîtrise du Trading en 4 Étapes Simples",
+      howItWorksSteps: [
+        {
+          step: "1",
+          title: "Faire l'Évaluation",
+          description: "Complétez notre évaluation complète de psychologie du trading"
+        },
+        {
+          step: "2", 
+          title: "Obtenir Coach IA",
+          description: "Recevez votre coach de psychologie IA personnalisé"
+        },
+        {
+          step: "3",
+          title: "Construire Trades", 
+          description: "Structurez les trades avec des checkpoints psychologiques"
+        },
+        {
+          step: "4",
+          title: "Suivre Progrès",
+          description: "Surveillez votre développement psychologique et amélioration du trading"
+        }
+      ],
+      // New Benefits Section
+      benefitsTitle: "Transformez Votre Psychologie de Trading",
+      benefitsSubtitle: "Débloquez votre plein potentiel et atteignez une rentabilité constante avec notre plateforme complète de psychologie de trading",
+      benefits: [
+        {
+          title: "Surmontez l'Hésitation avec un Plan de Trading Bien Développé",
+          description: "Construisez la confiance en créant un plan de trading structuré et actionnable, adapté à votre stratégie et vos objectifs. Éliminez les doutes et exécutez les trades de manière décisive avec une feuille de route claire qui définit les règles d'entrée, de sortie et de gestion des risques.",
+          icon: Target,
+          gradient: "from-blue-500 to-cyan-500"
+        },
+        {
+          title: "Gérez la Prise de Décision Émotionnelle",
+          description: "Apprenez des techniques éprouvées pour reconnaître, contrôler et canaliser les émotions pendant le trading. Réduisez les réactions impulsives et cultivez un état d'esprit discipliné qui soutient des décisions solides et objectives—même dans des marchés volatils.",
+          icon: Heart,
+          gradient: "from-purple-500 to-pink-500"
+        },
+        {
+          title: "Arrêtez les Mauvaises Décisions de Gestion des Risques",
+          description: "Maîtrisez les principes de gestion des risques efficace. Définissez vos limites de risque, tailles de position et stratégies d'atténuation des pertes pour protéger le capital et rester dans le jeu à long terme, évitant les erreurs catastrophiques qui sabotent votre progrès.",
+          icon: Shield,
+          gradient: "from-green-500 to-emerald-500"
+        },
+        {
+          title: "Éliminez les Mauvais Trades et les Décisions Pauvres",
+          description: "Analysez votre comportement de trading pour identifier les modèles d'erreurs et d'auto-sabotage. Utilisez la réflexion guidée et les commentaires structurés pour briser le cycle d'erreurs répétées, vous aidant à faire des choix de trading constamment meilleurs.",
+          icon: TrendingDown,
+          gradient: "from-red-500 to-orange-500"
+        },
+        {
+          title: "Maximisez les Opportunités de Trading avec un Dimensionnement de Position Confiant",
+          description: "Apprenez à dimensionner les positions stratégiquement basé sur votre plan et tolérance au risque. Optimisez les retours potentiels tout en gérant le risque de baisse, vous permettant de profiter des opportunités sans peur ou hésitation.",
+          icon: Zap,
+          gradient: "from-yellow-500 to-amber-500"
+        },
+        {
+          title: "Visez la Rentabilité Constante",
+          description: "Passez de victoires sporadiques au succès durable. Développez les habitudes, processus et résilience psychologique requis pour livrer des résultats fiables au fil du temps, transformant le trading discipliné en une carrière constamment rentable.",
+          icon: DollarSign,
+          gradient: "from-indigo-500 to-purple-500"
+        }
+      ],
+      detailedFeatures: [
+        {
+          title: "Modèles Comportementaux",
+          description: "Identifiez et comprenez vos comportements de trading récurrents et biais psychologiques.",
+          detailedContent: "Notre analyse avancée des modèles comportementaux utilise l'apprentissage automatique pour identifier les modèles récurrents dans votre comportement de trading. Nous analysons vos processus de prise de décision, déclencheurs émotionnels et biais psychologiques qui peuvent affecter votre performance de trading."
+        },
+        {
+          title: "Exercices Interactifs", 
+          description: "Participez à des exercices de TCC, méditations et simulations conçues pour les traders.",
+          detailedContent: "Notre bibliothèque complète d'exercices interactifs est spécifiquement conçue pour que les traders développent la résilience mentale et le contrôle émotionnel. Ceux-ci incluent des exercices de Thérapie Cognitivo-Comportementale (TCC) qui vous aident à identifier et changer les schémas de pensée négatifs."
+        },
+        {
+          title: "Insights de Marché en Direct",
+          description: "Indicateurs de psychologie de marché en temps réel et analyse de sentiment pour vous aider à prendre des décisions éclairées.",
+          detailedContent: "Obtenez des insights en temps réel sur la psychologie et le sentiment du marché avec notre tableau de bord d'analyse avancée. Cette fonctionnalité fournit une analyse de sentiment de marché en direct, des indicateurs de peur et de cupidité, des niveaux de stress de volatilité et des métriques de psychologie de foule."
+        },
+        {
+          title: "Analyse de Captures d'Écran",
+          description: "Téléchargez des captures d'écran de trading pour une analyse alimentée par l'IA de votre prise de décision et état émotionnel.", 
+          detailedContent: "Notre fonctionnalité révolutionnaire d'analyse de captures d'écran utilise l'IA avancée pour analyser vos captures d'écran de la plateforme de trading et fournir des insights profonds sur votre processus de prise de décision."
+        },
+        {
+          title: "Suivi des Progrès",
+          description: "Surveillez votre développement psychologique avec des métriques détaillées et des rapports de performance.",
+          detailedContent: "Suivez votre développement psychologique et amélioration du trading avec notre système complet de suivi des progrès. Cette fonctionnalité surveille votre contrôle émotionnel, niveaux de discipline, métriques de cohérence et croissance psychologique au fil du temps."
+        },
+        {
+          title: "Gamification",
+          description: "Gagnez des badges et récompenses en développant une meilleure psychologie et discipline de trading.",
+          detailedContent: "Rendez votre développement psychologique engageant et motivant avec notre système complet de gamification. Gagnez des badges pour atteindre des jalons comme 'Maître de la Discipline' pour suivre votre plan de trading pendant 30 jours consécutifs."
+        },
+        {
+          title: "Cours de Psychologie",
+          description: "Accédez à des parcours d'apprentissage structurés couvrant tous les aspects de la psychologie du trading.",
+          detailedContent: "Accédez à notre bibliothèque complète de cours de psychologie structurés conçus spécifiquement pour les traders. Ces cours couvrent des sujets essentiels comme la régulation émotionnelle, la psychologie de gestion des risques et le développement d'un état d'esprit gagnant de trader."
+        },
+        {
+          title: "Outils de Réflexion",
+          description: "Enregistrez vos trades et émotions avec des invites guidées pour une auto-analyse plus approfondie.",
+          detailedContent: "Nos outils de réflexion vous aident à développer une plus grande conscience de soi grâce à des exercices guidés de journalisation et d'auto-analyse. Ces outils incluent des invites de réflexion de trade, des exercices de conscience émotionnelle et des cadres de définition d'objectifs."
+        }
+      ],
+      features: [
+        {
+          title: "Coach de Psychologie IA",
+          description:
+            "Votre Mentor Personnel de Psychologie de Trading : Obtenez un coaching émotionnel en temps réel, une analyse des modèles comportementaux et des stratégies personnalisées pour surmonter les barrières psychologiques et développer une discipline de trading inébranlable.",
+        },
+        {
+          title: "Constructeur de Trade",
+          description:
+            "Planification de Trade Axée sur la Psychologie : Planifiez chaque trade avec une analyse psychologique, des checkpoints émotionnels et des garde-fous comportementaux conçus pour vous aider à prendre des décisions éclairées.",
+        },
+        {
+          title: "Analyse de Trade IA",
+          description:
+            "Transformez Chaque Trade en Opportunité d'Apprentissage : Notre IA analyse vos trades à travers une lentille psychologique, fournissant des insights exploitables pour améliorer votre prise de décision et augmenter votre rentabilité.",
+        },
+        {
+          title: "Constructeur de Carrière Financée",
+          description:
+            "Votre Chemin vers le Trading Professionnel : Obtenez des conseils complets et des outils pour vous qualifier pour les programmes de trading financé, construire votre historique et lancer votre carrière de trading professionnel avec confiance.",
+        },
+      ],
+      pricingTitle: "Votre Transformation de Voyage de Trading Commence Ici",
+      pricingSubtitle: "Commencez gratuitement, mettez à niveau quand vous êtes prêt",
+      pricingPlans: [
+        {
+          name: "Gratuit",
+          price: "$0",
+          period: "/mois",
+          description: "Parfait pour Commencer",
+          features: [
+            "Coach de Psychologie IA",
+            "5 Analyses de Trade par mois",
+            "Suivi des Progrès",
+            "Exercices Interactifs",
+            "Cours de Psychologie"
+          ]
+        },
+        {
+          name: "Pro",
+          price: "$14",
+          period: "/mois",
+          description: "Pour les Traders Sérieux",
+          features: [
+            "Coach de Psychologie IA Avancé",
+            "25 Analyses de Trade par mois",
+            "Suivi des Progrès Avancé",
+            "Journal de Réflexion",
+            "Cours de Psychologie",
+            "Analyse de Captures d'Écran",
+            "10 Constructeur de Trade",
+            "Exercices Interactifs"
+          ]
+        },
+        {
+          name: "Premium",
+          price: "$28",
+          period: "/mois",
+          description: "Pour les Traders Professionnels",
+          popular: true,
+          features: [
+            "Tout de Pro",
+            "Coach de Psychologie IA Avancé",
+            "Analyses de Trade Illimitées",
+            "Suivi des Progrès Avancé",
+            "Journal de Réflexion",
+            "Cours de Psicologia",
+            "Insights de Coaching",
+            "30 Constructeur de Trade",
+            "Exercícios Interactivos",
+            "Modèles Comportamentaux"
+          ]
+        },
+        {
+          name: "Elite",
+          price: "$55",
+          period: "/mois",
+          description: "Para os Traders Elite",
+          features: [
+            "Tudo de Premium",
+            "Coach de Psicologie IA Avancé",
+            "Análises de Trade Ilimitadas",
+            "Suivi dos Progrès Avançado",
+            "Journal de Réflexion",
+            "Cours de Psicologia",
+            "Insights de Coaching",
+            "Constructeur de Trade Ilimitado",
+            "Exercícios Interactivos",
+            "Modèles Comportamentais",
+            "Constructeur de Carreira Financiada"
+          ]
+        }
+      ],
+      testimonialsTitle: "Rejoignez des Milliers de Traders Prospères",
+      testimonialsSubtitle: "Rejoignez des milliers de traders qui ont transformé leur mentalité",
+      ctaTitle: "Prêt à Débloquer Votre Plein Potentiel de Trading ??",
+      ctaSubtitle: "Rejoignez des milliers de traders qui ont transformé leur psychologie et atteint une rentabilité constante.",
+      ctaButton: "Commencez Votre Essai Gratuit",
       expandAll: "Tout Développer",
       collapseAll: "Tout Réduire",
+      testimonials: [
+        {
+          name: "Sarah Chen",
+          role: "Day Trader",
+          content: "MaXTrades m'a aidé à surmonter ma peur de prendre des bénéfices. Ma cohérence s'est considérablement améliorée en seulement 3 mois.",
+          rating: 5
+        },
+        {
+          name: "Marcus Rodriguez",
+          role: "Swing Trader",
+          content: "Le coach IA est comme avoir un psychologue de trading disponible 24/7. Il a transformé ma façon d'aborder les marchés.",
+          rating: 5
+        },
+        {
+          name: "Emily Johnson",
+          role: "Trader d'Options",
+          content: "Enfin, une plateforme qui aborde le jeu mental. Mon contrôle émotionnel n'a jamais été meilleur.",
+          rating: 5
+        }
+      ]
     }
   }
 
-  const currentTranslations = staticTranslations[currentLanguage as keyof typeof staticTranslations] || staticTranslations.en
-
-  // Dynamic content that will be translated by AI
-  const dynamicContent = {
-    featuresTitle: "Developed for Trading Psychology Mastery and High Performance",
-    featuresSubtitle: "The Ultimate Platform for Mental Edge — Combining AI-Powered Insights, Personalized Coaching, and a Deeply Immersive Environment Where You Continuously Grow, Review Past Trades with Purpose, and Build Each New Trade with Clarity and Confidence.",
-    
-    howItWorksTitle: "How MaXTrades Works",
-    howItWorksSubtitle: "Your Path to Trading Mastery in 4 Simple Steps",
-    
-    benefitsTitle: "Transform Your Trading Psychology",
-    benefitsSubtitle: "Unlock your full potential and achieve consistent profitability with our comprehensive trading psychology platform",
-    
-    pricingTitle: "Your Trading Transformation Journey Starts Here",
-    pricingSubtitle: "Start free, upgrade when you're ready",
-    
-    testimonialsTitle: "Join the Community of Successful Traders",
-    testimonialsSubtitle: "Join thousands of traders who are transforming their mindset",
-    
-    ctaTitle: "Ready to Unlock Your Full Trading Potential?",
-    ctaSubtitle: "Join thousands of traders who have transformed their psychology and achieved consistent profitability.",
-    ctaButton: "Start Your Free Trial",
-  }
-
-  const features = [
-    {
-      title: "AI Psychology Coach",
-      description: "Your Personal Trading Psychology Mentor: Get real-time emotional coaching, behavioral pattern analysis, and personalized strategies to overcome psychological barriers and develop unshakeable trading discipline.",
-    },
-    {
-      title: "Trade Builder",
-      description: "Psychology-Focused Trade Planning: Plan every trade with psychological analysis, emotion checkpoints, and behavioral safeguards designed to help you make informed decisions.",
-    },
-    {
-      title: "AI Trade Analysis",
-      description: "Transform Every Trade into Learning Opportunity: Our AI analyzes your trades through a psychological lens, providing actionable insights to improve your decision-making and increase your profitability.",
-    },
-    {
-      title: "Funded Career Builder",
-      description: "Your Path to Professional Trading: Get comprehensive guidance and tools to qualify for funded trading programs, build your track record, and launch your professional trading career with confidence.",
-    },
-  ]
-
-  const detailedFeatures = [
-    {
-      title: "Behavioral Patterns",
-      description: "Identify and understand your recurring trading behaviors and psychological biases.",
-      detailedContent: "Our advanced behavioral pattern analysis uses machine learning to identify recurring patterns in your trading behavior. We analyze your decision-making processes, emotional triggers, and psychological biases that may be affecting your trading performance."
-    },
-    {
-      title: "Interactive Exercises",
-      description: "Engage with CBT exercises, meditations, and simulations designed for traders.",
-      detailedContent: "Our comprehensive library of interactive exercises is specifically designed for traders to build mental resilience and emotional control. These include Cognitive Behavioral Therapy (CBT) exercises that help you identify and change negative thought patterns."
-    },
-    {
-      title: "Market Live Insights",
-      description: "Real-time market psychology indicators and sentiment analysis to help you make informed decisions.",
-      detailedContent: "Our advanced behavioral pattern analysis uses machine learning to identify recurring patterns in your trading behavior. We analyze your decision-making processes, emotional triggers and psychological biases that may be affecting your trading performance."
-    },
-    {
-      title: "Screenshot Analysis",
-      description: "Upload trading screenshots for AI-powered analysis of your decision-making and emotional state.",
-      detailedContent: "Our revolutionary screenshot analysis feature uses advanced AI to analyze your trading platform screenshots and provide deep insights into your decision-making process."
-    },
-    {
-      title: "Progress Tracking",
-      description: "Monitor your psychological development with detailed metrics and performance reports.",
-      detailedContent: "Track your psychological development and improvement with our comprehensive progress tracking system. This feature monitors your emotional control, discipline levels, consistency metrics, and psychological growth over time."
-    },
-    {
-      title: "Gamification",
-      description: "Earn badges and rewards as you develop better trading psychology and discipline.",
-      detailedContent: "Make your psychological development engaging and motivating with our comprehensive gamification system. Earn badges for achieving milestones like 'Discipline Master' for following your trading plan for 30 days consecutive."
-    },
-    {
-      title: "Psychology Courses",
-      description: "Access structured learning paths covering all aspects of trading psychology.",
-      detailedContent: "Access our comprehensive library of structured psychology courses designed specifically for traders. These courses cover essential topics like emotional regulation, risk management psychology, and developing a winning trader mindset."
-    },
-    {
-      title: "Reflection Tools",
-      description: "Journal your trades and emotions with guided prompts for deeper self-analysis.",
-      detailedContent: "Our reflection tools help you develop deeper self-awareness through guided journaling and self-analysis exercises. These tools include trade reflection prompts, emotional awareness exercises, and goal-setting frameworks."
-    }
-  ]
-
-  const benefits = [
-    {
-      title: "Overcome Hesitation with a Well-Developed Trading Plan",
-      description: "Build confidence by creating a structured, actionable trading plan tailored to your strategy and goals. Eliminate second-guessing and execute trades decisively with a clear roadmap that defines entry, exit, and risk management rules.",
-      icon: Target,
-      gradient: "from-blue-500 to-cyan-500"
-    },
-    {
-      title: "Manage Emotional Decision-Making",
-      description: "Learn proven techniques to recognize, control, and channel emotions while trading. Reduce impulsive reactions and cultivate a disciplined mindset that supports sound, objective decisions—even in volatile markets.",
-      icon: Heart,
-      gradient: "from-purple-500 to-pink-500"
-    },
-    {
-      title: "Stop Poor Risk Management Decisions",
-      description: "Master the principles of effective risk management. Define your risk limits, position sizes, and loss mitigation strategies to protect capital and stay in the game long-term, avoiding catastrophic errors that sabotage your progress.",
-      icon: Shield,
-      gradient: "from-green-500 to-emerald-500"
-    },
-    {
-      title: "Eliminate Bad Trades and Poor Decisions",
-      description: "Analyze your trading behavior to identify patterns of mistakes and self-sabotage. Use guided reflection and structured feedback to break the cycle of repeated errors, helping you make consistently better trading choices.",
-      icon: TrendingDown,
-      gradient: "from-red-500 to-orange-500"
-    },
-    {
-      title: "Maximize Trading Opportunities with Confident Position Sizing",
-      description: "Learn to size positions strategically based on your plan and risk tolerance. Optimize potential returns while managing downside risk, empowering you to take advantage of opportunities without fear or hesitation.",
-      icon: Zap,
-      gradient: "from-yellow-500 to-amber-500"
-    },
-    {
-      title: "Aim for Consistent Profitability",
-      description: "Shift from sporadic wins to sustainable success. Develop the habits, processes, and psychological resilience required to deliver reliable results over time, turning disciplined trading into a consistently profitable career.",
-      icon: DollarSign,
-      gradient: "from-indigo-500 to-purple-500"
-    }
-  ]
-
-  const pricingPlans = [
-    {
-      name: "Free",
-      price: "$0",
-      period: "/month",
-      description: "Perfect for Getting Started",
-      features: [
-        "AI Psychology Coach",
-        "Trader Assessment",
-        "5 Trade Analyses per month",
-        "Progress Tracking",
-        "Interactive Exercises",
-        "Psychology Courses"
-      ]
-    },
-    {
-      name: "Pro",
-      price: "$15",
-      period: "/month",
-      description: "For Serious Traders",
-      features: [
-        "Advanced AI Psychology Coach",
-        "Trader Assessment",
-        "25 Trade Analyses per month",
-        "Advanced Progress Tracking",
-        "Reflection Journal",
-        "Psychology Courses",
-        "Screenshot Analysis",
-        "10 Trade Builder",
-        "Interactive Exercises"
-      ]
-    },
-    {
-      name: "Premium",
-      price: "$25",
-      period: "/month",
-      description: "For Professional Traders",
-      popular: true,
-      features: [
-        "Everything in Pro",
-        "Advanced AI Psychology Coach",
-        "Trader Assessment",
-        "Unlimited Trade Analyses",
-        "Advanced Progress Tracking",
-        "Reflection Journal",
-        "Psychology Courses",
-        "Coaching Insights",
-        "30 Trade Builder",
-        "Interactive Exercises",
-        "Behavioral Patterns"
-      ]
-    },
-    {
-      name: "Elite",
-      price: "$35",
-      period: "/month",
-      description: "For Elite Traders",
-      features: [
-        "Everything in Premium",
-        "Advanced AI Psychology Coach",
-        "Trader Assessment",
-        "Unlimited Trade Analyses",
-        "Advanced Progress Tracking",
-        "Reflection Journal",
-        "Psychology Courses",
-        "Coaching Insights",
-        "Unlimited Trade Builder",
-        "Interactive Exercises",
-        "Behavioral Patterns",
-        "Funded Career Builder"
-      ]
-    }
-  ]
-
-  const testimonials = [
-    {
-      name: "Sarah Chen",
-      role: "Day Trader",
-      content: "MaXTrades helped me overcome my fear of taking profits. My consistency improved dramatically in just 3 months.",
-      rating: 5
-    },
-    {
-      name: "Marcus Rodriguez",
-      role: "Swing Trader",
-      content: "The AI coach is like having a trading psychologist available 24/7. It's transformed how I approach the markets.",
-      rating: 5
-    },
-    {
-      name: "Emily Johnson",
-      role: "Options Trader",
-      content: "Finally, a platform that addresses the mental game. My emotional control has never been better.",
-      rating: 5
-    }
-  ]
+  const t = content[selectedLanguage as keyof typeof content]
 
   const toggleFeature = (index: number) => {
     setExpandedFeatures((prev) => ({
@@ -370,13 +1078,13 @@ export default function LandingPage() {
 
           <nav className="hidden md:flex items-center space-x-8">
             <Link href="#features" className="text-navy-700 hover:text-royal-blue-600 transition-colors">
-              {currentTranslations.footerFeatures}
+              {t.footerFeatures}
             </Link>
             <Link href="#pricing" className="text-navy-700 hover:text-royal-blue-600 transition-colors">
-              {currentTranslations.footerPricing}
+              {t.footerPricing}
             </Link>
             <Link href="#demo" className="text-navy-700 hover:text-royal-blue-600 transition-colors">
-              {currentTranslations.footerDemo}
+              {t.footerDemo}
             </Link>
 
             <DropdownMenu>
@@ -386,8 +1094,8 @@ export default function LandingPage() {
                   className="flex items-center space-x-2 text-navy-700 hover:text-royal-blue-600"
                 >
                   <Globe className="h-4 w-4" />
-                  <span>{languages.find((lang) => lang.code === currentLanguage)?.flag}</span>
-                  <span>{languages.find((lang) => lang.code === currentLanguage)?.name}</span>
+                  <span>{languages.find((lang) => lang.code === selectedLanguage)?.flag}</span>
+                  <span>{languages.find((lang) => lang.code === selectedLanguage)?.name}</span>
                   <ChevronDown className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
@@ -408,14 +1116,14 @@ export default function LandingPage() {
 
           <div className="flex items-center space-x-4">
             <Button variant="ghost" className="text-navy-700 hover:text-royal-blue-600" asChild>
-              <Link href="/auth/signin">{currentTranslations.signIn}</Link>
+              <Link href="/auth/signin">{t.signIn}</Link>
             </Button>
             <Button
               className="bg-gradient-to-r from-navy-600 to-royal-blue-500 hover:from-navy-700 hover:to-royal-blue-600 text-white border-0"
               asChild
             >
               <Link href="/auth/signup">
-                {currentTranslations.getStarted}
+                {t.getStarted}
                 <ChevronRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
@@ -429,13 +1137,13 @@ export default function LandingPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
               <Badge className="bg-gradient-to-r from-navy-100 to-royal-blue-100 text-navy-700 border-navy-200 px-4 py-2 text-sm font-medium">
-                {currentTranslations.badge}
+                {t.badge}
               </Badge>
               <h1 className="text-5xl md:text-6xl font-bold text-navy-900 leading-tight gradient-text">
-                {currentTranslations.heroTitle}
+                {t.heroTitle}
               </h1>
               <p className="text-xl text-navy-600 leading-relaxed max-w-lg">
-                {currentTranslations.description}
+                {t.description}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button
@@ -444,13 +1152,13 @@ export default function LandingPage() {
                   asChild
                 >
                   <Link href="/auth/signup">
-                    {currentTranslations.getStarted}
+                    {t.getStarted}
                     <ChevronRight className="ml-2 h-6 w-6" />
                   </Link>
                 </Button>
                 <Button size="lg" variant="outline" className="border-navy-300 text-navy-700 hover:bg-navy-50 px-8 py-4 text-lg">
                   <Play className="mr-2 h-5 w-5" />
-                  {currentTranslations.learnMore}
+                  {t.learnMore}
                 </Button>
               </div>
             </div>
@@ -480,19 +1188,19 @@ export default function LandingPage() {
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <div>
               <div className="text-4xl font-bold text-royal-blue-600 mb-2">10,000+</div>
-              <div className="text-navy-600">{translateText("Active Traders")}</div>
+              <div className="text-navy-600">Active Traders</div>
             </div>
             <div>
               <div className="text-4xl font-bold text-royal-blue-600 mb-2">85%</div>
-              <div className="text-navy-600">{translateText("Improved Consistency")}</div>
+              <div className="text-navy-600">Improved Consistency</div>
             </div>
             <div>
               <div className="text-4xl font-bold text-royal-blue-600 mb-2">4.9/5</div>
-              <div className="text-navy-600">{translateText("User Rating")}</div>
+              <div className="text-navy-600">User Rating</div>
             </div>
             <div>
               <div className="text-4xl font-bold text-royal-blue-600 mb-2">24/7</div>
-              <div className="text-navy-600">{translateText("AI Support")}</div>
+              <div className="text-navy-600">AI Support</div>
             </div>
           </div>
         </div>
@@ -502,16 +1210,12 @@ export default function LandingPage() {
       <section className="py-20 px-4 bg-gradient-to-br from-blue-50 to-sky-50">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-navy-900 mb-4 gradient-text">
-              {translateText(dynamicContent.featuresTitle)}
-            </h2>
-            <p className="text-xl text-navy-600 max-w-4xl mx-auto">
-              {translateText(dynamicContent.featuresSubtitle)}
-            </p>
+            <h2 className="text-4xl font-bold text-navy-900 mb-4 gradient-text">{t.featuresTitle}</h2>
+            <p className="text-xl text-navy-600 max-w-4xl mx-auto">{t.featuresSubtitle}</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {detailedFeatures.map((feature, index) => {
+            {t.detailedFeatures.map((feature, index) => {
               const icons = [BarChart3, Target, Activity, Camera, TrendingUp, Award, BookOpen, MessageSquare]
               const IconComponent = icons[index]
               return (
@@ -522,12 +1226,8 @@ export default function LandingPage() {
                         <div className="w-16 h-16 bg-gradient-to-r from-navy-600 to-royal-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
                           <IconComponent className="h-8 w-8 text-white" />
                         </div>
-                        <CardTitle className="text-xl text-navy-800">
-                          {translateText(feature.title)}
-                        </CardTitle>
-                        <CardDescription className="text-navy-600">
-                          {translateText(feature.description)}
-                        </CardDescription>
+                        <CardTitle className="text-xl text-navy-800">{feature.title}</CardTitle>
+                        <CardDescription className="text-navy-600">{feature.description}</CardDescription>
                       </CardHeader>
                     </Card>
                   </DialogTrigger>
@@ -537,18 +1237,14 @@ export default function LandingPage() {
                         <div className="w-12 h-12 bg-gradient-to-r from-navy-600 to-royal-blue-500 rounded-full flex items-center justify-center">
                           <IconComponent className="h-6 w-6 text-white" />
                         </div>
-                        <h3 className="text-2xl font-bold text-navy-900">
-                          {translateText(feature.title)}
-                        </h3>
+                        <h3 className="text-2xl font-bold text-navy-900">{feature.title}</h3>
                       </div>
-                      <p className="text-navy-600 leading-relaxed">
-                        {translateText(feature.detailedContent)}
-                      </p>
+                      <p className="text-navy-600 leading-relaxed">{feature.detailedContent}</p>
                       <Button
                         className="bg-gradient-to-r from-navy-600 to-royal-blue-500 hover:from-navy-700 hover:to-royal-blue-600 text-white"
                         asChild
                       >
-                        <Link href="/auth/signup">{currentTranslations.getStarted}</Link>
+                        <Link href="/auth/signup">{t.getStarted}</Link>
                       </Button>
                     </div>
                   </DialogContent>
@@ -563,18 +1259,15 @@ export default function LandingPage() {
       <section className="py-20 px-4 bg-white">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-navy-900 mb-4 gradient-text">
-              {translateText("Our Ultimate Trading Features")}
-            </h2>
-            <p className="text-xl text-navy-600">
-              {translateText("The core tools that set MaXTrades apart from every other trading platform")}
-            </p>
+            <h2 className="text-4xl font-bold text-navy-900 mb-4 gradient-text">Our Ultimate Trading Features</h2>
+            <p className="text-xl text-navy-600">The core tools that set MaXTrades apart from every other trading platform</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-            {features.map((feature, index) => {
+            {t.features.map((feature, index) => {
               const icons = [Brain, Settings, TrendingUp, Award]
               const IconComponent = icons[index]
+              const isExpanded = expandedFeatures[index] || false
               return (
                 <Card
                   key={index}
@@ -584,13 +1277,11 @@ export default function LandingPage() {
                     <div className="w-20 h-20 bg-gradient-to-r from-navy-600 to-royal-blue-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
                       <IconComponent className="h-10 w-10 text-white" />
                     </div>
-                    <CardTitle className="text-2xl text-navy-800 mb-4">
-                      {translateText(feature.title)}
-                    </CardTitle>
+                    <CardTitle className="text-2xl text-navy-800 mb-4">{feature.title}</CardTitle>
                   </CardHeader>
                   <CardContent className="text-center">
                     <CardDescription className="text-navy-600 text-lg leading-relaxed">
-                      {translateText(feature.description)}
+                      {feature.description}
                     </CardDescription>
                   </CardContent>
                 </Card>
@@ -600,17 +1291,15 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* How It Works - IMAGE SECTION */}
+      {/* How It Works - REPLACED WITH IMAGE */}
       <section className="py-20 px-4 bg-white">
         <div className="container mx-auto text-center">
-          <h2 className="text-4xl font-bold text-navy-900 mb-8 gradient-text">
-            {translateText("The Ultimate Toolkit to Accelerate Your Trading Success")}
-          </h2>
+          <h2 className="text-4xl font-bold text-navy-900 mb-8 gradient-text">The Ultimate Toolkit to Accelerate Your Trading Success</h2>
           <Image
             src="/images/sec1.png"
             alt="How MaXTrades Works"
-            width={1000}
-            height={400}
+            width={1000} // Adjust width as needed to match section size
+            height={400} // Adjust height as needed to match section size
             layout="responsive"
             objectFit="contain"
             className="rounded-lg shadow-lg mx-auto"
@@ -618,20 +1307,16 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Benefits Section */}
+      {/* NEW BENEFITS SECTION */}
       <section className="py-20 px-4 bg-white">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-navy-900 mb-4 gradient-text">
-              {translateText(dynamicContent.benefitsTitle)}
-            </h2>
-            <p className="text-xl text-navy-600 max-w-4xl mx-auto">
-              {translateText(dynamicContent.benefitsSubtitle)}
-            </p>
+            <h2 className="text-4xl font-bold text-navy-900 mb-4 gradient-text">{t.benefitsTitle}</h2>
+            <p className="text-xl text-navy-600 max-w-4xl mx-auto">{t.benefitsSubtitle}</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            {benefits.map((benefit, index) => {
+            {t.benefits.map((benefit, index) => {
               const IconComponent = benefit.icon
               const isExpanded = expandedBenefits[index] || false
               return (
@@ -644,7 +1329,7 @@ export default function LandingPage() {
                       <IconComponent className="h-8 w-8 text-white" />
                     </div>
                     <CardTitle className="text-xl text-navy-800 text-center leading-tight">
-                      {translateText(benefit.title)}
+                      {benefit.title}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="pt-0">
@@ -662,7 +1347,7 @@ export default function LandingPage() {
                         <div className="flex items-start mb-2">
                           <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
                           <p className="text-navy-600 leading-relaxed text-sm">
-                            {translateText(benefit.description)}
+                            {benefit.description}
                           </p>
                         </div>
                       </div>
@@ -678,14 +1363,12 @@ export default function LandingPage() {
       {/* Career Box Image Section */}
       <section className="py-20 px-4 bg-white">
         <div className="container mx-auto text-center">
-          <h2 className="text-4xl font-bold text-navy-900 mb-8 gradient-text">
-            {translateText("Master Your Mindset, Unlock Career Growth.")}
-          </h2>
+          <h2 className="text-4xl font-bold text-navy-900 mb-8 gradient-text">Master Your Mindset, Unlock Career Growth.</h2>
           <Image
             src="/images/sec2.png"
             alt="Funded Career Builder"
-            width={1000}
-            height={400}
+            width={1000} // Adjust width as needed to match section size
+            height={400} // Adjust height as needed to match section size
             layout="responsive"
             objectFit="contain"
             className="rounded-lg shadow-lg mx-auto"
@@ -697,16 +1380,12 @@ export default function LandingPage() {
       <section id="pricing" className="py-20 px-4 bg-gradient-to-br from-blue-50 to-sky-50">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-navy-900 mb-4 gradient-text">
-              {translateText(dynamicContent.pricingTitle)}
-            </h2>
-            <p className="text-xl text-navy-600">
-              {translateText(dynamicContent.pricingSubtitle)}
-            </p>
+            <h2 className="text-4xl font-bold text-navy-900 mb-4 gradient-text">{t.pricingTitle}</h2>
+            <p className="text-xl text-navy-600">{t.pricingSubtitle}</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-            {pricingPlans.map((plan, index) => (
+            {t.pricingPlans.map((plan, index) => (
               <Card
                 key={index}
                 className={`relative border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 ${
@@ -718,21 +1397,17 @@ export default function LandingPage() {
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                     <Badge className="bg-royal-blue-500 text-white px-4 py-1 text-sm font-medium">
-                      {translateText("Most Popular")}
+                      Most Popular
                     </Badge>
                   </div>
                 )}
                 <CardHeader className="text-center pb-8">
-                  <CardTitle className="text-2xl text-navy-800 mb-4">
-                    {translateText(plan.name)}
-                  </CardTitle>
+                  <CardTitle className="text-2xl text-navy-800 mb-4">{plan.name}</CardTitle>
                   <div className="mb-4">
                     <span className="text-5xl font-bold text-royal-blue-600">{plan.price}</span>
-                    <span className="text-navy-600 ml-2">{translateText(plan.period)}</span>
+                    <span className="text-navy-600 ml-2">{plan.period}</span>
                   </div>
-                  <CardDescription className="text-navy-600 text-lg">
-                    {translateText(plan.description)}
-                  </CardDescription>
+                  <CardDescription className="text-navy-600 text-lg">{plan.description}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <ul className="space-y-3">
@@ -747,7 +1422,7 @@ export default function LandingPage() {
                             />
                           </svg>
                         </div>
-                        <span className="text-sm">{translateText(feature)}</span>
+                        <span className="text-sm">{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -759,7 +1434,7 @@ export default function LandingPage() {
                     }`}
                     asChild
                   >
-                    <Link href="/auth/signup">{currentTranslations.getStarted}</Link>
+                    <Link href="/auth/signup">Get Started</Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -772,16 +1447,12 @@ export default function LandingPage() {
       <section className="py-20 px-4 bg-white">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-navy-900 mb-4 gradient-text">
-              {translateText(dynamicContent.testimonialsTitle)}
-            </h2>
-            <p className="text-xl text-navy-600">
-              {translateText(dynamicContent.testimonialsSubtitle)}
-            </p>
+            <h2 className="text-4xl font-bold text-navy-900 mb-4 gradient-text">{t.testimonialsTitle}</h2>
+            <p className="text-xl text-navy-600">{t.testimonialsSubtitle}</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {testimonials.map((testimonial, index) => (
+            {t.testimonials.map((testimonial, index) => (
               <Card key={index} className="border-0 shadow-xl bg-white">
                 <CardContent className="p-8">
                   <div className="flex items-center mb-4">
@@ -789,12 +1460,10 @@ export default function LandingPage() {
                       <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
                     ))}
                   </div>
-                  <p className="text-navy-600 mb-6 italic">
-                    "{translateText(testimonial.content)}"
-                  </p>
+                  <p className="text-navy-600 mb-6 italic">"{testimonial.content}"</p>
                   <div>
                     <p className="font-bold text-navy-900">{testimonial.name}</p>
-                    <p className="text-navy-600 text-sm">{translateText(testimonial.role)}</p>
+                    <p className="text-navy-600 text-sm">{testimonial.role}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -804,26 +1473,22 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section
-        className="py-20 px-4 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/images/img5.png')" }}
-      >
-        <div className="container mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white">
-            {translateText(dynamicContent.ctaTitle)}
-          </h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
-            {translateText(dynamicContent.ctaSubtitle)}
-          </p>
-          <Button
-            size="lg"
-            className="bg-white text-navy-600 hover:bg-blue-50 px-8 py-4 text-lg font-semibold"
-            asChild
-          >
-            <Link href="/auth/signup">{translateText(dynamicContent.ctaButton)}</Link>
-          </Button>
-        </div>
-      </section>
+<section
+  className="py-20 px-4 bg-cover bg-center bg-no-repeat"
+  style={{ backgroundImage: "url('/images/img5.png')" }}
+>
+  <div className="container mx-auto text-center">
+    <h2 className="text-4xl md:text-5xl font-bold text-white">{t.ctaTitle}</h2>
+    <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">{t.ctaSubtitle}</p>
+    <Button
+      size="lg"
+      className="bg-white text-navy-600 hover:bg-blue-50 px-8 py-4 text-lg font-semibold"
+      asChild
+    >
+      <Link href="/auth/signup">{t.ctaButton}</Link>
+    </Button>
+  </div>
+</section>
 
       {/* Footer */}
       <footer className="bg-navy-900 text-white py-16 px-4">
@@ -833,57 +1498,44 @@ export default function LandingPage() {
               <Link href="/" className="flex items-center space-x-2">
                 <img src="/images/maxtradeslogo.png" alt="MaXTrades Logo" className="h-8 w-auto" />
               </Link>
-              <p className="text-blue-200">
-                {translateText("Master your trading psychology with AI-powered coaching and behavioral analysis.")}
-              </p>
+              <p className="text-blue-200">Master your trading psychology with AI-powered coaching and behavioral analysis.</p>
             </div>
 
             <div>
-              <h4 className="font-bold mb-4">{translateText("Product")}</h4>
+              <h4 className="font-bold mb-4">Product</h4>
               <ul className="space-y-2 text-blue-200">
-                <li><Link href="#features" className="hover:text-white transition-colors">{currentTranslations.footerFeatures}</Link></li>
-                <li><Link href="#pricing" className="hover:text-white transition-colors">{currentTranslations.footerPricing}</Link></li>
-                <li><Link href="#demo" className="hover:text-white transition-colors">{currentTranslations.footerDemo}</Link></li>
+                <li><Link href="#features" className="hover:text-white transition-colors">{t.footerFeatures}</Link></li>
+                <li><Link href="#pricing" className="hover:text-white transition-colors">{t.footerPricing}</Link></li>
+                <li><Link href="#demo" className="hover:text-white transition-colors">{t.footerDemo}</Link></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-bold mb-4">{translateText("Company")}</h4>
+              <h4 className="font-bold mb-4">Company</h4>
               <ul className="space-y-2 text-blue-200">
-                <li><Link href="/about" className="hover:text-white transition-colors">{translateText("About")}</Link></li>
-                <li><Link href="/contact" className="hover:text-white transition-colors">{translateText("Contact")}</Link></li>
-                <li><Link href="/careers" className="hover:text-white transition-colors">{translateText("Careers")}</Link></li>
+                <li><Link href="/about" className="hover:text-white transition-colors">About</Link></li>
+                <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+                <li><Link href="/careers" className="hover:text-white transition-colors">Careers</Link></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-bold mb-4">{translateText("Support")}</h4>
+              <h4 className="font-bold mb-4">Support</h4>
               <ul className="space-y-2 text-blue-200">
-                <li><Link href="/help" className="hover:text-white transition-colors">{translateText("Help Center")}</Link></li>
-                <li><Link href="/privacy" className="hover:text-white transition-colors">{translateText("Privacy Policy")}</Link></li>
-                <li><Link href="/terms" className="hover:text-white transition-colors">{translateText("Terms of Service")}</Link></li>
+                <li><Link href="/help" className="hover:text-white transition-colors">Help Center</Link></li>
+                <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link></li>
               </ul>
             </div>
           </div>
 
           <div className="border-t border-navy-700 mt-12 pt-8 text-center text-blue-200">
-            <p>&copy; 2024 MaXTrades. {translateText("All rights reserved.")}</p>
+            <p>&copy; 2024 MaXTrades. All rights reserved.</p>
           </div>
         </div>
       </footer>
-
-      {/* Loading Overlay */}
-      {isLoading && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-xl">
-            <div className="flex items-center space-x-3">
-              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-royal-blue-600"></div>
-              <span className="text-navy-700">{translateText("Translating content...")}</span>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
+
 
