@@ -1182,18 +1182,23 @@ export default function LandingPage() {
         </div>
       </section>
 
-     {/* Stats Section with Image Background */}
+    {/* Stats Section with Image Background */}
 <section
   className="py-16 px-4 bg-cover bg-center"
-  style={{ backgroundImage: "url('/images/dis1.png")' }}
+  style={{ backgroundImage: `url("/images/dis1.png")` }}
 >
   <div className="container mx-auto">
     <div className="grid md:grid-cols-4 gap-8 text-center">
       <div>
         {/* Content */}
       </div>
+      <div>
+        <div className="text-4xl font-bold text-royal-blue-600 mb-2">92%</div>
+        <div className="text-navy-600">Of Traders Agree Psychology is Key to Success</div>
+      </div>
     </div>
   </div>
+</section>
             <div>
               <div className="text-4xl font-bold text-royal-blue-600 mb-2">92%</div>
               <div className="text-navy-600">Of Traders Agree Psychology is Key to Success</div>
