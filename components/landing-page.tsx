@@ -1187,20 +1187,20 @@ export default function LandingPage() {
         <div className="container mx-auto">
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-4xl font-bold text-royal-blue-600 mb-2">10,000+</div>
-              <div className="text-navy-600">Active Traders</div>
+              <div className="text-4xl font-bold text-royal-blue-600 mb-2">92%</div>
+              <div className="text-navy-600">Of Traders Agree Psychology is Key to Success</div>
             </div>
             <div>
               <div className="text-4xl font-bold text-royal-blue-600 mb-2">85%</div>
-              <div className="text-navy-600">Improved Consistency</div>
+              <div className="text-navy-600">Improved Consistency with MaXTrades</div>
             </div>
             <div>
               <div className="text-4xl font-bold text-royal-blue-600 mb-2">4.9/5</div>
               <div className="text-navy-600">User Rating</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-royal-blue-600 mb-2">24/7</div>
-              <div className="text-navy-600">AI Support</div>
+              <div className="text-4xl font-bold text-royal-blue-600 mb-2">+5000</div>
+              <div className="text-navy-600">Traders Worldwide</div>
             </div>
           </div>
         </div>
