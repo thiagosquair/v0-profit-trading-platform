@@ -61,7 +61,7 @@ export default function LandingPage() {
   const content = {
     en: {
       title: "MaXTrades",
-      subtitle: "Trading Psychology Labbbb",
+      subtitle: "Trading Psychology Lab",
       badge: "Ai-Powered Trading Psychology",
       heroTitle: "Master Your Mindset. Master Your Trading.",
       description:
