@@ -77,6 +77,37 @@ export default function LandingPage() {
         "The Ultimate Platform for Mental Edge — Combining AI-Powered Insights, Personalized Coaching, and a Deeply Immersive Environment Where You Continuously Grow, Review Past Trades with Purpose, and Build Each New Trade with Clarity and Confidence.",
       howItWorksTitle: "How MaXTrades Works",
       howItWorksSubtitle: "Your Path to Trading Mastery in 4 Simple Steps",
+      // Stats Section
+      statsTitle1: "92%",
+      statsDesc1: "Of Traders Agree Psychology is Key to Success",
+      statsTitle2: "85%",
+      statsDesc2: "Improved Consistency with MaXTrades",
+      statsTitle3: "4.9/5",
+      statsDesc3: "User Rating",
+      statsTitle4: "+5000",
+      statsDesc4: "Traders Worldwide",
+      // Ultimate Features Section
+      ultimateFeaturesTitle: "Our Ultimate Trading Features",
+      ultimateFeaturesSubtitle: "The core tools that set MaXTrades apart from every other trading platform",
+      // How It Works Section (now image section)
+      toolkitTitle: "The Ultimate Toolkit to Accelerate Your Trading Success",
+      // Benefits Section
+      benefitsTitle: "Transform Your Trading Psychology",
+      benefitsSubtitle: "Unlock your full potential and achieve consistent profitability with our comprehensive trading psychology platform",
+      // Career Box Section
+      careerBoxTitle: "Master Your Mindset, Unlock Career Growth.",
+      // Pricing Section
+      pricingTitle: "Your Trading Transformation Journey Starts Here",
+      pricingSubtitle: "Start free, upgrade when you're ready",
+      // Testimonials Section
+      testimonialsTitle: "Join the Community of Successful Traders",
+      testimonialsSubtitle: "Join thousands of traders who are transforming their mindset",
+      // CTA Section
+      ctaTitle: "Ready to Unlock Your Full Trading Potential??",
+      ctaSubtitle: "Join thousands of traders who have transformed their psychology and achieved consistent profitability.",
+      ctaButton: "Start Your Free Trial",
+      expandAll: "Expand All",
+      collapseAll: "Collapse All",
       howItWorksSteps: [
         {
           step: "1",
@@ -99,9 +130,6 @@ export default function LandingPage() {
           description: "Monitor your psychological development and trading improvement"
         }
       ],
-      // New Benefits Section
-      benefitsTitle: "Transform Your Trading Psychology",
-      benefitsSubtitle: "Unlock your full potential and achieve consistent profitability with our comprehensive trading psychology platform",
       benefits: [
         {
           title: "Overcome Hesitation with a Well-Developed Trading Plan",
@@ -204,8 +232,6 @@ export default function LandingPage() {
             "Your Path to Professional Trading: Get comprehensive guidance and tools to qualify for funded trading programs, build your track record, and launch your professional trading career with confidence.",
         },
       ],
-      pricingTitle: "Your Trading Transformation Journey Starts Here",
-      pricingSubtitle: "Start free, upgrade when you're ready",
       pricingPlans: [
         {
           name: "Free",
@@ -279,13 +305,6 @@ export default function LandingPage() {
           ]
         }
       ],
-      testimonialsTitle: "Join the Community of Successful Traders",
-      testimonialsSubtitle: "Join thousands of traders who are transforming their mindset",
-      ctaTitle: "Ready to Unlock Your Full Trading Potential??",
-      ctaSubtitle: "Join thousands of traders who have transformed their psychology and achieved consistent profitability.",
-      ctaButton: "Start Your Free Trial",
-      expandAll: "Expand All",
-      collapseAll: "Collapse All",
       testimonials: [
         {
           name: "Sarah Chen",
@@ -325,6 +344,37 @@ export default function LandingPage() {
         "A Plataforma Definitiva para Vantagem Mental — Combinando Insights Alimentados por IA, Coaching Personalizado e um Ambiente Profundamente Imersivo Onde Você Cresce Continuamente, Revisa Trades Passados com Propósito e Constrói Cada Novo Trade com Clareza e Confiança.",
       howItWorksTitle: "Como o MaXTrades Funciona",
       howItWorksSubtitle: "Seu Caminho para Maestria no Trading em 4 Passos Simples",
+      // Stats Section
+      statsTitle1: "92%",
+      statsDesc1: "Dos Traders Concordam que Psicologia é Chave para o Sucesso",
+      statsTitle2: "85%",
+      statsDesc2: "Consistência Melhorada com MaXTrades",
+      statsTitle3: "4.9/5",
+      statsDesc3: "Avaliação dos Usuários",
+      statsTitle4: "+5000",
+      statsDesc4: "Traders Mundialmente",
+      // Ultimate Features Section
+      ultimateFeaturesTitle: "Nossos Recursos Definitivos de Trading",
+      ultimateFeaturesSubtitle: "As ferramentas principais que diferenciam MaXTrades de todas as outras plataformas de trading",
+      // How It Works Section (now image section)
+      toolkitTitle: "O Kit de Ferramentas Definitivo para Acelerar Seu Sucesso no Trading",
+      // Benefits Section
+      benefitsTitle: "Transforme Sua Psicologia de Trading",
+      benefitsSubtitle: "Desbloqueie seu potencial completo e alcance rentabilidade consistente com nossa plataforma abrangente de psicologia de trading",
+      // Career Box Section
+      careerBoxTitle: "Domine Sua Mentalidade, Desbloqueie Crescimento na Carreira.",
+      // Pricing Section
+      pricingTitle: "Sua Transformação na Jornada de Trading Começa Aqui",
+      pricingSubtitle: "Comece grátis, faça upgrade quando estiver pronto",
+      // Testimonials Section
+      testimonialsTitle: "Junte-se à Comunidade de Traders Bem-Sucedidos",
+      testimonialsSubtitle: "Junte-se a milhares de traders que estão transformando sua mentalidade",
+      // CTA Section
+      ctaTitle: "Pronto Para Desbloquear Seu Potencial Completo no Trading??",
+      ctaSubtitle: "Junte-se a milhares de traders que transformaram sua psicologia e alcançaram rentabilidade consistente.",
+      ctaButton: "Comece Seu Teste Gratuito",
+      expandAll: "Expandir Tudo",
+      collapseAll: "Recolher Tudo",
       howItWorksSteps: [
         {
           step: "1",
@@ -347,9 +397,6 @@ export default function LandingPage() {
           description: "Monitore seu desenvolvimento psicológico e melhoria no trading"
         }
       ],
-      // New Benefits Section
-      benefitsTitle: "Transforme Sua Psicologia de Trading",
-      benefitsSubtitle: "Desbloqueie seu potencial completo e alcance rentabilidade consistente com nossa plataforma abrangente de psicologia de trading",
       benefits: [
         {
           title: "Supere a Hesitação com um Plano de Trading Bem Desenvolvido",
@@ -422,7 +469,7 @@ export default function LandingPage() {
         {
           title: "Cursos de Psicologia",
           description: "Acesse caminhos de aprendizado estruturados cobrindo todos os aspectos da psicologia de trading.",
-          detailedContent: "Acesse nossa biblioteca abrangente de cursos de psicologia estruturados projetados especificamente para traders. Estes cursos cobrem tópicos essenciais como regulação emocional, risco management psychology, and developing a winning trader mindset."
+          detailedContent: "Acesse nossa biblioteca abrangente de cursos de psicologia estruturados projetados especificamente para traders. Estes cursos cobrem tópicos essenciais como regulação emocional, psicologia de gestão de risco e desenvolvimento de uma mentalidade vencedora de trader."
         },
         {
           title: "Ferramentas de Reflexão",
@@ -452,8 +499,6 @@ export default function LandingPage() {
             "Seu Caminho para Trading Profissional: Obtenha orientação abrangente e ferramentas para se qualificar para programas de trading financiado, construir seu histórico e lançar sua carreira de trading profissional com confiança.",
         },
       ],
-      pricingTitle: "Sua Transformação na Jornada de Trading Começa Aqui",
-      pricingSubtitle: "Comece grátis, faça upgrade quando estiver pronto",
       pricingPlans: [
         {
           name: "Gratuito",
@@ -462,6 +507,7 @@ export default function LandingPage() {
           description: "Perfeito para Começar",
           features: [
             "Coach de Psicologia IA",
+            "Avaliação de Trader",
             "5 Análises de Trade por mês",
             "Acompanhamento de Progresso",
             "Exercícios Interativos",
@@ -475,6 +521,7 @@ export default function LandingPage() {
           description: "Para Traders Sérios",
           features: [
             "Coach de Psicologia IA Avançado",
+            "Avaliação de Trader",
             "25 Análises de Trade por mês",
             "Acompanhamento de Progresso Avançado",
             "Diário de Reflexão",
@@ -493,6 +540,7 @@ export default function LandingPage() {
           features: [
             "Tudo do Pro",
             "Coach de Psicologia IA Avançado",
+            "Avaliação de Trader",
             "Análises de Trade Ilimitadas",
             "Acompanhamento de Progresso Avançado",
             "Diário de Reflexão",
@@ -511,6 +559,7 @@ export default function LandingPage() {
           features: [
             "Tudo do Premium",
             "Coach de Psicologia IA Avançado",
+            "Avaliação de Trader",
             "Análises de Trade Ilimitadas",
             "Acompanhamento de Progresso Avançado",
             "Diário de Reflexão",
@@ -523,13 +572,6 @@ export default function LandingPage() {
           ]
         }
       ],
-      testimonialsTitle: "Junte-se a Milhares de Traders Bem-Sucedidos",
-      testimonialsSubtitle: "Junte-se a milhares de traders que transformaram sua mentalidade",
-      ctaTitle: "Pronto Para Desbloquear Seu Potencial Completo no Trading??",
-      ctaSubtitle: "Junte-se a milhares de traders que transformaram sua psicologia e alcançaram rentabilidade consistente.",
-      ctaButton: "Comece Seu Teste Gratuito",
-      expandAll: "Expandir Tudo",
-      collapseAll: "Recolher Tudo",
       testimonials: [
         {
           name: "Sarah Chen",
@@ -553,7 +595,7 @@ export default function LandingPage() {
     },
     es: {
       title: "MaXTrades",
-      subtitle: "Trading Psychology Labbbb",
+      subtitle: "Trading Psychology Lab",
       badge: "Psicología de Trading Impulsada por IA",
       heroTitle: "Domina Tu Mentalidad. Domina Tu Trading.",
       description:
@@ -569,6 +611,37 @@ export default function LandingPage() {
         "La Plataforma Definitiva para Ventaja Mental — Combinando Insights Impulsados por IA, Coaching Personalizado y un Entorno Profundamente Inmersivo Donde Creces Continuamente, Revisas Trades Pasados con Propósito y Construyes Cada Nuevo Trade con Claridad y Confianza.",
       howItWorksTitle: "Cómo Funciona MaXTrades",
       howItWorksSubtitle: "Tu Camino hacia la Maestría en Trading en 4 Pasos Simples",
+      // Stats Section
+      statsTitle1: "92%",
+      statsDesc1: "De los Traders Están de Acuerdo en que la Psicología es Clave para el Éxito",
+      statsTitle2: "85%",
+      statsDesc2: "Consistencia Mejorada con MaXTrades",
+      statsTitle3: "4.9/5",
+      statsDesc3: "Calificación de Usuario",
+      statsTitle4: "+5000",
+      statsDesc4: "Traders en Todo el Mundo",
+      // Ultimate Features Section
+      ultimateFeaturesTitle: "Nuestras Características Definitivas de Trading",
+      ultimateFeaturesSubtitle: "Las herramientas principales que distinguen a MaXTrades de todas las demás plataformas de trading",
+      // How It Works Section (now image section)
+      toolkitTitle: "El Kit de Herramientas Definitivo para Acelerar Tu Éxito en Trading",
+      // Benefits Section
+      benefitsTitle: "Transforma Tu Psicología de Trading",
+      benefitsSubtitle: "Desbloquea tu potencial completo y logra rentabilidad consistente con nuestra plataforma integral de psicología de trading",
+      // Career Box Section
+      careerBoxTitle: "Domina Tu Mentalidad, Desbloquea Crecimiento Profesional.",
+      // Pricing Section
+      pricingTitle: "Tu Transformación en el Viaje de Trading Comienza Aquí",
+      pricingSubtitle: "Comienza gratis, actualiza cuando estés listo",
+      // Testimonials Section
+      testimonialsTitle: "Únete a la Comunidad de Traders Exitosos",
+      testimonialsSubtitle: "Únete a miles de traders que están transformando su mentalidad",
+      // CTA Section
+      ctaTitle: "¿Listo Para Desbloquear Tu Potencial Completo en Trading??",
+      ctaSubtitle: "Únete a miles de traders que han transformado su psicología y logrado rentabilidad consistente.",
+      ctaButton: "Comienza Tu Prueba Gratuita",
+      expandAll: "Expandir Todo",
+      collapseAll: "Contraer Todo",
       howItWorksSteps: [
         {
           step: "1",
@@ -591,9 +664,6 @@ export default function LandingPage() {
           description: "Monitorea tu desarrollo psicológico y mejora en el trading"
         }
       ],
-      // New Benefits Section
-      benefitsTitle: "Transforma Tu Psicología de Trading",
-      benefitsSubtitle: "Desbloquea tu potencial completo y logra rentabilidad consistente con nuestra plataforma integral de psicología de trading",
       benefits: [
         {
           title: "Supera la Vacilación con un Plan de Trading Bien Desarrollado",
@@ -696,8 +766,6 @@ export default function LandingPage() {
             "Tu Camino hacia Trading Profesional: Obtén orientación integral y herramientas para calificar para programas de trading financiado, construir tu historial y lanzar tu carrera de trading profesional con confianza.",
         },
       ],
-      pricingTitle: "Tu Transformación en el Viaje de Trading Comienza Aquí",
-      pricingSubtitle: "Comienza gratis, actualiza cuando estés listo",
       pricingPlans: [
         {
           name: "Gratuito",
@@ -706,6 +774,7 @@ export default function LandingPage() {
           description: "Perfecto para Empezar",
           features: [
             "Coach de Psicología IA",
+            "Evaluación de Trader",
             "5 Análisis de Trade por mes",
             "Seguimiento de Progreso",
             "Ejercicios Interactivos",
@@ -714,11 +783,12 @@ export default function LandingPage() {
         },
         {
           name: "Pro",
-          price: "$14",
+          price: "$15",
           period: "/mes",
           description: "Para Traders Serios",
           features: [
             "Coach de Psicología IA Avanzado",
+            "Evaluación de Trader",
             "25 Análisis de Trade por mes",
             "Seguimiento de Progreso Avanzado",
             "Diario de Reflexión",
@@ -730,13 +800,14 @@ export default function LandingPage() {
         },
         {
           name: "Premium",
-          price: "$28",
+          price: "$25",
           period: "/mes",
           description: "Para Traders Profesionales",
           popular: true,
           features: [
             "Todo de Pro",
             "Coach de Psicología IA Avanzado",
+            "Evaluación de Trader",
             "Análisis de Trade Ilimitados",
             "Seguimiento de Progreso Avanzado",
             "Diario de Reflexión",
@@ -749,31 +820,25 @@ export default function LandingPage() {
         },
         {
           name: "Elite",
-          price: "$55",
+          price: "$35",
           period: "/mes",
           description: "Para Traders Elite",
           features: [
             "Todo de Premium",
             "Coach de Psicología IA Avanzado",
+            "Evaluación de Trader",
             "Análisis de Trade Ilimitados",
             "Seguimiento de Progreso Avanzado",
             "Diario de Reflexión",
             "Cursos de Psicología",
             "Insights de Coaching",
             "Constructor de Trade Ilimitado",
-            "Exercícios Interactivos",
+            "Ejercicios Interactivos",
             "Patrones Conductuales",
-            "Constructor de Carreira Financiada"
+            "Constructor de Carrera Financiada"
           ]
         }
       ],
-      testimonialsTitle: "Únete a Miles de Traders Exitosos",
-      testimonialsSubtitle: "Únete a miles de traders que han transformado su mentalidad",
-      ctaTitle: "¿Listo Para Desbloquear Tu Potencial Completo en Trading??",
-      ctaSubtitle: "Únete a miles de traders que han transformado su psicología y logrado rentabilidad consistente.",
-      ctaButton: "Comienza Tu Prueba Gratuita",
-      expandAll: "Expandir Todo",
-      collapseAll: "Contraer Todo",
       testimonials: [
         {
           name: "Sarah Chen",
@@ -797,7 +862,7 @@ export default function LandingPage() {
     },
     fr: {
       title: "MaXTrades",
-      subtitle: "Trading Psychology Labbbb",
+      subtitle: "Trading Psychology Lab",
       badge: "Psychologie de Trading Alimentée par l'IA",
       heroTitle: "Maîtrisez Votre Mentalité. Maîtrisez Votre Trading.",
       description:
@@ -813,6 +878,37 @@ export default function LandingPage() {
         "La Plateforme Ultime pour l'Avantage Mental — Combinant des Insights Alimentés par l'IA, un Coaching Personnalisé et un Environnement Profondément Immersif Où Vous Grandissez Continuellement, Révisez les Trades Passés avec un Objectif et Construisez Chaque Nouveau Trade avec Clarté et Confiance.",
       howItWorksTitle: "Comment MaXTrades Fonctionne",
       howItWorksSubtitle: "Votre Chemin vers la Maîtrise du Trading en 4 Étapes Simples",
+      // Stats Section
+      statsTitle1: "92%",
+      statsDesc1: "Des Traders Sont d'Accord que la Psychologie est la Clé du Succès",
+      statsTitle2: "85%",
+      statsDesc2: "Consistance Améliorée avec MaXTrades",
+      statsTitle3: "4.9/5",
+      statsDesc3: "Note des Utilisateurs",
+      statsTitle4: "+5000",
+      statsDesc4: "Traders dans le Monde",
+      // Ultimate Features Section
+      ultimateFeaturesTitle: "Nos Fonctionnalités de Trading Ultimes",
+      ultimateFeaturesSubtitle: "Les outils principaux qui distinguent MaXTrades de toutes les autres plateformes de trading",
+      // How It Works Section (now image section)
+      toolkitTitle: "La Boîte à Outils Ultime pour Accélérer Votre Succès en Trading",
+      // Benefits Section
+      benefitsTitle: "Transformez Votre Psychologie de Trading",
+      benefitsSubtitle: "Débloquez votre plein potentiel et atteignez une rentabilité constante avec notre plateforme complète de psychologie de trading",
+      // Career Box Section
+      careerBoxTitle: "Maîtrisez Votre Mentalité, Débloquez la Croissance de Carrière.",
+      // Pricing Section
+      pricingTitle: "Votre Transformation de Voyage de Trading Commence Ici",
+      pricingSubtitle: "Commencez gratuitement, mettez à niveau quand vous êtes prêt",
+      // Testimonials Section
+      testimonialsTitle: "Rejoignez la Communauté de Traders Prospères",
+      testimonialsSubtitle: "Rejoignez des milliers de traders qui transforment leur mentalité",
+      // CTA Section
+      ctaTitle: "Prêt à Débloquer Votre Plein Potentiel de Trading ??",
+      ctaSubtitle: "Rejoignez des milliers de traders qui ont transformé leur psychologie et atteint une rentabilité constante.",
+      ctaButton: "Commencez Votre Essai Gratuit",
+      expandAll: "Tout Développer",
+      collapseAll: "Tout Réduire",
       howItWorksSteps: [
         {
           step: "1",
@@ -835,9 +931,6 @@ export default function LandingPage() {
           description: "Surveillez votre développement psychologique et amélioration du trading"
         }
       ],
-      // New Benefits Section
-      benefitsTitle: "Transformez Votre Psychologie de Trading",
-      benefitsSubtitle: "Débloquez votre plein potentiel et atteignez une rentabilité constante avec notre plateforme complète de psychologie de trading",
       benefits: [
         {
           title: "Surmontez l'Hésitation avec un Plan de Trading Bien Développé",
@@ -940,8 +1033,6 @@ export default function LandingPage() {
             "Votre Chemin vers le Trading Professionnel : Obtenez des conseils complets et des outils pour vous qualifier pour les programmes de trading financé, construire votre historique et lancer votre carrière de trading professionnel avec confiance.",
         },
       ],
-      pricingTitle: "Votre Transformation de Voyage de Trading Commence Ici",
-      pricingSubtitle: "Commencez gratuitement, mettez à niveau quand vous êtes prêt",
       pricingPlans: [
         {
           name: "Gratuit",
@@ -950,6 +1041,7 @@ export default function LandingPage() {
           description: "Parfait pour Commencer",
           features: [
             "Coach de Psychologie IA",
+            "Évaluation de Trader",
             "5 Analyses de Trade par mois",
             "Suivi des Progrès",
             "Exercices Interactifs",
@@ -958,11 +1050,12 @@ export default function LandingPage() {
         },
         {
           name: "Pro",
-          price: "$14",
+          price: "$15",
           period: "/mois",
           description: "Pour les Traders Sérieux",
           features: [
             "Coach de Psychologie IA Avancé",
+            "Évaluation de Trader",
             "25 Analyses de Trade par mois",
             "Suivi des Progrès Avancé",
             "Journal de Réflexion",
@@ -974,50 +1067,45 @@ export default function LandingPage() {
         },
         {
           name: "Premium",
-          price: "$28",
+          price: "$25",
           period: "/mois",
           description: "Pour les Traders Professionnels",
           popular: true,
           features: [
             "Tout de Pro",
             "Coach de Psychologie IA Avancé",
+            "Évaluation de Trader",
             "Analyses de Trade Illimitées",
             "Suivi des Progrès Avancé",
             "Journal de Réflexion",
-            "Cours de Psicologia",
+            "Cours de Psychologie",
             "Insights de Coaching",
             "30 Constructeur de Trade",
-            "Exercícios Interactivos",
-            "Modèles Comportamentaux"
+            "Exercices Interactifs",
+            "Modèles Comportementaux"
           ]
         },
         {
           name: "Elite",
-          price: "$55",
+          price: "$35",
           period: "/mois",
-          description: "Para os Traders Elite",
+          description: "Pour les Traders Elite",
           features: [
-            "Tudo de Premium",
-            "Coach de Psicologie IA Avancé",
-            "Análises de Trade Ilimitadas",
-            "Suivi dos Progrès Avançado",
+            "Tout de Premium",
+            "Coach de Psychologie IA Avancé",
+            "Évaluation de Trader",
+            "Analyses de Trade Illimitées",
+            "Suivi des Progrès Avancé",
             "Journal de Réflexion",
-            "Cours de Psicologia",
+            "Cours de Psychologie",
             "Insights de Coaching",
-            "Constructeur de Trade Ilimitado",
-            "Exercícios Interactivos",
-            "Modèles Comportamentais",
-            "Constructeur de Carreira Financiada"
+            "Constructeur de Trade Illimité",
+            "Exercices Interactifs",
+            "Modèles Comportementaux",
+            "Constructeur de Carrière Financée"
           ]
         }
       ],
-      testimonialsTitle: "Rejoignez des Milliers de Traders Prospères",
-      testimonialsSubtitle: "Rejoignez des milliers de traders qui ont transformé leur mentalité",
-      ctaTitle: "Prêt à Débloquer Votre Plein Potentiel de Trading ??",
-      ctaSubtitle: "Rejoignez des milliers de traders qui ont transformé leur psychologie et atteint une rentabilité constante.",
-      ctaButton: "Commencez Votre Essai Gratuit",
-      expandAll: "Tout Développer",
-      collapseAll: "Tout Réduire",
       testimonials: [
         {
           name: "Sarah Chen",
@@ -1191,20 +1279,20 @@ export default function LandingPage() {
     <div className="grid md:grid-cols-4 gap-8 text-center">
       
       <div>
-        <div className="text-4xl font-bold text-royal-blue-600 mb-2">92%</div>
-        <div className="text-navy-600">Of Traders Agree Psychology is Key to Success</div>
+        <div className="text-4xl font-bold text-royal-blue-600 mb-2">{t.statsTitle1}</div>
+        <div className="text-navy-600">{t.statsDesc1}</div>
       </div>
       <div>
-        <div className="text-4xl font-bold text-royal-blue-600 mb-2">85%</div>
-        <div className="text-navy-600">Improved Consistency with MaXTrades</div>
+        <div className="text-4xl font-bold text-royal-blue-600 mb-2">{t.statsTitle2}</div>
+        <div className="text-navy-600">{t.statsDesc2}</div>
       </div>
       <div>
-        <div className="text-4xl font-bold text-royal-blue-600 mb-2">4.9/5</div>
-        <div className="text-navy-600">User Rating</div>
+        <div className="text-4xl font-bold text-royal-blue-600 mb-2">{t.statsTitle3}</div>
+        <div className="text-navy-600">{t.statsDesc3}</div>
       </div>
       <div>
-        <div className="text-4xl font-bold text-royal-blue-600 mb-2">+5000</div>
-        <div className="text-navy-600">Traders Worldwide</div>
+        <div className="text-4xl font-bold text-royal-blue-600 mb-2">{t.statsTitle4}</div>
+        <div className="text-navy-600">{t.statsDesc4}</div>
       </div>
     </div>
   </div>
@@ -1263,8 +1351,8 @@ export default function LandingPage() {
       <section className="py-20 px-4 bg-white">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-navy-900 mb-4 gradient-text">Our Ultimate Trading Features</h2>
-            <p className="text-xl text-navy-600">The core tools that set MaXTrades apart from every other trading platform</p>
+            <h2 className="text-4xl font-bold text-navy-900 mb-4 gradient-text">{t.ultimateFeaturesTitle}</h2>
+            <p className="text-xl text-navy-600">{t.ultimateFeaturesSubtitle}</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
@@ -1298,7 +1386,7 @@ export default function LandingPage() {
       {/* How It Works - REPLACED WITH IMAGE */}
       <section className="py-20 px-4 bg-white">
         <div className="container mx-auto text-center">
-          <h2 className="text-4xl font-bold text-navy-900 mb-8 gradient-text">The Ultimate Toolkit to Accelerate Your Trading Success</h2>
+          <h2 className="text-4xl font-bold text-navy-900 mb-8 gradient-text">{t.toolkitTitle}</h2>
           <Image
             src="/images/sec1.png"
             alt="How MaXTrades Works"
@@ -1367,7 +1455,7 @@ export default function LandingPage() {
       {/* Career Box Image Section */}
       <section className="py-20 px-4 bg-white">
         <div className="container mx-auto text-center">
-          <h2 className="text-4xl font-bold text-navy-900 mb-8 gradient-text">Master Your Mindset, Unlock Career Growth.</h2>
+          <h2 className="text-4xl font-bold text-navy-900 mb-8 gradient-text">{t.careerBoxTitle}</h2>
           <Image
             src="/images/sec2.png"
             alt="Funded Career Builder"
