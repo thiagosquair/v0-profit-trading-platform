@@ -5,6 +5,8 @@ export const translations = {
     // Navigation
     "nav.overview": "Overview",
     "nav.aiCoach": "AI Coach",
+    "nav.assessment": "Trader Assessment",
+    "nav.assessmentDesc": "Discover your trading psychology",
     "nav.analysis": "Screenshot Analysis",
     "nav.progress": "Progress Tracking",
     "nav.exercises": "Interactive Exercises",
@@ -18,6 +20,9 @@ export const translations = {
 
     // Common
     "common.welcome": "Welcome",
+    "common.dashboard": "Dashboard",
+    "common.new": "NEW",
+    "common.user": "User",
     "common.profile": "Profile",
     "common.signOut": "Sign Out",
     "common.loading": "Loading...",
@@ -311,6 +316,8 @@ export const translations = {
     // Navigation
     "nav.overview": "Visão Geral",
     "nav.aiCoach": "Coach IA",
+    "nav.assessment": "Avaliação do Trader",
+    "nav.assessmentDesc": "Descubra sua psicologia de trading",
     "nav.analysis": "Análise de Screenshot",
     "nav.progress": "Acompanhamento de Progresso",
     "nav.exercises": "Exercícios Interativos",
@@ -318,12 +325,15 @@ export const translations = {
     "nav.courses": "Cursos de Psicologia",
     "nav.journal": "Diário de Reflexão",
     "nav.insights": "Insights de Coaching",
-    "nav.tradeBuilder": "Construtor de Trade",
+    "nav.tradeBuilder": "Construtor de Trades",
     "nav.marketInsights": "Insights de Mercado",
     "nav.settings": "Configurações",
 
     // Common
     "common.welcome": "Bem-vindo",
+    "common.dashboard": "Painel",
+    "common.new": "NOVO",
+    "common.user": "Usuário",
     "common.profile": "Perfil",
     "common.signOut": "Sair",
     "common.loading": "Carregando...",
@@ -432,7 +442,7 @@ export const translations = {
     riskVisualization: "Visualização de Risco",
     riskVisualizationDesc: "Visualize e prepare-se mentalmente para riscos potenciais de trading",
     fomoTraining: "Treinamento Anti-FOMO",
-    fomoTrainingDesc: "Desenvolva resistência ao Medo de Perder Oportunidades nas decisões de trading",
+    fomoTrainingDesc: "Desenvolva resistência ao Medo de Perder Oportunidades em decisões de trading",
     lossAcceptance: "Treinamento de Aceitação de Perdas",
     lossAcceptanceDesc: "Aprenda a aceitar e processar perdas de trading de forma saudável",
     confidenceBuilding: "Construção de Confiança",
@@ -443,7 +453,7 @@ export const translations = {
     behavioralPatternsCategory: "Padrões Comportamentais",
     mindfulness: "Mindfulness",
     confidence: "Confiança",
-    completed: "Concluído",
+    completed: "Completado",
     beginner: "Iniciante",
     intermediate: "Intermediário",
     advanced: "Avançado",
@@ -456,7 +466,7 @@ export const translations = {
     lastScore: "Última Pontuação",
     retry: "Tentar Novamente",
     start: "Iniciar",
-    complete: "Concluir",
+    complete: "Completar",
     exit: "Sair",
     noneFound: "Nenhum exercício encontrado",
     tryAnotherCategory: "Tente selecionar outra categoria",
@@ -467,7 +477,7 @@ export const translations = {
 
     // Behavioral Patterns
     behavioralPatternsTitle: "Padrões Comportamentais",
-    behavioralPatternsSubtitle: "Identifique e acompanhe seus padrões de comportamento no trading",
+    behavioralPatternsSubtitle: "Identifique e acompanhe seus padrões de comportamento de trading",
     patternAnalysis: "Análise de Padrões",
     identifiedPatterns: "Padrões Identificados",
     patternFrequency: "Frequência do Padrão",
@@ -494,7 +504,7 @@ export const translations = {
     courseProgress: "Progresso do Curso",
     startCourse: "Iniciar Curso",
     continueCourse: "Continuar Curso",
-    courseCompleted: "Curso Concluído",
+    courseCompleted: "Curso Completado",
     courseDuration: "Duração do Curso",
     courseLevel: "Nível do Curso",
     courseRating: "Avaliação do Curso",
@@ -536,7 +546,7 @@ export const translations = {
     performanceMetrics: "Métricas de Performance",
 
     // Trade Builder
-    tradeBuilderTitle: "Construtor de Trade",
+    tradeBuilderTitle: "Construtor de Trades",
     tradeBuilderSubtitle: "Planeje seus trades com análise focada em psicologia",
     newTrade: "Novo Trade",
     tradePlan: "Plano de Trade",
@@ -617,19 +627,24 @@ export const translations = {
     // Navigation
     "nav.overview": "Resumen",
     "nav.aiCoach": "Coach IA",
+    "nav.assessment": "Evaluación del Trader",
+    "nav.assessmentDesc": "Descubre tu psicología de trading",
     "nav.analysis": "Análisis de Captura",
     "nav.progress": "Seguimiento de Progreso",
     "nav.exercises": "Ejercicios Interactivos",
     "nav.patterns": "Patrones Conductuales",
     "nav.courses": "Cursos de Psicología",
     "nav.journal": "Diario de Reflexión",
-    "nav.insights": "Insights de Coaching",
-    "nav.tradeBuilder": "Constructor de Trade",
-    "nav.marketInsights": "Insights de Mercado",
+    "nav.insights": "Perspectivas de Coaching",
+    "nav.tradeBuilder": "Constructor de Operaciones",
+    "nav.marketInsights": "Perspectivas del Mercado",
     "nav.settings": "Configuración",
 
     // Common
     "common.welcome": "Bienvenido",
+    "common.dashboard": "Panel",
+    "common.new": "NUEVO",
+    "common.user": "Usuario",
     "common.profile": "Perfil",
     "common.signOut": "Cerrar Sesión",
     "common.loading": "Cargando...",
@@ -842,11 +857,11 @@ export const translations = {
     performanceMetrics: "Métricas de Rendimiento",
 
     // Trade Builder
-    tradeBuilderTitle: "Constructor de Trade",
+    tradeBuilderTitle: "Constructor de Operaciones",
     tradeBuilderSubtitle: "Planifica tus trades con análisis enfocado en psicología",
-    newTrade: "Nuevo Trade",
-    tradePlan: "Plan de Trade",
-    tradeSetup: "Configuración del Trade",
+    newTrade: "Nueva Operación",
+    tradePlan: "Plan de Operación",
+    tradeSetup: "Configuración de la Operación",
     entryPrice: "Precio de Entrada",
     stopLoss: "Stop Loss",
     takeProfit: "Take Profit",
@@ -854,15 +869,15 @@ export const translations = {
     riskReward: "Riesgo/Recompensa",
     tradingPair: "Par de Trading",
     timeframe: "Marco Temporal",
-    tradeReason: "Razón del Trade",
+    tradeReason: "Razón de la Operación",
     emotionalState: "Estado Emocional",
     confidenceLevel: "Nivel de Confianza",
-    saveTrade: "Guardar Trade",
-    executeTrade: "Ejecutar Trade",
-    tradeHistory: "Historial de Trades",
+    saveTrade: "Guardar Operación",
+    executeTrade: "Ejecutar Operación",
+    tradeHistory: "Historial de Operaciones",
 
     // Market Insights
-    marketInsightsTitle: "Insights de Mercado",
+    marketInsightsTitle: "Perspectivas del Mercado",
     marketInsightsSubtitle: "Análisis en tiempo real de psicología y sentimiento del mercado",
     marketSentiment: "Sentimiento del Mercado",
     fearGreedIndex: "Índice Miedo y Codicia",
@@ -923,6 +938,8 @@ export const translations = {
     // Navigation
     "nav.overview": "Aperçu",
     "nav.aiCoach": "Coach IA",
+    "nav.assessment": "Évaluation du Trader",
+    "nav.assessmentDesc": "Découvrez votre psychologie de trading",
     "nav.analysis": "Analyse de Capture",
     "nav.progress": "Suivi des Progrès",
     "nav.exercises": "Exercices Interactifs",
@@ -930,12 +947,15 @@ export const translations = {
     "nav.courses": "Cours de Psychologie",
     "nav.journal": "Journal de Réflexion",
     "nav.insights": "Insights de Coaching",
-    "nav.tradeBuilder": "Constructeur de Trade",
-    "nav.marketInsights": "Insights de Marché",
+    "nav.tradeBuilder": "Constructeur de Trades",
+    "nav.marketInsights": "Insights du Marché",
     "nav.settings": "Paramètres",
 
     // Common
     "common.welcome": "Bienvenue",
+    "common.dashboard": "Tableau de Bord",
+    "common.new": "NOUVEAU",
+    "common.user": "Utilisateur",
     "common.profile": "Profil",
     "common.signOut": "Se Déconnecter",
     "common.loading": "Chargement...",
@@ -954,9 +974,9 @@ export const translations = {
 
     // Dashboard Overview
     welcome: "Bon retour",
-    subtitle: "Prêt à améliorer votre psychologie du trading aujourd'hui ?",
+    subtitle: "Prêt à améliorer votre psychologie de trading aujourd'hui?",
     psychologyScore: "Score de Psychologie",
-    exercisesCompleted: "Exercices Complétés",
+    exercisesCompleted: "Exercices Terminés",
     coachingSessions: "Sessions de Coaching",
     achievements: "Réalisations",
     thisWeek: "Cette semaine",
@@ -964,14 +984,14 @@ export const translations = {
     fromLastWeek: "+5 de la semaine dernière",
     badgesEarned: "Badges gagnés",
     quickActions: "Actions Rapides",
-    jumpInto: "Plongez dans votre formation",
+    jumpInto: "Plongez dans votre entraînement",
     getPersonalizedCoaching: "Obtenez des insights de coaching personnalisés",
     uploadAndAnalyze: "Téléchargez et analysez vos captures d'écran de trading",
     completePsychology: "Complétez les exercices et évaluations de psychologie",
     reflectOnTrading: "Réfléchissez sur vos expériences de trading",
     recentActivity: "Activité Récente",
     latestActivities: "Vos dernières activités",
-    completedEmotionalControl: "Évaluation de Contrôle Émotionnel Complétée",
+    completedEmotionalControl: "Évaluation de Contrôle Émotionnel Terminée",
     aiCoachingSession: "Session de Coaching IA sur la Gestion des Risques",
     screenshotAnalysisEUR: "Analyse de Capture - Trade EUR/USD",
     hoursAgo: "il y a 2 heures",
@@ -983,10 +1003,10 @@ export const translations = {
     currentGoals: "Objectifs Actuels",
     developmentObjectives: "Vos objectifs de développement",
     improveEmotionalControl: "Améliorer le Contrôle Émotionnel",
-    complete20Exercises: "Compléter 20 Exercices",
+    complete20Exercises: "Terminer 20 Exercices",
     weeklyCoachingSessions: "Sessions de Coaching Hebdomadaires",
     scoreTarget: "Score 85+",
-    exercisesProgress: "12/20 complétés",
+    exercisesProgress: "12/20 terminés",
     sessionsProgress: "4/5 sessions",
 
     // AI Coach
@@ -1148,7 +1168,7 @@ export const translations = {
     performanceMetrics: "Métriques de Performance",
 
     // Trade Builder
-    tradeBuilderTitle: "Constructeur de Trade",
+    tradeBuilderTitle: "Constructeur de Trades",
     tradeBuilderSubtitle: "Planifiez vos trades avec analyse axée sur la psychologie",
     newTrade: "Nouveau Trade",
     tradePlan: "Plan de Trade",
@@ -1168,7 +1188,7 @@ export const translations = {
     tradeHistory: "Historique des Trades",
 
     // Market Insights
-    marketInsightsTitle: "Insights de Marché",
+    marketInsightsTitle: "Insights du Marché",
     marketInsightsSubtitle: "Analyse en temps réel de la psychologie et du sentiment du marché",
     marketSentiment: "Sentiment du Marché",
     fearGreedIndex: "Indice Peur et Cupidité",
@@ -1258,3 +1278,4 @@ export function t(key: string): string {
   // Try to get translation from current language, fallback to English, then return key
   return langTranslations[key] || enTranslations[key] || key
 }
+
