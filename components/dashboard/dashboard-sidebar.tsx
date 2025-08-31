@@ -1,10 +1,12 @@
-'use client';
+"use client";
 
 import { useUser } from '@/contexts/UserContext';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/hooks/use-language';
+import { useState, useEffect } from 'react';
 import {
   Brain,
   BarChart3,
@@ -23,163 +25,161 @@ import {
 export function DashboardSidebar() {
   const { profile, getRemainingUsage } = useUser();
   const pathname = usePathname();
+  const { t } = useLanguage();
+  const [, forceUpdate] = useState({});
+
+  // Force re-render when language changes
+  useEffect(() => {
+    const handleLanguageChange = () => {
+      forceUpdate({});
+    };
+
+    window.addEventListener('languageChanged', handleLanguageChange);
+    return () => window.removeEventListener('languageChanged', handleLanguageChange);
+  }, []);
 
   const navigation = [
     {
-      name: "Overview",
+      name: t("nav.overview", "Overview"),
       href: "/dashboard",
       icon: BarChart3,
     },
     {
-      name: "AI Coach",
+      name: t("nav.aiCoach", "AI Coach"),
       href: "/dashboard/coach",
       icon: Brain,
     },
     {
-      name: "Trader Assessment",
+      name: t("nav.assessment", "Trader Assessment"),
       href: "/dashboard/assessment",
       icon: ClipboardList,
       isNew: true,
-      description: "Discover your trading psychology"
+      description: t("nav.assessmentDesc", "Discover your trading psychology")
     },
     {
-      name: "Screenshot Analysis",
+      name: t("nav.analysis", "Screenshot Analysis"),
       href: "/dashboard/analysis",
       icon: Camera,
       showUsage: true,
       usageType: "screenshot_analysis" as const,
     },
     {
-      name: "Trade Builder",
-      href: "/dashboard/trade-builder",
-      icon: Hammer,
-      showUsage: true,
-      usageType: "trade_builder" as const,
+      name: t("nav.progress", "Progress Tracking"),
+      href: "/dashboard/progress",
+      icon: TrendingUp,
     },
     {
-      name: "Interactive Exercises",
+      name: t("nav.exercises", "Interactive Exercises"),
       href: "/dashboard/exercises",
       icon: Activity,
     },
     {
-      name: "Behavioral Patterns",
+      name: t("nav.patterns", "Behavioral Patterns"),
       href: "/dashboard/patterns",
       icon: GitPullRequest,
     },
     {
-      name: "Psychology Courses",
+      name: t("nav.courses", "Psychology Courses"),
       href: "/dashboard/courses",
       icon: BookOpen,
+      isNew: true,
     },
     {
-      name: "Reflection Journal",
+      name: t("nav.journal", "Reflection Journal"),
       href: "/dashboard/journal",
       icon: PenTool,
     },
     {
-      name: "Coaching Insights",
+      name: t("nav.insights", "Coaching Insights"),
       href: "/dashboard/insights",
       icon: MessageSquare,
     },
     {
-      name: "Funded Career Builder",
-      href: "/dashboard/career-builder",
-      icon: Trophy,
+      name: t("nav.tradeBuilder", "Trade Builder"),
+      href: "/dashboard/trade-builder",
+      icon: Hammer,
     },
     {
-      name: "Progress Tracking",
-      href: "/dashboard/progress",
-      icon: TrendingUp,
+      name: t("nav.marketInsights", "Market Insights"),
+      href: "/dashboard/market-insights",
+      icon: Trophy,
     },
   ];
 
   return (
-    <div className="flex h-full w-64 flex-col fixed inset-y-0 z-50 lg:flex">
-      <div className="flex flex-col flex-grow bg-white border-r border-gray-200 pt-5 pb-4 overflow-y-auto">
-        <div className="flex items-center flex-shrink-0 px-4">
-          <h1 className="text-xl font-bold text-gray-900">MaxTrades Dashboard</h1>
+    <div className="flex h-full w-64 flex-col overflow-y-auto border-r bg-white px-3 py-4">
+      <div className="flex flex-col space-y-6">
+        <div className="flex items-center">
+          <h2 className="text-lg font-semibold text-gray-900">
+            {t("common.dashboard", "Dashboard")}
+          </h2>
         </div>
-
-        <nav className="mt-5 flex-1 px-2 space-y-1">
+        <nav className="flex-1 space-y-1">
           {navigation.map((item) => {
-            const IconComponent = item.icon;
             const isActive = pathname === item.href;
-            
-            // For testing - show unlimited usage for all features
-            const remaining = item.showUsage ? 'unlimited' : null;
+            const remainingUsage = item.showUsage && item.usageType 
+              ? getRemainingUsage(item.usageType) 
+              : null;
 
             return (
-              <div key={item.name}>
-                <Link
-                  href={item.href}
-                  className={`group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-colors relative ${
-                    isActive
-                      ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-700'
-                      : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900'
+              <Link
+                key={item.name}
+                href={item.href}
+                className={`group flex items-center rounded-md px-2 py-2 text-sm font-medium ${
+                  isActive
+                    ? 'bg-gray-100 text-gray-900'
+                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                }`}
+              >
+                <item.icon
+                  className={`mr-3 h-5 w-5 flex-shrink-0 ${
+                    isActive ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500'
                   }`}
-                >
-                  <IconComponent className={`mr-3 h-5 w-5 flex-shrink-0 ${
-                    isActive ? 'text-blue-500' : 'text-gray-400 group-hover:text-gray-500'
-                  }`} />
-                  
-                  <div className="flex-1">
-                    <div className="flex items-center">
-                      {item.name}
+                  aria-hidden="true"
+                />
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <span>{item.name}</span>
+                    <div className="flex items-center space-x-1">
                       {item.isNew && (
-                        <Badge className="ml-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs">
-                          NEW
+                        <Badge variant="secondary" className="text-xs">
+                          {t("common.new", "NEW")}
+                        </Badge>
+                      )}
+                      {remainingUsage !== null && (
+                        <Badge variant="outline" className="text-xs">
+                          {remainingUsage}
                         </Badge>
                       )}
                     </div>
-                    {item.description && (
-                      <div className="text-xs text-gray-500 mt-0.5">
-                        {item.description}
-                      </div>
-                    )}
                   </div>
-
-                  {/* Show unlimited badge for testing */}
-                  {remaining === 'unlimited' && (
-                    <Badge variant="secondary" className="ml-auto text-xs">
-                      Unlimited
-                    </Badge>
+                  {item.description && (
+                    <p className="text-xs text-gray-500 mt-1">{item.description}</p>
                   )}
-                </Link>
-              </div>
+                </div>
+              </Link>
             );
           })}
         </nav>
-
-        {/* Plan Information - Show as Elite for testing */}
-        <div className="flex-shrink-0 p-4 border-t border-gray-200">
-          <div className="text-sm text-gray-600 mb-3">
-            <div className="flex items-center justify-between mb-2">
-              <span>Current Plan:</span>
-              <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white">
-                Elite (Testing)
-              </Badge>
-            </div>
-            
-            <div className="text-xs text-gray-500 space-y-1">
-              <div className="flex justify-between">
-                <span>Screenshot Analysis:</span>
-                <span>Unlimited</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Trade Builder:</span>
-                <span>Unlimited</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Assessment:</span>
-                <span className="text-green-600">Available</span>
+        
+        {/* User Profile Section */}
+        <div className="border-t pt-4">
+          <div className="flex items-center">
+            <div className="flex-shrink-0">
+              <div className="h-8 w-8 rounded-full bg-gray-300 flex items-center justify-center">
+                <span className="text-sm font-medium text-gray-700">
+                  {profile?.email?.charAt(0).toUpperCase() || 'U'}
+                </span>
               </div>
             </div>
-          </div>
-          
-          <div className="space-y-2">
-            <Button variant="outline" size="sm" className="w-full" asChild>
-              <Link href="/dashboard/billing">Manage Plan</Link>
-            </Button>
+            <div className="ml-3">
+              <p className="text-sm font-medium text-gray-900">
+                {profile?.email || t("common.user", "User")}
+              </p>
+              <p className="text-xs text-gray-500">
+                {t("common.profile", "Profile")}
+              </p>
+            </div>
           </div>
         </div>
       </div>
