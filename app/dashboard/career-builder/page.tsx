@@ -1,9 +1,9 @@
-"use client";
+import { FundedCareerBuilder } from '@/components/dashboard/funded-career-builder'
 
-import { FundedCareerBuilder } from "@/components/dashboard/funded-career-builder";
-
-export default function FundedCareerBuilderPage() {
+export default function CareerBuilderPage() {
   return (
-    <FundedCareerBuilder />
-  );
+    <div className="container mx-auto p-6">
+      <FundedCareerBuilder />
+    </div>
+  )
 }
